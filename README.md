@@ -2,7 +2,8 @@
 Parser and runtime for ECMAScript aka Javascript.
 
 The parser uses PetitParser. Requires a tweaked version which can be downloaded here:
-https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+https://github.com/hkleinsorgen/VW-PetitParser
 
 The VisualWorks version uses the OrderedDictionary class from the "PDF" package from Cincoms Public Repository. See the class comment.
 
