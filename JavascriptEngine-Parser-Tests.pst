@@ -1,0 +1,1067 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Parser-Tests
+Notice: Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Parser tests
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96222
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-AST' '') #(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-Parser-Core' '') #(#any 'JavascriptEngine-VisualWorks' '') #(#any 'PetitParser' '') #(#any 'SUnitToo' '') #(#any 'PetitAnalyzer' '') #(#any 'SUnit' ''))
+Id: 4ae41534-50d8-4a99-a917-69eeec1397dd
+KSignature: #('definedClasses' 15 'definedClassesHash' 25390609713 'extendedClasses' 3 'extendedClassesHash' 500495856)
+KSignatureV2: #('definedClasses' 15 'definedClassesHash' 744634616707327020132319645239337212858967754055 'extendedClasses' 3 'extendedClassesHash' 425512467264910770692827719058438687886228458216)
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-Parser-Tests
+Parcel: #('JavascriptEngine-Parser-Tests')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Parser-Tests
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-AST' #componentType #package) #(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package) #(#name 'PetitParser' #componentType #package) #(#name 'SUnitToo' #componentType #package) #(#name 'PetitAnalyzer' #componentType #package) #(#name 'SUnit' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-AST' '') #('JavascriptEngine-Namespace' '') #('JavascriptEngine-Parser-Core' '') #('JavascriptEngine-VisualWorks' '') #('PetitParser' '') #('SUnitToo' '') #('PetitAnalyzer' '') #('SUnit' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Url: file:///c:/develop/smalltalk/squeak/Pharo3.0/package-cache/JavascriptEngine-Parser-Tests-hkleinsorgen.1.mcz
+Version: 0.5.1
+Date: 2:15:07 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:15:07</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSEParserTest</name>
+<environment>JSE</environment>
+<super>XProgramming.SUnit.TestCase</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>parser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractLexicalTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSELexicalTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLexicalTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEJsonLexicalTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLexicalTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTreeValidationTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENumericConversionTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBasicParserTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>leftRecursiveProductions </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEJsonParserTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPrintSourceTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionParserTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEParserTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>UnicodeTest</name>
+<environment>JSE</environment>
+<super>XProgramming.SUnit.TestCase</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEJsonTestFactory</name>
+<environment>JSE</environment>
+<super>JSE.JSEJsonFactory</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonTestFactory</class-id>
+<body>A factory used by some unit tests that creates Smalltalk objects</body>
+</comment>
+
+<class>
+<name>JSETestFactory</name>
+<environment>JSE</environment>
+<super>JSE.JSEParsedNodesFactory</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSETestFactory</class-id>
+<body>A factory used by some unit tests that creates a simplified AST of nested arrays and literals</body>
+</comment>
+
+<class>
+<name>JSETestParserResource</name>
+<environment>JSE</environment>
+<super>XProgramming.SUnit.TestResource</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>parser lexicalParser numericStringParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Tests</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>PetitParser.PPSequenceParser</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">jseIsLeftRecursiveProduction: leftParser	^ self children first == leftParser</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">jseIsLeftRecursiveProduction	^ self children anySatisfy: [ : p | p jseIsLeftRecursiveProduction: self ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">jseIsLeftRecursiveProduction: leftParser	^ false</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPChoiceParser</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">jseIsLeftRecursiveProduction: leftParser	^ self children anySatisfy: [ : p | p jseIsLeftRecursiveProduction: leftParser ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParserTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">assertParse: aString	^ [		self parse: aString.	] on: JSESyntaxError do: [ : ex |		self signalFailure: ex description.		nil.	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">assertParseFailure: aString	[		| result |		result := self parse: aString.		self signalFailure: aString printString, ' : Expected parser failure, got ', result printString	] on: JSESyntaxError do: [ : ex |		" expected this "	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">floatFrom: aString 	^ JSEPlatform floatClass readFrom: aString readStream</body>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString	^ self parser parse: aString</body>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString equals: expectedParsedValue 	| parsedValue | 	[	parsedValue := self parse: aString.		self 			assert: parsedValue = expectedParsedValue			description: aString printString , ' : Parsed: ' , parsedValue displayString , ', expected: ' , expectedParsedValue displayString	] on: JSESyntaxError do: [: ex | self signalFailure: ex description ].</body>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString onError: aBlock 	self parser parse: aString onError: aBlock.</body>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ (self class parserResource parser )		factory:  JSETestFactory new;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParserTest class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Tests">parserResource	^ JSETestParserResource current</body>
+
+<body package="JavascriptEngine-Parser-Tests">resources	^ Array with: JSETestParserResource</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParserTest class</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">isAbstract	^ self = JSEParserTest</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString expectTokenValue: tokenValue type: tokenType 	^ [ | tokens |		tokens := self parse: aString.		self parsedString: aString tokens: tokens expectTokenValue: tokenValue type: tokenType.		tokens	] 		on: JSESyntaxError		do: 		[: ex |			self signalFailure: ex description.			#( )		]</body>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString expectTokens: expecedTokenStrings 	^ [ | tokens tokenStrings |		tokens := self parse: aString.		tokens := tokens asArray.		tokenStrings := tokens collect: [: token | token value ].		self 			assert: tokenStrings = expecedTokenStrings			description: aString , ': Expected ' , expecedTokenStrings printString , ' got: ' , tokenStrings printString.		tokens	] 		on: JSESyntaxError		do: 		[: ex |			self signalFailure: ex description.			#( )		]</body>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString expectTokens: expecedTokenStrings types: expectedTokenTypes	^ [ | tokens tokenStrings tokenTypes |		tokens := self parse: aString.		tokens := tokens asArray.		tokenStrings := tokens collect: [: token | token value ].		self 			assert: tokenStrings = expecedTokenStrings			description: aString , ': Expected ' , expecedTokenStrings printString , ' got: ' , tokenStrings printString.		tokenTypes := tokens collect: [: token | token type ].		self 			assert: tokenTypes = expectedTokenTypes			description: aString , ': Expected types ' , expectedTokenTypes printString , ' got: ' , tokenTypes printString.		tokens	] 		on: JSESyntaxError		do: 		[: ex |			self signalFailure: ex description.			#( )		]</body>
+
+<body package="JavascriptEngine-Parser-Tests">parsedString: aString tokens: tokens expectTokenValue: tokenValue type: tokenType	| token |	self assert: tokens size = 1 description: aString , ': Expected one token, got ', tokens size printString, ': ', tokens printString.	token := tokens first.	self assert: (token  isKindOf: JSEToken) description: aString , ': Expected token: ', token printString.	self 		assert: token literalValue = tokenValue		description: aString , ': Parsed: ' , token literalValue printString, ', expected: ' , tokenValue printString.	self 		assert: token type= tokenType		description: aString , ': Parsed type: ' , token type printString, ', expected: ' , tokenType printString.	^ token</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parseRegularExpression: aString	^ self parseRegularExpression: aString flags: nil</body>
+
+<body package="JavascriptEngine-Parser-Tests">parseRegularExpression: aString flags: flags	| tokens |	tokens := self parse: 'r = /', aString, '/', (flags ifNil: [ '' ]).	self assert: tokens size = 3 description: aString, ' :  three tokens expected, string probably not parsed as regular expression'.	self parsedString: aString tokens: (tokens copyFrom: 3 to: 3) expectTokenValue: aString type: #regex.	^ tokens at: 3</body>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ self class parserResource lexicalParser</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.8.4 String Literals</category>
+
+<body package="JavascriptEngine-Parser-Tests">testDoubleQuotedString	self privateTestStringWithQuote: '"'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testEscapeCharacters	(Array with: $" with: $') do: [ : quote |		self privateTestEscapeCharacter: (Character codePoint: 16r08) with: $b quote: quote.		self privateTestEscapeCharacter: (Character codePoint: 16r09) with: $t quote: quote.		self privateTestEscapeCharacter: (Character codePoint: 16r0A) with: $n quote: quote.		self privateTestEscapeCharacter: (Character codePoint: 16r0B) with: $v quote: quote.		self privateTestEscapeCharacter: (Character codePoint: 16r0C) with: $f quote: quote.		self privateTestEscapeCharacter: (Character codePoint: 16r0D) with: $r quote: quote.		self privateTestEscapeCharacter: $" with: $" quote: quote.		self privateTestEscapeCharacter: $' with: $' quote: quote.		self privateTestEscapeCharacter: $\ with: $\ quote: quote.	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testHexEscapeSequence	self parse: '"a\xbcdef"' expectTokenValue: (String with: $a with: (Character codePoint: 16rbc) ), 'def' type: #string.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testLineContiunation	| string |	JSELexicalParser lineTerminatorCodeUnitValues do: 		[: codeValue | | lineTerminator |			lineTerminator := Character codePoint: codeValue.			string := '"First' , ( String with: $\ with: lineTerminator ) , 'Second"'.			self parse: string expectTokenValue: 'FirstSecond' type: #string		].	string := '"First' , ( String with: $\ with: Character cr with: Character lf ) , 'Second"'.	self parse: string expectTokenValue: 'FirstSecond' type: #string.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNullCharacter	self parse: '"a\0b"' expectTokenValue: (String with: $a with: (Character codePoint: 0) with: $b) type: #string.	self assertParseFailure: '"\01"' .</body>
+
+<body package="JavascriptEngine-Parser-Tests">testSingleQuotedString	self privateTestStringWithQuote: ''''.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testUnicodeEscapeSequence	self parse: '"a\ubcdef"' expectTokenValue: (String with: $a with: (Character codePoint: 16rbcde) with: $f) type: #string.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>15.10 Regular Expression Objects</category>
+
+<body package="JavascriptEngine-Parser-Tests">testNoRegularExpression	" single line comment, not an empty regex "	self parse: '//' expectTokens: #().	" line terminator "	self parse: '/a', (String with:Character cr), 'b/' expectTokens: #('/' 'a' 'b' '/').	self parse: '(1/2)/3' expectTokens: #('(' '1' '/' '2' ')' '/' '3').	self parse: 'n/=j/2' expectTokens: #('n' '/=' 'j' '/' '2').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpression	self parseRegularExpression: '(\w.+)'.	self parseRegularExpression: '(\w.+)'.	self parseRegularExpression: '[:alnum:]'.	self parseRegularExpression: '^[:punct:]\s+'.	self parseRegularExpression: '[az\w]'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpressionEscape	'AZbB&lt;&gt;nrtvfae' do: [ : escapeCharacter |		self parseRegularExpression: (String with: $\ with: escapeCharacter).	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpressionExamples	" sizzle.js, (dojo, jQuery) "	self parseRegularExpression: '((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|[''"][^''"]*[''"]|[^[\]''"]+)+\]|\\.|[^ &gt;+~,(\[\\]+)+|[&gt;+~])(\s*,\s*)?((?:.|\r|\n)*)'.	" effects.js (Scriptaculous) "	self parseRegularExpression: 'opacity:\s*((?:0|1)?(?:\.\d*)?)'.	" jQuery "	self parseRegularExpression: 'rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)'.	self parseRegularExpression: 'rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)'.	self parseRegularExpression: '#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})'.	self parseRegularExpression: '#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])'.	self parseRegularExpression: 'rgba\(0, 0, 0, 0\)'.	self parseRegularExpression: '#((?:[\w\u00c0-\uFFFF-]|\\.)+)'.	self parseRegularExpression: '\.((?:[\w\u00c0-\uFFFF-]|\\.)+)'.	self parseRegularExpression: '\[name=[''"]*((?:[\w\u00c0-\uFFFF-]|\\.)+)[''"]*\]'.	self parseRegularExpression: '\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*([''"]*)(.*?)\3|)\s*\]'.	self parseRegularExpression: ' jQuery\d+="(?:\d+|null)"'.	self parseRegularExpression: '^\s+'.	self parseRegularExpression: '(&lt;([\w:]+)[^&gt;]*?)\/&gt;'.	self parseRegularExpression: '^(?:area|br|col|embed|hr|img|input|link|meta|param)$'.	self parseRegularExpression: '&lt;([\w:]+)'.	self parseRegularExpression: '&lt;tbody'.	self parseRegularExpression: '&lt;|&amp;#?\w+;'.	self parseRegularExpression: '&lt;script|&lt;object|&lt;embed|&lt;option|&lt;style'.	self parseRegularExpression: 'checked\s*(?:[^=]|=\s*.checked.)'.	self parseRegularExpression: '=([^="''&gt;\s]+\/)&gt;'.	" jQuery UI "	self parseRegularExpression: '\Array\(\)'</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpressionFlags	#( '' 'c' 'cF') do: [ : flags |		| token |		token := self parseRegularExpression: 'abc' flags: flags.		self assert: token flags = flags description: token flags printString.	]</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpressionOnly	" parse a pure regular expression without any other tokens "	| tokens |	tokens := self parse: '/	/'.	self assert: tokens size = 1.	self assert: tokens first type = #regex.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpressionPerl	" not supported by the Regex package "	self parseRegularExpression: '(?=a)'.	self parseRegularExpression: '(?:0|1)'.	self parseRegularExpression: '(?:\.\d*)'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.6 Identifier Names and Identifiers</category>
+
+<body package="JavascriptEngine-Parser-Tests">testIdentifier	#('foo' 'IF' 'foo42') do: [ : identifier |		self parse: identifier expectTokenValue: identifier type: #identifierName.	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testIdentifierEscaping	#(36 95 228 ) do: [ : codePoint || string |		string := (String with: (Character codePoint: codePoint)) .		self parse: string  expectTokenValue: string  type: #identifierName.		self parse: '\u', (codePoint jsePrintStringRadix: 16 paddedTo: 4) expectTokenValue: string  type: #identifierName.	].	self parse:  '$\u0030' expectTokenValue:  (String with: $$ with: (Character codePoint: 16r30))  type: #identifierName.	self assert: (self parse: '*ab') size = 2.	" A UnicodeEscapeSequence cannot be used to put a character into an IdentifierName that would otherwise be illegal. "	self assertParseFailure:  '\u002Aab'.	self assertParseFailure: (String with: (Character codePoint: 16r20AC) with: $a with: $b).	self assertParseFailure: '\u20ACbc'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testIdentifierName	JSELexicalParser keywords , JSELexicalParser futureReservedWords 		do: [: reservedWord | self parse: reservedWord expectTokenValue: reservedWord type: #identifierName ].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testIdentifierNameEscaping	self parse: '\u0069\u0066' expectTokenValue: 'if' type: #identifierName</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>11.1 Primary Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testCallExpression	self parse: 'bar()' expectTokens: #('bar' '(' ')').	self parse: 'bar(arg1)' expectTokens: #('bar' '(' 'arg1' ')').	self parse: 'foo.bar(arg1)' expectTokens: #('foo' '.' 'bar' '(' 'arg1' ')').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testGroupedExpression	self parse: '((1+23)+45)' expectTokens: #('(' '(' '1' '+' '23' ')' '+' '45' ')')</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.3 Line Terminators</category>
+
+<body package="JavascriptEngine-Parser-Tests">testLineTerminator	" line terminators are removed from the token stream. the next token is flagged "	JSELexicalParser lineTerminatorCodeUnitValues do: [ : codeValue |		| character tokens |		character := (Character codePoint: codeValue).		tokens := self parse: (('1' copyWith: character), '2 3') expectTokens: #('1' '2' '3').		self assert: (tokens at: 1) hasPreceedingLineTerminator not.		self assert: (tokens at: 2) hasPreceedingLineTerminator.		self assert: (tokens at: 1) hasPreceedingLineTerminator not.	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.8.3 Numeric Literals</category>
+
+<body package="JavascriptEngine-Parser-Tests">testDecimalIntegerLiteral	0 to: 10 do: [: i | self parse: i printString expectTokenValue: i type: #numeric ].	self parse: '12345' expectTokenValue: 12345 type: #numeric.	self parse: '1.2' expectTokenValue: 1.2d type: #numeric.	self parse: '.2' expectTokenValue: 0.2d type: #numeric.	self parse: '1e3' expectTokenValue: 1000 type: #numeric.	self parse: '1e+3' expectTokenValue: 1000 type: #numeric.	self parse: '1e-2' expectTokenValue: ( 10 raisedTo: -2 ) type: #numeric.	self parse: '1E3' expectTokenValue: 1000 type: #numeric.	self parse: '12.34E3' expectTokenValue: 12.34d3 type: #numeric.	self parse: '2.3E-2' expectTokenValue: 2.3d-2 type: #numeric.	self parse: '2.3E+2' expectTokenValue: 2.3e2 type: #numeric.	self parse: '1.3E+50' expectTokenValue: 1.3d50 type: #numeric.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testExponent	self parse: '0.1e-1' expectTokenValue: 0.01d type: #numeric.	self parse: '.1e-1' expectTokenValue: 0.01d type: #numeric.	self parse: '2.1e-2' expectTokenValue: 0.021d type: #numeric.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testHexIntegerLiteral	self parse: '0x12345' expectTokenValue: 16r12345 type: #numeric.	self parse: '0Xabcdef' expectTokenValue: 16rabcdef type: #numeric.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testOctalIntegerLiteral	self parse: '0042' expectTokenValue: 34 type: #numericOctal.	self parse: '00' expectTokenValue: 0 type: #numericOctal.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>testing - private</category>
+
+<body package="JavascriptEngine-Parser-Tests">privateTestEscapeCharacter: character with: escapeCharacter quote: quoteCharacter 	self 		parse: ( String with: quoteCharacter with: $\ with: escapeCharacter with: quoteCharacter )		expectTokenValue: ( String with: character )		type: #string.</body>
+
+<body package="JavascriptEngine-Parser-Tests">privateTestStringWithQuote: quoteString	self parse: quoteString, 'Test', quoteString expectTokenValue: 'Test' type: #string.	self parse: quoteString, quoteString expectTokenValue: '' type: #string.	self parse: quoteString, '-', quoteString expectTokenValue: '-' type: #string.	self assertParseFailure: quoteString, quoteString, quoteString.	self assertParseFailure: quoteString, 'Missing quote'.	JSELexicalParser lineTerminatorCodeUnitValues do: [ : codeValue | | string |		string := 'First', (String with: (Character codePoint: codeValue)), 'Second'.		self assertParseFailure: quoteString, string, quoteString.	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.4 Comments</category>
+
+<body package="JavascriptEngine-Parser-Tests">testMultiLineComment	| multilineString cr |	cr := String with: Character cr.	self parse: '/*test*/' expectTokens: #().	self parse: '/**test**/' expectTokens: #().	self parse: '/***test***/' expectTokens: #().	self parse: '/* * test * */' expectTokens: #().	self parse: '/***', cr, 'test', cr, '***/' expectTokens: #().	self parse: '123 /*123 is a magic number*/ 456' expectTokens: #('123' '456').	multilineString := 'real', cr, cr, 'multiline'.	self parse: '123 /*', multilineString, '*/ 456' expectTokens: (Array with: '123' with: '456').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testSingleLineComment	self parse: '123 // 123 is a magic number' expectTokenValue: 123 type: #numeric</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>11.2 Left-Hand-Side Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testMemberExpression	self parse: 'foo[bar]' expectTokens: #('foo' '[' 'bar' ']').	self parse: 'foo.bar' expectTokens: #('foo' '.' 'bar').</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.2 White Space</category>
+
+<body package="JavascriptEngine-Parser-Tests">testWhiteSpace	self parse: ' 1' expectTokens: #('1').	self parse: '1 ' expectTokens: #('1').	self parse: ' 1 ' expectTokens: #('1').	self parse: '  1  ' expectTokens: #('1').	self parse: '1;23;45' expectTokens: #('1' ';' '23' ';' '45').	self parse: '1 ; 23 ; 45' expectTokens: #('1' ';' '23' ';' '45').	self parse: '1;2 3;4 5' expectTokens: #('1' ';' '2' '3' ';' '4' '5').	self parse: 'abcdef' expectTokens: #('abcdef').	self parse: 'abc def' expectTokens: #('abc' 'def').	self parse: 'abc(def)' expectTokens: #('abc' '(' 'def' ')').	self parse: ' abc ( def ) ' expectTokens: #('abc' '(' 'def' ')').		JSELexicalParser whiteSpaceCodeValues do: [ : codeValue |		self parse: (String with: (Character codePoint: codeValue)), ' 1' expectTokens: #('1').	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>11.4 Unary Operators</category>
+
+<body package="JavascriptEngine-Parser-Tests">testUnaryAdd	self parse: '"-" + "1" ' expectTokens: #('-' '+' '1') types: #(string punctuator string)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.8.2 Boolean Literals</category>
+
+<body package="JavascriptEngine-Parser-Tests">testBooleanLiteral	self parse: 'true' expectTokenValue: true type: #boolean.	self parse: 'false' expectTokenValue: false type: #boolean.	" not a boolean "	self parse: 'trueStuff' expectTokenValue: 'trueStuff' type: #identifierName.	self parse: 'TRUE' expectTokenValue: 'TRUE' type: #identifierName.	self parse: 'falseStuff' expectTokenValue: 'falseStuff' type: #identifierName.	self parse: 'FALSE' expectTokenValue: 'FALSE' type: #identifierName.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalTest</class-id> <category>7.8.1 Null Literals</category>
+
+<body package="JavascriptEngine-Parser-Tests">testNullLiteral	self parse: 'null' expectTokenValue: nil type: #null.	" not a null "	self parse: 'nullStuff' expectTokenValue: 'nullStuff' type: #identifierName.	self parse: 'NULL' expectTokenValue: 'NULL' type: #identifierName.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonLexicalTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">testArray	| tokens |	self parse: '[1, 2, 3]' expectTokens: #('[' '1' ',' '2' ',' '3' ']') types: #(#punctuator #numeric #punctuator #numeric #punctuator #numeric #punctuator).	tokens := self parse: '[]'.	self assert: tokens size = 2.	self assert: tokens first literalValue = '['.	self assert: tokens last literalValue = ']'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testBoolean	self parse: 'true' expectTokenValue: true type: #boolean.	self parse: 'false' expectTokenValue: false type: #boolean.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNull	self parse: 'null' expectTokenValue: nil type: #null.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNumber	self parse: '123' expectTokenValue: 123 type: #numeric.	self parse: '123.45' expectTokenValue: 123.45d type: #numeric.	self parse: '-123.45e6' expectTokenValue: -123.45d6 type: #numeric.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testObject	| tokens |	self parse: '{"age": 42}' expectTokens: #('{' 'age' ':' '42' '}').	tokens := self parse: '{}'.	self assert: tokens size = 2.	self assert: tokens first literalValue = '{'.	self assert: tokens last literalValue = '}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testString	self parse: '"Jason"' expectTokens: #('Jason') types: #(string).	self parse: '"Voorhees"' expectTokenValue: 'Voorhees' type: #string.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testWhitespace	#(9 10 13 32) do: [ : i |		self parse: (String with: (Character codePoint: i)) expectTokens: #().	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonLexicalTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ JSEJsonLexicalParser new</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeValidationTest</class-id> <category>11 Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testPostfixOperators	self assertParse: 'i++'.	self assertParse: 'i--'.	self assertParseFailure: '123++'.	self assertParseFailure: '123--'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeValidationTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parse: aString	| syntaxTree |	syntaxTree := super parse: aString.	syntaxTree validate</body>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ (self class parserResource parser copy)		factory: JSESyntaxTreeFactory new;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeValidationTest</class-id> <category>12 Statements</category>
+
+<body package="JavascriptEngine-Parser-Tests">testBreak	self assertParse: 'label: break label;'.	self assertParse: 'for (;;) {break;}'.	self assertParseFailure: 'break;'.	self assertParseFailure: 'label: break otherLabel;'.	self assertParseFailure: 'label: break otherLabel; otherLabel: 42;'.	self assertParseFailure: 'otherLabel: 42; label: break otherLabel;'.	self assertParseFailure: 'label: function f() { break: label; }'.	self assertParseFailure: 'label: { label: 42; }'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericConversionTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">testDecimalInteger	self parse: '1' equals: 1.	self parse: ' 123 ' equals: 123.	self parse: ' +123 ' equals: 123.	self parse: ' -123 ' equals: -123.	self parse: '1.' equals: 1.	self assertParseFailure: '- 123'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testDouble	self parse: '1.2' equals: (self floatFrom: '1.2').	self parse: ' 12.3 ' equals: (self floatFrom: '12.3').	self assertParseFailure: '1.2.3'.	self assertParseFailure: '1..3'.	self assertParseFailure: '1,3'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testEmptyString	self parse: '' equals: 0.	" whitespace "	self parse: ' ' equals: 0.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testHexInteger	self parse: '0x12345' equals: 16r12345.	self parse: '0Xabcdef' equals: 16rabcdef.	self assertParseFailure: '0x'.	self assertParseFailure: '0xy'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testInfinity	self parse: 'Infinity' equals: JSEPlatform positiveInfinityValue.	self parse: '-Infinity' equals: JSEPlatform negativeInfinityValue.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNegativeZero	| zero |	zero := self parse: '-0'.	self assert: zero jseIsNegativeZero.	self deny: zero jseIsPositiveZero.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testPositiveZero	| zero |	zero := self parse: '0'.	self assert: zero jseIsPositiveZero.	self deny: zero jseIsNegativeZero.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericConversionTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ self class parserResource numericStringParser</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBasicParserTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Parser-Tests">testLineNumber	self assert: (( String with: $1 with: Character cr with: $2 ) jseLineNumberAt: 1) = 1.	self assert: (( String with: $1 with: Character cr with: $2 ) jseLineNumberAt: 2) = 2.	self assert: (( String with: $1 with: Character lf with: $2 ) jseLineNumberAt: 2) = 2.	self assert: (( String with: $1 with: Character cr with: Character lf with: $2 ) jseLineNumberAt: 2) = 2.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNewParser	JSEParser new</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNoLeftRecursions	JSEParser new allParsersDo: [ : p |		self assert: p jseIsLeftRecursiveProduction not description: 'Left recursive: ', p printString	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>11 Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testAdditiveOperators	self privateTestBinaryOperators: JSESyntacticParser additiveOperators.	self parseExpression: '1+2' equals: #( 1 #'+' 2 ).	self parseExpression: '1.2+3.4' equals: ( Array with: ( self floatFrom: '1.2' ) with: #'+' with: ( self floatFrom: '3.4' )).	self parseExpression: '.1+.2' equals: ( Array with: ( self floatFrom: '0.1' ) with: #'+' with: ( self floatFrom: '0.2' )).	self parseExpression: '1e+2+2e+2' equals: #( 100 #'+' 200 ).	self parseExpression: '"-" + "1"' equals: #('-' #+ '1').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testAssignment	JSESyntacticParser assignmentOperators do: [ : operatorString  |		self parseExpression: 'v', operatorString, '1' equals: (Array with: #v with: operatorString asSymbol with: 1)	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testBitwiseOperators	self privateTestBinaryOperators: #('&amp;' '|' '^')</body>
+
+<body package="JavascriptEngine-Parser-Tests">testCommaOperator"	JSESyntacticParser assignmentOperators do: [ : operatorString  |		self parseExpression: 'v', operatorString, '1,w=2' equals: (Array with: (Array with: #v with: operatorString asSymbol with: 1) with: #(w #= 2)).	]."	self parseExpression: 'v=1,w=2,x=3,z=4' equals: #((((v #= 1) #(w #= 2)) #(x #= 3)) (z #= 4)).	self assertExpressionFailure: 'v=1,,w=2'.	self assertExpressionFailure: ',v=1,w=2'.	self assertExpressionFailure: 'v=1,w=2,'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testConditionalOperator	self parseExpression: 'b ? 1 : 2 ' equals: #(b $? 1 $: 2).	self assertExpressionFailure: 'b ? 1 : '.	self assertExpressionFailure: 'b ? 1'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testLogicalOperators	self privateTestBinaryOperators: #('&amp;&amp;' '||')</body>
+
+<body package="JavascriptEngine-Parser-Tests">testMultiplicativeOperators	self parseExpression: '1 * 2' equals: #(1 #* 2).	self parseExpression: '1 / 2' equals: #(1 #/ 2).	self parseExpression: '1 % 2' equals: #(1 #% 2).	self assertExpressionFailure: '* 1'.	self assertExpressionFailure: '1 *'.	self assertExpressionFailure: '1 * / 2'.	self assertExpressionFailure: '1 % * 2'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testPostfixOperators	self parseExpression: '123++' equals: #(123 #++).	self parseExpression: '123--' equals: #(123 #--).	self parseExpression: '123 ++' equals: #(123 #++).	self parseExpression: '123 /* postfix */ ++' equals: #(123 #++).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRelationalOperators	self privateTestBinaryOperators: JSESyntacticParser relationalOperators</body>
+
+<body package="JavascriptEngine-Parser-Tests">testShiftOperators	self privateTestBinaryOperators: JSESyntacticParser shiftOperators</body>
+
+<body package="JavascriptEngine-Parser-Tests">testUnaryOperators	JSESyntacticParser unaryOperators do: 		[: operatorString |			self parseExpression: operatorString , ' value' equals: ( Array with: operatorString asSymbol with: #value ).			( operatorString allSatisfy: [: ch | ch isLetter not ]) 				ifTrue: [ self parseExpression: operatorString , 'value' equals: ( Array with: operatorString asSymbol with: #value )]		].	self parseExpression: '++n' equals: #(#++ n).	self parseExpression: '--n' equals: #(#-- n).	self parseExpression: '-- n' equals: #(#-- n).	self parseExpression: '- -n' equals: #(#- (#- n)).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">assertExpressionFailure: aString	self assertParseFailure: aString, ';'</body>
+
+<body package="JavascriptEngine-Parser-Tests">parseExpression: expressionString equals: expectedParsedValue	self parse: expressionString, ';' equals: (Array with: expectedParsedValue)</body>
+
+<body package="JavascriptEngine-Parser-Tests">parseObjectLiteral: literalString equals: keysAndValues 	| object |	object := Dictionary new.	keysAndValues do: [: pair | object at: pair first put: pair last ].	self parseExpression: 'o=', literalString equals: (Array with: #o with: #= with: object)</body>
+
+<body package="JavascriptEngine-Parser-Tests">privateTestBinaryOperators: operators 	operators do: 		[: operatorString |			self parseExpression: 'left ' , operatorString , ' right' equals: ( Array with: #left with: operatorString asSymbol with: #right ).			( operatorString allSatisfy: [: char | char isLetter not ]) 				ifTrue: 				[	self parseExpression: 'left' , operatorString , 'right' equals: ( Array with: #left with: operatorString asSymbol with: #right )				].			self assertExpressionFailure: 'left ', operatorString.		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>12 Statements</category>
+
+<body package="JavascriptEngine-Parser-Tests">testBlock	self parse: '{}' equals: #(()).	self parse: '{{}}' equals: #((())).	self parse: '{{1;}{2;}}' equals: #(((1)(2))).	self assertParseFailure: '{'.	self assertParseFailure: '}'.	self assertParseFailure: '{{}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testBreak	self parse: 'for (;;) {break;}' equals: #((for (nil nil nil) (break))).	self parse: 'label: break label;' equals: #(#(#label #':' #(#break #label))).	self parse: 'for (;;) {break ', (String with: Character cr), ' noLabel;}' equals: #((for (nil nil nil) (break noLabel))) .</body>
+
+<body package="JavascriptEngine-Parser-Tests">testContinue	self parse: 'continue;' equals: #(continue).	self parse: 'continue label;' equals: #((continue label)).	self parse: 'continue ', (String with: Character cr), ' noLabel;' equals: #(continue noLabel).	self assertParseFailure: 'continue a=b;'.	self assertParseFailure: 'continue {label};'.	self assertParseFailure: 'continue label1 label2;'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testDebugger	self parse: 'debugger;' equals: #(debugger).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testEmptyStatement	self parse: '{;}' equals: #((())).	self parse: '{;;}' equals: #((()())).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testExpressionStatement	self parse: 'a;' equals: #(a).	self parse: 'a;b;' equals: #(a b).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testIfStatement	self parse: 'if (a&gt;b) a;' equals: #((if (a #&gt; b) a)).	self parse: 'if (a&gt;b) a; else b;' equals: #((if (a #&gt; b) a b)).	self parse: 'if (a&gt;b) {} else {}' equals: #((if (a #&gt; b) #() #())).	self assertParseFailure: 'if a&gt;b a;'.	self assertParseFailure: 'if (a&gt;b)'.	self assertParseFailure: 'if a&gt;b'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testLabelledStatement	self parse: 'blog: 42;' equals: #((blog #':' 42 )).	self parse: 'blog: {}' equals: #((blog #':' () )).	self parse: 'blog: ;' equals: #((blog #':' () )).	self assertParseFailure: 'blog 42;'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testReturn	self parse: 'return;' equals: #(return).	self parse: 'return result;' equals: #((return result)).	self parse: 'return result=42;' equals: #((return (result #= 42))).	self parse: 'return ', (String with: Character cr), ' noResult;' equals: #(return noResult).	self assertParseFailure: 'return result1 result2;'.	self assertParseFailure: 'return {42;};'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testSwitch	self parse: 'switch (i) {case 1: a;}' equals: #((switch i ((case 1 (a)) ))).	self parse: 'switch (i) {default: d;}' equals: #((switch i ((default (d)) ))).	self parse: 'switch (i) {case 1: a; case 2: b;}' equals: #((switch i ((case 1 (a)) (case 2 (b)) ))).	self parse: 'switch (i) {case 1: a; default: d;}' equals: #((switch i ((case 1 (a)) (default (d)) ))).	self parse: 'switch (i) {default: d;case 1: a;}' equals: #((switch i ((default (d)) (case 1 (a)) ))).	self parse: 'switch (i) {}' equals: #((switch i ())).	self parse: 'switch (i) {case 1: a; case 1: b;}' equals: #((switch i ((case 1 (a)) (case 1 (b)) ))).	self assertParseFailure: 'switch (i) {default: d; default: d;}'.	self assertParseFailure: 'switch (i) {case: a;}'.	self assertParseFailure: 'switch {case 1: a;}'.	self assertParseFailure: 'switch i {case 1: a;}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testThrow	self parse: 'throw exception;' equals: #((throw exception)).	self parse: 'return exception=e;' equals: #((return (exception #= e))).	self parse: 'throw "exception";' equals: #((throw 'exception')).	self assertParseFailure: 'throw ', (String with: Character cr), ' exception;'.	self assertParseFailure: 'throw;'.	self assertParseFailure: 'throw {exception;};'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testTry	self parse: 'try {something;} catch (Failure) {fail;}' equals: #((try (something) (catch Failure (fail)))).	self parse: 'try {something;} finally {cleanup;}' equals: #((try (something) (finally (cleanup)))).	self parse: 'try {something;} catch (Failure) {fail;} finally {cleanup;}' equals: #((try (something) (catch Failure (fail)) (finally (cleanup)))).	self assertParseFailure: 'try {something;}'.	self assertParseFailure: 'try something; finally {cleanup;}'.	self assertParseFailure: 'try {something;} catch {fail;}'.	self assertParseFailure: 'try {something;} catch (Failure)'.	self assertParseFailure: 'try {something;} finally cleanup;'.	self assertParseFailure: 'try {something;} catch () {fail;}'.	self assertParseFailure: 'try {something;} finally {cleanup;} catch (Failure) {fail;} '.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testVariableStatement	self parse: 'var blog;' equals: #((var (blog))).	self parse: 'var blog="MyBlog";' equals: #((var ((blog #= 'MyBlog')))).	self parse: 'var blog,microblog,feed;' equals: #((var (blog microblog feed))).	self parse: 'var blog="MyBlog",microblog,feed;' equals: #((var ((blog #= 'MyBlog') microblog feed))).	self parse: 'var blog="MyBlog",microblog="Whale",feed="News";' equals: #((var ((blog #= 'MyBlog') (microblog #= 'Whale') (feed #= 'News')))).	self parse: 'var bool=1 in numbers;' equals: #((var ((bool #= (1 in numbers))))).	self assertParseFailure: 'var blog=;'.	self assertParseFailure: 'var var=1;'.	self assertParseFailure: 'var=1;'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testWith	self parse: 'with (a) b;' equals: #((with a b)).	self assertParseFailure: 'with () b;'.	self assertParseFailure: 'with a b;'.	self assertParseFailure: 'with (;) b;'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>11.2 Left-Hand-Side Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testCallExpression	self parseExpression: 'blog()' equals: #(blog ()).	self parseExpression: 'blog(url)' equals: #(blog (url)).	self parseExpression: 'my.blog()' equals: #((my $. blog) ()).	self parseExpression: 'my.blog(url)' equals: #((my $. blog) (url)).	self parseExpression: 'my.blog(url,title)' equals: #((my $. blog) (url title)).	self parseExpression: 'my.blog(url,title)[0]' equals: #(((my $. blog) (url title)) $[ 0 $]).	self parseExpression: 'my.blog(url,title).value' equals: #(((my $. blog) (url title)) $. value).	self parseExpression: 'my.blog(url)(title)' equals: #(((my $. blog) (url)) (title)).	self parseExpression: 'blog(get(url))' equals: #(blog ( (get (url)) )).	self parseExpression: '"a" + name()' equals: #('a' #+ (name ())).	self parseExpression: 'set("a" + "b")' equals: #(set (('a' #+ 'b'))).	self assertExpressionFailure: 'blog('.	self assertExpressionFailure: 'blog(()'.	self assertExpressionFailure: 'blog(url title)'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testCallExpressionConcatenation	self parseExpression: 'blog().post()' equals: #(((blog ()) $. post) ()).	self parseExpression: 'my.blog(url).post(stuff)' equals: #((((my $. blog) (url)) $. post) (stuff)).	self parseExpression: 'new Blog.post()' equals: #(new (Blog $. post) ()).	self parseExpression: 'new Blog().post()' equals: #(((new #Blog ()) $. post) ()).	self parseExpression: 'new Blog(url).post()' equals: #(((new #Blog (url)) $. post) ()).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNewExpression	self parseExpression: 'new Blog' equals: #(new Blog).	self parseExpression: 'new Blog()' equals: #(new Blog ()).	self parseExpression: 'new Blog(url)' equals: #(new #Blog (url)).	self parseExpression: 'new Blog(url, title)' equals: #(new Blog (url title)).	self parseExpression: 'new new Blog' equals: #(new #(new Blog)).	self parseExpression: 'new new Blog()' equals: #(new #(new Blog ())).	self parseExpression: 'new new Blog(url, title)' equals: #(new #(new Blog (url title))).	self parseExpression: 'new new Blog(url)(title)' equals: #(new #(new Blog (url))(title)).	self parseExpression: 'new My.Blog()' equals: #(new #(My $. Blog ) ()).	self assertExpressionFailure: 'new'.	self assertExpressionFailure: 'new new'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>13 Function Definition</category>
+
+<body package="JavascriptEngine-Parser-Tests">testFunctionDeclaration	self parse: 'function blog(){}' equals: #((function blog () nil)).	self parse: 'function blog(url,title){}' equals: #((function blog (url title) nil)).	self parse: 'function blog(url,title){42;}' equals: #((function blog (url title) (42))).	self parse: 'function blog(url,title){function inner(){}}' equals: #((function blog (url title) ((function inner () nil)))).	self assertParseFailure: 'function blog()'.	self assertParseFailure: 'function blog{}'.	self assertParseFailure: 'function function{}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testFunctionDeclarationWithinBlock	self parse: '{ function f() { } }' equals: #( ((function f () nil)) ).	self parse: 'try { function f() { } } finally { }' equals: #((try (#(function f () nil)) (finally ()))).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testFunctionExpression	self parse: 'var f=function(){};' equals: #((var ((f #= (function () nil))))).	self parse: 'var f=function(url,title){};' equals: #((var ((f #= (function (url title) nil))))).	self parse: 'var f=function(url,title){42;};' equals: #((var ((f #= (function (url title) (42)))))).	self assertParseFailure: 'function();'.	self assertParseFailure: 'var f=function blog'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>11.1 Primary Expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testArrayLiteral	self parseExpression: '[1, 2, 3]' equals: #(1 2 3).	self parseExpression: '[1]' equals: #(1).	self parseExpression: '[]' equals: #().	self parseExpression: '[1, ]' equals: #(1).	self parseExpression: '[1,, 3]' equals: #(1 nil 3).	self parseExpression: '[1,, , 4]' equals: #(1 nil nil 4).	self parseExpression: '[,2, 3]' equals: #(nil 2 3).	self parseExpression: '[,,3, 4]' equals: #(nil nil 3 4).	self parseExpression: '[1, 2,]' equals: #(1 2).	self parseExpression: '[1, 2,,]' equals: #(1 2 nil).	self parseExpression: '[, 2,]' equals: #(nil 2).	self assertExpressionFailure: '[1'.	self assertExpressionFailure: '1]'.	self assertExpressionFailure: '[1 2 3]'.	self assertExpressionFailure: '[1, 2 3]'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testBracketMemberExpression	self parseExpression: 'a[0]' equals: #(a $[ 0 $]).	self parseExpression: 'a[b]' equals: #(a $[ b $]).	self parseExpression: 'a[0][b]' equals: #(#(a $[ 0 $]) $[ b $]).	self assertExpressionFailure: 'a[]'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testDotMemberExpression	self parseExpression: 'a.b' equals: #(a $. b).	self parseExpression: 'a.b.c' equals: #(#(a $. b) $. c).	self assertExpressionFailure: 'a.'.	self assertExpressionFailure: '.b'.	self assertExpressionFailure: 'a..b'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testGroupedExpression	self parseExpression: '((1)+2)' equals: #(((1) #+ 2)).	self assertExpressionFailure: '(1'.	self assertExpressionFailure: '1)'.	self assertExpressionFailure: '((1)'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testIdentifier	#( 'foo' 'foo1' '$' '_') do: [ : identifier |		self parseExpression: identifier equals: identifier asSymbol	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testObjectLiteral	self parseObjectLiteral: '{}' equals: #().	self parseObjectLiteral: '{key1: 123}' equals: #(( key1 123)).	self parseObjectLiteral: '{key1: 123, }' equals: #(( key1 123)).	self parseObjectLiteral: '{key1: 123, key2: 234}' equals: #(( key1 123) ( key2 234)).	self parseObjectLiteral: '{f:  function() {} }' equals: #(( f #(function () nil) )).	self parseObjectLiteral: '{get property() { {} }}' equals: #(( #(get property) #(()))).	self parseObjectLiteral: '{set property(arg) { {} }}' equals: #(( (set property arg) #(()))).	self assertExpressionFailure: 'o={123}'.	self assertExpressionFailure: 'o={key1:}'.	self assertExpressionFailure: 'o={key1,key2: 123}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testPropertyAccessor	self parse:  		'var object = {			get property() { { p } },			set property(arg) { { p = arg } }		}' .	self parse:  		'var object = {			get null() { { 0 } },		}' .</body>
+
+<body package="JavascriptEngine-Parser-Tests">testRegularExpression	self parseExpression: '/\w+\d*/' equals: #(regex '\w+\d*').	" a greedy lexical parser that does not check the regular expression would return '2)' as regular expression, and the syntactic parser would fail "	self parseExpression: '(1/2)/3' equals: #(((1 #/ 2)) #/ 3).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testThis	self parseExpression: 'this' equals: #this</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>12.6 Iteration Statements</category>
+
+<body package="JavascriptEngine-Parser-Tests">testDoWhile	self parse: 'do {1;} while (a&gt;b)' equals: #((do (1) while (a #&gt; b))).	self assertExpressionFailure: 'do 1 while (a&gt;b)'.	self assertExpressionFailure: 'do {1;} while a&gt;b'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testFor	self parse: 'for (i=1;i&lt;10;i++) {42;}' equals: #((for ((i #= 1) (i #&lt; 10) (i #++)) (42))).	self parse: 'for (;i&lt;10;i++) {42;}' equals: #((for (nil (i #&lt; 10) (i #++)) (42))).	self parse: 'for (i=1;;i++) {42;}' equals: #((for ((i #= 1) nil (i #++)) (42))).	self parse: 'for (i=1;i&lt;10;) {42;}' equals: #((for ((i #= 1) (i #&lt; 10) nil) (42))).	self parse: 'for (;;) {42;}' equals: #((for (nil nil nil) (42))).	self assertExpressionFailure: 'for (;) {42;}'.	self assertExpressionFailure: 'for (;;;) {42;}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testForIn	self parse: 'for (each in collection) {each;}' equals: #((for (each in collection) (each))).	self assertParseFailure: 'for (each in) {each;}'.	self assertParseFailure: 'for (in collection) {each;}'.	self assertParseFailure: 'for each in collection {each;}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testForVariable	self parse: 'for (var i=1;i&lt;10;i++) {42;}' equals: #((for (var ((i #= 1)) (i #&lt; 10) (i #++)) (42))).	self parse: 'for (var i=1,j=10;i&lt;j;i++) {42;}' equals: #((for (var ((i #= 1)(j #= 10)) (i #&lt; j) (i #++)) (42))).	self parse: 'for (var i=1;;i++) {42;}' equals: #((for (var ((i #= 1))nil (i #++)) (42))).	self parse: 'for (var i=1;i&lt;10;) {42;}' equals: #((for (var ((i #= 1)) (i #&lt; 10) nil) (42))).	self parse: 'for (var i=1;;) {42;}' equals: #((for (var ((i #= 1)) nil nil) (42))).	"no #in allowed "	self assertParseFailure: 'for (var b=1 in numbers;;b) {42;}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testForVariableIn	self parse: 'for (var each in collection) {each;}' equals: #((for (var each in collection) (each))).	self parse: 'for (var each=1 in collection) {each;}' equals: #((for (var (each #= 1) in collection) (each))).	" variable declaration does not allow #in, so two consecutive #in operators are parsed this way "	self parse: 'for (var each=1 in numbers in collection) {each;}' equals: #((for (var (each #= 1) in (numbers in collection)) (each))).	self assertParseFailure: 'for (var each in) {each;}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testWhile	self parse: 'while (a&gt;b) {1;}' equals: #((while (a #&gt; b) (1) )).	self assertParseFailure: 'while a&lt;b {1;}'.	self assertParseFailure: 'while {1;}'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>7 Lexical Conventions</category>
+
+<body package="JavascriptEngine-Parser-Tests">testAutomaticSemicolonAtEnd	" explicit semicolon "	self parse: 'a;' equals: #(a).	" automatic semicolon "	self parse: 'a' equals: #(a).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testAutomaticSemicolonCurlyBrace	" explicit semicolon "	self parse: '{a;}' equals: #((a)).	" automatic semicolon "	self parse: '{a}' equals: #((a)).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testAutomaticSemicolonExamples	" 7.9.2 Examples of Automatic Semicolon Insertion "	| lineTerminator |	lineTerminator := String with: Character cr.	self assertParseFailure: '{ 1 2 } 3'.	self parse: '{ 1', lineTerminator, '2 } 3' equals: (self parse: '{1;2;}3;').	self assertParseFailure: 'for (a; b', lineTerminator, ')'.	self parse: 'return', lineTerminator, 'a + b;' equals:  (self parse: 'return; a + b').	self parse: 'a = b', lineTerminator, '++c' equals: (self parse: 'a = b; ++c').	self assertParseFailure: 'if (a &gt; b)', lineTerminator, 'else c = d'.	self parse: 'a = b + c', lineTerminator, '(d + e).print()' equals: (self parse: 'a = b + c(d + e).print()').	" additional tests "	self parse: 'throw "error"' equals: (self parse: 'throw "error";').	self parse: 'break label' equals: (self parse: 'break label;').	self parse: 'continue label' equals: (self parse: 'continue label;').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testAutomaticSemicolonLineTerminator	" explicit semicolon "	self parse: 'a;b;' equals: #(a b).	" automatic semicolon "	self parse: 'a', (String with: Character cr), 'b;' equals: #(a b).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testComments	self parseExpression: '123 /* postfix */ ++' equals: #(123 #++).	self assertExpressionFailure: ('123', (String with: Character cr), '++').	self assertExpressionFailure: ('123 /* ', (String with: Character cr), ' */ ++').</body>
+
+<body package="JavascriptEngine-Parser-Tests">testFutureReservedWords	self assertExpressionFailure: 'var class'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testLineTerminator	JSELexicalParser lineTerminatorCodeUnitValues do: [ : codeValue | | character |		character := (Character codePoint: codeValue).		self parse: '{a;', (String with:  character), 'b;}' equals: #((a b)).	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testLiteral	self parseExpression: '123' equals: 123.	self parseExpression: '"test"' equals: 'test'.	self parseExpression: 'true' equals: true.	self parseExpression: 'false' equals: false.	self parseExpression: 'null' equals: nil.	" make sure that the string token '(' ')' is not handled as parenthesis "	self parseExpression: '"("' equals: '('.	self parseExpression: 'call("(" + ")")' equals: #(#call (('(' #+ ')'))).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testOctalIntegerLiteral	self parseExpression: '012' equals: 10.	" not an octal number "	self assertParseFailure: '099'.	" not allowed "	self assertParseFailure: '"use strict"; 012'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testReservedWords	JSELexicalParser reservedWords do: [ : word |		self assertExpressionFailure: 'var ', word.	].	JSELexicalParser strictReservedWords asSet - JSELexicalParser reservedWords do: [ : strictWord |		self parseExpression: 'var ', strictWord equals: (Array with: #var with: (Array with: strictWord asSymbol))	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testStrictReservedWords	JSELexicalParser strictReservedWords do: [ : word |		self assertExpressionFailure: '"use strict"; var ', word.	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testWhitespace	#( '{a;b;}'  '{a; b;}' '{ a; b; }' ' { a; b; } ' ) do: [ : string |		self parse: string equals: #((a b)).	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTest</class-id> <category>position</category>
+
+<body package="JavascriptEngine-Parser-Tests">testSyntaxErrorInterval	| source |	[	source := 'ok();			var i = good();			if a &gt; b;			done()'.		self parse: source.		self signalFailure: 'Syntax error expected'.	] on: JSESyntaxError do: [ : ex | 		| sourceInterval |		sourceInterval := ex sourceInterval.		self assert: sourceInterval notNil.		" cannot parse if "		self assert: sourceInterval first = (source indexOfSubCollection: 'if' startingAt: 1).		self assert: sourceInterval last = (sourceInterval first + 1).		self assert: ex sourceString  = source.		self assert: ex lineNumber = 3.	].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testSyntaxErrorIntervalBacktracking	" Ensure that the error interval of  a SyntaxError is close to the actual cause of the error (this.get value)"	| source | 	[	source := 'function Person() { }			Person.prototype.shoesize = function() {				return this.get value("shoesize");			};			next();'.		self parse: source.		self signalFailure: 'Syntax error expected'	] 		on: JSESyntaxError		do: 		[: ex | | sourceInterval getIndex nextIndex |			sourceInterval := ex sourceInterval.			self assert: sourceInterval notNil.			" cannot parse 'get value' "			getIndex := source indexOfSubCollection: 'get' startingAt: 1.			self assert: sourceInterval first &gt;= getIndex.			nextIndex := source indexOfSubCollection: 'next' startingAt: 1.			self assert: sourceInterval last &lt; nextIndex.			self assert: ex sourceString  = source.			self assert: ex lineNumber = 3		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonParserTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">testArray	self assert: (self parse: '[1, 2, 3]') = #(1 2 3 ).	self assert: (self parse: '[[1, 2], 3, []]') = #((1 2) 3 #() ).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testBoolean	self assert: (self parse: 'true') == true.	self assert: (self parse: 'false') == false.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNull	self assert: (self parse: 'null') == nil</body>
+
+<body package="JavascriptEngine-Parser-Tests">testNumber	self assert: (self parse: '-123.45e6') = -123.45d6</body>
+
+<body package="JavascriptEngine-Parser-Tests">testObject	| object expected |	object := self parse: '{"name": "tester", "child" : {"name": "child"}, "parent": {} }'.	expected := Dictionary new.	expected at: 'name' put: 'tester'.	expected at: 'child' put: (Dictionary new at: 'name' put: 'child'; yourself).	expected at: 'parent' put: Dictionary new.	self assert: object = expected</body>
+
+<body package="JavascriptEngine-Parser-Tests">testString	self assert: (self parse: '"Jason"') = 'Jason'.	self assert: (self parse: '"Jason\/Argonauts"') = 'Jason/Argonauts'.	self assert: (self parse: '"Ja\u0073on"') = 'Jason'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonParserTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ JSEJsonParser new 		factory: JSEJsonTestFactory new;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Tests">testPrintFunction	self parseAndPrint: ' function  blog(a,b ) {   }' equals: 'function blog(a, b) {}'.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testPrintFunctionWithBody	self parseAndPrint: ' function  blog(a,b ) {var  i= 42; }' equals: 'function blog(a, b) {	var i = 42;}'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">parseAndPrint: aString 	| syntaxTree stream printer |	syntaxTree := self parse: aString.	stream := String new writeStream.	printer := JSEPrintSourceVisitor on: stream.	printer visit: syntaxTree.	^ stream contents</body>
+
+<body package="JavascriptEngine-Parser-Tests">parseAndPrint: aString equals: expectedString	| printedString |	printedString := self parseAndPrint: aString .	self assert: printedString = expectedString description: printedString.</body>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ (self class parserResource parser )		factory:  JSESyntaxTreeFactory new;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionParserTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Tests">formalParmaterListParser	^ JSEFormalParameterListParser new 		factory: JSETestFactory new;		yourself</body>
+
+<body package="JavascriptEngine-Parser-Tests">functionBodyParser	^ JSEFunctionBodyParser new 		factory: JSETestFactory new;		yourself</body>
+
+<body package="JavascriptEngine-Parser-Tests">testParseFormalParameterList	| parsed |	parsed := self formalParmaterListParser parse: 'a, b, c'.	self assert: parsed = #(#function #(#a #b #c) nil)</body>
+
+<body package="JavascriptEngine-Parser-Tests">testParseFormalParameterListEmpty	| parsed |	parsed := self formalParmaterListParser parse: ''.	self assert: parsed = #(#function #() nil).</body>
+
+<body package="JavascriptEngine-Parser-Tests">testParseFormalParameterListSyntaxError	[	self formalParmaterListParser parse: '{ var a = 42 }'.		self signalFailure: 'Syntax error expected'	] on: JSESyntaxError do: [: ex | ].</body>
+
+<body package="JavascriptEngine-Parser-Tests">testParseFunctionBody	| parsed |	parsed := self functionBodyParser parse: 'var a = 42'.	self assert: parsed = #(#(#var #(#(#a #= 42))))</body>
+</methods>
+
+<methods>
+<class-id>JSE.UnicodeTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Parser-Tests">testUnicodeCategory	self assert: (JSEUnicodeTables unicodeCategoryOf: $A) = 'Lu'.	self assert: (JSEUnicodeTables unicodeCategoryOf: $A codePoint) = 'Lu'.	self assert: (JSEUnicodeTables unicodeCategoryOf: $a) = 'Ll'.	self assert: (JSEUnicodeTables unicodeCategoryOf: $() = 'Ps'.	self assert: (JSEUnicodeTables unicodeCategoryOf: 16rFFFF) isNil.</body>
+
+<body package="JavascriptEngine-Parser-Tests">testUnicodeCategoryPredicate	| parser |	parser :=  PPPredicateObjectParser anyUnicodeCategory: #('Lu' 'Ll').	self assert: (parser matches: 'A').	self assert: (parser matches: 'a').	self assert: (parser matches: '1') not.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonTestFactory</class-id> <category>factory</category>
+
+<body package="JavascriptEngine-Parser-Tests">createArrayWithElements: aList	^ aList asArray</body>
+
+<body package="JavascriptEngine-Parser-Tests">createLiteral: aLiteralValue 	^ aLiteralValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createMember: aName value: aValue	^ aName -&gt; aValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createObjectWithMembers: aListOfMembers 	| object |	object := Dictionary new.	aListOfMembers do: [: member | object at: member key put: member value ].	^ object</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestFactory</class-id> <category>lexical elements</category>
+
+<body package="JavascriptEngine-Parser-Tests">createBooleanLiteral: token	" 7.8 Literals "	^ token literalValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createIdentifier: token	" 7.5 Tokens "	^ token literalValue asSymbol</body>
+
+<body package="JavascriptEngine-Parser-Tests">createIdentifierName: token	" 7.5 Tokens "	^ token literalValue asSymbol</body>
+
+<body package="JavascriptEngine-Parser-Tests">createNullLiteral: token	" 7.8 Literals "	^ token literalValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createNumericLiteral: token	" 7.8 Literals "	^ token literalValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createRegularExpression: regexToken	" 15.10 RegExp (Regular Expression) Objects "	^ Array with: #regex with: regexToken literalValue</body>
+
+<body package="JavascriptEngine-Parser-Tests">createStringLiteral: token	" 7.8 Literals "	^ token literalValue</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestFactory</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Parser-Tests">initialize</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestFactory</class-id> <category>expressions</category>
+
+<body package="JavascriptEngine-Parser-Tests">createAdditiveExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.6 Additive Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createArguments: arguments sourceInterval: anObject 	" 11.2 Left-Hand-Side Expressions "	^ arguments</body>
+
+<body package="JavascriptEngine-Parser-Tests">createArray: arrayElements padBefore: padBeforeSize after: padAfterSize sourceInterval: anObject 	" 11.1.4 Array Initialiser "	| array |	^ ( padBeforeSize &gt; 0 or: [ padAfterSize &gt; 0 ]) 		ifTrue: 		[	array := Array new: padBeforeSize + arrayElements size + padAfterSize.			array replaceFrom: padBeforeSize + 1 to: padBeforeSize + arrayElements size with: arrayElements.			array		]		ifFalse: [ arrayElements ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createAssignmentExpression: leftHandSideExpression to: assignedExpression operator: operatorString sourceInterval: anObject 	" 11.13 Assignment Operators "	^ Array with: leftHandSideExpression with: operatorString asSymbol with: assignedExpression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createBitwiseExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.10 Binary Bitwise Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createCall: memberExpression arguments: arguments sourceInterval: anObject 	" 11.2 Left-Hand-Side Expressions "	^ Array with: memberExpression with: arguments</body>
+
+<body package="JavascriptEngine-Parser-Tests">createCommaSeparatedExpression: expression1 with: expression2 sourceInterval: anObject 	" 11.14 Comma Operator "	^ Array with: expression1 with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createConditionalExpression: textExpression trueExpression: trueExpression falseExpression: falseExpression sourceInterval: anObject 	" 11.12 Conditional Operator "	^ ( Array new: 5 )		at: 1 put: textExpression;		at: 2 put: $?;		at: 3 put: trueExpression;		at: 4 put: $:;		at: 5 put: falseExpression;		yourself</body>
+
+<body package="JavascriptEngine-Parser-Tests">createEqualityExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.9 Equality Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createGroupedExpression: expression sourceInterval: anObject 	" 11.1.6 The Grouping Operator "	^ Array with: expression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createLogicalExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.11 Binary Logical Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createMemberOf: baseExpression bracket: bracketExpression sourceInterval: anObject 	" 11.2 Left-Hand-Side Expressions "	^ Array with: baseExpression with: $[ with: bracketExpression with: $]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createMemberOf: baseExpression dot: dotExpression sourceInterval: anObject 	" 11.2 Left-Hand-Side Expressions "	^ Array with: baseExpression with: $. with: dotExpression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createMultiplicativeExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.5 Multiplicative Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createNew: newExpression arguments: argumentsOrNil sourceInterval: anObject 	" 11.2 Left-Hand-Side Expressions "	^ argumentsOrNil notNil 		ifTrue: [ Array with: #new with: newExpression with: argumentsOrNil ]		ifFalse: [ Array with: #new with: newExpression ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createObject: propertyAssignmentList sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	| object |	object := Dictionary new:  propertyAssignmentList size.	propertyAssignmentList do: [ : assoc |			object at: assoc key put: assoc value.	].	^ object</body>
+
+<body package="JavascriptEngine-Parser-Tests">createPostfixExpression: expression operator: postfixOperatorString sourceInterval: anObject 	" 11.3 Postfix Expressions "	^ Array with: expression with: postfixOperatorString asSymbol</body>
+
+<body package="JavascriptEngine-Parser-Tests">createPropertyAssignment: propertyName expression: assignedExpression sourceInterval: anObject 	" 11.1.5 Object Initialiser "	^ propertyName -&gt; assignedExpression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createPropertyGetAssignment: propertyName functionBody: functionBody sourceInterval: anObject 	" 11.1.5 Object Initialiser "	^ ( Array with: #get with: propertyName ) -&gt; functionBody</body>
+
+<body package="JavascriptEngine-Parser-Tests">createPropertySetAssignment: propertyName parameter: parameter functionBody: functionBody sourceInterval: anObject 	" 11.1.5 Object Initialiser "	^ ( Array with: #set with: propertyName with: parameter ) -&gt; functionBody</body>
+
+<body package="JavascriptEngine-Parser-Tests">createRelationalExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.8 Relational Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createShiftExpression: expression1 with: expression2 operator: operatorString sourceInterval: anObject 	" 11.7 Bitwise Shift Operators "	^ Array with: expression1 with: operatorString asSymbol with: expression2</body>
+
+<body package="JavascriptEngine-Parser-Tests">createThisExpression: anObject 	" 11.1.1 The this Keyword "	^ #this</body>
+
+<body package="JavascriptEngine-Parser-Tests">createUnaryExpression: expression operator: unaryOperatorString sourceInterval: anObject 	" 11.4 Unary Operators "	^ Array with: unaryOperatorString asSymbol with: expression</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestFactory</class-id> <category>statements</category>
+
+<body package="JavascriptEngine-Parser-Tests">createBlock: statementList sourceInterval: anObject 	" 12.1 Block "	^ statementList</body>
+
+<body package="JavascriptEngine-Parser-Tests">createBreak: identifierOrNil sourceInterval: anObject 	" 12.8 The break Statement "	^ identifierOrNil notNil 		ifTrue: [ Array with: #break with: identifierOrNil ]		ifFalse: [ #break ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createCatch: identifier block: catchBlock sourceInterval: anObject 	" 12.14 The try Statement "	^ Array with: #catch with: identifier with: catchBlock</body>
+
+<body package="JavascriptEngine-Parser-Tests">createContinue: identifierOrNil sourceInterval: anObject 	" 12.7 The continue Statement "	^ identifierOrNil notNil 		ifTrue: [ Array with: #continue with: identifierOrNil ]		ifFalse: [ #continue ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createDebugger: anObject 	" 12.15 The debugger statement "	^ #debugger</body>
+
+<body package="JavascriptEngine-Parser-Tests">createDo: statement whileExpression: whileExpression sourceInterval: anObject 	" 12.6.1 The do-while Statement "	^ Array with: #do with: statement with: #while with: whileExpression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createEmptyStatement: anObject 	" 12.3 Empty Statement "	^ #( )</body>
+
+<body package="JavascriptEngine-Parser-Tests">createExpressionStatement: expression sourceInterval: anObject 	" 12.4 Expression Statement "	^ expression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createFinally: finallyBlock sourceInterval: anObject 	" 12.14 The try Statement "	^ Array with: #finally with: finallyBlock</body>
+
+<body package="JavascriptEngine-Parser-Tests">createFor: initializationExpression condition: conditionExpression update: updateExpression do: statement sourceInterval: anObject 	" 12.6.3 The for Statement "	^ Array with: #for with: ( Array with: initializationExpression with: conditionExpression with: updateExpression ) with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createFor: enumerableExpression in: enumeratedObjectExpression do: statement sourceInterval: anObject 	" 12.6.3 The for Statement "	^ Array with: #for with: ( Array with: enumerableExpression with: #in with: enumeratedObjectExpression ) with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createForVariable: variableDeclaration in: enumeratedObjectExpression do: statement sourceInterval: anObject 	" 12.6.3 The for Statement "	^ Array with: #for with: ( Array with: #var with: variableDeclaration with: #in with: enumeratedObjectExpression ) with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createForVariables: variableDeclarationList condition: conditionExpression update: updateExpression do: statement sourceInterval: anObject 	" 12.6.3 The for Statement "	^ Array with: #for with: ( Array with: #var with: variableDeclarationList with: conditionExpression with: updateExpression ) with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createIf: textExpression trueExpression: trueExpression falseExpression: falseExpressionOrNil sourceInterval: anObject 	" 12.5 The if Statement "	^ falseExpressionOrNil notNil 		ifTrue: [ Array with: #if with: textExpression with: trueExpression with: falseExpressionOrNil ]		ifFalse: [ Array with: #if with: textExpression with: trueExpression ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createLabel: labelIdentifier statement: statement sourceInterval: anObject 	" 12.12 Labelled Statements "	^ Array with: labelIdentifier with: #':' with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createReturn: returnExpressionOrNil sourceInterval: anObject 	" 12.9 The return Statement "	^ returnExpressionOrNil notNil 		ifTrue: [ Array with: #return with: returnExpressionOrNil ]		ifFalse: [ #return ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createSwitch: switchExpression clauses: clauses sourceInterval: anObject 	" 12.11 The switch Statement "	^ Array with: #switch with: switchExpression with: clauses</body>
+
+<body package="JavascriptEngine-Parser-Tests">createSwitchClause: clauseExpression statements: statements sourceInterval: anObject 	" 12.11 The switch Statement "	^ Array with: #case with: clauseExpression with: statements</body>
+
+<body package="JavascriptEngine-Parser-Tests">createSwitchDefaultClause: statements sourceInterval: anObject 	" 12.11 The switch Statement "	^ Array with: #default with: statements</body>
+
+<body package="JavascriptEngine-Parser-Tests">createThrow: throwExpression sourceInterval: anObject 	" 12.13 The throw Statement "	^ Array with: #throw with: throwExpression</body>
+
+<body package="JavascriptEngine-Parser-Tests">createTry: tryBlock catch: catchStatementOrNil finally: finallyStatementOrNil sourceInterval: anObject 	" 12.14 The try Statement "	| try |	try := Array with: #try with: tryBlock.	catchStatementOrNil notNil 		ifTrue: [ try := try copyWith: catchStatementOrNil ].	finallyStatementOrNil notNil 		ifTrue: [ try := try copyWith: finallyStatementOrNil ].	^ try</body>
+
+<body package="JavascriptEngine-Parser-Tests">createVariableDeclaration: identifier initializer: initializerOrNil sourceInterval: anObject 	" 12.2 Variable Statement "	^ initializerOrNil notNil 		ifTrue: [ Array with: identifier with: #'=' with: initializerOrNil ]		ifFalse: [ identifier ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createVariableStatement: variableDeclarations sourceInterval: anObject 	" 12.2 Variable Statement "	^ Array with: #var with: variableDeclarations</body>
+
+<body package="JavascriptEngine-Parser-Tests">createWhile: expression statement: statement sourceInterval: anObject 	" 12.6.2 The while Statement "	^ Array with: #while with: expression with: statement</body>
+
+<body package="JavascriptEngine-Parser-Tests">createWith: withExpression statement: statement sourceInterval: anObject 	" 12.10 The with Statement "	^ Array with: #with with: withExpression with: statement</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestFactory</class-id> <category>functions and programs</category>
+
+<body package="JavascriptEngine-Parser-Tests">createFunctionBody: sourceElements sourceInterval: anObject 	" 13 Function Definition "	^ sourceElements</body>
+
+<body package="JavascriptEngine-Parser-Tests">createFunctionDeclaration: identifier parameters: formalParameters body: functionBody sourceInterval: anObject 	" 13 Function Definition "	^ Array with: #function with: identifier with: formalParameters with: functionBody</body>
+
+<body package="JavascriptEngine-Parser-Tests">createFunctionExpression: identifierOrNil parameters: formalParameters body: functionBody sourceInterval: anObject 	" 13 Function Definition "	^ identifierOrNil notNil 		ifTrue: [ Array with: #function with: identifierOrNil with: formalParameters with: functionBody ]		ifFalse: [ Array with: #function with: formalParameters with: functionBody ]</body>
+
+<body package="JavascriptEngine-Parser-Tests">createProgram: sourceElements 	" 14 Program "	^ sourceElements</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestParserResource</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Tests">lexicalParser	^ lexicalParser</body>
+
+<body package="JavascriptEngine-Parser-Tests">numericStringParser	numericStringParser isNil		ifTrue: [			numericStringParser := JSENumericStringParser new.		].	^ numericStringParser</body>
+
+<body package="JavascriptEngine-Parser-Tests">parser	^ parser</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETestParserResource</class-id> <category>Running</category>
+
+<body package="JavascriptEngine-Parser-Tests">setUp	parser := JSEParser new.	lexicalParser := parser lexicalParser.</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>PPParser</name>
+<environment>PetitParser</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>properties </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>PPSequenceParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPListParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEJsonFactory</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>PPChoiceParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPListParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>TestCase</name>
+<environment>XProgramming.SUnit</environment>
+<super>SUnit.TestCase</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>assertCounter </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>SUnit</category>
+<attributes>
+<package>SUnit</package>
+</attributes>
+</class>
+
+<class>
+<name>TestResource</name>
+<environment>XProgramming.SUnit</environment>
+<super>SUnit.TestResource</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>name description </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>SUnit</category>
+<attributes>
+<package>SUnit</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEParsedNodesFactory</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+</st-source>

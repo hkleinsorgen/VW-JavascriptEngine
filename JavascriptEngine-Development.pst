@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Development
+Notice: Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96215
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Parser-Core' '') #(#any 'JavascriptEngine-VisualWorks' '') #(#any 'PetitParser' '') #(#any 'JavascriptEngine-Runtime-Core' ''))
+Id: 222f162b-90e9-4a96-aeec-42535f63f870
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-Development
+Parcel: #('JavascriptEngine-Development')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Development
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package) #(#name 'PetitParser' #componentType #package) #(#name 'JavascriptEngine-Runtime-Core' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Parser-Core' '') #('JavascriptEngine-VisualWorks' '') #('PetitParser' '') #('JavascriptEngine-Runtime-Core' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+TestCoverage: false
+Url: file:///c:/develop/smalltalk/squeak/Pharo3.0/package-cache/JavascriptEngine-Development-hkleinsorgen.1.mcz
+Version: 0.5.1
+Date: 2:14:44 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:14:44</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>utilities</category>
+
+<body package="JavascriptEngine-Development">jseCountProductionsWhile: aBlock do: aResultBlock 	| counters copy |	counters := Dictionary new.	copy := self copy.	lexicalParser 		jseCountProductionsWhile: 		[: countingLexicalParser |			copy lexicalParser: countingLexicalParser.			syntacticParser 				jseCountProductionsWhile: 				[: countingSyntacticParser |					copy syntacticParser: countingSyntacticParser.					aBlock value: copy				]				do: [: syntacticResult : syntacticCounters | counters at: #syntactic put: syntacticCounters ]		]		do: [: lexicalResult : lexicalCounters | counters at: #lexical put: lexicalCounters ].	^ counters</body>
+
+<body package="JavascriptEngine-Development">jseParseAndCountTotalSyntaxProductions: aString	" count how often any syntax production was applied "	| counters |	counters := self jseParseAndCountProductions: aString.	^ (counters at: #syntactic) inject: 0 into: [ : total : counter | total + counter ]</body>
+
+<body package="JavascriptEngine-Development">jseWithLoggingTo: aStream 	| copy |	copy := self copy.	copy syntacticParser: ( self syntacticParser jseWithLoggingTo: aStream ).	^ copy</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>transforming</category>
+
+<body package="JavascriptEngine-Development">replace: aParser with: anotherParser	super replace: aParser with: anotherParser.	syntacticParser == aParser ifTrue: [ syntacticParser := anotherParser ].	lexicalParser == aParser ifTrue: [ lexicalParser := anotherParser ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnicodeTables class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Development">compileUnicodeCategoriesArrayFromData: unicodeDataString 	" self compileUnicodeCategoriesArrayFromData: 'http://unicode.org/Public/UNIDATA/UnicodeData.txt' asURI readStream upToEnd "	| categoryStream dataStream categories |	dataStream := unicodeDataString readStream.	categories := Dictionary new.	[			[ dataStream atEnd ] whileFalse: 			[ | code category |				code := JSEPlatform parseIntegerFrom: dataStream radix: 16.				2 timesRepeat: [ dataStream upTo: $; ].				category := dataStream upTo: $;.				dataStream upTo: Character lf.				( categories at: category ifAbsentPut: [ OrderedCollection new ]) add: code			]	] ensure: [ dataStream close ].	categoryStream := String new writeStream.	categoryStream		nextPutAll: 'unicodeCategoriesArray'; cr;		nextPutAll: '^ #('; cr.	categories keysAndValuesDo: 		[: unicodeCategory : codes | | codeStream startCode lastCode code |			categoryStream tab; nextPutAll: '#('.			unicodeCategory printOn: categoryStream.			categoryStream				cr;				tab; tab; tab; nextPutAll: '#('.			startCode := nil.			lastCode := nil.			codeStream := codes readStream.			[	code := codeStream next.				( startCode notNil and: [ code notNil and: [ code = ( lastCode + 1 )]]) 					ifFalse: 					[	lastCode notNil 							ifTrue: 							[	categoryStream space.								( startCode notNil and: [ startCode ~= lastCode ]) 									ifTrue: 									[	categoryStream nextPutAll: '#('.										startCode printOn: categoryStream.										categoryStream space.										lastCode printOn: categoryStream.										categoryStream nextPutAll: ')'									]									ifFalse: [ lastCode printOn: categoryStream ]							].						startCode := code					].				lastCode := code.				code notNil			] whileTrue.			categoryStream nextPutAll: '))'; cr		].	categoryStream nextPutAll: ')'.	JSEPlatform compile: categoryStream contents into: self class classified: #private</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStackVariable</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Development">performHandler: aContext	" a copy of the inherited method to prevent the debugger from halting when getting the current execution environment "	| result oldHandler |	(handlerContext := aContext) == nil		ifTrue:			[result := self defaultAction.			self isResumable				ifTrue:					[handlerContext := initialContext.					firstUnwindContext := nil.					self						nonlocalReturn: result						evaluate: nil						finalAction: [handlerContext := nil]						into: handlerContext]]		ifFalse:			[oldHandler := handlerContext.			result := handlerContext handlerBlock cull: self.			handlerContext := oldHandler. "Executing the handler may have set a new handler."			self				nonlocalReturn: result				evaluate: nil				finalAction: []				into: handlerContext].	^result</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>utilities</category>
+
+<body package="JavascriptEngine-Development">jseCountProductionsWhile: aBlock do: aResultBlock 	" count how often a production was applied "	| counters countingParser result |	counters := Dictionary new.	countingParser := self transform: 			[: p | 				p name notNil 					ifTrue: 					[	PPWrappingParser 							on: p							block: 							[: stream : parseBlock |								counters at: p name put: ( counters at: p name ifAbsent: [ 0 ]) + 1.								parseBlock value							]					]					ifFalse: [ p ]			].	result := aBlock value: countingParser.	^  aResultBlock value: result value: counters</body>
+
+<body package="JavascriptEngine-Development">jseHaltOn: parserName 	" halts when the parser with the given name ( = selector ) is active		 (JSELexicalParser new jseHaltOn: #numericLiteral ) parse: 'a + 1' 	"	^ self transform: 		[: p |			p name = parserName 				ifTrue: 				[	PPWrappingParser 						on: p						block: 						[: stream : parseBlock |							self halt.							parseBlock value						]				]				ifFalse: [ p ]		]</body>
+
+<body package="JavascriptEngine-Development">jseParseAndCountProductions: aString	" count how often a production was applied "	^ self jseCountProductionsWhile: [ : countingParser | countingParser  parse: aString ] do: [ : result : counters | counters ]</body>
+
+<body package="JavascriptEngine-Development">jseWithLoggingTo: aStream 	" print parser activity on the stream 		(JSELexicalParser new jseWithLoggingTo: Transcript ) parse: 'a + 1'  	"	| printBlock |	printBlock :=	[: string |		string do: 			[: ch |				ch = $&amp; 					ifTrue: [ aStream nextPutAll: '&amp;amp;' ]					ifFalse: 					[	ch = $&lt; 							ifTrue: [ aStream nextPutAll: '&amp;lt;' ]							ifFalse: [ (ch codePoint  &gt;= 32 and: [ ch codePoint &lt;= 255 ]) ifTrue: [ aStream nextPut: ch ] ifFalse: [ aStream nextPutAll: '\u'; nextPutAll: ch codePoint jseHexString ]]					]			]	].	^ self transform: 		[: p |			p name notNil 				ifTrue: 				[	PPWrappingParser 						on: p						block: 						[: stream : parseBlock | | result |							aStream nextPutAll: '&lt;parse position="'; print: stream position;								nextPutAll: '" parser="'.							printBlock value: p name.							aStream								nextPutAll: '"&gt;'; cr;								nextPutAll: '&lt;dive&gt;'; cr.														result := parseBlock value.							aStream nextPutAll: '&lt;/dive&gt;'; cr.							aStream nextPutAll: '&lt;result&gt;'.							printBlock value: result displayString.							aStream nextPutAll: '&lt;/result&gt;'; cr.							aStream nextPutAll: '&lt;/parse&gt;'; cr; cr.							result						]				]				ifFalse: [ p ]		]</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>JSEStackVariable</name>
+<environment>JSE</environment>
+<super>JSE.JSENotification</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>PPParser</name>
+<environment>PetitParser</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>properties </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>lexicalParser syntacticParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+</st-source>

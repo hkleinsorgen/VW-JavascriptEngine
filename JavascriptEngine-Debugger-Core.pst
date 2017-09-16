@@ -1,0 +1,1227 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Debugger-Core
+Notice: Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Remote debugger, compatible with Rhino
+
+See  http://wiki.eclipse.org/JSDT/Debug/Rhino_Debug_Wire_Protocol
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96213
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-Runtime-Core' '') #(#any 'JavascriptEngine-AST' '') #(#any 'JavascriptEngine-Parser-Core' ''))
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-Debugger-Core
+Parcel: #('JavascriptEngine-Debugger-Core')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Debugger-Core
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-Runtime-Core' #componentType #package) #(#name 'JavascriptEngine-AST' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Namespace' '') #('JavascriptEngine-Runtime-Core' '') #('JavascriptEngine-AST' '') #('JavascriptEngine-Parser-Core' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Version: 0.5.1
+Date: 2:14:23 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:14:23</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSEDebugEvent</name>
+<environment>JSE</environment>
+<super>Core.Announcement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThreadEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEDebugEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>thread </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThreadEnter</name>
+<environment>JSE</environment>
+<super>JSE.JSEThreadEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebuggerProtocol</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFrame</name>
+<environment>JSE</environment>
+<super>JSE.JSERDebuggerArtefact</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>thread executionContext </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEFrame</class-id>
+<body>Represents an execution context of a thread</body>
+</comment>
+
+<class>
+<name>JSEDebugMessage</name>
+<environment>JSE</environment>
+<super>Core.Announcement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>message </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebuggerProperty</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>name value </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebugEnvironment</name>
+<environment>JSE</environment>
+<super>JSE.JSERunEnvironment</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>version breakpoints threadsToControl lastTriggeredBreakpoint </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEDebugEnvironment</class-id>
+<body>API to control running scripts via a (remote) debugger</body>
+</comment>
+
+<class>
+<name>JSEBreakEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEDebugEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>executionContext lineNumber thread shouldSuspend </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERhinoProtocol</name>
+<environment>JSE</environment>
+<super>JSE.JSEDebuggerProtocol</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebugException</name>
+<environment>JSE</environment>
+<super>JSE.JSEDebugMessage</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>exception </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebugLog</name>
+<environment>JSE</environment>
+<super>JSE.JSEDebugMessage</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebuggerEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEBreakEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEStepEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEBreakEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>stepKind </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThreadExit</name>
+<environment>JSE</environment>
+<super>JSE.JSEThreadEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEUnhandledErrorEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEBreakEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>exception </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBreakpointEvent</name>
+<environment>JSE</environment>
+<super>JSE.JSEBreakEvent</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>breakpoint </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Core</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>debugger - properties</category>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerPropertyClass	&lt;debuggerProperty: #class&gt;	^ self classString</body>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerProto	&lt;debuggerProperty: #proto&gt;	^ self internalPrototype</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractObject class</class-id> <category>pragmas</category>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerPropertiesPragmas	&lt;pragmas: #instance&gt;	^ #(	debuggerProperty: )</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEvent</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Debugger-Core">eventType	^ self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEvent</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Debugger-Core">suspend	" The runtime should suspend, if this event supports suspending "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThreadEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">thread	^ thread</body>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread 	thread := aThread.</body>
+
+<body package="JavascriptEngine-Debugger-Core">type	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThreadEvent</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| json |	json := Dictionary new.	json at: JSERhinoProtocol THREAD_ID put: self thread id.	json at: JSERhinoProtocol TYPE put: self type.	^ json</body>
+
+<body package="JavascriptEngine-Debugger-Core">eventType	^'thread'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThreadEvent class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread 	^ self new thread: aThread;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThreadEnter</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">type	^ 'enter'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProtocol class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerProtocol	^ #rhino</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProtocol class</class-id> <category>api</category>
+
+<body package="JavascriptEngine-Debugger-Core">description	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFrame</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">executionContext	^ executionContext</body>
+
+<body package="JavascriptEngine-Debugger-Core">executionContext: aExecutionContext 	executionContext := aExecutionContext.</body>
+
+<body package="JavascriptEngine-Debugger-Core">properties	| properties |	properties := OrderedCollection new.	self executionContext addDebuggerPropertiesTo: properties.	^ properties</body>
+
+<body package="JavascriptEngine-Debugger-Core">referenceWithID: refId	^ self properties at: refId ifAbsent: [ JSEDebugError raiseSignal: 'Reference not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Core">script	^ self executionContext globalCode script</body>
+
+<body package="JavascriptEngine-Debugger-Core">thread	^ thread</body>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread 	thread := aThread.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFrame</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Core">referenceId	^ self class referenceId</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFrame</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| json |	json := Dictionary new.	json at: JSERhinoProtocol FRAME_ID put: self id.	json at: JSERhinoProtocol SCRIPT_ID put: self script id.	json at: JSERhinoProtocol THREAD_ID put: self thread id.	json at: JSERhinoProtocol CONTEXT_ID put: JSERhinoProtocol PSEUDO_CONTEXT_ID.	json at: JSERhinoProtocol REFERENCE_ID put: self referenceId.	json at: JSERhinoProtocol SCOPE_NAME put: nil.	self executionContext addToRhinoFrameJson: json.	^ json</body>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoLookupJsonWithRegistry: objectRegistry 	| lookup lookupProperties |	lookupProperties := OrderedCollection new.	self properties do: [: property | lookupProperties add: (property asRhinoJsonWithRegistry:  objectRegistry) ].	lookup := Dictionary new.	lookup at: 'ref' put: self referenceId;		at: 'type' put: 'frame';		at: 'properties' put: lookupProperties.	^ lookup</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFrame class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">id: anId thread: aThread executionContext: aExecutionContext 	^ self new		id: anId;		thread: aThread;		executionContext: aExecutionContext;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFrame class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">referenceId	^ 0</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugMessage</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">message	^ message</body>
+
+<body package="JavascriptEngine-Debugger-Core">message: aMessage 	message := aMessage.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProperty</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">childProperties	^ self value debuggerProperties</body>
+
+<body package="JavascriptEngine-Debugger-Core">name	^ name</body>
+
+<body package="JavascriptEngine-Debugger-Core">name: aName 	name := aName.</body>
+
+<body package="JavascriptEngine-Debugger-Core">value	^ value</body>
+
+<body package="JavascriptEngine-Debugger-Core">value: aValue 	value := aValue asJSEObject.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProperty</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Debugger-Core">printOn: aStream 	super printOn: aStream.	aStream nextPut: $(.	aStream nextPutAll: self name.	aStream nextPut: $).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProperty</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJsonWithRegistry: anObjectRegistry	| ref |	ref :=  anObjectRegistry referenceTo: self value.	^ Dictionary new 		at: 'ref' put: ref id;		at: 'name' put: self name;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProperty</class-id> <category>comparing</category>
+
+<body package="JavascriptEngine-Debugger-Core">= anotherProperty	^ self class = anotherProperty class		and: [ self name = anotherProperty name		and: [ self value = anotherProperty value ]]</body>
+
+<body package="JavascriptEngine-Debugger-Core">hash	^ self name hash</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerProperty class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">name: aName value: aValue	^ self new		name: aName;		value: aValue;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>controlling</category>
+
+<body package="JavascriptEngine-Debugger-Core">continue: threadID step: stepKind 	| thread |	threadID notNil 		ifTrue: 		[	thread := self threadWithID: threadID.			thread isNil 				ifTrue: [ JSEDebugError raiseSignal: 'Thread not found' ].			thread continue: stepKind		]		ifFalse: [ self threads do: [: t | t continue: stepKind ]].</body>
+
+<body package="JavascriptEngine-Debugger-Core">runCode: aCompiledCode in: executionEnvironment 	" run the code in a new debugable thread "	| thread hasUnhandledError |	thread := self prepareRunCode: aCompiledCode in: executionEnvironment.	^ [	hasUnhandledError := false.		[				[ aCompiledCode runIn: executionEnvironment ] 				on: JSEError				do: 				[: ex |					hasUnhandledError := true.					self unhandledError: ex in: executionEnvironment				]		] on: JSEStopThreadNotification do: [: ex | ]	] ensure: 		[				[( hasUnhandledError and: [ self isDebugEnabled ]) 					ifTrue: 					[	" halt on errors "						self checkForControlledThreadsIn: executionEnvironment					]			] ensure: [ self finishedThread: thread ]		]</body>
+
+<body package="JavascriptEngine-Debugger-Core">stopThreadWithID: threadID 	| thread |	thread := self threadWithID: threadID.	thread notNil 		ifTrue: 		[	thread stop			thread isStopped 				ifFalse: [ JSEDebugError raiseSignal: 'Could not stop thread' ]		]		ifFalse: [ JSEDebugError raiseSignal: 'Thread not found' ].</body>
+
+<body package="JavascriptEngine-Debugger-Core">suspendThreadWithID: threadID 	| thread |	thread := self threadWithID: threadID.	thread notNil 		ifTrue: 		[	thread suspend.			thread isSuspended 				ifFalse: [ JSEDebugError raiseSignal: 'Could not suspend thread' ]		]		ifFalse: [ JSEDebugError raiseSignal: 'Thread not found' ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">addBreakpoint: aBreakpoint 	self register: aBreakpoint in: self breakpoints.</body>
+
+<body package="JavascriptEngine-Debugger-Core">breakpointWithID: anID 	^ self breakpoints at: anID ifAbsent: [ nil ]</body>
+
+<body package="JavascriptEngine-Debugger-Core">breakpoints	^ breakpoints</body>
+
+<body package="JavascriptEngine-Debugger-Core">removeAllBreakpoints	self breakpoints notEmpty 		ifTrue: [ self breakpoints copy do: [: breakpoint | self removeBreakpoint: breakpoint ]].</body>
+
+<body package="JavascriptEngine-Debugger-Core">removeBreakpoint: aBreakpoint	self deregister: aBreakpoint from: self breakpoints</body>
+
+<body package="JavascriptEngine-Debugger-Core">version	" VM version infirmation "	version isNil 		ifTrue: 		[	version := Dictionary new.			version				at: 'javascript.vm.name' put: 'JSE';				at: 'javascript.vm.version' put: '1';				at: 'javascript.vm.vendor' put: '';				at: 'javascript.version' put: '1';				at: 'ecmascript.version' put: '5.1'.		].	^ version</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Debugger-Core">initialize	super initialize.	breakpoints := Dictionary new.	threadsToControl := Set new.</body>
+
+<body package="JavascriptEngine-Debugger-Core">shutDown</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Core">addThreadToControl: aThread action: aControlSymbol	threadsToControl add: aThread -&gt; aControlSymbol.	" cannot control the thead if it is suspended "	aThread wakeUp.</body>
+
+<body package="JavascriptEngine-Debugger-Core">createThreadForExecutionEnvironment: executionEnvironment 	" A thread provides debugger-related bookkeeping for an execution environment "	| thread |	thread := JSEThread executionEnvironment: executionEnvironment.	self addThread: thread.	thread process: Processor activeProcess.	^ thread</body>
+
+<body package="JavascriptEngine-Debugger-Core">finishedThread: thread 	self removeThread: thread.	self triggerThreadExit: thread.</body>
+
+<body package="JavascriptEngine-Debugger-Core">isDebugEnabled	^ self subscriptionRegistryOrNil ifNotNil: [: registry | registry notEmpty ] ifNil: [ false ]</body>
+
+<body package="JavascriptEngine-Debugger-Core">prepareRunCode: aCompiledCode in: executionEnvironment 	| thread |	executionEnvironment debugEnvironment: self.	self registerScriptForCode: aCompiledCode.	thread := self createThreadForExecutionEnvironment: executionEnvironment.	self triggerThreadEnter: thread.	^ thread</body>
+
+<body package="JavascriptEngine-Debugger-Core">stepInExecutionContext: anExecutionContext at: aLineNumber 	" enter/step in/leave an execution context "	| executionEnvironment |	anExecutionContext canDebug 		ifTrue: 		[	executionEnvironment := anExecutionContext executionEnvironment.			( executionEnvironment breakStepKindAt: aLineNumber ) ifNotNil: 				[: stepKind |					executionEnvironment resetStep.					( self threadForExecutionEnvironment: executionEnvironment ) ifNotNil: 						[: thread | | event |							event := JSEStepEvent thread: thread executionContext: anExecutionContext lineNumber: aLineNumber.							event stepKind: stepKind.							self triggerBreakEvent: event thread: thread						]				]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>events - private</category>
+
+<body package="JavascriptEngine-Debugger-Core">checkForControlledThreadsIn: anExecutionEnvironment 	threadsToControl notEmpty 		ifTrue: 		[	threadsToControl copy do: 				[: threadAndAction | | thread |					thread := threadAndAction key.					thread executionEnvironment = anExecutionEnvironment 						ifTrue: 						[	threadsToControl remove: threadAndAction.							thread perform: threadAndAction value						]				]		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerBreakEvent: event thread: thread 	self announce: event.	event shouldSuspend 		ifTrue: [ thread suspend ].</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerBreakpointsForCodeSection: aCodeSection in: anExecutionContext at: aLineNumber 	| triggeredBreakpoint script |	triggeredBreakpoint := self breakpoints notEmpty 			ifTrue: 			[	script := anExecutionContext script.				script notNil 					ifTrue: 					[	self breakpoints detect: [: breakpoint | breakpoint script = script and: [ breakpoint lineNumber = aLineNumber ]] ifNone: [ nil ]					]					ifFalse: 					[	" kein script -&gt; keine sources -&gt; kein Breakpoint "						nil					]			]			ifFalse: [ nil ].	triggeredBreakpoint notNil 		ifTrue: 		[	" only break once per line "			( lastTriggeredBreakpoint isNil or: [ lastTriggeredBreakpoint ~= triggeredBreakpoint ]) 				ifTrue: 				[	lastTriggeredBreakpoint := triggeredBreakpoint.					" Break. Reset stepping before halting "					anExecutionContext executionEnvironment resetStep.					self triggerBreakpoint: triggeredBreakpoint in: anExecutionContext				]		]		ifFalse: 		[	lastTriggeredBreakpoint := nil.			self stepInExecutionContext: anExecutionContext at: aLineNumber		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerThreadEnter: aThread 	" the thread has started "	self announce: ( JSEThreadEnter thread: aThread ).</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerThreadExit: aThread 	" the thread has ended "	self announce: ( JSEThreadExit thread: aThread ).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugEnvironment</class-id> <category>events</category>
+
+<body package="JavascriptEngine-Debugger-Core">triggerBreakpoint: aBreakpoint in: anExecutionContext 	" Break "	| thread event |	" Reset stepping before halting "	anExecutionContext executionEnvironment resetStep.	thread := self threadForExecutionEnvironment: anExecutionContext executionEnvironment.	thread notNil 		ifTrue: 		[	event := JSEBreakpointEvent thread: thread executionContext: anExecutionContext lineNumber: aBreakpoint lineNumber.			event breakpoint: aBreakpoint.			self triggerBreakEvent: event thread: thread		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerDebuggerIn: anExecutionContext at: aLineNumber 	| event thread |	self isDebugEnabled 		ifTrue: 		[	thread := self threadForExecutionEnvironment: anExecutionContext executionEnvironment.			thread notNil 				ifTrue: 				[	event := JSEDebuggerEvent thread: thread executionContext: anExecutionContext lineNumber: aLineNumber.					self triggerBreakEvent: event thread: thread				]		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">triggerEventsForCodeSection: aCodeSection in: anExecutionContext 	| lineNumber |	self isDebugEnabled 		ifTrue: 		[				" Check for suspended threads "			self checkForControlledThreadsIn: anExecutionContext executionEnvironment.			" Check for breakpoints "			lineNumber := aCodeSection lineNumber.			self triggerBreakpointsForCodeSection: aCodeSection in: anExecutionContext at: lineNumber.			" Step "			self stepInExecutionContext: anExecutionContext at: lineNumber.		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">unhandledError: aJSEError in: anExecutionEnvironment 	| thread executionContext lineNumber |	self isDebugEnabled 		ifTrue: 		[	executionContext := anExecutionEnvironment currentExecutionContext.			lineNumber := aJSEError lineNumber.			thread := self threadForExecutionEnvironment: executionContext executionEnvironment.			thread unhandledException: aJSEError.			self announce: ( JSEUnhandledErrorEvent thread: thread executionContext: executionContext lineNumber: lineNumber exception: aJSEError ).			thread suspend.		].	aJSEError pass .</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerStatement	^ false</body>
+
+<body package="JavascriptEngine-Debugger-Core">executionContext	^ executionContext</body>
+
+<body package="JavascriptEngine-Debugger-Core">executionContext: aExecutionContext 	executionContext := aExecutionContext.</body>
+
+<body package="JavascriptEngine-Debugger-Core">lineNumber	^ lineNumber</body>
+
+<body package="JavascriptEngine-Debugger-Core">lineNumber: aLineNumber 	lineNumber := aLineNumber.</body>
+
+<body package="JavascriptEngine-Debugger-Core">shouldSuspend	" True if the runtime should suspend. Attached debuggers should send #suspend to this event "	^ shouldSuspend ifNil: [ false ]</body>
+
+<body package="JavascriptEngine-Debugger-Core">suspend	" The runtime should suspend "	shouldSuspend := true</body>
+
+<body package="JavascriptEngine-Debugger-Core">thread	^ thread</body>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread 	thread := aThread.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakEvent</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| message |	message := Dictionary new.	message		at: JSERhinoProtocol CONTEXT_ID put: JSERhinoProtocol PSEUDO_CONTEXT_ID;		at: JSERhinoProtocol DEBUGGER_STATEMENT put: self debuggerStatement;		at: JSERhinoProtocol LINE_NUMBER put: self lineNumber;		at: JSERhinoProtocol SCRIPT_ID put: self executionContext script id;		at: JSERhinoProtocol THREAD_ID put: self thread id.	self executionContext function 		ifNotNil: [: function | function identifier ifNotNil: [: identifier | message at: 'functionName' put: identifier asString ]].	^ message</body>
+
+<body package="JavascriptEngine-Debugger-Core">eventType	^ 'break'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakEvent class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread executionContext: aExecutionContext lineNumber: aLineNumber 	^ self new		thread: aThread;		executionContext: aExecutionContext;		lineNumber: aLineNumber;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERhinoProtocol class</class-id> <category>constants</category>
+
+<body package="JavascriptEngine-Debugger-Core">BODY	^ 'body'</body>
+
+<body package="JavascriptEngine-Debugger-Core">BREAKPOINT	^ 'breakpoint'</body>
+
+<body package="JavascriptEngine-Debugger-Core">BREAKPOINT_ID	^ 'breakpointId'</body>
+
+<body package="JavascriptEngine-Debugger-Core">CLASS_NAME	^ 'className'</body>
+
+<body package="JavascriptEngine-Debugger-Core">COMMAND	^ 'command'</body>
+
+<body package="JavascriptEngine-Debugger-Core">CONDITION	^ 'condition'</body>
+
+<body package="JavascriptEngine-Debugger-Core">CONSTRUCTOR_FUNCTION	^ 'constructorFunction'</body>
+
+<body package="JavascriptEngine-Debugger-Core">CONTEXTS	^ 'contexts'</body>
+
+<body package="JavascriptEngine-Debugger-Core">CONTEXT_ID	^ 'contextId'</body>
+
+<body package="JavascriptEngine-Debugger-Core">DEBUGGER_STATEMENT	^ 'debuggerStatement'</body>
+
+<body package="JavascriptEngine-Debugger-Core">EVALUATE	^ 'evaluate'</body>
+
+<body package="JavascriptEngine-Debugger-Core">EVENT	^ 'event'</body>
+
+<body package="JavascriptEngine-Debugger-Core">EVENT_TYPE	^ 'event'</body>
+
+<body package="JavascriptEngine-Debugger-Core">EXPRESSION	^ 'expression'</body>
+
+<body package="JavascriptEngine-Debugger-Core">FRAME	^ 'frame'</body>
+
+<body package="JavascriptEngine-Debugger-Core">FRAMES	^ 'frames'</body>
+
+<body package="JavascriptEngine-Debugger-Core">FRAME_ID	^ 'frameId'</body>
+
+<body package="JavascriptEngine-Debugger-Core">GENERATED	^ 'generated'</body>
+
+<body package="JavascriptEngine-Debugger-Core">LINES	^ 'lines'</body>
+
+<body package="JavascriptEngine-Debugger-Core">LINE_NUMBER	^ 'line'</body>
+
+<body package="JavascriptEngine-Debugger-Core">LOCATION	^ 'location'</body>
+
+<body package="JavascriptEngine-Debugger-Core">LOOKUP	^ 'lookup'</body>
+
+<body package="JavascriptEngine-Debugger-Core">NAME	^ 'name'</body>
+
+<body package="JavascriptEngine-Debugger-Core">PROPERTIES	^ 'properties'</body>
+
+<body package="JavascriptEngine-Debugger-Core">PROTOTYPE_OBJECT	^ 'prototypeObject'</body>
+
+<body package="JavascriptEngine-Debugger-Core">PSEUDO_CONTEXT_ID	^ 0</body>
+
+<body package="JavascriptEngine-Debugger-Core">REFERENCE_ID	^ 'ref'</body>
+
+<body package="JavascriptEngine-Debugger-Core">REQUEST_SEQUENCE	^ 'request_seq'</body>
+
+<body package="JavascriptEngine-Debugger-Core">RESPONSE_TYPE	^ 'response'</body>
+
+<body package="JavascriptEngine-Debugger-Core">RUNNING	^ 'running'</body>
+
+<body package="JavascriptEngine-Debugger-Core">SCOPE_NAME	^ 'scopeName'</body>
+
+<body package="JavascriptEngine-Debugger-Core">SCRIPT_ID	^ 'scriptId'</body>
+
+<body package="JavascriptEngine-Debugger-Core">SEQUENCE	^ 'seq'</body>
+
+<body package="JavascriptEngine-Debugger-Core">SOURCE	^ 'source'</body>
+
+<body package="JavascriptEngine-Debugger-Core">STATE	^ 'state'</body>
+
+<body package="JavascriptEngine-Debugger-Core">STEP	^ 'step'</body>
+
+<body package="JavascriptEngine-Debugger-Core">SUCCESS	^ 'success'</body>
+
+<body package="JavascriptEngine-Debugger-Core">THREAD	^ 'thread'</body>
+
+<body package="JavascriptEngine-Debugger-Core">THREAD_ID	^ 'threadId'</body>
+
+<body package="JavascriptEngine-Debugger-Core">TYPE	^ 'type'</body>
+
+<body package="JavascriptEngine-Debugger-Core">VALUE	^ 'value'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERhinoProtocol class</class-id> <category>api</category>
+
+<body package="JavascriptEngine-Debugger-Core">description	^ 'Mozilla Rhino'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugException</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">exception	^ exception</body>
+
+<body package="JavascriptEngine-Debugger-Core">exception: aException 	exception := aException.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugException class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">exception: aException message: aMessage 	^ self new 		exception: aException;		message: aMessage;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebugLog class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">message: aMessage 	^ self new message: aMessage;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerStatement	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStepEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">stepKind	^ stepKind</body>
+
+<body package="JavascriptEngine-Debugger-Core">stepKind: aStepKind 	stepKind := aStepKind.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStepEvent</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| message |	message := super asRhinoJson.	self stepKind ifNotNil: [: kind | message at: JSERhinoProtocol STEP put: kind asString ].	^ message</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThreadExit</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">type	^ 'exit'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnhandledErrorEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">exception	^ exception</body>
+
+<body package="JavascriptEngine-Debugger-Core">exception: aException 	exception := aException.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnhandledErrorEvent class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Core">thread: aThread executionContext: aExecutionContext lineNumber: aLineNumber exception: aJSEError 	^ ( self thread: aThread executionContext: aExecutionContext lineNumber: aLineNumber )		exception: aJSEError;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakpointEvent</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">breakpoint	^ breakpoint</body>
+
+<body package="JavascriptEngine-Debugger-Core">breakpoint: aBreakpoint 	breakpoint := aBreakpoint.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakpointEvent</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| message |	message := super asRhinoJson.	message at: JSERhinoProtocol BREAKPOINT put: self breakpoint id.	^ message</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEExecutionContext</class-id> <category>debugger</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties 	debuggerProperties add: ( JSEDebuggerProperty name:  'this' value: self thisValue).	self variableEnvironment addDebuggerPropertiesTo: debuggerProperties.	self lexicalEnvironment ~~ self variableEnvironment 		ifTrue: [ self lexicalEnvironment addDebuggerPropertiesTo: debuggerProperties ].</body>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoFrameJson: json 	| lineNumber |	lineNumber  := self node ifNotNil: [ : n | n lineNumber ].	json at: JSERhinoProtocol LINE_NUMBER put: (lineNumber ifNil: [ 1 ]).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties 	super addDebuggerPropertiesTo: debuggerProperties.	" properties of the object "	self propertyNamesDo: 		[: name | | debuggerProperty property |			property := self getOwnPropertyOrNil: name.			( property notNil and: [ property isData ]) 				ifTrue: 				[	debuggerProperty := JSEDebuggerProperty name: name asJSEPropertyNameString value: property value.					debuggerProperties add: debuggerProperty				]		].	" transient debugger properties "	self isPrototype 		ifFalse: 		[	self class				cachedPragmasNamed: #debuggerProperty:				upTo: JSEAbstractObject				do: 				[: pragma | | value debuggerProperty name |					value := self perform: pragma selector.					value notNil 						ifTrue: 						[	name := '#' , ( pragma argumentAt: 1 ).							debuggerProperty := JSEDebuggerProperty name: name value: value asJSEObject.							debuggerProperties add: debuggerProperty						]				]		].</body>
+
+<body package="JavascriptEngine-Debugger-Core">addObjectInformationToRhinoLookup: objectRegistry registry: lookupJson 	lookupJson at: JSERhinoProtocol CLASS_NAME put: self classString.	lookupJson at: JSERhinoProtocol PROTOTYPE_OBJECT put: objectRegistry ==&gt; self internalPrototype.	lookupJson at: JSERhinoProtocol CONSTRUCTOR_FUNCTION put: objectRegistry ==&gt; ( self internalPrototype get: #constructor ).</body>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoLookup: lookupJson registry: objectRegistry 	| debuggerProperties |	super addToRhinoLookup: lookupJson registry: objectRegistry.	self addObjectInformationToRhinoLookup: objectRegistry registry: lookupJson.	debuggerProperties := OrderedCollection new.	self addDebuggerPropertiesTo: debuggerProperties.	lookupJson at: JSERhinoProtocol PROPERTIES put: ( debuggerProperties collect: [: debuggerProperty | debuggerProperty asRhinoJsonWithRegistry: objectRegistry ]).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractObject</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties	" add properties of the object "</body>
+
+<body package="JavascriptEngine-Debugger-Core">addObjectEnvironmentPropertiesTo: debuggerProperties	" add environment record properties of the object "	self addDebuggerPropertiesTo: debuggerProperties</body>
+
+<body package="JavascriptEngine-Debugger-Core">addPreviewPropertiesTo: debuggerProperties	" add 'important' properties of the object bound to 'this' "</body>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoLookup: lookupJson registry: objectRegistry 	" add information about the object "	lookupJson at: 'type' put: self typeOfSymbol asString.</body>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoLookupJsonWithRegistry: registry	^ (registry referenceTo: self) asRhinoLookupJsonWithRegistry: registry</body>
+
+<body package="JavascriptEngine-Debugger-Core">debuggerProperties	" properties of the object for debugging.	may include transient properties "	| debuggerProperties |	debuggerProperties := OrderedCollection new.	self addDebuggerPropertiesTo: debuggerProperties .	^ debuggerProperties</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumber</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addValueToRhinoLookup: lookupJson 	" JSDT dies when encountering INF or NaN "	self isFinite		ifTrue: [ lookupJson at: JSERhinoProtocol VALUE put: self value ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEScript</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| json lines |	json := Dictionary new.	json at: JSERhinoProtocol  SCRIPT_ID put: self id.	lines := Set new.	self nodeCodeSections keysDo: [: node | node lineNumberInterval ifNotNil: [: interval | interval do: [: lineNumber | lines add: lineNumber ]]].	json at: JSERhinoProtocol  LINES put: lines asSortedCollection.	self sourceInformation addToRhinoScriptJson: json.	self code addToRhinoScriptJson: json.	^ json</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalEnvironment</class-id> <category>debugger</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties 	| outerProperties |	self environmentRecord addDebuggerPropertiesTo: debuggerProperties.	self outerEnvironment notNil 		ifTrue: [ 			outerProperties := OrderedCollection new.			" add non-overwritten properties "			self outerEnvironment addDebuggerPropertiesTo: outerProperties .			outerProperties do: [ : outerProperty |				(debuggerProperties anySatisfy: [ : p | p name = outerProperty name ])					ifFalse: [ debuggerProperties add: outerProperty ].			]. 		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThread</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| thread |	thread := Dictionary new.	thread at: JSERhinoProtocol THREAD_ID put: self id.	thread at: JSERhinoProtocol CONTEXTS put: (Array with: JSERhinoProtocol PSEUDO_CONTEXT_ID).	thread at: JSERhinoProtocol STATE put: self state asString.	^ thread</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThread</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Core">evaluate: expression inFrame: frame	^ self threadProcessDo: 			[	" no breakpoints etc. while evaluating the expression "				self executionEnvironment noDebuggingWhile: 					[							[ frame executionContext eval: expression isDirect: true isString: false ] on: JSEError do: [: ex | ex description asJSEObject ]					]			].</body>
+
+<body package="JavascriptEngine-Debugger-Core">frameWithID: frameID 	| executionContext executionContexts i |	executionContexts := self executionEnvironment contextStack.	i := executionContexts size - frameID.	executionContext := ( i &gt;= 1 and: [ i &lt;= executionContexts size ]) 			ifTrue: [ executionContexts at: i ]			ifFalse: [ nil ].	executionContext isNil 		ifTrue: [ JSEDebugError raiseSignal: 'Frame not found' ].	^ JSEFrame id: frameID thread: self executionContext: executionContext</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEEnvironmentRecord</class-id> <category>debugger</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionObject</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addObjectInformationToRhinoLookup: objectRegistry registry: lookupJson 	super addObjectInformationToRhinoLookup: objectRegistry registry: lookupJson .	self function ifNotNil: [ : function | lookupJson at: JSERhinoProtocol NAME put: function identifier ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakpoint</class-id> <category>comparing</category>
+
+<body package="JavascriptEngine-Debugger-Core">= anotherBreakpoint	^ self class = anotherBreakpoint class		and: [ self lineNumber = anotherBreakpoint  lineNumber		and: [ self script = anotherBreakpoint script ]]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakpoint</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	| json |	json := Dictionary new.	json at: JSERhinoProtocol BREAKPOINT_ID put: self id.	json at: JSERhinoProtocol SCRIPT_ID put: self script id.	json at: JSERhinoProtocol LINE_NUMBER put: self lineNumber.	self condition notNil 		ifTrue: [ json at: JSERhinoProtocol CONDITION put: self condition ].	^ json</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakpoint</class-id> <category>comparing</category>
+
+<body package="JavascriptEngine-Debugger-Core">hash	^ self lineNumber hash bitXor: self script hash</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERDebuggerArtefact</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectReference</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoJson	^ Dictionary new 		at: JSERhinoProtocol REFERENCE_ID put: self id;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Core">asRhinoLookupJsonWithRegistry: objectRegistry  	| lookup |	lookup := Dictionary new.	lookup at: JSERhinoProtocol REFERENCE_ID put: self id.	self object addToRhinoLookup: lookup registry: objectRegistry .	^ lookup</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSECompiledCode</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoScriptJson: json	" information about the script "	json at: 'functions' put: (self functionDeclarations collect: [ : declaration | declaration identifier ]).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrimitiveValue</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoLookup: lookupJson registry: objectRegistry 	super addToRhinoLookup: lookupJson registry: objectRegistry.	self addValueToRhinoLookup: lookupJson.</body>
+
+<body package="JavascriptEngine-Debugger-Core">addValueToRhinoLookup: lookupJson 	self value notNil 		ifTrue: [ lookupJson at: JSERhinoProtocol VALUE  put: self value ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectEnvironmentRecord</class-id> <category>debugger</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties 	super addDebuggerPropertiesTo: debuggerProperties.	self bindingObject addObjectEnvironmentPropertiesTo: debuggerProperties</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESourceInformation</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Core">addToRhinoScriptJson: json 	" add information to a script response "	| locationName |	json at: JSERhinoProtocol GENERATED put: false.	json at: JSERhinoProtocol SOURCE put: self sourceString.	locationName := self location.	" add .js for proper syntax highlighting in Eclipse "	( locationName endsWith: '.js' ) 		ifFalse: [ locationName := locationName , '.js' ].	json at: JSERhinoProtocol LOCATION put: locationName.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEGlobalObject</class-id> <category>debugging</category>
+
+<body package="JavascriptEngine-Debugger-Core">addObjectEnvironmentPropertiesTo: debuggerProperties	self addPreviewPropertiesTo: debuggerProperties</body>
+
+<body package="JavascriptEngine-Debugger-Core">addPreviewPropertiesTo: debuggerProperties 	" show global properties that are not built-in "	| propertyNames |	propertyNames := Set new.	#(property: property:readOnly: function:parameters: function:parameters:length: ) do: [ : pragmaName |		(Pragma allNamed: pragmaName in: self class) do: [ : pragma |			propertyNames add: (pragma argumentAt: 1)		].	].	self properties do: 		[: property | | debuggerProperty |			( property isData and: [ property value isBuiltIn not  and: [ (propertyNames includes: property name) not ]]) 				ifTrue: 				[	debuggerProperty := JSEDebuggerProperty name: property name asJSEPropertyNameString value: property value.					debuggerProperties add: debuggerProperty				]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDeclarativeEnvironmentRecord</class-id> <category>debugger</category>
+
+<body package="JavascriptEngine-Debugger-Core">addDebuggerPropertiesTo: debuggerProperties 	super addDebuggerPropertiesTo: debuggerProperties.	self bindings do: [: binding | debuggerProperties add: ( JSEDebuggerProperty name: binding identifier value: binding value )].</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEEnvironmentRecord</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEObjectEnvironmentRecord</name>
+<environment>JSE</environment>
+<super>JSE.JSEEnvironmentRecord</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>bindingObject provideThis </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERDebuggerArtefact</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>id </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEExecutionContext</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>lexicalEnvironment variableEnvironment thisBinding labelStack code executionEnvironment currentCodeSection implementation </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractObject</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars>cachedPragmas cachedConditions cachedSendToPrototype </class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThread</name>
+<environment>JSE</environment>
+<super>JSE.JSERDebuggerArtefact</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>state executionEnvironment objectRegistry suspendSemaphore process unhandledException </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>Announcement</name>
+<environment>Core</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>System-Announcements</category>
+<attributes>
+<package>System-Announcements</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERunEnvironment</name>
+<environment>JSE</environment>
+<super>Core.Announcer</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>scripts nextId threads </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBreakpoint</name>
+<environment>JSE</environment>
+<super>JSE.JSERDebuggerArtefact</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>script lineNumber condition installedLineNumber </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFirstClassObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>internalProperties properties internalPrototype </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEGlobalObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEBuiltInObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEObjectReference</name>
+<environment>JSE</environment>
+<super>JSE.JSERDebuggerArtefact</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>object </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDeclarativeEnvironmentRecord</name>
+<environment>JSE</environment>
+<super>JSE.JSEEnvironmentRecord</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>bindings </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSECompiledCode</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>isStrict codeSection functionDeclarations variableDeclarations </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESourceInformation</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceString location clientData </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPrimitiveValue</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENumber</name>
+<environment>JSE</environment>
+<super>JSE.JSEPrimitiveValue</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>value </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEFirstClassObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>code scope isStrict </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEScript</name>
+<environment>JSE</environment>
+<super>JSE.JSERDebuggerArtefact</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>code sourceInformation breakpoints rootNode nodeCodeSections </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSELexicalEnvironment</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>environmentRecord outerEnvironment </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+</st-source>

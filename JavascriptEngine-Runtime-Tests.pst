@@ -1,0 +1,1491 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Runtime-Tests
+Notice: Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Runtime tests
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96220
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-AST' '') #(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-Parser-Core' '') #(#any 'JavascriptEngine-Parser-Tests' '') #(#any 'JavascriptEngine-Runtime-Core' '') #(#any 'JavascriptEngine-VisualWorks' '') #(#any 'SUnitToo' '') #(#any 'SUnit' '') #(#any 'JavascriptEngine-Debugger-Core' ''))
+Id: 9e315e19-3e61-4425-9ab2-fd517cafd2dc
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-Runtime-Tests
+Parcel: #('JavascriptEngine-Runtime-Tests')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Runtime-Tests
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-AST' #componentType #package) #(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'JavascriptEngine-Parser-Tests' #componentType #package) #(#name 'JavascriptEngine-Runtime-Core' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package) #(#name 'SUnitToo' #componentType #package) #(#name 'SUnit' #componentType #package) #(#name 'JavascriptEngine-Debugger-Core' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-AST' '') #('JavascriptEngine-Namespace' '') #('JavascriptEngine-Parser-Core' '') #('JavascriptEngine-Parser-Tests' '') #('JavascriptEngine-Runtime-Core' '') #('JavascriptEngine-VisualWorks' '') #('SUnitToo' '') #('SUnit' '') #('JavascriptEngine-Debugger-Core' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Url: file:///c:/develop/smalltalk/squeak/Pharo3.0/package-cache/JavascriptEngine-Runtime-Tests-hkleinsorgen.1.mcz
+Version: 0.5.1
+Date: 2:15:18 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:15:18</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSEAbstractRuntimeTest</name>
+<environment>JSE</environment>
+<super>XProgramming.SUnit.TestCase</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERegExpTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEArrayTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEErrorTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDateTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEConversionTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEMathTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERuntimeResource</name>
+<environment>JSE</environment>
+<super>XProgramming.SUnit.TestResource</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>formalParameterListParser functionBodyParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEGlobalObjectTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESelfTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports>
+			SUnit.*
+			</imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENumberTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEStringTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionObjectTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERuntimeTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEJsonTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEObjectTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBooleanTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEStrictTest</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractRuntimeTest</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Tests</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>Boost.BoostRxMatcher class</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Runtime-Tests">disableLibWhile: block 	"for testcases - hide the lib during block evaluation"	libAvailable := false.	^ block ensure: [ libAvailable := nil ]</body>
+
+<body package="JavascriptEngine-Runtime-Tests">libAvailableSet	"for testcases - has the state of the lib been checked?"	^ libAvailable notNil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractRuntimeTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">addTestFunctionsTo: executionEnvironment 	| globalObject globalContext |	globalObject := executionEnvironment globalObject.	globalContext := executionEnvironment globalExecutionContext.	" assert(boolean) "	globalObject 		initializeFunctionNamed: #assert		parameters: #( #boolean description)		block: 		[: arguments : executionContext | | bool description |			bool := arguments at: 1.			bool isJSEBoolean ifFalse: [ self signalFailure: 'Boolean for assertion expected, got ', bool typeOfSymbol ].			bool value 				ifFalse: 				[	description := ( (description := arguments at: 2) isUndefined not								ifTrue: [ 'Assertion failed: ', description toStringValue ]								ifFalse: [ 'Assertion failed' ]).					executionContext node ifNotNil: [ : node | node lineNumber ifNotNil: [ : lineNumber | description := description ,' (line ', lineNumber printString, ')' ]].					self signalFailure: description.				].			bool		]		strict: true		executionContext: globalContext.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">compile: aJavascriptSourceString 	| syntaxTree sourceInfo | 	sourceInfo := (JSESourceInformation sourceString: aJavascriptSourceString).	sourceInfo location: self selector asString.	syntaxTree := self parser parse: aJavascriptSourceString sourceInformation: sourceInfo.	syntaxTree validate.	^ JSERuntimeBuilderVisitor new visit: syntaxTree</body>
+
+<body package="JavascriptEngine-Runtime-Tests">compileAndRun: aJavascriptSourceString 	| code executionEnvironment runtimeResource result |	code := self compile: aJavascriptSourceString.	executionEnvironment := code createExecutionEnvironment.	" speedup eval by reusing parsers "	executionEnvironment evalParser: self parser.	runtimeResource := JSERuntimeResource current.	runtimeResource formalParameterListParser 		ifNotNil: [: formalParameterListParser | executionEnvironment formalParameterListParser: formalParameterListParser ].	runtimeResource functionBodyParser ifNotNil: [: functionBodyParser | executionEnvironment functionBodyParser: functionBodyParser ].	self addTestFunctionsTo: executionEnvironment.	result := code runIn: executionEnvironment.	" remember parsers "	executionEnvironment formalParameterListParserOrNil 		ifNotNil: [: formalParameterListParser | runtimeResource formalParameterListParser: formalParameterListParser ].	executionEnvironment functionBodyParserOrNil 		ifNotNil: [: functionBodyParser | runtimeResource functionBodyParser: functionBodyParser ].	^ result</body>
+
+<body package="JavascriptEngine-Runtime-Tests">compileAndRun: aJavascriptSourceString expectErrorOfClass: anErrorClass	[		self compileAndRun: aJavascriptSourceString .		self signalFailure: 'Expected error of class ', anErrorClass name.	] on: anErrorClass do: [ : ex |	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">floatFrom: aString 	" for platform compatibility "	aString = 'NaN' 		ifTrue: [ ^ JSEPlatform nanValue ].	aString = 'Infinity' 		ifTrue: [ ^ JSEPlatform positiveInfinityValue ].	aString = '-Infinity' 		ifTrue: [ ^ JSEPlatform negativeInfinityValue ].	^ JSEPlatform floatClass readFrom: aString readStream</body>
+
+<body package="JavascriptEngine-Runtime-Tests">globalBaseExpressionsDo: aBlock 	" access by global variable scope and by global object reference "	#(		'' 		'this.'	) do: aBlock</body>
+
+<body package="JavascriptEngine-Runtime-Tests">parser	^ (self class parserResource parser )		factory: JSESyntaxTreeFactory new;		yourself</body>
+
+<body package="JavascriptEngine-Runtime-Tests">printInternalValue: aValue 	^ aValue isCharacters 		ifTrue: [ '"' , aValue , '"' ]		ifFalse: [ aValue printString ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractRuntimeTest</class-id> <category>assertions</category>
+
+<body package="JavascriptEngine-Runtime-Tests">assert: aJavascriptString raisesError: anErrorClass	self assert: aJavascriptString raisesError: anErrorClass messagePattern: nil</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assert: aJavascriptString raisesError: anErrorClass messagePattern: messagePattern	[ | result |		result := self compileAndRun: aJavascriptString.		self signalFailure: 'Did not raise ' , anErrorClass name, ', returned ', result printString.	] 		on: anErrorClass		do: 		[: ex |			messagePattern notNil 				ifTrue: 				[	self 						assert: ( messagePattern match: ex description )						description: 'Error message "' , ex description , '" does not match message pattern "' , messagePattern , '"'				]		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assert: aJavascriptString returnsPrimitiveObjectValue: aValue	| result |	result := self compileAndRun: aJavascriptString.	self assert: (result isKindOf: JSEPrimitiveObject) description: 'Primitive expected'.	self assertPrimitive: result primitiveValue equalsValue: aValue</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assert: aJavascriptString returnsValue: aValue	| result |	result := self compileAndRun: aJavascriptString.	self assert: (result isKindOf: JSEPrimitiveValue) description: 'Primitive expected'.	self assertPrimitive: result equalsValue: aValue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assertNotGeneric: functionCallString type: typeString	" Assert that this is not a generic function "	self		assert: 'function Custom', typeString, '() {}			Custom', typeString, '.prototype = ', typeString, '.prototype;			(new Custom', typeString, '()).', functionCallString, ';'		raisesError: JSETypeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assertPrimitive: aJSEPrimitiveValue equalsValue: aValue 	| actualValue |	actualValue := aJSEPrimitiveValue value.	self assert: actualValue = aValue description: 'Expected ' , ( self printInternalValue: aValue ) , ', got ' , ( self printInternalValue: actualValue ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assertReturnsNaN: aJavascriptString	| result |	result := self compileAndRun: aJavascriptString.	self assert: (result isJSENumber and: [ result isNaN ]) description: 'Expected NaN, returned ', result printString.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractRuntimeTest class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Runtime-Tests">parserResource	^ self parserResourceClass current</body>
+
+<body package="JavascriptEngine-Runtime-Tests">parserResourceClass	^ JSETestParserResource</body>
+
+<body package="JavascriptEngine-Runtime-Tests">resources	^ Array with: self parserResourceClass with: JSERuntimeResource</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegExpTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	| regex |	regex := self compileAndRun: 'new RegExp(".*");'.	self assert: regex isRegExp.	self assertRegExp: regex source: '.*' global: false ignoreCase: false multiline: false.	regex := self compileAndRun: 'new RegExp();'.	self assert: regex isRegExp.	self assertRegExp: regex source: '' global: false ignoreCase: false multiline: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	| regex |	regex := self compileAndRun: 'RegExp(".?");'.	self assert: regex isRegExp.	self assertRegExp: regex source: '.?' global: false ignoreCase: false multiline: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunctionLiteralPattern	| regex |	regex := self compileAndRun: 'RegExp(/\w+/);'.	self assert: regex isRegExp.	self assertRegExp: regex source: '\w+' global: false ignoreCase: false multiline: false.	" return the literal object unchanged "	self assert: 'var r = /x+/; RegExp(r) === r;' returnsValue: true.	" literal RegExp patterns and flags are not allowed "	self assert: 'var r = /x+/; RegExp(r, "i") === r;' raisesError: JSETypeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorFlags	#( 		#( 'i' #( #ignoreCase ))	) do: 		[: flagsAndProperties | | regex flags |			flags  := flagsAndProperties first.			regex := self compileAndRun: 'new RegExp(".*", "', flags, '")'.			self assert: regex isRegExp.			#( #ignoreCase #global #multiline ) do: [: flagName |  | flagSet |				flagSet := ( regex get: flagName ) .				self assert: flagSet value = ( flagsAndProperties last includes: flagName ) description: '"', flags, '": ', flagName, ' = ', flagSet printString.			]		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorLiteralPattern	| regex |	regex := self compileAndRun: 'new RegExp(/x+/);'.	self assert: regex isRegExp.	self assertRegExp: regex source: 'x+' global: false ignoreCase: false multiline: false.	" creates a new RegExp object, does not return the pattern "	self assert: 'var r = /x+/; new RegExp(r) === r;' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testExec	| result elements |	result := self 		compileAndRun: 'var r = /(\d+th)\s+(\w+)/;			r.exec("The 7th son of a 7th son")		' .	self assert: result class = JSEArray.	elements := result arrayElements.	self assert: elements size = 3.	self assert: (elements collect: [ : e | e value ])  asArray  = #('7th son' '7th' 'son').</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testExecNonMatch	| result |	result := self 		compileAndRun: 'var r = /\d+/;			r.exec("Hello")		' .	self assert: result class = JSENull.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLibAvailable	self assert: Boost.BoostRxMatcher uncachedLibAvailable.	Boost.BoostRxMatcher disableLibWhile: [ self deny: Boost.BoostRxMatcher libAvailable ].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLiteral	| regex |	regex := self compileAndRun: 'var r = /.+/; r;'.	self assert: regex isRegExp.	self assertRegExp: regex source: '.+' global: false ignoreCase: false multiline: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReplace	self assert: '"JavaScript".replace(/java/i, "ECMA")' returnsValue: 'ECMAScript'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTest	self		assert: 			'var r = /\d/;			r.test("The 7th son of a 7th son")		'		returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTestNonMatch	self		assert: 			'var r = /8/;			r.test("The 7th son of a 7th son")		'		returnsValue: false.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegExpTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">assertRegExp: regex source: source global: global ignoreCase: ignoreCase multiline: multiline	self assert: regex isRegExp.	self assert: (regex get: #source) value = source.	self assert: (regex get: #lastIndex) value = 0.	self assert: (regex get: #global) value = global.	self assert: (regex get: #ignoreCase) value = ignoreCase.	self assert: (regex get: #multiline) value = multiline.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEArrayTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConcat	| result |	self assert: (self compileAndRun: 'Array.prototype.concat.length') value = 1.	result := self compileAndRun: '[1,2,3].concat(4,5)'.	self assert: result class = JSEArray.	self assert: (result arrayElements collect: [ : e | e value ]) asArray = #(1 2 3 4 5).	" check that concat does not modify the original array "	result := self compileAndRun: '		var array = [1,2,3];		array.concat(4,5);		array'.	self assert: result class = JSEArray.	self assert: (result arrayElements collect: [ : e | e value ]) asArray = #(1 2 3).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConcatAfterSort	"Sort should not base the array on a SortedCollection. Elements pushed to the array after sorting should appear in the back"	| sorted elementValues |	sorted := self compileAndRun: '		var array = [1, 3, 0];		array.sort();		array = array.concat(2,-1);		array;	'.	self assert: sorted class = JSEArray.	elementValues := sorted arrayElements collect: [ : each | each value ].	self assert: (elementValues asArray = #(0 1 3 2 -1)).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConcatArray	| result |	result := self compileAndRun: '[1,2,3].concat([4,5])'.	self assert: result class = JSEArray.	self assert: (result arrayElements collect: [ : e | e value ]) asArray = #(1 2 3 4 5).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	" 15.4.2.1 new Array ( [ item0 [ , item1 [ , ... ] ] ] ) "	| result |	result := self compileAndRun: 'new Array()'.	self assert: result class = JSEArray.	self assert: result length = 0.	result := self compileAndRun: 'new Array("a", "b", "c")'.	self assert: result class = JSEArray.	self assert: result length = 3.	self assert: (result elementAtIndex: 0) value = 'a'.	self assert: (result elementAtIndex: 1) value = 'b'.	self assert: (result elementAtIndex: 2) value = 'c'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	" 15.4.1.1 Array ( [ item1 [ , item2 [ , ... ] ] ] ) "	| result |	result := self compileAndRun: 'Array()'.	self assert: result class = JSEArray.	self assert: result length = 0.	result := self compileAndRun: 'Array("a", "b")'.	self assert: result class = JSEArray.	self assert: result length = 2.	self assert: (result elementAtIndex: 0) value = 'a'.	self assert: (result elementAtIndex: 1) value = 'b'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorWithIllegalLength	" 15.4.2.2 new Array (len) "	self compileAndRun: 'new Array(-1)' expectErrorOfClass: JSERangeError.	self compileAndRun: 'new Array(1.2)' expectErrorOfClass: JSERangeError.	self compileAndRun: 'new Array(NaN)' expectErrorOfClass: JSERangeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorWithLength	" 15.4.2.2 new Array (len) "	| result |	result := self compileAndRun: 'new Array(3)'.	self assert: result class = JSEArray.	self assert: result length = 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCustomArrayEvery	self compileAndRun: '		function CustomArray() {			}		CustomArray.prototype = Array.prototype;		var customArray = new CustomArray();		customArray[0] = "a";		customArray[2] = "c";		customArray.length = 3;		assert(customArray[1] == undefined, "[1] should be undefined");		var everyCount = 0;		customArray.every(			function(e) {				assert(e != undefined, "every() should only iterate existing properties");				everyCount = everyCount + 1;				return true;			}		);		assert(everyCount == 2, "every() count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCustomArrayPrototypeFunction	self compileAndRun: '		function CustomArray() {				this.insert = function(item, index) {				this.splice(index, 0, item);			};		}		CustomArray.prototype = Array.prototype;		var customArray = new CustomArray();		customArray.test = true;		customArray.insert("a", 0);		customArray.insert("b", 1);		assert(customArray.length == 2, "array length != 2");		assert(customArray[0] == "a", "[0] differs");		assert(customArray[1] == "b", "[1] differs");		assert(customArray.test == true, ".test differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDeleteLength	self compileAndRun: '		var array = ["a"];		var deleted = delete array.length;		assert(deleted == false, "length was deleted");		assert(array.length == 1, "length should be 1");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEveryMatch	self assert: (self compileAndRun: 'Array.prototype.every.length') value = 1.	self compileAndRun: '		var array = [ 3, 5, 7, 10, 12 ];		var count = 0;		var result = array.every(			function(e, i, traversed) {				assert(i == count, "index differs");				assert(traversed == array, "traversed object differs");				count = count + 1;				return e &lt; 20 ;			}		);		assert(result == true, "result should be true");		assert(count == 5, "count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEveryNonMatch	self compileAndRun: '		var array = [ 3, 5, 7, 10, 12 ];		var count = 0;		var result = array.every(			function(e) {				count = count + 1;				return e &lt; 10 ;			}		);		assert(result == false, "result should be false");		assert(count == 4, "count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEveryThisArgument	self compileAndRun: '		var array = [ 1, 2, 5, 8 ];		var everyCount = 0;		var result = array.every(			function(e) {				everyCount = everyCount + 1;				return e &lt; this.length;			},			array		);		assert(result == false, "result should be false");		assert(everyCount == 3, "every() count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testExtendingArrayPrototype	| result |	self assert: '		Array.prototype.size = function() { return this.length };		new Array(1, 2).size();' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFilter	self assert: (self compileAndRun: 'Array.prototype.filter.length') value = 1.	self compileAndRun: '		var values = [ 1, 12, 3, 24 ];		var filtered = values.filter(			function(e) { return e &gt;= 10 }		);		assert(filtered.length == 2, "length differs");		assert(filtered[0] == 12, "[0] differs");		assert(filtered[1] == 24, "[1] differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForEach	self assert: (self compileAndRun: 'Array.prototype.forEach.length') value = 1.	self compileAndRun: '		var values = [ 42, 17, 4 ];		var indices = [ 1, 2 ];		var sum = 0;		var count = 0;		var result = indices.forEach(			function(each, i , traversed) { 				assert(i == count, "index differs");				assert(traversed == indices, "traversed object differs");				sum = sum + this[each];					count = count + 1;			},			values		);		assert(sum == 21, "sum should be 21");		assert(result == undefined, "result should be undefined");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForEachModifyTraversedArray	self compileAndRun: '		var values = [ 1, 2, 3 ];		var count = 0;		values.forEach(			function(each, i , traversed) { 				values[i + 1] = 42;				count = count + 1;				if (i &gt; 0)					assert(each == 42, "Array modification should affect traversed elements");				else					assert(each == 1, "First element was modified");			}		);		assert(count == 3, "count differs");		assert(values.length == 4, "length differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIndexOf	self assert: 'Array.prototype.indexOf.length' returnsValue: 1.	self assert: '["a", "b", "a", "c"].indexOf("a")' returnsValue: 0.	self assert: '["a", "b", "a", "c"].indexOf("a", 1)' returnsValue: 2.	self assert: '["a", "b", "a", "c"].indexOf("b")' returnsValue: 1.	self assert: '["a", "b", "a", "c"].indexOf("b",1)' returnsValue: 1.	self assert: '["a", "b", "a", "c"].indexOf("b",2)' returnsValue: -1.	self assert: '["a", "b", "a", "c"].indexOf("x")' returnsValue: -1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIsArray	self assert: 'Array.isArray(1)' returnsValue: false.	self assert: 'Array.isArray([1,2])' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testJoin	| result |	self assert: ( self compileAndRun: 'Array.prototype.join.length' ) value = 1.	self assert: '[1, 2, 3].join(" - ")' returnsValue: '1 - 2 - 3'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLastIndexOf	self assert: 'Array.prototype.lastIndexOf.length' returnsValue: 1.	self assert: '["a", "b", "a", "c"].lastIndexOf("a")' returnsValue: 2.	self assert: '["a", "b", "a", "c"].lastIndexOf("a", 1)' returnsValue: 0.	self assert: '["a", "b", "a", "c"].lastIndexOf("a", 3)' returnsValue: 2.	self assert: '["a", "b", "a", "c"].lastIndexOf("c")' returnsValue: 3.	self assert: '["a", "b", "a", "c"].lastIndexOf("c", 2)' returnsValue: -1.	self assert: '["a", "b", "a", "c"].lastIndexOf("x")' returnsValue: -1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testMap	self assert: (self compileAndRun: 'Array.prototype.map.length') value = 1.	self compileAndRun: '		var values = [ 1, 4 ];		var mapped = values.map(			function(e, i) { return 10 + e + i; }		);		assert(mapped.length == 2, "length differs");		assert(mapped[0] == 11, "[0] differs");		assert(mapped[1] == 15, "[1] differs");		assert(values[0] == 1, "values was modified");		assert(values[1] == 4, "values was modified");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPop	self compileAndRun: '		var array = new Array();		var popped;		array[0] = "zero";		array[1] = "one";		assert(array.length == 2, "length should be 2");		popped = array.pop();		assert(array.length == 1, "length should be 1");		assert(popped == "one", "popped element should be ''one'' ");		popped = array.pop();		assert(array.length == 0);		assert(popped == "zero", "popped element should be ''zero'' ");		popped = array.pop();		assert(array.length == 0, "length should be 0");		assert(popped == undefined, "popped element should be undefined ");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototype	| result |	result := self compileAndRun: 'Array.prototype'.	self assert: result class = JSEArray.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeConstructor	| result |	self assert: 'Array.prototype.constructor === Array' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeLength	| result |	self assert: 'Array.prototype.length' returnsValue: 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPush	self assert: (self compileAndRun: 'Array.prototype.push.length') value = 1.	self compileAndRun: '		var array = new Array();		var sizeAfterPush;		sizeAfterPush = array.push("zero");		assert(array.length == 1, "length should be 1");		assert(sizeAfterPush == 1, "push should have returned 1");		assert(array[0] == "zero", "array[0] should be ''zero''");		sizeAfterPush = array.push("one", "two");		assert(array.length == 3, "length should be 3");		assert(sizeAfterPush == 3, "push should have returned 3");		assert(array[1] == "one", "array[1] should be ''one''");		assert(array[2] == "two", "array[2] should be ''two''");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPushAfterSort	"Sort should not base the array on a SortedCollection. Elements pushed to the array after sorting should appear in the back"	| sorted elementValues |	sorted := self compileAndRun: '		var array = [1, 3, 0];		array.sort();		array.push(2);		array;	'.	self assert: sorted class = JSEArray.	elementValues := sorted arrayElements collect: [ : each | each value ].	self assert: (elementValues asArray = #(0 1 3 2)).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReduce	self assert: ( self compileAndRun: 'Array.prototype.reduce.length' ) value = 1.	self assert: '[ "a", "b", "c" ].reduce(function(a,b) { return a + b; });' returnsValue: 'abc'.	self assert: '[ "a" ].reduce(function(a,b) { return a + b; });' returnsValue: 'a'.	[	self compileAndRun: '[ ].reduce(function(a,b) { return a + b; });'.		self signalFailure: 'Expected TypeError'	] on: JSETypeError do: [: ex | ].	self assert: '[ "a", "b" ].reduce(function(a,b) { return a + b; }, "test:" );' returnsValue: 'test:ab'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReduceInitialValue	" IV-Bug 3140 "	self assert: '[ "a", "b", "c" ].reduce(function(x,y) { if (x) return x + y; else return "u" + y });' returnsValue: 'abc'.	self assert: '[ "a", "b", "c" ].reduce(function(x,y) { if (x) return x + y; else return "u" + y }, undefined);' returnsValue: 'uabc'.	self assert: '[ "a" ].reduce(function(x,y) { if (x) return x + y; else return "u" + y });' returnsValue: 'a'.	self assert: '[ "a"].reduce(function(x,y) { if (x) return x + y; else return "u" + y }, undefined);' returnsValue: 'ua'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReduceRight	| result |	self assert: ( self compileAndRun: 'Array.prototype.reduceRight.length' ) value = 1.	self assert: '[ "a", "b", "c" ].reduceRight(function(a,b) { return a + b; });' returnsValue: 'cba'.	self assert: '[ "a" ].reduceRight(function(a,b) { return a + b; });' returnsValue: 'a'.	[	self compileAndRun: '[ ].reduce(function(a,b) { return a + b; });'.		self signalFailure: 'Expected TypeError'	] on: JSETypeError do: [: ex | ].	self assert: '[ "a", "b" ].reduceRight(function(a,b) { return a + b; }, "test:" );' returnsValue: 'test:ba'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReverse	self compileAndRun: '		var array = [0, 1, 2];		array.reverse();		assert(array[0] == 2, "array[0] should be 2");		assert(array[1] == 1, "array[1] should be 1");		assert(array[2] == 0, "array[2] should be 0");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testShift	self compileAndRun: '		var array = [0, 1, 2];		var shifted; 		shifted = array.shift();		assert(shifted == 0, "shifted element should be 0");		assert(array.length == 2, "array.length should be 2");		assert(array[0] == 1, "array[0] should be 1");		assert(array[1] == 2, "array[1] should be 2");		shifted = array.shift();		assert(shifted == 1, "shifted element should be 1");		assert(array.length == 1, "array.length should be 1");		assert(array[0] == 2, "array[0] should be 2");		shifted = array.shift();		assert(shifted == 2, "shifted element should be 1");		assert(array.length == 0, "array.length should be 0");		shifted = array.shift();		assert(shifted == undefined, "shifted element should be undefined");		assert(array.length == 0, "array.length should be 0");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSlice	self assert: (self compileAndRun: 'Array.prototype.slice.length') value = 2.	self compileAndRun: '		var array = [0, 1, 2, 3];		var sliced; 		sliced = array.slice(1,2);		assert(sliced.length == 1, "slice(1,2) failed - length");		assert(sliced[0] == 1, "slice(1,2) failed - [0]");		sliced = array.slice(1,3);		assert(sliced.length == 2, "slice(1,3) failed - length");		assert(sliced[0] == 1, "slice(1,3) failed - [0]");		assert(sliced[1] == 2, "slice(1,3) failed - [1]");		sliced = array.slice(2,4);		assert(sliced.length == 2, "slice(2,4) failed - length");		assert(sliced[0] == 2, "slice(2,4) failed - [0]");		assert(sliced[1] == 3, "slice(2,4) failed - [1]");		sliced = array.slice(-1, undefined);		assert(sliced.length == 1, "slice(-1,undefined) failed - length");		assert(sliced[0] == 3, "slice(-1,undefined) failed - [0]");		sliced = array.slice(-3, -1);		assert(sliced.length == 2, "slice(-3,-1) failed - length");		assert(sliced[0] == 1, "slice(-3,-1) failed - [0]");		assert(sliced[1] == 2, "slice(-3,-1) failed - [0]");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSomeMatch	self assert: (self compileAndRun: 'Array.prototype.some.length') value = 1.	self compileAndRun: '		var array = [ 3, 5, 7, 10, 12 ];		var count = 0;		var result = array.some(			function(e) {				count = count + 1;				return e == 10 ;			}		);		assert(result == true, "result should be true");		assert(count == 4, "count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSomeNoneMatch	self compileAndRun: '		var array = [ 3, 5, 7, 10, 12 ];		var count = 0;		var result = array.some(			function(e) {				count = count + 1;				return e == 20 ;			}		);		assert(result == false, "result should be false");		assert(count == 5, "count differs");	'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSort	| sorted elementValues |	sorted := self compileAndRun: '		var array = [0, 3, "2", true, undefined, "u", "t", 1, 10, 20];		array.sort();		array;	'.	self assert: sorted class = JSEArray.	elementValues := sorted arrayElements collect: [ : each | each value ].	self assert: (elementValues asArray = #(0 1 10 '2' 20 3 't' true 'u' nil)).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSortCompareFunction	| sorted elementValues |	sorted := self compileAndRun: '		var array = [0, 3, 2, undefined, true, 10, 20];		array.sort(function(a, b) { if (a &gt;= b) return -1; else  return 1; });	'.	self assert: sorted class = JSEArray.	elementValues := sorted arrayElements collect: [ : each | each value ].	self assert: (elementValues asArray = #(20 10 3 2 true 0 nil)).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSplice	self assert: (self compileAndRun: 'Array.prototype.splice.length') value = 2.	self compileAndRun: '		var array = [0, 1, 2, 3];		var deleted; 		deleted = array.splice(2,1, "x1", "x2");		assert(deleted.length == 1);		assert(deleted[0] == 2);		assert(array.length == 5);		assert(array[0] == 0);		assert(array[1] == 1);		assert(array[2] == "x1");		assert(array[3] == "x2");		assert(array[4] == 3);		deleted = array.splice(-1,0, "x3");		assert(array.length == 6);		assert(array[4] == "x3");		assert(array[5] == 3);	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	| result |	self assert: '[1, 2, 3].toString()' returnsValue: '1,2,3'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof Array' returnsValue: 'function'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUnshift	self assert: (self compileAndRun: 'Array.prototype.unshift.length') value = 1.	self compileAndRun: '		var array = [0, 1, 2];		var newLength; 		newLength = array.unshift(-2, -1);		assert(newLength == 5);		assert(array.length == 5);		assert(array[0] == -2);		assert(array[1] == -1);		assert(array[2] == 0);		assert(array[3] == 1);		assert(array[4] == 2);	'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEErrorTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	| error |	error := self compileAndRun: 'new Error()'.	self assert: error class = JSEErrorObject.	self assert: '(new Error("test")).message' returnsValue: 'test'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	| error |	error := self compileAndRun: 'Error()'.	self assert: error class = JSEErrorObject.	self assert: '(Error("test")).message' returnsValue: 'test'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testErrorPrototype	self 		assert: 			'try {				reference;			} catch (e) {				e instanceof ReferenceError			}' 		returnsValue: true</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testInstanceOf	self errorTypes do: [ : type |		self assert: '(new ', type, '()) instanceof ', type returnsValue: true.		self assert: '(new ', type, '()) instanceof Error' returnsValue: true.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testInstanceOfSmalltalkError	self		assert: 			'try {				eval("does not work()")			} catch(e) { 				e instanceof SyntaxError			}'		returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testName	self errorTypes do: [ : type |		self assert: '(new ', type, '()).name' returnsValue: type asString.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeMessage	self errorTypes do: [ : type |		self assert: type, '.prototype.message' returnsValue: ''.		self assert: '(new ', type, '()).message' returnsValue: ''.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStackAnonymousFunction	" non standard extension, similar to several browser implementations "	| stackResult expected |	stackResult := self compileAndRun: 			'function inner(f)			{				f();			}			function outer(f)			{				inner(f);			}			try {				outer(function() { throw new Error() });				"did not throw";			}			catch(e) {				e.stack			}'.		self assert: stackResult class = JSEString.		expected := 'function () (in &lt;1s&gt; @ 10)function inner (f) (in &lt;1s&gt; @ 3)function outer (f) (in &lt;1s&gt; @ 7)&lt;1s&gt; @ 10' expandMacrosWith: self selector asString.		self assert: expected = stackResult value.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStackInternalError	" non standard extension, similar to several browser implementations "	| stackResult expected |	stackResult := self compileAndRun: 			'function inner(innerParameter)			{	// raises a RangeError				Number(1).toPrecision(-1);			}			function outer(outerParameter)			{				inner(outerParameter);			}			try {				outer("p");				"did not throw";			}			catch(e) {				e.stack			}'.		self assert: stackResult class = JSEString.		expected := 'function toPrecision (precision) (in &lt;1s&gt; @ 3)function inner (innerParameter) (in &lt;1s&gt; @ 3)function outer (outerParameter) (in &lt;1s&gt; @ 7)&lt;1s&gt; @ 10' expandMacrosWith: self selector asString.		self assert: expected = stackResult value.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStackThrowError	" non standard extension, similar to several browser implementations "	| stackResult expected |	stackResult := self compileAndRun: 			'function inner(innerParameter)			{				throw new Error(innerParameter);			}			function outer(outerParameter)			{				inner(outerParameter);			}			try {				outer("p");				"did not throw";			}			catch(e) {				e.stack			}'.		self assert: stackResult class = JSEString.		expected := 'function inner (innerParameter) (in &lt;1s&gt; @ 3)function outer (outerParameter) (in &lt;1s&gt; @ 7)&lt;1s&gt; @ 10' expandMacrosWith: self selector asString.		self assert: expected = stackResult value.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStackThrowErrorEval	" non standard extension, similar to several browser implementations "	| stackResult expected |	stackResult := self compileAndRun: 			'function inner(innerParameter)			{				eval("throw new Error(''evil eval'');");			}			function outer(outerParameter)			{				inner(outerParameter);			}			try {				outer("p");				"did not throw";			}			catch(e) {				e.stack			}'.		self assert: stackResult class = JSEString.		expected := 'eval script in &lt;1s&gt; (generated @ 3) @ 1function eval (x) (in &lt;1s&gt; @ 3)function inner (innerParameter) (in &lt;1s&gt; @ 3)function outer (outerParameter) (in &lt;1s&gt; @ 7)&lt;1s&gt; @ 10' expandMacrosWith: self selector asString.		self assert: expected = stackResult value.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self errorTypes do: [ : type |		self assert: 'typeof ', type returnsValue: 'function'.	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEErrorTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">errorTypes	^ #(		#EvalError		#EvalError		#RangeError		#ReferenceError		#SyntaxError		#TypeError		#URIError	)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDateTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	self 		assert: 'new Date(2013, 6, 5, 16, 27, 1, 234)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 16 minutes: 27 seconds: 1 milliseconds: 234) jseAsUTCMilliseconds.	self assert: 'Date.length' returnsValue: 7.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	| result dateString |	result := self 		compileAndRun: 'Date()'.	self assert: result class = JSEString.	self		assert: 'Date() == (new Date()).toString()'		returnsValue: true.	" all arguments are ignored... "	dateString := self 		compileAndRun: 'Date(1984, 6, 5, 16, 27, 1, 234)'.	self assert: dateString class = JSEString.	self deny: ('*1984*' match: dateString value).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorFloat	self 		assert: 'new Date(2013.1, 6.2, 5.3, 16.4, 27.5, 1.6, 234.7)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 16 minutes: 27 seconds: 1 milliseconds: 234) jseAsUTCMilliseconds.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorFromNumber	self 		assert: 'new Date(12345)'		returnsPrimitiveObjectValue:12345.	self assertReturnsNaN: '(new Date(NaN)).valueOf()'.	self assertReturnsNaN: '(new Date(Infinity)).valueOf()'.	self assertReturnsNaN: '(new Date(-Infinity)).valueOf()'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorFromString	self 		assert: 'new Date("2013-07-05T14:27:01.234Z")'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 14 minutes: 27 seconds: 1 milliseconds: 234) jseAsMilliseconds.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorInvalidDate	| result |	result := self compileAndRun: 'new Date(2013, 6, NaN)'.	self assert: result primitiveValue class = JSEDate.	self deny: result primitiveValue isValid.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorNoArguments	| t1 result t2 dateValue date |	t1 := Timestamp now jseAsUTCMilliseconds.	result := self compileAndRun: 'new Date()'.	t2 := Timestamp now jseAsUTCMilliseconds.	self assert: result class = JSEPrimitiveObject.	date := result primitiveValue.	self assert: date class = JSEDate.	dateValue := date value.	self assert: dateValue &gt;= t1.	self assert: dateValue &lt;= t2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorValuesOutOfRangeMax	self 		assert: 'new Date(2013, 6, 5, 16, 21, 23, 2100)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 16 minutes: 21 seconds: 25 milliseconds: 100) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 6, 5, 16, 21, 523, 1)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 16 minutes: 29 seconds: 43 milliseconds: 1) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 6, 5, 16, 421, 12, 2)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 5 hours: 23 minutes: 1 seconds: 12 milliseconds: 2) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 6, 5, 216, 21, 12, 3)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 14 hours: 0 minutes: 21 seconds: 12 milliseconds: 3) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 6, 75, 3, 21, 12, 4)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 9 day: 13 hours: 3 minutes: 21 seconds: 12 milliseconds: 4) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 10, 75, 3, 21, 12, 4)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2014 month: 1 day: 14 hours: 3 minutes: 21 seconds: 12 milliseconds: 4) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, 100, 375, 853, 421, 122, 1232)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2022 month: 6 day: 14 hours: 20 minutes: 3 seconds: 3 milliseconds: 232) jseAsUTCMilliseconds.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorValuesOutOfRangeMin	self 		assert: 'new Date(2013, 6, 8, 2, 1, 2, -3)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2013 month: 7 day: 8 hours: 2 minutes: 1 seconds: 1 milliseconds: 997) jseAsUTCMilliseconds.	self 		assert: 'new Date(2013, -6, -82, -22, -113, -987, -312)'		returnsPrimitiveObjectValue: (JSEPlatform timestampFromYear: 2012 month: 4 day: 7 hours: 23 minutes: 50 seconds: 32 milliseconds: 688) jseAsUTCMilliseconds.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCustomDate	self 		assert: '			function CustomDate() { }			CustomDate.prototype = Date.prototype;			var customDate = new CustomDate();			customDate.toLocaleString();'		raisesError: JSETypeError		messagePattern: '*toLocaleString()*'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDatePartsLocalTime	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getFullYear()'		returnsValue: 2013.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getMonth()'		returnsValue: 9.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getDate()'		returnsValue: 15.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getDay()'		returnsValue: 2.	self 		assert: '(new Date(2013, 9, 13, 1, 27, 49, 765)).getDay()'		returnsValue: 0.	self 		assert: '(new Date(2013, 9, 12, 1, 27, 49, 765)).getDay()'		returnsValue: 6.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getHours()'		returnsValue: 1.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getMinutes()'		returnsValue: 27.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getSeconds()'		returnsValue: 49.	self 		assert: '(new Date(2013, 9, 15, 1, 27, 49, 765)).getMilliseconds()'		returnsValue: 765.	self assertReturnsNaN: '(new Date(NaN)).getFullYear()'.	self assertReturnsNaN: '(new Date(NaN)).getMonth()'.	self assertReturnsNaN: '(new Date(NaN)).getDate()'.	self assertReturnsNaN: '(new Date(NaN)).getDay()'.	self assertReturnsNaN: '(new Date(NaN)).getHours()'.	self assertReturnsNaN: '(new Date(NaN)).getMinutes()'.	self assertReturnsNaN: '(new Date(NaN)).getSeconds()'.	self assertReturnsNaN: '(new Date(NaN)).getMilliseconds()'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDatePartsUTC	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCFullYear()'		returnsValue: 2012.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCMonth()'		returnsValue: 11.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCDate()'		returnsValue: 31.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCDay()'		returnsValue: 1.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCHours()'		returnsValue: 23.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCMinutes()'		returnsValue: 3.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCSeconds()'		returnsValue: 5.	self 		assert: '(new Date(2013, 0, 1, 0, 3, 5, 765)).getUTCMilliseconds()'		returnsValue: 765.	self assertReturnsNaN: '(new Date(NaN)).getUTCFullYear()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCMonth()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCDate()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCDay()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCHours()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCMinutes()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCSeconds()'.	self assertReturnsNaN: '(new Date(NaN)).getUTCMilliseconds()'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetTime	" getTime() is equivalent to valueOf() "	self		assert: '(new Date(1987, 2, 8, 4, 12, 28, 653)).getTime()'		returnsValue: 542171548653.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetTimezoneOffset	"  DST "	self		assert: '(new Date(2013, 8,1)).getTimezoneOffset()'		returnsValue: 120.	" no DST "	self		assert: '(new Date(2013, 1,1)).getTimezoneOffset()'		returnsValue: 60.	self assertReturnsNaN: '(new Date(NaN)).getTimezoneOffset()'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNow	| t1 result t2 dateValue |	t1 := Timestamp now jseAsUTCMilliseconds.	result := self compileAndRun: 'Date.now()'.	t2 := Timestamp now jseAsUTCMilliseconds.	self assert: result class = JSENumber.	dateValue := result value.	self assert: dateValue &gt;= t1.	self assert: dateValue &lt;= t2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParse	" full timestamp "	self 		assert: 'Date.parse("1995-02-04T23:00:12.123Z")'		returnsValue: 791938812123.	" timezone "	self 		assert: 'Date.parse("1995-02-04T23:00:12.123+02:00")'		returnsValue: 791931612123.	self assertReturnsNaN: 'Date.parse()'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseDate	" date only "	self 		assert: 'Date.parse("1997")'		returnsValue: 852076800000.	self 		assert: 'Date.parse("1997-08")'		returnsValue: 870393600000.	self 		assert: 'Date.parse("1997-02-03")'		returnsValue: 854928000000.	" toString "	self 		assert: 'Date.parse(1997)'		returnsValue: 852076800000.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseTime	" time only "	self 		assert: 'Date.parse("T21:31")'		returnsValue: 73860000.	self 		assert: 'Date.parse("T00:31:22")'		returnsValue: -1718000.	self 		assert: 'Date.parse("T02:31:22.234")'		returnsValue: 5482234.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetDate	| selectors |	selectors :=  #(day:).	self privateTestSetFunction: 'setDate' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCDate' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetDateParts	"new Date(year, month0, day, hours, minutes, seconds, milliseconds"	"month is zero-based!"	self assert: 'var date = new Date();		date.setFullYear(2005);		date.getFullYear()' 		returnsValue: 2005.	"Year"	self assert: 'var date = new Date();		date.setMonth(0);		date.getMonth()' 		returnsValue: 0.	"Month"	self assert: 'var date = new Date();		date.setDate(5);		date.getDate()' 		returnsValue: 5.	"Day in month"	self assert: 'var date = new Date();		date.setHours(15);		date.getHours()' 		returnsValue: 15.	"Hour"	self assert: 'var date = new Date();		date.setMinutes(25);		date.getMinutes()' 		returnsValue: 25.	"Minutes"	self assert: 'var date = new Date();		date.setSeconds(55);		date.getSeconds()' 		returnsValue: 55.	"Seconds"	self assert: 'var date = new Date();		date.setMilliseconds(555);		date.getMilliseconds()' 		returnsValue: 555.	"Milliseconds"</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetFullYear	| selectors |	selectors :=  #(year: month: day:).	self privateTestSetFunction: 'setFullYear' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCFullYear' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetHours	| selectors |	selectors :=  #(hour: minute: second: millisecond:).	self privateTestSetFunction: 'setHours' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCHours' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetMilliseconds	| selectors |	selectors :=  #(millisecond:).	self privateTestSetFunction: 'setMilliseconds' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCMilliseconds' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetMinutes	| selectors |	selectors :=  #(minute: second: millisecond:).	self privateTestSetFunction: 'setMinutes' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCMinutes' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetMonth	| selectors |	selectors :=  #(month: day:).	self privateTestSetFunction: 'setMonth' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCMonth' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetSecond	| selectors |	selectors :=  #(second: millisecond:).	self privateTestSetFunction: 'setSeconds' possiblePartSelectors:selectors isUTC: false.	self privateTestSetFunction: 'setUTCSeconds' possiblePartSelectors:selectors isUTC: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetSeconds	self 		assert: '			var d = new Date(5345); 			d.setSeconds(2, 345);			d'		returnsPrimitiveObjectValue: 2345.	self 		assert: '			var d = new Date(5345); 			d.setSeconds(2);			d'		returnsPrimitiveObjectValue: 2345.	self 		assertReturnsNaN: '			var d = new Date(12345); 			d.setSeconds(NaN);			d.valueOf()'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetTime	self 		assert: '(new Date(2222, 1, 2, 3, 4, 5)).setTime(1373034421234)'		returnsValue: 1373034421234.	self 		assert: '			var d = new Date(); 			d.setTime(12345);			d'		returnsPrimitiveObjectValue: 12345.	self 		assert: '			var d = new Date(); 			d.setTime("34567.8");			d'		returnsPrimitiveObjectValue: 34567.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetUTCDateParts	"new Date(year, month0, day, hours, minutes, seconds, milliseconds"	"month is zero-based!"	self assert: 'var date = new Date();		date.setUTCFullYear(2005);		date.getUTCFullYear()' 		returnsValue: 2005.	"Year"	self assert: 'var date = new Date();		date.setUTCMonth(0);		date.getUTCMonth()' 		returnsValue: 0.	"Month"	self assert: 'var date = new Date();		date.setUTCDate(5);		date.getUTCDate()' 		returnsValue: 5.	"Day in month"	self assert: 'var date = new Date();		date.setUTCHours(15);		date.getUTCHours()' 		returnsValue: 15.	"Hour"	self assert: 'var date = new Date();		date.setUTCMinutes(25);		date.getUTCMinutes()' 		returnsValue: 25.	"Minutes"	self assert: 'var date = new Date();		date.setUTCSeconds(55);		date.getUTCSeconds()' 		returnsValue: 55.	"Seconds"	self assert: 'var date = new Date();		date.setUTCMilliseconds(555);		date.getUTCMilliseconds()' 		returnsValue: 555.	"Milliseconds"</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToDateString	self		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toDateString()'		returnsValue: '5. Juli 2013'.	self		assert: '(new Date(NaN)).toDateString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToISOString	" DST "	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toISOString()'		returnsValue: '2013-07-05T14:27:01.234Z'.	" no DST "	self 		assert: '(new Date(2013, 1, 5, 16, 27, 1, 234)).toISOString()'		returnsValue: '2013-02-05T15:27:01.234Z'.	self 		assert: '(new Date(NaN)).toISOString()'		raisesError: JSERangeError</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToJSON	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toJSON("who cares")'		returnsValue: '2013-07-05T14:27:01.234Z'.	self 		assert: '(new Date(NaN)).toJSON()'		returnsValue: nil.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToLocaleDateString	self		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toLocaleDateString()'		returnsValue: '5. Juli 2013'.	self		assert: '(new Date(NaN)).toLocaleDateString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToLocaleString	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toLocaleString()'		returnsValue: '5. Juli 2013 16:27:01 GMT+0200' .	self		assert: '(new Date(NaN)).toLocaleString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToLocaleTimeString	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toLocaleTimeString()'		returnsValue: '16:27:01 GMT+0200'.	self 		assert: '(new Date(NaN)).toLocaleTimeString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toString()'		returnsValue: '5. Juli 2013 16:27:01 GMT+0200'.	self 		assert: '(new Date(NaN)).toString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToTimeString	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toTimeString()'		returnsValue: '16:27:01 GMT+0200'.	self 		assert: '(new Date(NaN)).toTimeString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToUTCString	" DST "	self 		assert: '(new Date(2013, 6, 5, 16, 27, 1, 234)).toUTCString()'		returnsValue: '5. Juli 2013 14:27:01 GMT'.	" no DST "	self 		assert: '(new Date(2013, 1, 5, 16, 27, 1, 234)).toUTCString()'		returnsValue: '5. Februar 2013 15:27:01 GMT'.	self 		assert: '(new Date(NaN)).toUTCString()'		returnsValue: 'Invalid Date'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof Date' returnsValue: 'function'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUTC	" no DST "	| t1 result t2 |	self		assert: 'Date.UTC(2045, 1, 20, 18, 65, 28, 653);'		returnsValue: 2371230328653.	" DST "	self		assert: 'Date.UTC(2045, 8, 20, 18, 65, 28, 653);'		returnsValue: 2389547128653.	" incomplete "	self		assert: 'Date.UTC(2015,11)'		returnsValue: 1448928000000.	" implementation-dependent "	t1 := Timestamp now jseAsUTCMilliseconds.	result := self compileAndRun: 'Date.UTC()'.	t2 := Timestamp now jseAsUTCMilliseconds.	self assert: t1 &lt;= result value.	self assert: t2 &gt;= result value.	self		assert: 'Date.UTC.length'		returnsValue: 7.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testValueOf	" no DST "	self		assert: '(new Date(1987, 2, 8, 4, 12, 28, 653)).valueOf()'		returnsValue: 542171548653.	self		assert: '(new Date(1899, 2, 8, 4, 12)).valueOf()'		returnsValue: -2234810880000.	" DST "	self		assert: '(new Date(1987, 7, 8, 18, 12, 28, 653)).valueOf();'		returnsValue: 555437548653.	" see 15.9.1.15.1 Extended years "	self		assert: '(new Date(287586, 1, 2, 3, 4)).valueOf()'		returnsValue: 9013173185040000.	self		assertReturnsNaN: '(new Date(NaN)).valueOf()'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testZeroBaseMonth	"month is zero-based!"	self assert: 'var date = new Date();		date.setUTCFullYear(1970);		date.setUTCMonth(0);		date.setUTCDate(1);		date.setUTCHours(0);		date.setUTCMinutes(0);		date.setUTCSeconds(0);		date.setUTCMilliseconds(1);		date.valueOf()' 		returnsValue: 1 .	"0= Jan ... 3=Apr"</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDateTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">performTest	self setToDEWhile: [ super performTest ]</body>
+
+<body package="JavascriptEngine-Runtime-Tests">privateTestSetFunction: functionName partSelectors: partSelectors isUTC: isUTC 	| dateString expected expectedValue arguments argumentsStream argumentsString utcDate |	utcDate := JSEPlatform timestampFromYear: 2011 month: 12 day: 13 hours: 0 minutes: 2 seconds: 3 milliseconds: 4.	dateString := utcDate jseAsMilliseconds printString.	expected := utcDate copy.	isUTC ifFalse: [ expected := expected jseAsLocalTimestamp ].	arguments := Array new: partSelectors size.	1 to: arguments size		do: 		[: i |			#month: = ( partSelectors at: i ) 				ifTrue: [ arguments at: i put: i-1 ]				ifFalse: [ arguments at: i put: i ].			expected perform: ( partSelectors at: i ) with: i		].	argumentsStream := String new writeStream.	arguments 		do: [: argument | argument printOn: argumentsStream ]		separatedBy: [ argumentsStream nextPutAll: ', ' ].	argumentsString := argumentsStream contents.	expectedValue := isUTC 			ifTrue: [ expected jseAsMilliseconds ]			ifFalse: [ expected jseAsUTCMilliseconds ].	self assert: '			var d = new Date(' , dateString , '); 			d.' , functionName , '(' , argumentsString , ');			d' returnsPrimitiveObjectValue: expectedValue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">privateTestSetFunction: functionName possiblePartSelectors: possiblePartSelectors isUTC: isUTC 	" all arguments expect the first are optional "	possiblePartSelectors size to: 1 by: -1 do: [ : numberOfSelectors |		self privateTestSetFunction: functionName partSelectors: (possiblePartSelectors copyFrom: 1 to: numberOfSelectors) isUTC: isUTC 	].	self assertReturnsNaN: '		var d = new Date(); 		d.' , functionName , '(NaN);		d.valueOf()'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">setToDEWhile: aBlock 	" To do: set Timezone GMT +100 with DST "	| locale oldLocale |	locale := Locale named: #'de_DE'.	oldLocale := Processor activeProcess locale.	^ [	Processor activeProcess locale: locale.		aBlock value	] ensure: [ Processor activeProcess locale: oldLocale ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEConversionTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testNumberToStringAndBackToNumber	self assertNumberValue: JSEPlatform nanValue convertsToString: 'NaN'.	self assertNumberValue: 0 convertsToString: '0'.	self assertNumberValue: JSEPlatform positiveInfinityValue convertsToString: 'Infinity'.	self assertNumberValue: JSEPlatform negativeInfinityValue convertsToString: '-Infinity'.	self assertNumberValue: 1 convertsToString: '1'.	self assertNumberValue: -1 convertsToString: '-1'.	self assertNumberValue: ( 2 * ( 10 raisedTo: 20 )) asDouble convertsToString: '200000000000000000000'.	self assertNumberValue: 1.2d convertsToString: '1.2'.	self assertNumberValue: -98.765d convertsToString: '-98.765'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEConversionTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">assertNumberValue: value convertsToString: string 	| numberToString stringToNumber |	numberToString := ( JSENumber value: value ) toStringValue.	self assert: numberToString = string description: 'Value ' , value printString , ' to number =  ' , numberToString , ' expected ' , string.	stringToNumber := string asJSEObject toNumberValue.	( stringToNumber isNaN and: [ value isNaN ]) 		ifFalse: 		[	self 				assert: stringToNumber = value				description: 'String ' , string , ' to number =  ' , stringToNumber printString , ' expected ' , value printString		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEMathTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testAbs	self assert: 'Math.abs(1)' returnsValue: 1.	self assert: 'Math.abs(-2)' returnsValue: 2.	self assert: 'Math.abs(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.abs(-Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.abs("-3")' returnsValue: 3.	self assertReturnsNaN: 'Math.abs(NaN)'.	self assertReturnsNaN: 'Math.abs({})'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAcos	self assert: 'Math.acos(0)' returnsValue: 0d arcCos.	self assert: 'Math.acos(0.9)' returnsValue: 0.9d arcCos.	self assert: 'Math.acos(-0.5)' returnsValue: -0.5d arcCos.	self assertReturnsNaN: 'Math.acos(1.1)'.	self assertReturnsNaN: 'Math.acos(-1.01)'.		self assertReturnsNaN: 'Math.acos(Infinity)'.	self assertReturnsNaN: 'Math.acos(-Infinity)'.	self assertReturnsNaN: 'Math.acos(NaN)'.	self assertReturnsNaN: 'Math.acos({})'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAsin	self assert: 'Math.asin(0)' returnsValue: 0d arcSin.	self assert: 'Math.asin(0.9)' returnsValue: 0.9d arcSin.	self assert: 'Math.asin(-0.5)' returnsValue: -0.5d arcSin.	self assertReturnsNaN: 'Math.asin(1.1)'.	self assertReturnsNaN: 'Math.asin(-1.01)'.		self assertReturnsNaN: 'Math.asin(Infinity)'.	self assertReturnsNaN: 'Math.asin(-Infinity)'.	self assertReturnsNaN: 'Math.asin(NaN)'.	self assertReturnsNaN: 'Math.asin({})'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAtan	self assert: 'Math.atan(0)' returnsValue: 0d arcTan.	self assert: 'Math.atan(0.9)' returnsValue: 0.9d arcTan.	self assert: 'Math.atan(2)' returnsValue: 2d arcTan.	self assert: 'Math.atan(-3)' returnsValue: -3d arcTan.	self assert: 'Math.atan(Infinity)' returnsValue: JSEPlatform positiveInfinityValue arcTan.	" pi/2 "	self assert: 'Math.atan(-Infinity)' returnsValue: JSEPlatform negativeInfinityValue arcTan.	" -pi/2 "	self assertReturnsNaN: 'Math.atan(NaN)'.	self assertReturnsNaN: 'Math.atan({})'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAtan2	self assert: 'Math.atan2(1, 2)' returnsValue: 0.5d arcTan.	self assert: 'Math.atan2(1, 0)' returnsValue: JSEPlatform floatClass pi / 2.	self assert: 'Math.atan2(0, 2)' returnsValue: 0.	self assert: 'Math.atan2(0, 0)' returnsValue: 0.	self assert: 'Math.atan2(-2, 0)' returnsValue: JSEPlatform floatClass pi negated / 2.	self assert: 'Math.atan2(1, Infinity)' returnsValue: 0.	self assert: 'Math.atan2(1, -Infinity)' returnsValue: JSEPlatform floatClass pi.	self assert: 'Math.atan2(-2, Infinity)' returnsValue: 0.	self assert: 'Math.atan2(-3, -Infinity)' returnsValue: JSEPlatform floatClass pi negated.	self assert: 'Math.atan2(Infinity, 1)' returnsValue: JSEPlatform positiveInfinityValue arcTan.	self assert: 'Math.atan2(Infinity, -1)' returnsValue: JSEPlatform positiveInfinityValue arcTan.	self assert: 'Math.atan2(-Infinity, 2)' returnsValue: JSEPlatform negativeInfinityValue arcTan.	self assert: 'Math.atan2(-Infinity, -2)' returnsValue: JSEPlatform negativeInfinityValue arcTan.	self assert: 'Math.atan2(Infinity, Infinity)' returnsValue: JSEPlatform floatClass pi / 4.	self assert: 'Math.atan2(Infinity, -Infinity)' returnsValue: JSEPlatform floatClass pi * 3 / 4.	self assert: 'Math.atan2(-Infinity, Infinity)' returnsValue: JSEPlatform floatClass pi negated / 4.	self assert: 'Math.atan2(-Infinity, -Infinity)' returnsValue: JSEPlatform floatClass pi * -3 / 4.	self assertReturnsNaN: 'Math.atan2(NaN, 1)'.	self assertReturnsNaN: 'Math.atan2(1, NaN)'.	self assertReturnsNaN: 'Math.atan2(NaN, NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCeil	self assert: 'Math.ceil(0)' returnsValue: 0.	self assert: 'Math.ceil(1)' returnsValue: 1.	self assert: 'Math.ceil(1.1)' returnsValue: 2.	self assert: 'Math.ceil(-1.1)' returnsValue: -1.	self assert: 'Math.ceil(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.ceil(-Infinity)' returnsValue: JSEPlatform negativeInfinityValue.	self assertReturnsNaN: 'Math.ceil(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCos	self assert: 'Math.cos(0)' returnsValue: 1.	self assert: 'Math.cos(1)' returnsValue: 1d cos.	self assert: 'Math.cos(-2)' returnsValue: -2d cos.	self assertReturnsNaN: 'Math.cos(Infinity)'.	self assertReturnsNaN: 'Math.cos(-Infinity)'.	self assertReturnsNaN: 'Math.cos(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testExp	| e |	e := JSEPlatform floatClass e.	self assert: 'Math.exp(0)' returnsValue: 1.	self assert: 'Math.exp(1)' returnsValue: e.	self assert: 'Math.exp(2)' returnsValue: ( e raisedTo: 2 ).	self assert: 'Math.exp(-3)' returnsValue: ( e raisedTo: -3 ).	self assert: 'Math.exp(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.exp(-Infinity)' returnsValue: 0.	self assertReturnsNaN: 'Math.exp(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFloor	self assert: 'Math.floor(0)' returnsValue: 0.	self assert: 'Math.floor(1)' returnsValue: 1.	self assert: 'Math.floor(1.1)' returnsValue: 1.	self assert: 'Math.floor(-1.1)' returnsValue: -2.	self assert: 'Math.floor(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.floor(-Infinity)' returnsValue: JSEPlatform negativeInfinityValue.	self assertReturnsNaN: 'Math.floor(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLog	self assert: 'Math.log(0)' returnsValue: JSEPlatform negativeInfinityValue.	self assert: 'Math.log(1)' returnsValue: 0.	self assert: 'Math.log(1.1)' returnsValue: 1.1d ln.	self assert: 'Math.log(3)' returnsValue: 3d ln.	self assert: 'Math.log(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assertReturnsNaN: 'Math.log(-3)'.	self assertReturnsNaN: 'Math.log(-Infinity)'.	self assertReturnsNaN: 'Math.log(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testMax	self assert: 'Math.max()' returnsValue: JSEPlatform negativeInfinityValue.	self assert: 'Math.max(1)' returnsValue: 1.	self assert: 'Math.max(2, 3)' returnsValue: 3.	self assert: 'Math.max(4, 3, 2, 1)' returnsValue: 4.	self assert: 'Math.max(1, 2, Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.max(1, 2, -Infinity)' returnsValue: 2.	self assertReturnsNaN: 'Math.max(1, NaN, 2)'.	self assert: 'Math.max.length' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testMin	self assert: 'Math.min()' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.min(1)' returnsValue: 1.	self assert: 'Math.min(2, 3)' returnsValue: 2.	self assert: 'Math.min(4, 3, 2, 1)' returnsValue: 1.	self assert: 'Math.min(1, 2, -Infinity)' returnsValue: JSEPlatform negativeInfinityValue.	self assert: 'Math.min(1, 2, Infinity)' returnsValue: 1.	self assertReturnsNaN: 'Math.min(1, NaN, 2)'.	self assert: 'Math.min.length' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPow	self assert: 'Math.pow(2,3)' returnsValue: 8.	self assert: 'Math.pow(2.3, 7.3)' returnsValue: ( 2.3d raisedTo: 7.3d ).	self assertReturnsNaN: 'Math.pow(2, NaN)'.	self assert: 'Math.pow(NaN, 0)' returnsValue: 1.	self assertReturnsNaN: 'Math.pow(NaN, 1)'.	self assert: 'Math.pow(2, Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.pow(-2, Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.pow(3, -Infinity)' returnsValue: 0.	self assert: 'Math.pow(-3, -Infinity)' returnsValue: 0.	self assertReturnsNaN: 'Math.pow(1, Infinity)'.	self assertReturnsNaN: 'Math.pow(1, -Infinity)'.	self assertReturnsNaN: 'Math.pow(-1, Infinity)'.	self assertReturnsNaN: 'Math.pow(-1, -Infinity)'.	self assert: 'Math.pow(0.5, Infinity)' returnsValue: 0.	self assert: 'Math.pow(0.5, -Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.pow(Infinity, 1)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.pow(Infinity, -1)' returnsValue: 0.	self assert: 'Math.pow(-Infinity, 1)' returnsValue: JSEPlatform negativeInfinityValue.	self assert: 'Math.pow(-Infinity, 2)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.pow(-Infinity, -1)' returnsValue: 0.	self assert: 'Math.pow(-Infinity, -2)' returnsValue: 0.	self assert: 'Math.pow(0, 1)' returnsValue: 0.	self assert: 'Math.pow(0, -1)' returnsValue: JSEPlatform positiveInfinityValue.	self assertReturnsNaN: 'Math.pow(-1, 2.3)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototype	self assert: 'Math.valueOf() === Math' returnsValue: true</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testRandom	| randoms  |	randoms := Set new.	100 timesRepeat: [ 		| random |		random := self compileAndRun: 'Math.random()'.		self assert: random isJSENumber.		self assert: random value &gt;= 0.		self assert: random value &lt;1.		randoms add: random value.	].	self assert: randoms size &gt;= 99</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testRound	self assert: 'Math.round(0)' returnsValue: 0.	self assert: 'Math.round(1)' returnsValue: 1.	self assert: 'Math.round(1.1)' returnsValue: 1.	self assert: 'Math.round(1.5)' returnsValue: 2.	self assert: 'Math.round(2.1)' returnsValue: 2.	self assert: 'Math.round(-1.4)' returnsValue: -1.	self assert: 'Math.round(-1.5)' returnsValue: -1.	self assert: 'Math.round(-1.6)' returnsValue: -2.	self assert: 'Math.round(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assert: 'Math.round(-Infinity)' returnsValue: JSEPlatform negativeInfinityValue.	self assertReturnsNaN: 'Math.round(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSin	self assert: 'Math.sin(0)' returnsValue: 0.	self assert: 'Math.sin(1)' returnsValue: 1d sin.	self assert: 'Math.sin(-2)' returnsValue: -2d sin.	self assertReturnsNaN: 'Math.sin(Infinity)'.	self assertReturnsNaN: 'Math.sin(-Infinity)'.	self assertReturnsNaN: 'Math.sin(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSqrt	self assert: 'Math.sqrt(0)' returnsValue: 0.	self assert: 'Math.sqrt(1)' returnsValue: 1.	self assert: 'Math.sqrt(2)' returnsValue: 2d sqrt.	self assert: 'Math.sqrt(3.1)' returnsValue: 3.1d sqrt.	self assert: 'Math.sqrt(Infinity)' returnsValue: JSEPlatform positiveInfinityValue.	self assertReturnsNaN: 'Math.sqrt(-2)'.	self assertReturnsNaN: 'Math.sqrt(-Infinity)'.	self assertReturnsNaN: 'Math.sqrt(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStaticProperties	self assert: 'Math.E' returnsValue: JSEPlatform floatClass e.	self assert: 'Math.PI' returnsValue: JSEPlatform floatClass pi.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTan	self assert: 'Math.tan(0)' returnsValue: 0.	self assert: 'Math.tan(1)' returnsValue: 1d tan.	self assert: 'Math.tan(-2)' returnsValue: -2d tan.	self assertReturnsNaN: 'Math.tan(Infinity)'.	self assertReturnsNaN: 'Math.tan(-Infinity)'.	self assertReturnsNaN: 'Math.tan(NaN)'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof Math' returnsValue: 'object'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeResource</class-id> <category>Running</category>
+
+<body package="JavascriptEngine-Runtime-Tests">setUp	JSEPlatform initializePlatform.	JSENumericStringParser withAllSubclasses do: [ : p | p reset ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeResource</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Runtime-Tests">formalParameterListParser	^ formalParameterListParser</body>
+
+<body package="JavascriptEngine-Runtime-Tests">formalParameterListParser: aFormalParameterListParser 	formalParameterListParser := aFormalParameterListParser.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">functionBodyParser	^ functionBodyParser</body>
+
+<body package="JavascriptEngine-Runtime-Tests">functionBodyParser: aFunctionBodyParser 	functionBodyParser := aFunctionBodyParser.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEGlobalObjectTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testDecodeURI	self assert: 'decodeURI("http://www.w3.org/standards/semanticweb/")' returnsValue: 'http://www.w3.org/standards/semanticweb/'.	self assert: 'decodeURI("http://www.w3.org/standards/semantic%20web/")' returnsValue: 'http://www.w3.org/standards/semantic web/'.	" reserved character "	self assert: 'decodeURI("http://www.example.org/test%23")' returnsValue: 'http://www.example.org/test%23'.	self assert: 'decodeURI("http://www.example.org/test%2bassert%3F")' returnsValue: 'http://www.example.org/test%2bassert%3F'.	self assert: 'decodeURI("%C0%00")' raisesError: JSEURIError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDecodeURIComponent	self assert: 'decodeURIComponent("semantic%20web")' returnsValue: 'semantic web'.	self assert: 'decodeURIComponent("ying%2Fyang")' returnsValue: 'ying/yang'.	self assert: 'decodeURIComponent("%E2%82%AC")' returnsValue: (String with: (Character codePoint: 16r20AC)).	self assert: 'decodeURIComponent("incomplete%")' raisesError: JSEURIError.	self assert: 'decodeURIComponent("incomplete%1")' raisesError: JSEURIError.	self assert: 'decodeURIComponent("incomplete%z")' raisesError: JSEURIError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEncodeURI	self assert: 'encodeURI("http://www.w3.org/standards/semanticweb/")' returnsValue: 'http://www.w3.org/standards/semanticweb/'.	self assert: 'encodeURI("http://www.w3.org/standards/semantic web/")' returnsValue: 'http://www.w3.org/standards/semantic%20web/'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEncodeURIComponent	self assert: 'encodeURIComponent("semantic web")' returnsValue: 'semantic%20web'.	self assert: 'encodeURIComponent("ying/yang")' returnsValue: 'ying%2Fyang'.	self assert: 'encodeURIComponent("', (String with: (Character codePoint: 16r20AC)), '")' returnsValue: '%E2%82%AC'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGlobalBaseExpressions	self globalBaseExpressionsDo: 		[: baseExpression | 			self assert: baseExpression , 'parseInt("42", 10)' returnsValue: 42.		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGlobalValueProperties	self globalBaseExpressionsDo: [ : baseExpression |		| result |		result := self compileAndRun: baseExpression, 'NaN'.		self assert: result isJSENumber.		self assert: result isNaN.			result := self compileAndRun: baseExpression, 'Infinity'.		self assert: result isJSENumber.		self assert: result isInfinity.			result := self compileAndRun: baseExpression, 'undefined'.		self assert: result isUndefined.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIsFinite	self assert: 'isFinite(NaN)' returnsValue: false.	self assert: 'isFinite(Infinity)' returnsValue: false.	self assert: 'isFinite(42)' returnsValue: true.	self assert: 'isFinite("42")' returnsValue: true.	self assert: 'isFinite("SomeString")' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIsNaN	self assert: 'isNaN(NaN)' returnsValue: true.	self assert: 'isNaN(42)' returnsValue: false.	self assert: 'isNaN("42")' returnsValue: false.	self assert: 'isNaN("SomeString")' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseFloat	self assert: 'parseFloat("123")' returnsValue: 123.	self assert: 'parseFloat("123.45")' returnsValue: ( self floatFrom: '123.45' ).	self assert: 'parseFloat("  123.45 and beyond")' returnsValue: ( self floatFrom: '123.45' ).	self assertReturnsNaN: 'parseFloat("not a float")'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseInt	self assert: 'parseInt("42", 10)' returnsValue: 42.	self assert: 'parseInt("+42", 10)' returnsValue: 42.	self assert: 'parseInt("-42", 10)' returnsValue: -42.	self assert: 'parseInt("42", 16)' returnsValue: 66.	self assert: 'parseInt("42", 0)' returnsValue: 42.	self assertReturnsNaN: 'parseInt("42", 1)'.	self assertReturnsNaN: 'parseInt("42", 37)'.	self assert: 'parseInt("13and other stuff", 10)' returnsValue: 13.	self assert: 'parseInt("    123 with leading whitespace", 10)' returnsValue: 123.	self assert: 'parseInt("FE", 16)' returnsValue: 254.	self assert: 'parseInt("42", undefined)' returnsValue: 42.	self assertReturnsNaN: 'parseInt(true, undefined)'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESelfTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssertDescription	" test built-in assert(boolean, description) "	| signalled |	signalled := false.	[		self compileAndRun: 'assert(false, "custom description")'.		self signalFailure: 'assert(false, description) did not raise an assertion error'	] on: self assertionFailureClass do: [ :ex | 		self assert: ex description = 'Assertion failed: custom description (line 1)'.		signalled := true.	].	self assert: signalled.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssertFalse	" test built-in assert(boolean) "	| signalled |	signalled := false.	[		self compileAndRun: 'assert(false)'.		self signalFailure: 'assert(false) did not raise an assertion error'	] on: self assertionFailureClass do: [ :ex | 		signalled := true.	].	self assert: signalled.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssertNonBoolean	" test built-in assert(boolean) "	| signalled result |	signalled := false.	[		result := self compileAndRun: 'assert("42")'.		self signalFailure: 'assert(false) did not raise an error'	] on: self assertionFailureClass do: [ :ex | 		signalled := true.	].	self assert: signalled.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssertTrue	" test built-in assert(boolean) "	| result | 	[ self assert: 'assert(true); 42' returnsValue: 42 ] 		on: self assertionFailureClass		do: [: ex | self signalFailure: 'assert(true) raised an assertion error' ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESelfTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">assertionFailureClass	" returns the error signal class of assertion failures. "	^ FailedAssertion</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumberTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	| result |	result := self compileAndRun: 'new Number(1)'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue value = 1.	result := self compileAndRun: 'new Number("42")'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue value = 42.	self assert: 'typeof new Number(2)' returnsValue: 'object'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	self assert: 'Number(1)' returnsValue: 1.	self assert: 'typeof Number(1)' returnsValue: 'number'.	self assert: 'Number("42")' returnsValue: 42.	self assert: 'Number()' returnsValue: 0.	self assertReturnsNaN: 'Number(undefined)'.	self assert: (self compileAndRun: 'Number("0")') isPositiveZero.	self assert: (self compileAndRun: 'Number("-0")') isNegativeZero.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStaticProperties	| result |	self assert: 'Number.MIN_VALUE' returnsValue: JSEPlatform floatClass fmin.	self assert: 'Number.MAX_VALUE' returnsValue: JSEPlatform floatClass fmax.	self assertReturnsNaN: 'Number.NaN'.	result := self compileAndRun: 'Number.POSITIVE_INFINITY'.	self assert: result class = JSENumber.	self assert: result value isPositiveInfinity.	result := self compileAndRun: 'Number.NEGATIVE_INFINITY'.	self assert: result class = JSENumber.	self assert: result value isNegativeInfinity.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToExponential	self assert: 'Number(1).toExponential()' returnsValue: '1e+0'.	self assert: 'Number(1).toExponential(2)' returnsValue: '1.00e+0'.	self assert: 'Number(1.2).toExponential(2)' returnsValue: '1.20e+0'.	self assert: 'Number(1.89).toExponential(0)' returnsValue: '2e+0'.	self assert: 'Number(-1.888).toExponential(0)' returnsValue: '-2e+0'.	self assert: 'Number(0).toExponential(2)' returnsValue: '0.00e+0'.	self assert: 'Number(0).toExponential(3)' returnsValue: '0.000e+0'.	self assert: 'Number(0).toExponential(0)' returnsValue: '0e+0'.	self assert: 'Number(123).toExponential()' returnsValue: '1.23e+2'.	self assert: 'Number(1234).toExponential(2)' returnsValue: '1.23e+3'.	self assert: 'Number(6789).toExponential(2)' returnsValue: '6.79e+3'.	self assert: 'Number(6799.12345).toExponential(2)' returnsValue: '6.80e+3'.	self assert: 'Number(0.0001).toExponential(2)' returnsValue: '1.00e-4'.	self assert: 'Number(NaN).toExponential()' returnsValue: 'NaN'.	self assert: 'Number(Infinity).toExponential()' returnsValue: 'Infinity'.	self assert: 'Number(-Infinity).toExponential()' returnsValue: '-Infinity'.	self assert: 'Number(1).toExponential(-1)' raisesError: JSERangeError.	self assert: 'Number(1).toExponential(999)' raisesError: JSERangeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToFixed	self assert: 'Number(1).toFixed(2)' returnsValue: '1.00'.	self assert: 'Number(123).toFixed(2)' returnsValue: '123.00'.	self assert: 'Number(1234).toFixed(0)' returnsValue: '1234'.	self assert: 'Number(345).toFixed()' returnsValue: '345'.	self assert: 'Number(-45).toFixed(2)' returnsValue: '-45.00'.	self assert: 'Number(12.345).toFixed(2)' returnsValue: '12.35'.		self assert: 'Number(12.123).toFixed(2)' returnsValue: '12.12'.	self assert: '(new Number(5.89)).toFixed(1)' returnsValue: '5.9'.	self assertNotGeneric: 'toFixed(2)' type: 'Number'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToLocaleString	self assert: 'Number(1).toLocaleString()' returnsValue: '1'.	self assert: 'Number(45.678).toLocaleString()' returnsValue: (Locale current printAsNumber: 45.678) asString.	self assert: '(new Number(-5.6)).toLocaleString()' returnsValue: (Locale current printAsNumber: -5.6) asString.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToPrecision	self assert: 'Number(1).toPrecision()' returnsValue: '1'.	self assert: 'Number(12.345).toPrecision()' returnsValue: '12.345'.	self assert: 'Number(0.345).toPrecision()' returnsValue: '0.345'.	self assert: 'Number(0.345).toPrecision(2)' returnsValue: '0.35'.	self assert: 'Number(0.3451).toPrecision(2)' returnsValue: '0.35'.	self assert: 'Number(0.0345).toPrecision(2)' returnsValue: '0.035'.	self assert: 'Number(-0.345).toPrecision()' returnsValue: '-0.345'.	self assert: 'Number(-0.345).toPrecision(2)' returnsValue: '-0.35'.	self assert: 'Number(-0.3451).toPrecision(2)' returnsValue: '-0.35'.	self assert: 'Number(-0.0345).toPrecision(2)' returnsValue: '-0.035'.	self assert: 'Number(1).toPrecision(2)' returnsValue: '1.0'.	self assert: 'Number(1).toPrecision(3)' returnsValue: '1.00'.	self assert: 'Number(9).toPrecision(2)' returnsValue: '9.0'.	self assert: 'Number(10).toPrecision(2)' returnsValue: '10'.	self assert: 'Number(99).toPrecision(2)' returnsValue: '99'.	self assert: 'Number(99).toPrecision(3)' returnsValue: '99.0'.	self assert: 'Number(100).toPrecision(3)' returnsValue: '100'.	self assert: 'Number(101).toPrecision(3)' returnsValue: '101'.	self assert: 'Number(1234).toPrecision(2)' returnsValue: '1.2e+3'.	self assert: 'Number(6789).toPrecision(3)' returnsValue: '6.79e+3'.	self assert: 'Number(0).toPrecision(1)' returnsValue: '0'.	self assert: 'Number(0).toPrecision(2)' returnsValue: '0.0'.	self assert: 'Number(NaN).toPrecision()' returnsValue: 'NaN'.	self assert: 'Number(Infinity).toPrecision()' returnsValue: 'Infinity'.	self assert: 'Number(-Infinity).toPrecision()' returnsValue: '-Infinity'.	self assert: 'Number(1).toPrecision(0)' raisesError: JSERangeError.	self assert: 'Number(1).toPrecision(999)' raisesError: JSERangeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	self assert: 'Number(1).toString()' returnsValue: '1'.	self assert: 'Number(-12).toString()' returnsValue: '-12'.	self assert: 'Number(-12.345).toString()' returnsValue: '-12.345'.	self assert: 'Number(-42).toString(16)' returnsValue: '-2A'.	" bounds "	self assert: 'Number(1.1e2).toString()' returnsValue: '110'.	self assert: 'Number(1e20).toString()' returnsValue: '100000000000000000000'.	self assert: 'Number(1e21).toString()' returnsValue: '1e+21'.	self assert: 'Number(1e-6).toString()' returnsValue: '0.000001'.	self assert: 'Number(1e-7).toString()' returnsValue: '1e-7'.	self assert: 'Number(-1e20).toString()' returnsValue: '-100000000000000000000'.	self assert: 'Number(-1e21).toString()' returnsValue: '-1e+21'.	self assert: 'Number(-1e-6).toString()' returnsValue: '-0.000001'.	self assert: 'Number(-1e-7).toString()' returnsValue: '-1e-7'.	" Number object "	self assert: '(new Number(129)).toString(16)' returnsValue: '81'.	self assertNotGeneric: 'toString(8)' type: 'Number'.	" Exceptions "	self assert: 'Number(2).toString(1)' raisesError: JSERangeError.	self assert: 'Number(3).toString(999)' raisesError: JSERangeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof Number' returnsValue: 'function'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testValueOf	self assert: 'Number(1).valueOf()' returnsValue: 1.	self assert: '(new Number(12.34)).valueOf()' returnsValue: 12.34d.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStringTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">test32BitCharacters	| primitive stringSource |	stringSource := '("I" + "\uD83D\uDC9DJS")'.	primitive := self compileAndRun: stringSource.	self assert: (primitive value = ( 'I' , ( String with: ( Character value: 16rD83D ) with: ( Character value: 16rDC9D ) ) , 'JS')).	self assert: stringSource , '.length' returnsValue: 5.	self assert: stringSource, '.charCodeAt(1)' returnsValue: 16rD83D.	self assert: stringSource, '.charCodeAt(2)' returnsValue: 16rDC9D.	self assert: stringSource, '.charCodeAt(3)' returnsValue: $J codePoint.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBracketMember	| result |	self assert: '"test"[1]'  returnsValue: 'e'.	result := self compileAndRun: '"test"[999]' .	self assert: result isUndefined.	result := self compileAndRun: '"test"[-1]' .	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCharAt	self assert: '"Hello".charAt(0)' returnsValue: 'H'.	self assert: '"Hello".charAt(1)' returnsValue: 'e'.	self assert: '"Hello".charAt(4)' returnsValue: 'o'.	self assert: '"Hello".charAt(5)' returnsValue: ''.	self assert: '"Hello".charAt(-1)' returnsValue: ''.	self assert: '"Hello".charAt(10)' returnsValue: ''.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCharCodeAt	| result |	self assert: '"Hello".charCodeAt(1)' returnsValue: $e codePoint.	result := self compileAndRun: '"Hello".charCodeAt(-2)'.	self assert: result isNaN.	result := self compileAndRun: '"Hello".charCodeAt(10)'.	self assert: result isNaN</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConcat	| result |	self assert: ( self compileAndRun: 'String.prototype.concat.length' ) value = 1.	self assert: '"Hello".concat(", ", "World");' returnsValue: 'Hello, World'.	self assert: '"Meaning".concat(": ", 42);' returnsValue: 'Meaning: 42'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	| result |	result := self compileAndRun: 'new String("Ok")'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue value = 'Ok'.	self assert: 'typeof new String("Ok")' returnsValue: 'object'.	self assert: '(new String("OK")).toLowerCase()' returnsValue: 'ok'.	self assert: '(new String("Ok")).length' returnsValue: 2.	self assert: '		var string = new String("Ok");		string.p = 42;		string.p' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	self assert: 'String("Ok")' returnsValue: 'Ok'.	self assert: 'typeof String("Ok")' returnsValue: 'string'.	self assert: 'String(undefined)' returnsValue: 'undefined'.	self assert: 'String(true)' returnsValue: 'true'.	self assert: 'String()' returnsValue: ''.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCustomStringSlice	| result |	self 		assert: '		function CustomString() {			this.toString = function() {				return "Custom";			};		}		CustomString.prototype = String.prototype;		var customString = new CustomString();		customString.slice(-3,-1);	'		returnsValue: 'to'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testExtendingStringPrototype	| result |	self assert: '		String.prototype.extension = function() { return 42 } ;		"hello".extension();' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFromCharCode	self 		assert: 'String.fromCharCode(0x54, 0x20ac, 0x73, 0x74)'		returnsValue: ( String withAll: ( #( 16r54 16r20ac 16r73 16r74 ) collect: [: cp | Character codePoint: cp ])).	self 		assert: 'String.fromCharCode(-1, 0x10000)' 		returnsValue: ( String with: ( Character codePoint: 65535 ) with: ( Character codePoint: 0 )).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIndexOf	| result |	self assert: ( self compileAndRun: 'String.prototype.indexOf.length' ) value = 1.	self assert: '"01234".indexOf("23")' returnsValue: 2.	self assert: '"0123401234".indexOf("23", 0)' returnsValue: 2.	self assert: '"0123401234".indexOf("23", 5)' returnsValue: 7.	self assert: '"01234".indexOf("23", -10)' returnsValue: 2.	self assert: '"01234".indexOf("X")' returnsValue: -1.	self assert: '"01234".indexOf("23", 10)' returnsValue: -1.	self assert: '"01234".indexOf("")' returnsValue: 0.	self assert: '"01234".indexOf("", 10)' returnsValue: -1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLastIndexOf	| result |	self assert: ( self compileAndRun: 'String.prototype.lastIndexOf.length' ) value = 1.	self assert: '"01234".indexOf("23")' returnsValue: 2.	self assert: '"0123401234".lastIndexOf("23", 10)' returnsValue: 7.	self assert: '"0123401234".lastIndexOf("23", 5)' returnsValue: 2.	self assert: '"01234".lastIndexOf("23", -10)' returnsValue: -1.	self assert: '"01234".lastIndexOf("X")' returnsValue: -1.	self assert: '"01234".lastIndexOf("23", 10)' returnsValue: 2.	self assert: '"01234".lastIndexOf("")' returnsValue: 5.	self assert: '"01234".lastIndexOf("", -1)' returnsValue: -1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLength	| result |	self assert: '"test".length' returnsValue: 4.	self assert: '"".length' returnsValue: 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLocaleCompare	| result |	self assert: '"ab".localeCompare("ac")' returnsValue: -1.	self assert: '"ab".localeCompare("ab")' returnsValue: 0.	self assert: '"ac".localeCompare("ab")' returnsValue: 1.	self assert: '"42".localeCompare(42)' returnsValue: 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testMatch	| array |	array := self compileAndRun: '"hello321world123".match(/\d+/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( '321' ).	array := self compileAndRun: '"hello321world123".match("[a-z]+")'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'hello' ).	array := self compileAndRun: '"hello321world123".match(/\d+/g)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( '321' '123' ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototype	| result constructor prototypeProperty |	result := self compileAndRun: 'String.prototype'.	self assert: result class = JSEBuiltInObjectPrototype.	self assert: result prototypeObjectClass = JSEString.	constructor := self compileAndRun: 'String'.	prototypeProperty := constructor getOwnPropertyOrNil: #prototype.	self assert: prototypeProperty notNil.	self deny: prototypeProperty isWritable.	self deny: prototypeProperty isEnumerable.	self deny: prototypeProperty isConfigurable.	self compileAndRun: '		function NewString() {};		var stringPrototype = String.prototype;		String.prototype = NewString.prototype;		assert(String.prototype == stringPrototype, "String.prototype should not be writable");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReplaceRegexWithFunction	self assert: '"hello world".replace(/l+/g, function(m, i, s) { return i })' returnsValue: 'he2o wor9d'.	self assert: '"hello world".replace(/[eo]/g, function(m, i, s) { return m.toUpperCase() })' returnsValue: 'hEllO wOrld'.	self assert: '"h1ello w2orl3d 42".replace(/(\w)\d(\w)/g, function(m, w1, w2, i, s) { return w1 + w2 })' returnsValue: 'hello world 42'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReplaceRegexWithString	self assert: '"hella warld".replace(/a/, "o")' returnsValue: 'hello warld'.	self assert: '"hella warld".replace(/a/g, "o")' returnsValue: 'hello world'.	self assert: '"hella wArld".replace(/a/gi, "o")' returnsValue: 'hello world'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReplaceRegexWithSymbol	self assert: '"hello world".replace(/o/g, "$$")' returnsValue: 'hell$ w$rld'.	self assert: '"hello world".replace(/o/g, "&gt;$&amp;&lt;")' returnsValue: 'hell&gt;o&lt; w&gt;o&lt;rld'.	self assert: '"hello world".replace(/\s/g, " $` ")' returnsValue: 'hello hello world'.	self assert: '"hello world".replace(/\s/g, " $'' ")' returnsValue: 'hello world world'.	self assert: '"he1lo wor1d".replace(/(\w)\d(\w)/g, "$1l$02")' returnsValue: 'hello world'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testReplaceStringWithString	self assert: '"hella warld".replace("a", "o")' returnsValue: 'hello warld'.	self assert: '"helo world".replace("l", "ll")' returnsValue: 'hello world'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSearch	self assert: '"012345".search(/23/)' returnsValue: 2.	self assert: '"012345".search(/24/)' returnsValue: -1.	self assert: '"".search(/.*/)' returnsValue: 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSlice	| result |	self assert: '"test".slice(1,3)' returnsValue: 'es'.	self assert: '"test".slice(-2,5)' returnsValue: 'st'.	self assert: '"test".slice(-3,-1)' returnsValue: 'es'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSplitRegex	| array |	array := self compileAndRun: '"one1two22three".split(/\d+/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'one' 'two' 'three' ).	array := self compileAndRun: '"1two3".split(/\d+/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( '' 'two' '' ).	array := self compileAndRun: '"one two  three".split(/\s+/, 2)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'one' 'two').	array := self compileAndRun: '"".split(/\d+/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( '' ).	array := self compileAndRun: '"atom".split(/\d+/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'atom' ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSplitRegexSubexpression	| array |	array := self compileAndRun: '"test&lt;code&gt;regexp&lt;/code&gt;&lt;b&gt;group&lt;/b&gt;".split(/&lt;\/?(\w+)&gt;/)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'test' 'code' 'regexp' 'code' '' 'b' 'group' 'b' '' ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSplitString	| array |	array := self compileAndRun: '"one,two,three".split(",")'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'one' 'two' 'three' ).	array := self compileAndRun: '"_one___two_".split("_")'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #('' 'one' '' '' 'two' '').	array := self compileAndRun: '"one,two,three".split(",", 2)'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'one' 'two').	array := self compileAndRun: '"atom".split(",")'.	self assert: ( array arrayElements asArray collect: [: each | each value ]) = #( 'atom' ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSubstr	self assert: '"test".substr(1,3)' returnsValue: 'est'.	self assert: '"test".substr(-2,2)' returnsValue: 'st'.	self assert: '"test".substr(-2,3)' returnsValue: 'st'.	self assert: '"test".substr(-4,2)' returnsValue: 'te'.	self assert: '"test".substr(1)' returnsValue: 'est'.	self assert: '"test".substr(4, 1)' returnsValue: ''.	self assert: '"test".substr(1, 0)' returnsValue: ''.	self assert: '"test".substr(1, -1)' returnsValue: ''.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSubstring	| result |	self assert: '"test".substring(1,3)' returnsValue: 'es'.	self assert: '"test".substring(-1,3)' returnsValue: 'tes'.	self assert: '"test".substring(1)' returnsValue: 'est'.	self assert: '"test".substring(3, 1)' returnsValue: 'es'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	| result |	self assert: '"test".toString()' returnsValue: 'test'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTrim	| result |	self assert: '"  test \u000A	 ".trim()' returnsValue: 'test'.	self assert: '" \u2003 test".trim()' returnsValue: 'test'.	self assert: '"test".trim()' returnsValue: 'test'.	self assert: '"".trim()' returnsValue: ''.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof String' returnsValue: 'function'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testValueOf	self assert: 'String("test").valueOf()' returnsValue: 'test'.	self assert: '(new String("wrapped")).valueOf()' returnsValue: 'wrapped'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionObjectTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testApply	| result |	self assert: ( self compileAndRun: 'Function.prototype.apply.length' ) value = 2.	self 		assert: '		var object = {			base: 1		};		var f = function(a, b) { 			return this.base + a + b; 		};		f.apply(object, [2, 3]);'		returnsValue: 6.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testApplyLength	| result |	self assert: 'Function.prototype.apply.length' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testApplyNoArguments	| result |	self assert: '		var f = function() { return 42};		f.apply();' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBind	| result |	self assert: ( self compileAndRun: 'Function.prototype.bind.length' ) value = 1.	self 		assert: '		var object = {			base: 1		};		var f = function(n) { 			return this.base + n; 		};		var boundFunction = f.bind(object, 2);		boundFunction();'		returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBindConstructor	| result |	self 		assert: '		var o = {			f: function(n) { 				this.number = n + 1;			}		};		var boundFunction = o.f.bind(o, 2);		var object = new boundFunction();		object.number;'		returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCall	| result |	self assert: ( self compileAndRun: 'Function.prototype.call.length' ) value = 1.	self 		assert: '		var object = {			base: 1		};		var f = function(a, b) { 			return this.base + a + b; 		};		f.call(object, 2, 3);'		returnsValue: 6.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	" 15.3.2.1 new Function (p1, p2, ... , pn, body) "	| result |	self assert: '		var object = {};		object.add = new Function("a", "b", "return a + b");		object.add(1, 2);' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	" 15.3.2.1 new Function (p1, p2, ... , pn, body) "	| result |	self assert: '		var object = {};		object.add = Function("a", "b", "return a + b");		object.add(1, 2);' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorNoParameterListNoBody	" 15.3.2.1 new Function (p1, p2, ... , pn, body) "	| result |	result := self compileAndRun: 'new Function()'.	self assert: result class = JSEFunctionObject.	result := self compileAndRun: '		var object = {};		object.doNothing = new Function();		object.doNothing();'.	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorPrototype	" 15.3.2.1 new Function (p1, p2, ... , pn, body) "	| result |	self assert: '		var f = Function();		f.prototype.constructor == f;' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLength	" 15.3.3.2 Function.length "	| result |	self assert: 'Function.length' returnsValue: 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototype	" 15.3.3.1 Function.prototype "	| result |	result := self compileAndRun: 'Function.prototype'.	self assert: result class = JSEFunctionObject.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeConstructor	| result |	self assert: 'Function.prototype.constructor === Function' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeToString	| result |	result := self compileAndRun: 'Function.prototype.toString()'.	self assert: result class = JSEString.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeToStringLength	| result |	self assert: 'Function.prototype.toString.length' returnsValue: 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToLocaleString	| result |	self assert: '		var object = { };		object.toLocaleString();	' returnsValue: '[object Object]'.	self assert: '		var object = { 			toString: function() { return "foobar"; }		};		object.toLocaleString();	' returnsValue: 'foobar'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.8 Relational Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testGreaterThanNumber	| result |	result := self compileAndRun: '1 &gt; 2'.	self assert: result class = JSEFalse.	result := self compileAndRun: '1 &gt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '2 &gt; 1'.	self assert: result class = JSETrue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGreaterThanNumberIEEE	| result |	result := self compileAndRun: '1 &gt; NaN'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'NaN &gt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '1 &gt; Infinity'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGreaterThanOrEqualNumber	| result |	result := self compileAndRun: '1 &gt;= 2'.	self assert: result class = JSEFalse.	result := self compileAndRun: '1 &gt;= 1'.	self assert: result class = JSETrue.	result := self compileAndRun: '2 &gt;= 1'.	self assert: result class = JSETrue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGreaterThanOrEqualNumberIEEE	| result |	result := self compileAndRun: '1 &gt;= NaN'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'NaN &gt;= 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '1 &gt;= Infinity'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIn	self assert: '0 in ["a", "b", "c"]' returnsValue: true.	self assert: '3 in ["a", "b", "c"]' returnsValue: false.	self assert: '"test" in {}' returnsValue: false.	self assert: '"test" in {test: 42 }' returnsValue: true.	self assert: '"fail" in {test: 42 }' returnsValue: false.	self assert: '42 in {"42": 42 }' returnsValue: true.	self assert: '43 in {"42": 42 }' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLessThanNumber	| result |	result := self compileAndRun: '1 &lt; 2'.	self assert: result class = JSETrue.	result := self compileAndRun: '1 &lt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '2 &lt; 1'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLessThanNumberIEEE	| result |	result := self compileAndRun: '1 &lt; NaN'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'NaN &lt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '1 &lt; Infinity'.	self assert: result class = JSETrue.	result := self compileAndRun: 'Infinity &lt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'Infinity &lt; Infinity'.	self assert: result class = JSEFalse.	result := self compileAndRun: '-Infinity &lt; 1'.	self assert: result class = JSETrue.	result := self compileAndRun: '1 &lt; -Infinity'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLessThanNumberMixed	| result |	result := self compileAndRun: '1 &lt; "2"'.	self assert: result class = JSETrue.	result := self compileAndRun: '"1" &lt; 1'.	self assert: result class = JSEFalse.	result := self compileAndRun: '"2" &lt; 1'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLessThanOrEqualNumber	| result |	result := self compileAndRun: '1 &lt;= 2'.	self assert: result class = JSETrue.	result := self compileAndRun: '1 &lt;= 1'.	self assert: result class = JSETrue.	result := self compileAndRun: '2 &lt;= 1'.	self assert: result class = JSEFalse.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLessThanString	| result |	result := self compileAndRun: '"a" &lt; "b"'.	self assert: result class = JSETrue.	result := self compileAndRun: '"xa" &lt; "xb"'.	self assert: result class = JSETrue.	result := self compileAndRun: '"a" &lt; "a"'.	self assert: result class = JSEFalse.	result := self compileAndRun: '"xa" &lt; "xa"'.	self assert: result class = JSEFalse.	result := self compileAndRun: '"b" &lt; "a"'.	self assert: result class = JSEFalse.	result := self compileAndRun: '"xb" &lt; "xa"'.	self assert: result class = JSEFalse.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.1.4 Array Initialiser</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiser	| result first |	result := self compileAndRun: '[1, 2, 3]'.	self assert: result class = JSEArray.	self assert: result length = 3.	first := result elementAtIndex: 0.	self assert: first class = JSENumber.	self assert: first value = 1.	self assert: (result elementAtIndex: 0) value = 1.	self assert: (result elementAtIndex: 1) value = 2.	self assert: (result elementAtIndex: 2) value = 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiserWithElisonBeforeAndAfter	| result |	result := self compileAndRun: '[, 2, ,]'.	self assert: result class = JSEArray.	self assert: result length = 3.	0 to: result length - 1		do: 		[: i | | element |			element := result elementAtIndex: i.			i = 1 				ifTrue: [ self assert: element value = 2 ]				ifFalse: [ self assert: element value isNil ]		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiserWithMixedContent	| result first second |	result := self compileAndRun: '[1, "two"]'.	self assert: result class = JSEArray.	self assert: result length = 2.	first := result elementAtIndex: 0.	self assert: first class = JSENumber.	self assert: first value = 1.	second := result elementAtIndex: 1.	self assert: second class = JSEString.	self assert: second value = 'two'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiserWithSingleElisonAfter	| result first second third |	result := self compileAndRun: '[1, 2, , ]'.	self assert: result class = JSEArray.	self assert: result length = 3.	first := result elementAtIndex: 0.	self assert: first value = 1.	second := result elementAtIndex: 1.	self assert: second value = 2.	third := result elementAtIndex: 2.	self assert: third value isNil.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiserWithSingleElisonBefore	| result first second third |	result := self compileAndRun: '[, 2, 3]'.	self assert: result class = JSEArray.	self assert: result length = 3.	first := result elementAtIndex: 0.	self assert: first value isNil.	second := result elementAtIndex: 1.	self assert: second value = 2.	third:= result elementAtIndex: 2.	self assert: third value = 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testArrayInitialiserWithVariableReference	| result first |	result := self compileAndRun: 'var f = "first"; [f]'.	self assert: result class = JSEArray.	self assert: result length = 1.	first := result elementAtIndex: 0.	self assert: first class = JSEString.	self assert: first value = 'first'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.2.2 The new Operator</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testNewObject	| result prototype internalPrototype |	result := self compileAndRun: '		function Blog()		{		}		new Blog();	'.	self assert: result class = JSEObject.	prototype := result getOwnPropertyOrNil: #prototype.	self assert: prototype isNil.	internalPrototype := result internalPrototype.	self assert: internalPrototype notNil.	self assert: internalPrototype class = JSEObject.	self assert: internalPrototype ~~ result.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNewTypeError	| result |	#(		'new true()'		'new 1'	) do: 		[ : javascript |			[ 	result := self compileAndRun: javascript.				self assert: false description: 'Excpected type error' 			 ] on: JSETypeError do: [ : ex |  ] 		 ]</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNewWithArguments	| result titleProperty |	result := self compileAndRun: '		function Blog(title)		{			this.title = title;		}		new Blog("Javascript");	'.	self assert: result class = JSEObject.	titleProperty := result getOwnPropertyOrNil: #title.	self assert: titleProperty notNil.	self assert: titleProperty name = #title.	self assert: titleProperty value class = JSEString.	self assert: titleProperty value value = 'Javascript'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNewWithDeclarativeEnviornmentArgument	self 		assert: '		function Blog(followers)		{			this.followers = followers;		}		var blog = new Blog(Infinity);		blog.followers;	'		returnsValue: JSEPlatform positiveInfinityValue.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.3/4 Postfix/Unary Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testBitwiseNotOperator	self assert: (self compileAndRun: '~1') value = -2.	self assert: (self compileAndRun: '~-1') value = 0.	self assert: (self compileAndRun: '~~3.14') value = 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDeleteOperator	self assert: (self compileAndRun: 'delete 42') value = true.	self assert: (self compileAndRun: 'var u; delete u') value = false.	self assert: (self compileAndRun: 'var a = [1, 2, 3]; delete a[2]') value = true.	self assert: (self compileAndRun: 'var a = [1, 2, 3]; delete a[2]; a[2]') isUndefined.	self assert: (self compileAndRun: 'var a = [1, 2, 3]; delete a[3]') value = true.	self assert: (self compileAndRun: 'var o = {name: "o"}; delete o.name') value = true.	self assert: (self compileAndRun: 'var o = {name: "o"}; delete o.name; o.name') isUndefined.	self assert: (self compileAndRun: 'var o = {name: "o"}; delete o["name"]; o.name') isUndefined.	self assert: (self compileAndRun: 'var o = {name: "o"}; delete o.nothing') value = true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testInstanceOf	| result |	self compileAndRun: '1 instanceof 2' expectErrorOfClass: JSETypeError.	self compileAndRun: 'var o1 = {}, o2 = {}; o1 instanceof o2' expectErrorOfClass: JSETypeError.	self assert: '"hello" instanceof String' returnsValue: false.	self assert: '		function F() { };		var f = new F();		f instanceof F;' returnsValue: true.	self assert: '		function F() { };		var o = {};		o instanceof F;' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLogicalNotOperator	self assert: (self compileAndRun: '!true') value = false.	self assert: (self compileAndRun: '!false') value = true.	self assert: (self compileAndRun: '!!false') value = false.	self assert: (self compileAndRun: '!1') value = false.	self assert: (self compileAndRun: '!0') value = true.	self assert: (self compileAndRun: '!"stuff"') value = false.	self assert: (self compileAndRun: '!""') value = true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPostFixOperator	self assert: (self compileAndRun: 'var i=0; i++') value = 0.	self assert: (self compileAndRun: 'var i=0; i--') value = 0.	self assert: (self compileAndRun: 'var i=1; i++; i') value = 2.	self assert: (self compileAndRun: 'var i="2"; i--; i') value = 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrefixOperator	self assert: (self compileAndRun: 'var i=0; ++i') value = 1.	self assert: (self compileAndRun: 'var i=0; --i') value = -1.	self assert: (self compileAndRun: 'var i=1; ++i; i') value = 2.	self assert: (self compileAndRun: 'var i="2"; --i; i') value = 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOfOperator	self assert: 'typeof undefined' returnsValue: 'undefined'.	self assert: 'typeof null' returnsValue: 'object'.	self assert: 'typeof true' returnsValue: 'boolean'.	self assert: 'typeof false' returnsValue: 'boolean'.	self assert: 'typeof "test"' returnsValue: 'string'.	self assert: 'typeof {}' returnsValue: 'object'.	self assert: 'typeof function f(){}' returnsValue: 'function'.		" primitive objects "	self assert: 'typeof (new Boolean(true))' returnsValue: 'object'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUnaryMinusOperatorZero	self assert: (self compileAndRun: '-0') isNegativeZero.	self deny: (self compileAndRun: '-0') isPositiveZero.	self assert: (self compileAndRun: '0') isPositiveZero.	self deny: (self compileAndRun: '0') isNegativeZero.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUnaryPlusMinusOperator	self assert: (self compileAndRun: '+3') value = 3.	self assert: (self compileAndRun: '-2') value = -2.	self assert: (self compileAndRun: '+"42"') value = 42.	self assert: (self compileAndRun: '-"3"') value = -3.	self assert: (self compileAndRun: '+-4') value = -4.	self assert: (self compileAndRun: '-+3') value = -3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testVoidOperator	self assert: (self compileAndRun: 'void 1') isUndefined.	self assert: (self compileAndRun: 'var i=0; void (i=1); i') value = 1.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.8 The break statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakInBlock	| result |	self assert: '		test: {			break test;			1;		}		2;	' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakInFor	| result |	self assert: '		var i=0, j=0; 		for (i=1; i &lt;= 3; i++) 		{			j=j+2;			if (i==2)				break;		}		j' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakInInnerBlock	| result |	self assert: '		outer: {			inner: {				break inner;				1;			}			2;		}			' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakSwitch	| result |	self 		assert: '		var i = 2;		var match = "";		switch (i) {			case 1: 				match = match + "case 1 does not match";			case 2: 				match = match + "ok";				break;			case 2: 				match = match + "past the break";				}		match'		returnsValue: 'ok'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakToForlInLabel	| result |	self 		assert: '		var i=0, j=0; 		loop: {			for (i=1; i &lt;= 3; i++) 			{				j=j+2;				if (i==2)					break;			}			j = j + 100;		}		j'		returnsValue: 104.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakToLabelInFor	| result |	self 		assert: '		var i=0, j=0; 		loop: {			for (i=1; i &lt;= 3; i++) 			{				j=j+2;				if (i==2)					break loop;			}			j = j + 100;		}		j'		returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakToLabelInWhile	| result |	self assert: '		var i=0;		loop: while (i &lt; 4)		{			i = i + 1;			if (i == 2)				break loop;		}		i' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBreakToOuterBlock	| result |	result := self compileAndRun: '		outer: {			inner: {				break outer;				1;			}			2;		}			'.	self assert: result isUndefined.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.1.5 Object Initialiser</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiser	| result |	result := self compileAndRun: 'var object = { }; object'.	self assert: result class = JSEObject.	self assert: result internalPrototype notNil.	self assert: result internalPrototype isUndefined not.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiserWithGetAccessor	| result |	self assert: '		var object = { 			get name() { return "Shiny" } 		}; 		object.name' returnsValue: 'Shiny'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiserWithGetAndSetAccessor	| result |	self 		assert: '		var object = { 			myName: "new object",			set name(newName) { this.myName = newName + "_set" }, 			get name() { return this.myName + "_get" } 		}; 		object.name = "Shiny";		object.name'		returnsValue: 'Shiny_set_get'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiserWithPropertyAssignments	| result |	result := self compileAndRun: 'var object = { name: "Shiny", 1: "One" }; object'.	self assert: result class = JSEObject.	self assert: (result get: #name) value = 'Shiny'.	self assert: (result get: 1 asJSEPropertyName) value = 'One'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiserWithSetAccessor	| result |	self 		assert: '		var object = { 			myName: "",			set name(newName) { this.myName = newName } 		}; 		object.name = "Shiny";		object.myName'		returnsValue: 'Shiny'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectInitialiserWithSinglePropertyAssignment	| result |	result := self compileAndRun: 'var object = { name: "Shiny" }; object'.	self assert: result class = JSEObject.	self assert: (result get: #name) value = 'Shiny'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.14 The try Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testThrow	self assert: 'throw 42;' raisesError: JSEThrowError</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testThrowInFunction	self 		assert: 			'function explode() { 				throw 42; 			}			explode();' 		raisesError: JSEThrowError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryCatchFinally	| result |	self 		assert: '		var i = 0;		var f = 0;		try {			i = 1;			throw 3;			i = 2;		} catch(e) {			i = e;		} finally {			f = 10;		}		i + f		'		returnsValue: 13.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryCatchNoThrow	| result |	self assert: '		var i = 0;		try {			i = 1;		} catch(e) {			i = 2;		}		i		' returnsValue: 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryCatchRuntimeError	| result |	result := self compileAndRun: '		var object = 0;		try {			object = 1;			Object.keys(1);			object = 2;		} catch(e) {			object = e;		}		object		'.	self assert: result isObject.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryCatchThrow	| result |	self assert: '		var i = 0;		try {			i = 1;			throw 3;			i = 2;		} catch(e) {			i = e;		}		i		' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryFinally	self 		assert: 			'try {				var i = 0;				var j = 10;				try {					i = 1;					throw 3;					i = 2;				} finally {					j = 20;				}				i = 3;				j = 30;			} catch(e) {			}			i + j;		' 		returnsValue: 21.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryFinallyBreak	self assert: '		var v;		var i = 0;		while (i==0) {		    try {		        break;		    } finally {		        v = "finally";		   }		   i += 1;		}		v	' returnsValue: 'finally'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTryFinallyPass	self 		assert: 			'try {				throw 3;			} finally {			}'		raisesError: JSEThrowError.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.2.1 Property Accessors</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetBracketMemberOfArray	| result |	self assert: '		var array = ["1" , "2", "3" ];		array[1]	' returnsValue: '2'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetBracketMemberOfArrayNoIndex	| result |	self assert: '		var array = [];		array["b"] = "bracket";		array["b"]	' returnsValue: 'bracket'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetDotMember	| result |	self assert: '		function Blog(title)		{			this.title = title;		}		var blog = new Blog("Javascript");		blog.title;	' returnsValue: 'Javascript'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetBracketMemberOfArray	| result |	result := self compileAndRun: '		var array = [];		array[1] = "b";		array;	'.	self assert: result class = JSEArray.	self assert: result length = 2.	self assert: (result elementAtIndex: 0) value isNil.	self assert: (result elementAtIndex: 1) value = 'b'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetBracketMemberOfArrayNoIndex	| result |	result := self compileAndRun: '		var array = [];		array["b"] = "bracket";		array["l"] = array.length;		array;	'.	self assert: result class = JSEArray.	self assert: result length = 0.	self assert: (result get: #b) value = 'bracket'.	self assert: (result get: #l) value = 0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetBracketMemberOfArrayUpdatesLength	| result |	result := self compileAndRun: '		var array = [];		array[0] = array.length;		array[1] = array.length;		array[2] = array.length;		array;	'.	self assert: result class = JSEArray.	self assert: result length = 3.	0 to: 2 do: [ : i |		self assert: (result elementAtIndex: i) value = i	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSetDotMember	| result |	self assert: '		function Blog() { }		var blog = new Blog();		blog.title = "Smalltalk";		blog.title;	' returnsValue: 'Smalltalk'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>7 Lexical Conventions</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testIllegalIdentifier	self assert: 'var prop = \u2029' raisesError: JSESyntaxError</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testInfinity	#(		'Infinity'		'1 / 0'		'Infinity / 0'	) do: 		[: expression |			| result |			result := self compileAndRun: expression.			self assert: result class = JSENumber.			self assert: result isInfinity		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNaN	#(		'0.0 / 0.0' 		'0 / 0'		'Infinity / Infinity'	) do: 		[: expression |			self assertReturnsNaN:  expression.		].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNumber	| result |	self assert: '1' returnsValue: 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testString	| result string |	string := 'Test'.	self assert: '"' , string , '"' returnsValue: string.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUnresolvedReference	| result |	[		result := self compileAndRun: 'reference'.		self assert: false description: 'expected reference error'	] on: JSEReferenceError do: [ : exception |	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.11 The switch Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchDefaultCaseAtEnd	self 		assert: '		var i = 3;		var match = "";		switch (i) {			case 1: 				match += "1";			case 2: 				match += "2";			default: 				match += i;		}		match'		returnsValue: '3'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchDefaultCaseInBetween	self 		assert: '		var i = 3;		var match = "";		switch (i) {			case 1: 				match += "1";			default: 				match += i;			case 2: 				match += "2";		}		match'		returnsValue: '32'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchDefaultCaseInBetweenBreak	self 		assert: '		var i = 3;		var match = "";		switch (i) {			case 1: 				match += "1";				break;			default: 				match += i;				break;			case 2: 				match += "2";				break;		}		match'		returnsValue: '3'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchMatchingCase	self 		assert: '		var match = "";		switch (2) {			case 1: 				match += "1";			case 2: 				match += "2";			case 3: 				match += "3";		}		match'		returnsValue: '23'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchMatchingCaseBreak	self 		assert: '		var match = "";		switch (2) {			case 1: 				match += "1";				break;			case 2: 				match += "2";				break;			case 3: 				match += "3";				break;		}		match'		returnsValue: '2'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchSeveralMatchingCases	self 		assert: '		var match = "";		switch (2) {			case 1: 				match += "1";				break;			case 2: 				match += "2a";				break;			case 2: 				match += "2b";				break;		}		match'		returnsValue: '2a'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchSingleCaseMatching	self assert: '		var match;		switch (1) {			case 1: 				match = "ok";		}		match' returnsValue: 'ok'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSwitchSingleCaseNotMatching	| result |	result := self compileAndRun: '		var i = 1;		var match;		switch (i) {			case 2: 				match = "why did I get here?";		}		match'.	self assert: result isUndefined</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>8 Types</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetProperty	| result property |	result := self compileAndRun: '		function Blog()		{			this.title = "My Blog";		}		new Blog();	'.	self assert: result class = JSEObject.	property := result getProperty: #title.	self assert: property notNil.	self assert: property = (result getOwnPropertyOrNil: #title).	self assert: property class = JSEDataProperty.	self assert: property value class = JSEString.	self assert: property value value = 'My Blog'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetPrototypeProperty	| result property |	result := self compileAndRun: '		function Blog()		{		}		Blog.prototype.title = "My Blog";		new Blog();	'.	self assert: result class = JSEObject.	property := result getProperty: #title.	self assert: property notNil.	self assert: (result getOwnPropertyOrNil: #title) isNil.	self assert: property class = JSEDataProperty.	self assert: property value class = JSEString.	self assert: property value value = 'My Blog'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.6 Additive Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testAddNumbers	self assert: '1 + 2' returnsValue: 3.	self assert: '1 + -2' returnsValue: -1.	self assertReturnsNaN: '1 + NaN'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAddNumbersIEEE	| result |	result := self compileAndRun: 'NaN + NaN'.	self assert: result isNaN.	result := self compileAndRun: 'Infinity + Infinity'.	self assert: result isInfinity.	result := self compileAndRun: 'Infinity + -Infinity'.	self assert: result isNaN.	result := self compileAndRun: 'Infinity + 1'.	self assert: result isInfinity.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAddStrings	self assert: '"1" + "2"' returnsValue: '12'.	self assert: '"1" + 2' returnsValue: '12'.	self assert: '1 + "2"' returnsValue: '12'.	self assert: '"-" + "1"' returnsValue: '-1'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSubtractNumbers	self assert: '1 - 2' returnsValue: -1.	self assertReturnsNaN: '1 - "harry"'.	self assertReturnsNaN: '"harry" - 1'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.2.3 Function Calls</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCall	| result |	self assert: '		function getNumber()		{			return 3;		}		getNumber();	' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallNonFunction	self assert: 'var f = 42; f();' raisesError: JSETypeError.	self assert: 'var f = { }; f();' raisesError: JSETypeError.	self assert: 'function P() {}; var f = new P(); f();' raisesError: JSETypeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallReturn	| result |	self assert: '		function getNumber()		{			return 4;			return 3;		}		getNumber();	' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallWithArgument	| result |	self assert: '		function increaseNumber(number)		{			return number + 1;		}		increaseNumber(41);	' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallWithDeclarativeEnvironmentArgument	self assert: '		function simplyReturn(number)		{			return number;		}		simplyReturn(Infinity);	' returnsValue: JSEPlatform positiveInfinityValue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallWithReferenceArgument	| result |	self assert: '		function increaseNumber(number)		{			return number + 1;		}		var numbers = [1, 2 , 41];		increaseNumber(numbers[2]);	' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionCallWithVariableArgument	| result |	self assert: '		function increaseNumber(number)		{			return number + 1;		}		var num = 41;		increaseNumber(num);	' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionWithoutReturn	| result |	result := self compileAndRun: '		function getUndefined()		{			42;		}		getUndefined();	'.	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectFunctionCall	| result |	self 		assert: '		function Blog(title)		{			this.title = title;			this.getTitle = function() {				return this.title;			}		}		var blog = new Blog("Erlang");		blog.getTitle();	'		returnsValue: 'Erlang'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testRecursiveFunctionCall	| result |	self 		assert: '		function faculty(number)		{			if (number == 1)				return 1;			else				return number * faculty(number - 1);		}		faculty(5);	'		returnsValue: 120.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.9 Equality Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testEquals	" 11.9.3 The Abstract Equality Comparison Algorithm "	| result |	#(		" 1 a "		#('var v; v ~ v' true)		" 1 b "		#('null ~ null' true)		" 1 c i "		#('(0.0/0.0) ~ 0' false)		" 1 c 2 "		#('0 ~ (0.0/0.0)' false)		" 1 c iii "	#('2 ~ 2' true)		" 1 c iv "	#('0 ~ -0' true) 		" 1 c v "		#('-0 ~ 0' true)		" 1 c vi "	#('1 ~ 2' false)		" 1 d "		#('"test" ~ "test"' true)		" 1 d "		#('"test" ~ "TEST"' false)		" 1 e "		#('true ~ true' true)		" 1 e "		#('false ~ false' true)		" 1 e "		#('true ~ false' false)		" 1 e "		#('false ~ true' false)		" 1 f "		#('function Foo() {}; var object = new Foo(); object ~ object' true)		" 1 f "		#('function Foo() {}; var object1 = new Foo(); var object2 = new Foo(); object1 ~ object2' false)		" 2 "		#('var v; null ~ v' true)		" 3 "		#('var v; v ~ null' true)		" 4 "		#('1 ~ "1"' true)		" 5 "		#('"1" ~ 1' true)		" 6 "		#('true ~ 1' true)		" 6 "		#('true ~ 2' false)		" 7 "		#('1 ~ true' true)		" 7 "		#('2 ~ true' false)	) do: [ : pair |		#('==' '!=') with: #(true false) do: [ : operator : expected |			| code |			code := (pair first copyReplaceAll: '~' with: operator).			result := self compileAndRun: code.			self assert: (result isKindOf: JSEBoolean).			self assert: (result value = pair last) = expected description: code, ' --&gt; ', result value printString.		].	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStrictEquals	" 11.9.6 The Strict Equality Comparison Algorithm "	| result |	" ~ will be replaced by === or !== "	#(		" 2 "		#('var v; v ~ v' true)		" 3 "		#('null ~ null' true)		" 4 a "		#('(0.0/0.0) ~ 0' false)		" 4 b "		#('0 ~ (0.0/0.0)' false)		" 4 c "		#('2 ~ 2' true)					#('0.0 ~ 0' true)					#('.0e-1 ~ 0' true)					#('.1e-1 ~ 0.01' true)		" 4 d "		#('0 ~ -0' true) 		" 4 e "		#('-0 ~ 0' true)		" 4 f "		#('1 ~ 2' false)		" 5 "		#('"test" ~ "test"' true)		" 5 "		#('"test" ~ "TEST"' false)		" 6 "		#('true ~ true' true)		" 6 "		#('false ~ false' true)		" 6 "		#('true ~ false' false)		" 6 "		#('false ~ true' false)		" 7 "		#('function Foo() {}; var object = new Foo(); object ~ object' true)		" 7 "		#('function Foo() {}; var object1 = new Foo(); var object2 = new Foo(); object1 ~ object2' false)		" 1 "		#('var v; null ~ v' false)		" 1 "		#('var v; v ~ null' false)		" 1 "		#('1 ~ "1"' false)		" 1 "		#('"1" ~ 1' false)		" 1 "		#('true ~ 1' false)		" 1 "		#('true ~ 2' false)		" 1 "		#('1 ~ true' false)		" 1 "		#('2 ~ true' false)	) do: [ : pair |		#('===' '!==') with: #(true false) do: [ : operator : expected |			| code |			code := (pair first copyReplaceAll: '~' with: operator).			result := self compileAndRun: code.			self assert: (result isKindOf: JSEBoolean).			self assert: (result value = pair last) = expected description: code, ' --&gt; ', result value printString.		].	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.6.3 The for Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testForDeleteWhileIterating	self		assert: '			var s = "";			var o = {a: "a", b:"b"};			for (var p in o)			 {			   s = s + p;			   delete o.a;			   delete o.b;			 }			s' 		returnsValue: 'a'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForIn	| result |	self assert: '		var sum = 0, k;		var object = { 			n: 1,			m: 3, 		};		for (k in object)			sum = sum + object[k];		' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForInArray	| result |	self assert: '		var sum = 0, k, array = [1 ,2, 39];		for (k in array)			sum = sum + array[k];		' returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForInArrayPropertyNameIsString	| result |	self assert: '		var sum = 0, k, array = [1 ,2, 39];		for (k in array)			sum = sum + k;		' returnsValue: '0012'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForInPrimitiveObject	| result |	result := self compileAndRun: '		var sum = 0, k, string = "A string";		for (k in string)			sum = sum + string[k];		'.	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForInPropertyNameIsString	" internal property names are Symbols. JSEString must wrap a string, though. 	Otherwise, comparison would not work correctly "	| result |	self assert: '		var name = 0,object = {a: 1};		for (var n in object)			name = n;		n' returnsValue: 'a'.	self deny: result value isSymbol.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForInVariable	| result |	self assert: '		var sum = 0;		var object = { 			n: 1,			m: 3, 		};		for (var k in object)			sum = sum + object[k];		' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForWithInitialiser	| result |	self assert: '		var i=0, j=0; 		for (i=1; i &lt;= 3; i++) 			j = j + 2;		j' returnsValue: 6.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testForWithVariableDeclaration	| result |	self assert: '		var j=0; 		for (var i=1,k=2; i &lt;= 3; i++) 			j=j+k;		j' returnsValue: 6.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>13.2 Creating Function Objects</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionLength	| result |	self assert: '		function doNothing()		{		}		doNothing.length;	' returnsValue: 0.	self assert: '		function doSomething(a,b)		{		}		doSomething.length;	' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionPrototype	| result |	result := self compileAndRun: '		function Thingy() { }		Thingy.prototype;	'.	self assert: result class = JSEObject.	self assert: '		function Thingy() { }		Thingy.prototype.constructor === Thingy;	' returnsValue: true.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12 Statements</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testBlock	self assert: '{ 1; } ' returnsValue: 1.	self assert: '{ 1 } ' returnsValue: 1.	self assert: '{ { 2; } } ' returnsValue: 2.	self assert: '{ var x = 1; { x = 2; } x; } ' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDebugger	| debugged result debugEnvironment code |	debugged := false.	debugEnvironment := JSEDebugEnvironment new.	debugEnvironment 		when: JSEDebuggerEvent		do: 		[: event | | executionContext  reference|			debugged := true.			executionContext := event executionContext.			reference := executionContext variableEnvironment getIdentifierReference: #i strict: true.			self assert: reference getValue value = 42.			[ event thread continue ] fork.		].	code := self compile: '		function debugMe()		{			var i = 42; 			debugger;			return i		}		debugMe();'.	result := debugEnvironment runCode: code.	self assert: debugged.	self assert: result value = 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDoWhile	| result |	self assert: 'var i=0; do { i++ } while (i != 3); i' returnsValue: 3.	self assert: 'var i=0; do { i++ } while (false); i' returnsValue: 1.	self assert: 'var i=0; do { i++ } while (i != 3);' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testWhile	self assert: 'var i=0; while (i != 3) i++; i' returnsValue: 3.	self assert: 'var i=0; while (i++ != 3) {}; i' returnsValue: 4.	self assert: 'var i=0; while (i++ != 3) { i; }; i' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testWith	| result |	self assert: 'with ({ name: "with"}) name' returnsValue: 'with'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.5 The if Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testIf	| result |	self assert: 'if (true) 1;' returnsValue: 1.	result := self compileAndRun: 'if (false) 1;'.	self assert: result isUndefined.	result := self compileAndRun: 'if (true) {};'.	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIfElse	| result |	self assert: 'if (true) 1; else 2;' returnsValue: 1.	self assert: 'if (false) 1; else 2;' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testNestedIfElse	| result |	self assert: 'if (true) 1; else if (true) 2; else 3;' returnsValue: 1.	self assert: 'if (false) 1; else if (true) 2; else 3;' returnsValue: 2.	self assert: 'if (false) 1; else if (false) 2;else 3;' returnsValue: 3.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11 Expressions</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignVariableToValue	| result |	self assert: '		var number; 		number = 3;		number	' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCommaOperator	| result |	self assert: 'var i = 0; i++, i + 2' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConditionalOperator	| result |	self assert: 'true ? 1 : 0' returnsValue: 1.	self assert: 'false ? 1 : 0' returnsValue: 0.	self assert: 'var a = Array(1,2,3); true ? a[0] : a[1]' returnsValue: 1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGroupedExpression	| result |	self assert: '3 * (1 + 2)' returnsValue: 9.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.2 Variable Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testVariable	| result |	result := self compileAndRun: '		var number; 		number;	'.	self assert: result == JSEUndefined singleton.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testVariableListWithInitializers	| result |	self assert: '		var a=2, b=3 ; 		a + b;	' returnsValue: 5.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testVariableReference	| result |	self assert: '		var a=2; 		var b=3; 		a+b;	' returnsValue: 5.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testVariableWithInitializer	| result |	self assert: '		var number=2; 		number;	' returnsValue: 2.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.7 Bitwise Shift Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testShiftLeft	self assert: '1 &lt;&lt; 0' returnsValue: 1.	self assert: '1 &lt;&lt; 1' returnsValue: 2.	self assert: '1 &lt;&lt; 2' returnsValue: 4.	self assert: '0xFFFFFFFF &lt;&lt; 1' returnsValue: -2.	self assert: '1 &lt;&lt; 0x1f' returnsValue: -16r80000000.	self assert: '1 &lt;&lt; 0x7f' returnsValue: -16r80000000.	self assert: '-1 &lt;&lt; 1' returnsValue: -2.	self assert: '-0xFFFFFFFF &lt;&lt; 1' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSignedRightShift	self assert: '1 &gt;&gt; 0' returnsValue: 1.	self assert: '1 &gt;&gt; 1' returnsValue: 0.	self assert: '5 &gt;&gt; 1' returnsValue: 2.	self assert: '1 &gt;&gt; 2' returnsValue: 0.	self assert: '-5 &gt;&gt; 1' returnsValue: -3.	self assert: '-5 &gt;&gt; 2' returnsValue: -2.	self assert: '-5 &gt;&gt; 4' returnsValue: -1.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testUnsignedRightShift	self assert: '1 &gt;&gt;&gt; 0' returnsValue: 1.	self assert: '1 &gt;&gt;&gt; 1' returnsValue: 0.	self assert: '5 &gt;&gt;&gt; 1' returnsValue: 2.	self assert: '1 &gt;&gt;&gt; 2' returnsValue: 0.	self assert: '-1 &gt;&gt;&gt; 1' returnsValue: 16r7FFFFFFF.	self assert: '-5 &gt;&gt;&gt; 1' returnsValue: 16r7FFFFFFD.	self assert: '-5 &gt;&gt;&gt; 2' returnsValue: 16r3FFFFFFE.	self assert: '-5 &gt;&gt;&gt; 4' returnsValue: 16rFFFFFFF.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.10/11 Binary Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testBitAnd	self assert: '1 &amp; 1' returnsValue: 1.	self assert: '1 &amp; 2' returnsValue: 0.	self assert: '3 &amp; 2' returnsValue: 2.	self assert: '6 &amp; 5' returnsValue: 4.	self assert: '-1 &amp; -3' returnsValue: -3.	self assert: '-2 &amp; -3' returnsValue: -4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBitOr	self assert: '1 | 1' returnsValue: 1.	self assert: '1 | 2' returnsValue: 3.	self assert: '3 | 2' returnsValue: 3.	self assert: '6 | 5' returnsValue: 7.	self assert: '-1 | -3' returnsValue: -1.	self assert: '-2 | -3' returnsValue: -1.	self assert: '-0x7f | -0x8f' returnsValue: -15.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testBitXor	self assert: '1 ^ 1' returnsValue: 0.	self assert: '1 ^ 2' returnsValue: 3.	self assert: '3 ^ 2' returnsValue: 1.	self assert: '6 ^ 5' returnsValue: 3.	self assert: '-1 ^ -3' returnsValue: 2.	self assert: '-2 ^ -3' returnsValue: 3.	self assert: '-0x7f ^ -0x8f' returnsValue: 16rF0.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLogicalAnd	self assert: 'true &amp;&amp; true' returnsValue: true.	self assert: 'true &amp;&amp; false' returnsValue: false.	self assert: 'false &amp;&amp; true' returnsValue: false.	self assert: 'false &amp;&amp; false' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testLogicalOr	self assert: 'true || false' returnsValue: true.	self assert: 'true || true' returnsValue: true.	self assert: 'false || true' returnsValue: true.	self assert: 'false || false' returnsValue: false.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>15.1.2.1 eval</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testEvalGlobalContextDirectCall	self 		assert: 			'var x = 42; 			eval("x;")' 		returnsValue: 42.	self 		assert: 			'var x = 42; 			eval("x = 43;");			x;'		returnsValue: 43.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEvalGlobalContextIndirectCall	self 		assert: 			'var x = 42; 			var e = eval;			e("x;")' 		returnsValue: 42.	self 		assert: 			'var x = 42; 			var e = eval;			e("x = 43;");			x;'		returnsValue: 43.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEvalLocalContextDirectCall	self 		assert: 			'function test() {				var x = 42; 				return eval("x;");			}			test();' 		returnsValue: 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEvalLocalContextIndirectCall	self 		assert: 			'function test() {				var x = 42; 				var e = eval;				return e("x;");			}			test();' 		raisesError: JSEReferenceError</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testEvalNoContext	self assert: 'eval("42;")' returnsValue: 42.	self assert: 'eval("function test(){ return true; } test();")' returnsValue: true.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.13 Assignment Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignAdd	self assert: 'var x = 11; x += 4; x;' returnsValue: 15.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignBitwiseAnd	self assert: 'var x = 3; x &amp;= 6; x;' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignBitwiseOr	self assert: 'var x = 3; x |= 6; x;' returnsValue: 7.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignBitwiseXor	self assert: 'var x = 3; x ^= 6; x;' returnsValue: 5.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignDivide	self assert: 'var x = 12; x /= 4; x;' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignLeftShift	self assert: 'var x = 16; x &lt;&lt;= 2; x;' returnsValue: 64.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignModulo	self assert: 'var x = 11; x %= 4; x;' returnsValue: 3.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignMultiply	self assert: 'var x = 2; x *= 3; x;' returnsValue: 6.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignReturnValue	self assert: 'var x = 1;  var y = (x = 2); y;' returnsValue: 2.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignSignedRightShift	self assert: 'var x = -8; x &gt;&gt;= 1; x;' returnsValue: -4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignSubtract	self assert: 'var x = 11; x -= 4; x;' returnsValue: 7.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testAssignUnsignedRightShift	self assert: 'var x = -8; x &gt;&gt;&gt;= 1; x;' returnsValue: 16r7FFFFFFC.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCompoundAssignReturnValue	self assert: 'var x = 3;  var y = (x += 4); y;' returnsValue: 7.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>11.5 Multiplicative Operators</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testDivideNumbers	#(		#( '4 / 2' '2' )		#( '4 / -2' '-2' )		#( '-4 / -2' '2' )		#( '0 / 2' '0' )		#( '3 / 2' '1.5' )		#( 'Infinity / 3' 'Infinity' )		#( 'Infinity / -3' '-Infinity' )		#( '3 / 0' 'Infinity' )		#( '3 / -0' '-Infinity' )		#( '-3 / 0' '-Infinity' )		#( '-3 / -0' 'Infinity' )	) do: [: pair | self assert: pair first returnsValue: ( self floatFrom: pair last )].	self assertReturnsNaN: 'NaN / 2'.	self assertReturnsNaN: '2 / NaN'.	self assertReturnsNaN: 'Infinity / Infinity'.	self assertReturnsNaN: '1 / "Floyd"'.	self assertReturnsNaN: '"Floyd" / 1'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testModulo	#( 		#( '4 % 2' '0' ) 		#( '4 % 5' '4' ) 		#( '12 % 5' '2' ) 		#( '0 % 2' '0' ) 		#( '3 % 2' '1' )		#( '2 % Infinity' '2' )	) do: [: pair | self assert: pair first returnsValue: ( self floatFrom: pair last )].	self assertReturnsNaN: 'Infinity % 2'.	self assertReturnsNaN: 'NaN % 2'.	self assertReturnsNaN: '2 % NaN'.	self assertReturnsNaN: '1 % "Floyd"'.	self assertReturnsNaN: '"Floyd" % 1'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testMultiplyNumbers	#(		#( '4 * 2' '8' ) 		#( '-4 * 2' '-8' ) 		#( '-4 * -5' '20' ) 		#( '0 * 2' '0' )		#( 'Infinity * 3' 'Infinity' )		#( 'Infinity * -3' '-Infinity' )	) do: [: pair | self assert: pair first returnsValue: ( self floatFrom: pair last )].	self assertReturnsNaN: 'NaN * 2'.	self assertReturnsNaN: '2 * NaN'.	self assertReturnsNaN: '1 * "Floyd"'.	self assertReturnsNaN: '"Floyd" * 1'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>10.6 Arguments Object</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testArgumentsAtIndex	self 		assert: 			'function add(x, y) {				return arguments[0] + arguments[1];			}			add(3,4);'		returnsValue: 7.	self 		assert: 			'function nothing(x, y) {				return arguments[2];			}			nothing(3,4);'		returnsValue: nil.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>12.7 The continue Statement</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueDoWhile	self assert: '		var sum=0;		var i=0;		do {			i++;			if (i == 2) continue;			sum = sum + i;		} while ( i &lt;= 3 )		sum' returnsValue: 8.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueFor	self assert: '		var sum=0; 		for (var i=1; i &lt;= 3; i++) 		{			if (i == 2)				continue;			sum = sum + i;		}		sum' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueForIn	self 		assert: '		var object = { a: 1, b: 2, c: 3 };		var j = 0;		for (var p in object) 		{			if (p == "b")				continue;			j = j + object[p];		}		j'		returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueLabel	self assert: '		var sum=0; 		loop: for (var i=1; i &lt;= 3; i++) 		{			if (i == 2)				continue loop;			sum = sum + i;		}		sum' returnsValue: 4.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueOuterLabel	self 		assert: '		var sum=0; 		outer: for (var i=1; i &lt;= 3; i++) 		{	inner: for (var j=1; j &lt;= 3; j++)			{				if (j == 2)					continue outer;				sum = sum + i + (j * 100);			}		}		sum'		returnsValue: 306.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueOuterLabelNoInnerLabel	self 		assert: '		var sum=0; 		outer: for (var i=1; i &lt;= 3; i++) 		{	for (var j=1; j &lt;= 3; j++)			{				if (j == 2)					continue outer;				sum = sum + i + (j * 100);			}		}		sum'		returnsValue: 306.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testContinueWhile	self assert: '		var sum=0;		var i=0;		while ( i &lt;= 3 ) 		{			i++;			if (i == 2) continue;			sum = sum + i;		}		sum' returnsValue: 8.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERuntimeTest</class-id> <category>position</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testRuntimeErrorPosition	| source |	[		source := 'function Blog()		{			this.init();		}		new Blog();'.		self compileAndRun: source.		self signalFailure: 'Exception expected'.	] on: JSETypeError do: [ : ex |		self assert: ex sourceString = source.		self assert: ex lineNumber = 3.	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">parseJson: aString	^ self compileAndRun: 'JSON.parse(''', aString, ''')'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonTest</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testParse32BitCharacters	| string |	string := self parseJson:  '"I\uD83D\uDC9DJS"'.	self assert: (string isKindOf: JSEString).	self assert: (string value = ( 'I' , ( String with: ( Character value: 16rD83D ) with: ( Character value: 16rDC9D ) ) , 'JS')).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseArray	| array |	array := self parseJson: '[1, 2, 3]'.	self assert: array class = JSEArray.	self assert: (array arrayElements collect: [ : each | each value ]) asArray = #(1 2 3 ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseArrayReviver	| revived |	revived := self compileAndRun: 		'function transform(key, value) {			if (typeof value == "number")				return value + 10;			else				return value;		}		JSON.parse(''[1, 2, 3]'', transform);'.	self assert: revived class = JSEArray.	self assert: (revived arrayElements collect: [ : each | each value value ]) asArray = #(11 12 13 ).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseBoolean	self assert: (self parseJson: 'true') == JSETrue singleton.	self assert: (self parseJson: 'false') == JSEFalse singleton.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseEscapeSequence	#(		#('a\/b' 'a/b')		#('a\\tb' 'a	b')	) do: [ : pair |		| object propertyValue  escaped unescaped  |		escaped := pair first.		unescaped := pair last.		object := self parseJson: '{"', escaped, '": "', escaped, '"}'.		self assert: object class = JSEObject.		propertyValue := (object getOrNil: unescaped) .		self assert: propertyValue notNil.		self assert: propertyValue value = unescaped	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseNull	self assert: (self parseJson: 'null') == JSENull singleton.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseNumber	| number |	number := (self parseJson: '-123.45e6').	self assert: number class = JSENumber.	self assert: number value = -123.45d6</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseObject	| object name label |	object := self parseJson: '{"name": "tester", "status" : "ok" }'.	self assert: object class = JSEObject.	name := (object getOrNil: #name) .	self assert: name notNil.	self assert: name value = 'tester'.	label:= (object getOrNil: #status) .	self assert: label notNil.	self assert: label value = 'ok'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseObjectNestedItems	| object array child name parent |	object := self parseJson: '{"child": { "name": "tester" }, "parent": { }, "values" : [1 ,2, 3 ], "metas": [] }'.	self assert: object class = JSEObject.	child := (object getOrNil: #child) .	self assert: child notNil.	self assert: child class = JSEObject.	name := (child getOrNil: #name) .	self assert: name notNil.	self assert: name value = 'tester'.	parent:= (object getOrNil: #parent) .	self assert: parent notNil.	self assert: parent class = JSEObject.	array := (object getOrNil: #values) .	self assert: array notNil.	self assert: (array arrayElements collect: [ : each | each value ]) asArray = #(1 2 3 ).	array := (object getOrNil: #metas) .	self assert: array notNil.	self assert: array arrayElements isEmpty.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseObjectReviver	| revived test bogus other |	revived := self compileAndRun: 		'function transform(key, value) {			switch (key) {				case "test": 					return "passed";				case "bogus":					return undefined;				default:					return value;			}		}		JSON.parse(''{ "test": "failed", "bogus": "remove", "other" : "unchanged" } '', transform);'.	self assert: revived class = JSEObject.	test := revived getOrNil: #test.	self assert: test class = JSEString.	self assert: test value = 'passed'.	bogus := revived getOrNil: #bogus.	self assert: bogus isNil.	other := revived getOrNil: #other.	self assert: other class = JSEString.	self assert: other value = 'unchanged'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testParseString	| string |	string := (self parseJson: '"Jason"').	self assert: string class = JSEString.	self assert: string value = 'Jason'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyArray	self assert: 'JSON.stringify([])' returnsValue: '[]'.	self assert: 'JSON.stringify([1, 2, 3])' returnsValue: '[1,2,3]'.	self assert: 'JSON.stringify([1, , 3])' returnsValue: '[1,null,3]'.	self assert: 'JSON.stringify([1, 2, 3], undefined,  "_")' returnsValue: ('[\_1,\_2,\_3\]' copyReplaceAll: '\' with: (String with: Character lf)).	self assert: 'JSON.stringify([1, 2, [3, 4 ]], undefined,  "_")' returnsValue: ('[\_1,\_2,\_[\__3,\__4\_]\]' copyReplaceAll: '\' with: (String with: Character lf)).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyArrayReplacer	self 		assert: 			'function jsonify(key, value) {				if (typeof value == "number")					return value + 10;				else					return value;			}			JSON.stringify([1, null, 3], jsonify,  "_")'		returnsValue: ( '[\_11,\_null,\_13\]' copyReplaceAll: '\' with: ( String with: Character lf )).</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyEscape	#('r' 'n' 't' 'b' 'f' '\') do: [ : escape |		self assert: 'JSON.stringify("\', escape, '")' returnsValue: '"\', escape, '"'.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyObject	self assert: 'JSON.stringify({})' returnsValue: '{}'.	self assert: 'JSON.stringify({"test": "passed"})' returnsValue: '{"test":"passed"}'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyObjectCycle	self assert: 'var node = {}; node.parent = node; JSON.stringify(node);' raisesError: JSETypeError.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyObjectIntegerKey	self assert: 'JSON.stringify({1: 2})' returnsValue: '{"1":2}'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testStringifyObjectPropertyList	self 		assert: 'JSON.stringify({"test": "passed", "other": "ok", "discard": 42}, ["test", "other"], "_")'		returnsValue: ( '{\_"test": "passed",\_"other": "ok"\}' copyReplaceAll: '\' with: ( String with: Character lf )).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectTest</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Runtime-Tests">assertObjectConstructorIsFunction: isFunction	| result new name |	new := isFunction ifTrue: [ '' ] ifFalse: [ 'new ' ].	result := self compileAndRun: new, 'Object( {name: "Test" } )'.	self assert: result class = JSEObject.	name := result get: #name.	self assert: name notNil.	self assert: name value = 'Test'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assertObjectConstructorNoArgument: result	|  internalPrototype |	self assert: result class = JSEObject.	self assert: result isExtensible.	internalPrototype := result internalPrototype.	self assert: internalPrototype notNil.	self assert: internalPrototype class = JSEObject.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">assertObjectConstructorToObjectIsFunction: isFunction	| result new |	new := isFunction ifTrue: [ '' ] ifFalse: [ 'new ' ].	result := self compileAndRun: new, 'Object("Test")'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue class = JSEString.	self assert: result primitiveValue value = 'Test'.	result := self compileAndRun: new, 'Object(true)'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue class = JSETrue.	result := self compileAndRun: new, 'Object(42)'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue class = JSENumber.	self assert: result primitiveValue value = 42.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">primitiveValueStrings	^ #(		'42'		'"test"'		'undefined'		'null'		'true'	)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	self assertObjectConstructorIsFunction: false</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	self assertObjectConstructorIsFunction: true</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunctionNoArgument	| result |	result := self compileAndRun: 'Object()'.	self assertObjectConstructorNoArgument: result.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunctionNull	| result |	result := self compileAndRun: 'Object(null)'.	self assertObjectConstructorNoArgument: result.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunctionToObject	self assertObjectConstructorToObjectIsFunction: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunctionUndefined	| result |	result := self compileAndRun: 'Object(undefined)'.	self assertObjectConstructorNoArgument: result.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorNoArgument	| result |	result := self compileAndRun: 'new Object()'.	self assertObjectConstructorNoArgument: result.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorToObject	self assertObjectConstructorToObjectIsFunction: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDefinePropertyData	self compileAndRun: '		var originalObject = { originalName: "Test" };		var descriptor = Object.getOwnPropertyDescriptor(originalObject, "originalName");		var object = new Object();		assert(object.name == undefined);		Object.defineProperty(object, "name", descriptor);		assert(object.name == "Test");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testDefinePropertyLength	| lengthProperty array |	array := self compileAndRun: '		var array = ["a", "b", "c"];		assert(array.length == 3);		Object.defineProperty(array, "length", { value: "2" });		assert(array.length == 2, "length did not change");		assert(array[2] == undefined, "element @ 2 still there");		array[3] = "d";		assert(array.length == 4, "length did not change after adding");		array	'.	lengthProperty := array getOwnPropertyOrNil: #length.	self assert: lengthProperty notNil.	self assert: (lengthProperty getPropertyValueOf: array) value = 4</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testFreeze	self compileAndRun: '		var object = { name: "Cub" };		assert(!Object.isFrozen(object));		Object.freeze(object);		assert(Object.isFrozen(object));		object.name = "Changes";		assert(object.name == "Cub", "changed frozen property");		object.newProperty = "New stuff";		assert(object.newProperty === undefined, "added property to frozen object");		delete object.name;		assert(object.name == "Cub", "Deleted existing  property");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetOwnPropertyDescriptorAccessor	self compileAndRun: '		var object = { 			get name() { } ,			set name(n) { } 		}; 		var descriptor = Object.getOwnPropertyDescriptor(object, "name");		assert(descriptor.get != undefined, "get");		assert(Object.getPrototypeOf(descriptor.get) == Function.prototype, "prototype of get accessor");		assert(descriptor.set != undefined, "set");		assert(Object.getPrototypeOf(descriptor.set) == Function.prototype, "prototype of set accessor");		assert(!descriptor.writable, "writable");		assert(descriptor.enumerable, "enumerable");		assert(descriptor.configurable, "configurable");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetOwnPropertyDescriptorData	self compileAndRun: '		var object = {name: "Test"};		var descriptor = Object.getOwnPropertyDescriptor(object, "name");		assert(descriptor.value == "Test", "value");		assert(descriptor.writable, "writable");		assert(descriptor.enumerable, "enumerable");		assert(descriptor.configurable, "configurable");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetOwnPropertyDescriptorUndefined	| result |	result := self compileAndRun: 'Object.getOwnPropertyDescriptor({}, "name")'.	self assert: result isUndefined.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetOwnPropertyNames	| result names nameStrings expectedStrings |	result := self compileAndRun: '		var array = [1, 2, 3];		array.name = "Test";		Object.getOwnPropertyNames(array)'.	self assert: result class = JSEArray.	names := result arrayElements.	nameStrings := names collect: [ : name | name value ].	expectedStrings := #('0' '1' '2' 'name' 'length').	self assert: nameStrings size = expectedStrings size.	expectedStrings do: [ : name | self assert: (nameStrings includes: name) description: 'Name not returned: ', name ].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetOwnPropertyNamesOfPrimitive	self primitiveValueStrings do: [ : primitive |		self compileAndRun: 'Object.getOwnPropertyNames(', primitive, ')' expectErrorOfClass: JSETypeError	]</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetPrototypeOfFunction	| result |	self assert: '		function f() { };		Object.getPrototypeOf(f) === Function.prototype' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetPrototypeOfNewObject	| result |	self assert: '		function f() { };		var newObject = new f();		f.prototype === Object.getPrototypeOf(newObject);' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetPrototypeOfObjectInitialiser	| result |	self assert: 'Object.getPrototypeOf({name: "Test"}) === Object.prototype' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGetPrototypeOfPrimitive	self primitiveValueStrings do: [ : primitive |		self compileAndRun: 'Object.getPrototypeOf(', primitive, ')' expectErrorOfClass: JSETypeError.	].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testHasOwnProperty	self assert: '		var object = { name: "test" };		object.hasOwnProperty("name")' returnsValue: true.	self assert: '		var object = { };		object.hasOwnProperty("name")' returnsValue: false.	self assert: '		var array = ["a", "b", "c"];		array.hasOwnProperty("1")' returnsValue: true.	self assert: '		var array = ["a", "b", "c"];		array.hasOwnProperty(2)' returnsValue: true.	self assert: '		var array = ["a", "b", "c"];		array.hasOwnProperty("test")' returnsValue: false.	self 		assert: '		function Thingy() { };		Thingy.prototype.name = "Proto";		var object = new Thingy();		object.hasOwnProperty("name")'		returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testIsPrototypeOf	| result |	self assert: '		var object = {  };		object.isPrototypeOf(1)' returnsValue: false.	self assert: '		var object1 = {  };		var object2 = {  };		object1.isPrototypeOf(object2)' returnsValue: false.	self assert: '		function Thingy() { };		var object = new Thingy();		Thingy.prototype.isPrototypeOf(object)' returnsValue: true.	self assert: '		function Thingy() { };		var object = new Thingy();		object.isPrototypeOf(Thingy.prototype)' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testKeys	| result names nameStrings expectedStrings |	result := self compileAndRun: '		var array = [1, 2, 3];		array.name = "Test";		Object.keys(array)'.	self assert: result class = JSEArray.	names := result arrayElements.	nameStrings := names collect: [ : name | name value ].	expectedStrings := #('0' '1' '2' 'name').	self assert: nameStrings size = expectedStrings size.	expectedStrings do: [ : name | self assert: (nameStrings includes: name) description: 'Name not returned: ', name ].</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testObjectPrototype	self assert: 'Object.prototype.isPrototypeOf(new Number(1))' returnsValue: true.	self assert: 'Object.prototype.isPrototypeOf([1,2,3])' returnsValue: true.	self assert: 'Object.prototype.isPrototypeOf({ "name": "literal" })' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPreventExtensions	self compileAndRun: '		var object = { name: "Cub" };		assert(Object.isExtensible(object), "should be extensible");		Object.preventExtensions(object);		assert(!Object.isExtensible(object), "should not be extensible");		object.name = "Changes";		assert(object.name == "Changes", "could not change existing  property");		object.newProperty = "New stuff";		assert(object.newProperty === undefined, "added property to sealed object");		delete object.name;		assert(object.name === undefined, "Could not delete existing  property");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPropertyIsEnumerable	| result |	self assert: '		var object = {  };		object.propertyIsEnumerable("name")' returnsValue: false.	self assert: '		var object = { name: "test" };		object.propertyIsEnumerable("name")' returnsValue: true.	self assert: 'Object.propertyIsEnumerable("prototype")' returnsValue: false.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototype	| result |	result := self compileAndRun: 'Object.prototype'.	self assert: result class = JSEObject.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeChaining	self compileAndRun: '		function Vehicle() { };		Vehicle.prototype.wheels = function() {			return 0;		};		Vehicle.prototype.needsDriver = function() {			return true;		};		Vehicle.prototype.wheels = function() {			return 4;		};		function Car() { };		Car.prototype = new Vehicle();		Car.prototype.wheels = function() {			return 4;		};		Car.prototype.spareWheels = function() {			return 1;		};		var car = new Car();		assert(car.wheels() == 4, "4 wheels expected" );		assert(car.spareWheels() == 1, "1 spare wheel expected");		assert(car.needsDriver() == true, "needs driver expected");		assert(car instanceof Car, "car should be a Car");		assert(car instanceof Vehicle, "car should be a Vehicle");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeConstructor	| result |	self assert: 'Object.prototype.constructor === Object' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testPrototypeToString	| result |	self assert: 'Object.prototype.toString()' returnsValue: '[object Object]'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testSeal	self compileAndRun: '		var object = { name: "Cub" };		assert(!Object.isSealed(object));		Object.seal(object);		assert(Object.isSealed(object));		object.name = "Changes";		assert(object.name == "Changes", "could not change existing  property");		object.newProperty = "New stuff";		assert(object.newProperty === undefined, "added property to sealed object");		delete object.name;		assert(object.name == "Changes", "Deleted existing  property");	'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	| result |	self assert: '		function Zork() { }		var zork = new Zork();		zork.toString();	' returnsValue: '[object Object]'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testValueOf	| result |	self assert: '		var object = { };		object.valueOf() === object' returnsValue: true.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBooleanTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructor	| result |	result := self compileAndRun: 'new Boolean(false)'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue value = false.	result := self compileAndRun: 'new Boolean(true)'.	self assert: result class = JSEPrimitiveObject.	self assert: result primitiveValue value = true.	self assert: 'typeof new Boolean(false)' returnsValue: 'object'.	self assert: '(new Boolean(true)).valueOf()' returnsValue: true.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testConstructorAsFunction	| result |	result := self compileAndRun: 'Boolean(false)'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'Boolean(true)'.	self assert: result class = JSETrue.	self assert: 'typeof Boolean(false)' returnsValue: 'boolean'.	result := self compileAndRun: 'Boolean(undefined)'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'Boolean(0)'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'Boolean(1)'.	self assert: result class = JSETrue.	result := self compileAndRun: 'Boolean("")'.	self assert: result class = JSEFalse.	result := self compileAndRun: 'Boolean("no")'.	self assert: result class = JSETrue.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testCustomBoolean	self 		assert: 'function CustomBoolean() { }			CustomBoolean.prototype = Boolean.prototype;			var customBoolean = new CustomBoolean();			customBoolean.valueOf();'		raisesError: JSETypeError		messagePattern: '*valueOf()*'</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testToString	| result |	self assert: 'false.toString()' returnsValue: 'false'.	self assert: 'true.toString()' returnsValue: 'true'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testTypeOf	self assert: 'typeof Boolean' returnsValue: 'function'.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testValueOf	self assert: 'false.valueOf()' returnsValue: false.	self assert: 'true.valueOf()' returnsValue: true.	self assert: 'Boolean(true).valueOf()' returnsValue: true.	self assert: '(new Boolean(false)).valueOf()' returnsValue: false.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStrictTest</class-id> <category>tests</category>
+
+<body package="JavascriptEngine-Runtime-Tests">testFunctionStrict	| compiledCode |	compiledCode := self compile: 'function test() { "use strict" }'.	self deny: compiledCode isStrict.	self assert: compiledCode functionDeclarations first code isStrict.	compiledCode := self compile: 'function test() { var x; }'.	self deny: compiledCode isStrict.	self deny: compiledCode functionDeclarations first code isStrict.	compiledCode := self compile: '"use strict"; function test() { var x; }'.	self assert: compiledCode isStrict.	self assert: compiledCode functionDeclarations first code isStrict.</body>
+
+<body package="JavascriptEngine-Runtime-Tests">testGlobalStrict	| compiledCode |	compiledCode := self compile: '"use strict"'.	self assert: compiledCode isStrict.	compiledCode := self compile: 'var x;'.	self deny: compiledCode isStrict.</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>TestCase</name>
+<environment>XProgramming.SUnit</environment>
+<super>SUnit.TestCase</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>assertCounter </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>SUnit</category>
+<attributes>
+<package>SUnit</package>
+</attributes>
+</class>
+
+<class>
+<name>TestResource</name>
+<environment>XProgramming.SUnit</environment>
+<super>SUnit.TestResource</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>name description </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>SUnit</category>
+<attributes>
+<package>SUnit</package>
+</attributes>
+</class>
+
+</st-source>

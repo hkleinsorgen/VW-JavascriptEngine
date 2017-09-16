@@ -1,0 +1,1109 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-JSDoc
+Notice: Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: JSDoc parser + printer.
+
+See class comments of JSDocPrinter and JSDocParser for examples.
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96216
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-AST' '') #(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-VisualWorks' '') #(#any 'JavascriptEngine-Runtime-Core' '') #(#any 'Browser-Parser' '') #(#any 'JavascriptEngine-Parser-Core' '') #(#any 'Regex11' ''))
+PackageName: JavascriptEngine-JSDoc
+Parcel: #('JavascriptEngine-JSDoc')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-JSDoc
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-AST' #componentType #package) #(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package) #(#name 'JavascriptEngine-Runtime-Core' #componentType #package) #(#name 'Browser-Parser' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'Regex11' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-AST' '') #('JavascriptEngine-Namespace' '') #('JavascriptEngine-VisualWorks' '') #('JavascriptEngine-Runtime-Core' '') #('Browser-Parser' '') #('JavascriptEngine-Parser-Core' '') #('Regex11' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Version: 0.5.1
+Date: 2:14:51 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:14:51</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSDocElement</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>annotations elements </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocObject</name>
+<environment>JSE</environment>
+<super>JSE.JSDocElement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>contentNode identifierNode objectName container containerName localName </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocNamespace</name>
+<environment>JSE</environment>
+<super>JSE.JSDocObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocClass</name>
+<environment>JSE</environment>
+<super>JSE.JSDocObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocAnnotation</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>description </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocVisitor</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeVisitor</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>elementClasses commentsStream elementsStack elementStart </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocPrinter</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>object indentLevel stream insertEmptyLine </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSDocPrinter</class-id>
+<body>Example:| directory |directory := ('C:\develop\javascript\kinf-js-api-', KInfinity.KInfinityCoreComponent actualSoftwareVersion printStringWithoutPatchLevel ,'\src\main\js') asFilename.JSDocPrinter generateJSDocFor: KJavascript.KInfinityObject in: directory  as: 'kinf-api.js'.JSDocPrinter generateJSDocFor: KJavascript.JNIObject in: directory  as: 'jni.js'.JSDocPrinter generateJSDocFor: KJavascript.Registry in: directory .JSDocPrinter generateJSDocForErrors: KJavascript.JavascriptError in: directory .JSEHostObject allSubclasses do: [ : each | each isAbstract ifFalse: [	JSDocPrinter generateJSDocFor: each in: directory .]].</body>
+</comment>
+
+<class>
+<name>JSDocParser</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSDocParser</class-id>
+<body>Example: | oldPackage |oldPackage := Store.Registry currentPackage.Store.Registry currentPackage: (Store.Registry packageNamed:'KJavascript-Runtime-Objects').[	JSDocParser 		generateCodeForFilesInDirectory: 'C:\develop\javascript\kinf-js-api\src\main\js'		class: KJavascript.JavascriptObject 		globalClass: JSE.JSEBuiltInObject] ensure: [	Store.Registry currentPackage: oldPackage.].</body>
+</comment>
+
+<class>
+<name>JSDocTag</name>
+<environment>JSE</environment>
+<super>JSE.JSDocAnnotation</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>name identifier type </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocFile</name>
+<environment>JSE</environment>
+<super>JSE.JSDocElement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>node </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocComment</name>
+<environment>JSE</environment>
+<super>JSE.JSDocAnnotation</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<class>
+<name>JSDocFunction</name>
+<environment>JSE</environment>
+<super>JSE.JSDocObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>isPrototypeFunction </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-JSDoc</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>JSE.JSEAbstractObject class</class-id> <category>pragmas</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocMacroPragma	&lt;pragmas: #class&gt;	^ #( jsDocMacro )</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printDetailsOn: aStream</body>
+
+<body package="JavascriptEngine-JSDoc">printOn: aStream	super printOn: aStream.	aStream nextPut: $(.	self printDetailsOn: aStream.	aStream nextPut: $).</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">addElement: aJSDocElement	" some JSDoc elements (e.g. namespaces) contain other elements "</body>
+
+<body package="JavascriptEngine-JSDoc">comments	^ self annotations select: [: annotation | annotation name = #comment ]</body>
+
+<body package="JavascriptEngine-JSDoc">elements	elements isNil 		ifTrue: [ elements := OrderedCollection new ].	^ elements</body>
+
+<body package="JavascriptEngine-JSDoc">elements: someElements 	elements := someElements .	someElements  do: [ : element | element container: self ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">connectToSuperclasses	" Connect classes to their superclasses "	self elements do: [ : element | element connectToSuperclasses ]</body>
+
+<body package="JavascriptEngine-JSDoc">generateCodeForClass: aClass objectClass: anObjectClass	" Generate code "	self elements do: [: element | element generateCodeForClass: aClass objectClass: anObjectClass ].</body>
+
+<body package="JavascriptEngine-JSDoc">generateMembersOf: aContainerClass	" Generate code if this is a member of the container "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement</class-id> <category>tags</category>
+
+<body package="JavascriptEngine-JSDoc">annotations	" All annotations associated with the element "	^ annotations</body>
+
+<body package="JavascriptEngine-JSDoc">annotations: someAnnotations 	annotations := someAnnotations.</body>
+
+<body package="JavascriptEngine-JSDoc">tagNamed: aStringOrSymbol	^ self annotations detect: [ : tag | tag name asSymbol = aStringOrSymbol asSymbol  ] ifNone: [ nil ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">isPartOfObjectNamed: aName	^ false</body>
+
+<body package="JavascriptEngine-JSDoc">shouldAddPart: aJSDocElement	" true if the element is a part of this element "	^  false</body>
+
+<body package="JavascriptEngine-JSDoc">shouldAssembleParts	" true if non-nested elements might exist that need to be assembled "	^  false</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocElement class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagName	" returns the name of the tag that identifies this element type "	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocObject</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">addElement: aJSDocElement	self elements add: aJSDocElement.	aJSDocElement container: self.</body>
+
+<body package="JavascriptEngine-JSDoc">container	^ container</body>
+
+<body package="JavascriptEngine-JSDoc">container: aContainer 	container := aContainer.</body>
+
+<body package="JavascriptEngine-JSDoc">containerName	^ containerName</body>
+
+<body package="JavascriptEngine-JSDoc">containerName: aContainerName 	containerName := aContainerName.</body>
+
+<body package="JavascriptEngine-JSDoc">contentNode	^ contentNode</body>
+
+<body package="JavascriptEngine-JSDoc">contentNode: aContentNode 	contentNode := aContentNode.</body>
+
+<body package="JavascriptEngine-JSDoc">description	" returns the description string "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-JSDoc">identifierNode	^ identifierNode</body>
+
+<body package="JavascriptEngine-JSDoc">identifierNode: anIdentifierNode 	identifierNode := anIdentifierNode.</body>
+
+<body package="JavascriptEngine-JSDoc">localName	^ localName</body>
+
+<body package="JavascriptEngine-JSDoc">localName: aLocalName 	localName := aLocalName.</body>
+
+<body package="JavascriptEngine-JSDoc">objectName	^ objectName</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocObject</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">initializeFromNodes	objectName := self identifierNode printString.	localName := self identifierNode jsDocName.</body>
+
+<body package="JavascriptEngine-JSDoc">localClassName	| localClassName |	localClassName := self localName.	localClassName first isUppercase 		ifFalse: 		[	localClassName := localClassName copy.			localClassName at: 1 put: localClassName first asUppercase		].	^ localClassName</body>
+
+<body package="JavascriptEngine-JSDoc">shouldAddPart: aJSDocElement	^aJSDocElement isPartOfObjectNamed: self objectName</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocObject</class-id> <category>code generation - private</category>
+
+<body package="JavascriptEngine-JSDoc">classNamed: aSymbol 	^ JSEFirstClassObject allSubclasses 		detect: [: subclass | subclass objectName = aSymbol ]		ifNone: [ JSEError allSubclasses detect: [: subclass | subclass objectName = aSymbol ] ifNone: [ nil ]]</body>
+
+<body package="JavascriptEngine-JSDoc">defineMethodNamed: aSymbol of: aClass contents: methodSourceString	| stream |	( aClass includesSelector: aSymbol ) 		ifFalse: 		[	stream := String new writeStream.			stream				nextPutAll: aSymbol; cr;cr;				tab; nextPutAll: methodSourceString.			JSEPlatform compile: stream contents into: aClass classified: #accessing		].</body>
+
+<body package="JavascriptEngine-JSDoc">generateMethodsOfClass: aClass 	aClass objectName ~= self localName asSymbol		ifTrue: [ self defineMethodNamed: #objectName of: aClass class contents: '^ #' , self localName ].</body>
+
+<body package="JavascriptEngine-JSDoc">generateSubclassOf: aSuperClass 	| generatedClass |	generatedClass := self generatedClass ifNil: [ JSEPlatform defineClassNamed: self localClassName superclass: aSuperClass ].	generatedClass notNil 		ifTrue: 		[	self description ifNotNil: 				[: description |					generatedClass comment ~= description 						ifTrue: [ generatedClass comment: description ]				].			self generateMethodsOfClass: generatedClass		].	^ generatedClass</body>
+
+<body package="JavascriptEngine-JSDoc">generatedClass	^ self classNamed: self localName asSymbol</body>
+
+<body package="JavascriptEngine-JSDoc">writeTagPragmasOn: aStream	self annotations do: [ : annotation | annotation writeTagPragmasOn: aStream ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocObject</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">connectToSuperclasses	self generatedClass ifNotNil: 		[: ownClass | 			( ownClass includesBehavior: JSEError ) 				ifFalse: 				[( self tagNamed: #extends ) ifNotNil: 						[: extendsTag | | className |							className := ( extendsTag description tokensBasedOn: $. ) last.							( self classNamed: className asSymbol ) ifNotNil: 								[: superClass |									ownClass superclass ~~ superClass 										ifTrue: [ JSEPlatform defineSuperclass: superClass of: ownClass ]								]						]				]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocObject class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">contentNode: aContentNode annotations: someAnnotations 	^ self new 		contentNode: aContentNode;		annotations: someAnnotations;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocNamespace</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printDetailsOn: aStream 	self objectName notNil 		ifTrue: [ aStream nextPutAll: self objectName ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocNamespace</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">shouldAssembleParts	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocNamespace</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">description	^ (self tagNamed: #namespace) ifNotNil: [ : tag | tag description ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocNamespace</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">generateCodeForClass: aClass objectClass: anObjectClass	| ownClass |	ownClass := self generateSubclassOf: anObjectClass .	self elements do: [ : element | 		element generateMembersOf: ownClass.		element generateCodeForClass: aClass objectClass: anObjectClass.	 ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocNamespace class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagName	^ 'namespace'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocClass</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printDetailsOn: aStream 	self objectName notNil 		ifTrue: [ aStream nextPutAll: self objectName ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocClass</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">generateCodeForClass: aClass objectClass: anObjectClass	| ownClass |	ownClass := self generateSubclassOf: aClass .	self elements do: [ : element | element generateMembersOf: ownClass ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocClass</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">shouldAssembleParts	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocClass</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">description	^ (self tagNamed: #class) ifNotNil: [ : tag | tag description ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocClass class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagName	^ 'class'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocAnnotation</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">description	^ description</body>
+
+<body package="JavascriptEngine-JSDoc">description: aDescriptionString 	description := aDescriptionString.</body>
+
+<body package="JavascriptEngine-JSDoc">name	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocAnnotation</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-JSDoc">isTag	^ false</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocAnnotation</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">writeTagPragmasOn: aStream</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocAnnotation class</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-JSDoc">parseAnnotationsFrom: aStream 	" Extract all JSDoc tags.	Assume that the source is valid, no error checking is done "	| annotations |	annotations := OrderedCollection new.	[ | comment |		comment := self parseNonTagFrom: aStream.		comment notEmpty 			ifTrue: [ annotations add: ( JSDocComment description: comment )].		aStream next = $@	] whileTrue: 		[ | tag |			tag := JSDocTag new.			tag parseFrom: aStream.			annotations add: tag		].	^ annotations</body>
+
+<body package="JavascriptEngine-JSDoc">parseAnnotationsFromToken: aToken 	| commentStream commentContentsStream char commentContents |	commentStream := aToken value readStream.	commentContentsStream := String new writeStream.	[ commentStream atEnd ] whileFalse: 		[				[	" skip comment markers at the beginning of the line "				char := commentStream peek.				char notNil and: [ #( 9 32 42 47 ) includes: char codePoint ]			] whileTrue: [ commentStream next ].			[	" add line to content "				char := commentStream peek.				char = $* 					ifTrue: 					[	commentStream next.						char := commentStream peek.						char = $/ 							ifTrue: 							[	commentStream next.								char := nil.								commentContentsStream upToEnd							]							ifFalse: [ commentContentsStream nextPut: $* ]					].				char isNil or: [ #( 10 13 ) includes: char codePoint ]			] whileFalse: [ commentContentsStream nextPut: commentStream next ].			char notNil ifTrue: [ commentContentsStream cr ].			commentStream next		].	commentContents := commentContentsStream contents.	^ self parseAnnotationsFrom: commentContents readStream</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocAnnotation class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">parseNonTagFrom: aStream 	" Parse the next part of a comment that is not a tag "	| commentStream |	commentStream := String new writeStream.	[	" skip whitespace at the beginning of a line "		[ aStream atEnd not and: [ #( 9 10 13 32 ) includes: aStream peek codePoint ]] whileTrue: [ aStream next ].		" tag ? "		aStream atEnd or: [ aStream peek = $@ ]	] whileFalse: 		[			| char | 			 " no, just a comment "			[	char := aStream next.				char isNil or: [ #( 10 13 ) includes: char codePoint ]			] whileFalse: [ commentStream nextPut: char ]		].	^ commentStream contents jseTrim</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocVisitor</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">commentsStream: aStream	commentsStream := aStream</body>
+
+<body package="JavascriptEngine-JSDoc">elements	^ elementsStack last</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocVisitor</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-JSDoc">acceptAssignment: anAssignmentNode 	self addElementFromContentNode: anAssignmentNode assignedExpression identifierNode: anAssignmentNode leftHandSide .	^ nil</body>
+
+<body package="JavascriptEngine-JSDoc">acceptFunctionExpression: aFunctionExpressionNode	^ self elementFromNode: aFunctionExpressionNode</body>
+
+<body package="JavascriptEngine-JSDoc">acceptObjectLiteral: anObjectLiteralNode	^self elementFromNode: anObjectLiteralNode</body>
+
+<body package="JavascriptEngine-JSDoc">acceptPropertyAssignment: anPropertyAssignmentNode 	self addElementFromContentNode: anPropertyAssignmentNode assignedExpression identifierNode: anPropertyAssignmentNode propertyName.	^ nil</body>
+
+<body package="JavascriptEngine-JSDoc">acceptVariableDeclaration: aVariableDeclarationNode 	self addElementFromContentNode: aVariableDeclarationNode initializer identifierNode: aVariableDeclarationNode identifier.	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocVisitor</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-JSDoc">initialize	super initialize.	elementsStack := OrderedCollection with: OrderedCollection new.	elementClasses := Dictionary new.	elementStart := 1.	JSDocElement allSubclasses do: [: elementClass | elementClass tagName ifNotNil: [: tagName | elementClasses at: tagName put: elementClass ]].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocVisitor</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">addElementFromContentNode: aContentNode identifierNode: anIdentifierNode 	" Add a JSDoc element for the content node "	| element |	elementStart := anIdentifierNode sourceInterval first.	element := self visit: aContentNode.	element notNil 		ifTrue: 		[	element identifierNode: anIdentifierNode.			element initializeFromNodes.			self elements add: element		].	^ element</body>
+
+<body package="JavascriptEngine-JSDoc">elementFromNode: aNode 	" Examine the tags to detect JSDoc elements "	| nodeComments annotations element subElements |	nodeComments := OrderedCollection new.	[ commentsStream atEnd not and: [ commentsStream peek stop &lt; elementStart ]] whileTrue: [ nodeComments add: commentsStream next ].	annotations := OrderedCollection new.	nodeComments do: [: commentToken | annotations addAll: ( JSDocTag parseAnnotationsFromToken: commentToken )].	annotations do: 		[: annotation | | elementClass |			elementClass := elementClasses at: annotation name ifAbsent: [ aNode jsDocElementClass ].			elementClass notNil 				ifTrue: 				[	element := elementClass contentNode: aNode annotations: annotations.					" visit elements of the element "					subElements := OrderedCollection new.					elementsStack addLast: subElements.					[ self visitChildrenOf: aNode ] ensure: [ elementsStack removeLast ].					element elements: subElements.					^ element				]		].	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocVisitor class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">commentsStream: aStream	^ self new commentsStream: aStream; yourself</body>
+
+<body package="JavascriptEngine-JSDoc">nodeTags: aNodeTags 	^ self new nodeTags: aNodeTags ; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter</class-id> <category>printing - pragmas</category>
+
+<body package="JavascriptEngine-JSDoc">comment: arguments	" already handled in #printCommentOfMethod: "</body>
+
+<body package="JavascriptEngine-JSDoc">condition: selector	" not exported "</body>
+
+<body package="JavascriptEngine-JSDoc">constructor: arguments	" no tag required "</body>
+
+<body package="JavascriptEngine-JSDoc">constructor: arguments length: length	" no tag required "</body>
+
+<body package="JavascriptEngine-JSDoc">deprecated	self deprecated: 'This function is deprecated and might be removed in future releases'.</body>
+
+<body package="JavascriptEngine-JSDoc">deprecated: aString	self tag: #deprecated  description: aString</body>
+
+<body package="JavascriptEngine-JSDoc">experimental	self tag: #version description: 'Experimental feature, might be removed at any time'</body>
+
+<body package="JavascriptEngine-JSDoc">function: aFunctionName parameters: arguments 	self printTag: 'function'.	self cr.</body>
+
+<body package="JavascriptEngine-JSDoc">function: aFunctionName parameters: arguments length: length 	self function: aFunctionName parameters: arguments.</body>
+
+<body package="JavascriptEngine-JSDoc">optionalParam: anIdentifierSymbol collectionType: aTypeSymbol description: aDescription 	self tag: #param type: aTypeSymbol isCollection: true identifier: anIdentifierSymbol isOptional: true description: aDescription.</body>
+
+<body package="JavascriptEngine-JSDoc">optionalParam: anIdentifierSymbol type: aTypeSymbol description: aDescription 	self tag: #param type: aTypeSymbol isCollection: false identifier: anIdentifierSymbol isOptional: true description: aDescription.</body>
+
+<body package="JavascriptEngine-JSDoc">param: anIdentifierSymbol collectionType: aTypeSymbol description: aDescription 	self tag: #param type: aTypeSymbol isCollection: true identifier: anIdentifierSymbol isOptional: false description: aDescription.</body>
+
+<body package="JavascriptEngine-JSDoc">param: anIdentifierSymbol type: aTypeSymbol description: aDescription 	self tag: #param type: aTypeSymbol isCollection: false identifier: anIdentifierSymbol isOptional: false description: aDescription.</body>
+
+<body package="JavascriptEngine-JSDoc">property: aPropertyName	" no tag required "</body>
+
+<body package="JavascriptEngine-JSDoc">property: aPropertyName readOnly: readOnly	" no tag required "</body>
+
+<body package="JavascriptEngine-JSDoc">prototypeFunction: aFunctionName parameters: arguments	self function: aFunctionName parameters: arguments</body>
+
+<body package="JavascriptEngine-JSDoc">prototypeFunction: aFunctionName parameters: arguments length: length	self prototypeFunction: aFunctionName parameters: arguments</body>
+
+<body package="JavascriptEngine-JSDoc">prototypeProperty: aPropertyName	" no tag required "</body>
+
+<body package="JavascriptEngine-JSDoc">see: aString	| description |	description := self fullNameOfType: aString asSymbol implementationSuperClass: JSEFirstClassObject.	self tag: #see description: description</body>
+
+<body package="JavascriptEngine-JSDoc">see: aTypeSymbol property: aPropertyName	self see: aTypeSymbol property: aPropertyName separator: '#'</body>
+
+<body package="JavascriptEngine-JSDoc">see: aTypeSymbol static: aPropertyName	self see: aTypeSymbol property: aPropertyName separator: '.'</body>
+
+<body package="JavascriptEngine-JSDoc">sendToPrototype	" internal implementation pragma, do not export "</body>
+
+<body package="JavascriptEngine-JSDoc">since: aString	self tag: #since description: aString</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag collectionType: aTypeSymbol description: aDescription	self tag: aTag collectionType: aTypeSymbol identifier: nil description: aDescription</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag collectionType: aTypeSymbol identifier: anIdentifierSymbol description: aDescription 	self tag: aTag type: aTypeSymbol isCollection: true identifier: anIdentifierSymbol isOptional: false description: aDescription.</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag description: aDescription	self tag: aTag type: nil description: aDescription</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag type: aTypeSymbol description: aDescription 	self tag: aTag type: aTypeSymbol identifier: nil description: aDescription</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag type: aTypeSymbol identifier: anIdentifierSymbol description: aDescription 	self tag: aTag type: aTypeSymbol isCollection: false identifier: anIdentifierSymbol isOptional: false description: aDescription.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">indentLevel	^ indentLevel</body>
+
+<body package="JavascriptEngine-JSDoc">indentLevel: aIndentLevel 	indentLevel := aIndentLevel.</body>
+
+<body package="JavascriptEngine-JSDoc">object	^ object</body>
+
+<body package="JavascriptEngine-JSDoc">object: aObject 	object := aObject.</body>
+
+<body package="JavascriptEngine-JSDoc">stream	^ stream</body>
+
+<body package="JavascriptEngine-JSDoc">stream: aStream 	stream := aStream.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printAnnotationsOfMethod: anAnnotatedMethod	" write comments and tags "	self printStart.	self printCommentOfMethod: anAnnotatedMethod .	self printTagsOfMethod: anAnnotatedMethod.	self printEnd.</body>
+
+<body package="JavascriptEngine-JSDoc">printCommentOfMethod: anAnnotatedMethod 	| comment expandedStream |	anAnnotatedMethod attributeMessages do: 		[: attributeMessage |			attributeMessage selector = #comment: 				ifTrue: 				[						comment := attributeMessage arguments first.					" Macros in Kommentaren expandieren "					expandedStream := String new writeStream.					'\$\(#\w+\)' asRegex 						copyStream: comment readStream						to: expandedStream						translatingMatchesUsing: [: match | anAnnotatedMethod mclass perform: ( match copyFrom: 4 to: match size - 1 ) asSymbol ].					self printComment: expandedStream contents				]		].</body>
+
+<body package="JavascriptEngine-JSDoc">printErrorClassHierarchy: aJSEErrorClass 	| namespacePath |	namespacePath := aJSEErrorClass objectNamespacePath.	self printNamespaceGlobal: ( namespacePath copyFrom: 1 to: namespacePath size - 1 ).	self printStart.	self printTag: 'namespace' tagDescription: 'Namespace of errors'.	self printEnd.	self printNamespacePath: namespacePath.	self nextPutAll: ' = {'; cr.	self increaseIndentWhile: 		[(( aJSEErrorClass allSubclasses reject: [: errorClass | errorClass isAbstract ]) 				sortedBy: [: errorClass | errorClass objectName ]) 				do: [: errorClass | self printErrorClass: errorClass ]				separatedBy: 				[	self nextPut: $,; cr;						cr				]		].	self cr;		nextPutAll: '};'.</body>
+
+<body package="JavascriptEngine-JSDoc">printHeaderTag: tag comment: aComment namespace: objectNamespacePath extends: extendedClass constructor: constructor	" print the definition of the object "	self printNamespaceGlobal: objectNamespacePath.	self printStart.	" the constructor has to be described before the class / namespace  "	constructor notNil		ifTrue: [			self printCommentOfMethod: constructor  .			self printTagsOfMethod: constructor .			insertEmptyLine := true.		].	self printTag: tag tagDescription: aComment.	(extendedClass notNil and: [ extendedClass  ~= JSEObject ])		ifTrue: [ self printTag: 'extends' tagDescription: extendedClass qualifiedObjectName. ].	self printEnd.</body>
+
+<body package="JavascriptEngine-JSDoc">printPropertyAssignment: propertyName 	self printIndent.	" property assignment within object initializer "	self nextPutAll: propertyName; nextPutAll: ': '.</body>
+
+<body package="JavascriptEngine-JSDoc">printPropertyAssignmentExpression: propertyName objectName: objectName isPrototype: isPrototype 	self printIndent.	" constructor / prototype  property assignment "	self nextPutAll: objectName.	isPrototype 		ifTrue: [ self nextPutAll: '.prototype' ].	self nextPut: $.; nextPutAll: propertyName; nextPutAll: ' = '.</body>
+
+<body package="JavascriptEngine-JSDoc">printTagsOfMethod: anAnnotatedMethod 	anAnnotatedMethod attributeMessages do: 		[: attributeMessage |			| selector |			selector := attributeMessage selector.			( self respondsTo: selector ) 				ifTrue: [ self perform: attributeMessage selector withArguments: attributeMessage arguments ]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter</class-id> <category>printing - private</category>
+
+<body package="JavascriptEngine-JSDoc">checkExample: aJavascriptExample	JSERuntimeBuilder compileSource: aJavascriptExample</body>
+
+<body package="JavascriptEngine-JSDoc">fullNameOfType: aTypeSymbol implementationSuperClass: implementationSuperClass 	| implementationClasses implementationClass |	implementationClasses := implementationSuperClass allSubclasses 			select: [: each | each isAbstract not and: [ each objectName = aTypeSymbol or: [ each fullyQualifiedReference asSymbol = aTypeSymbol ]]].	implementationClasses size &gt; 1 		ifTrue: [ implementationClasses := implementationClasses select: [: each | each environment = object class environment ]].	implementationClass := implementationClasses singleElementOrNil.	^ implementationClass notNil 		ifTrue: [ implementationClass qualifiedObjectName ]		ifFalse: [ aTypeSymbol ]</body>
+
+<body package="JavascriptEngine-JSDoc">increaseIndentWhile: aBlock	| old |	old := self indentLevel.	self indentLevel: old + 1.	^ aBlock ensure: [ self indentLevel: old ].</body>
+
+<body package="JavascriptEngine-JSDoc">insertEmptyLine	^ insertEmptyLine ifNil: [ false]</body>
+
+<body package="JavascriptEngine-JSDoc">printComment: aComment 	| lines |	lines := aComment asString tokensBasedOn: Character cr.	lines do: 		[: line |			self printLineStart.			self space; nextPutAll: line jseTrim; cr		].	insertEmptyLine := true.</body>
+
+<body package="JavascriptEngine-JSDoc">printEnd	self indentLevel timesRepeat: [ self stream tab ].	self nextPutAll: '**/'; cr.</body>
+
+<body package="JavascriptEngine-JSDoc">printErrorClass: anErrorClass 	self printStart.	self printTag: 'class' tagDescription: anErrorClass jsDocComment.	self printEnd.	self printIndent.	self nextPutAll: anErrorClass objectName; nextPutAll: ': function() {}'.</body>
+
+<body package="JavascriptEngine-JSDoc">printIndent	self indentLevel timesRepeat: [ self tab ].</body>
+
+<body package="JavascriptEngine-JSDoc">printLineStart	self insertEmptyLine 		ifTrue: 		[	insertEmptyLine := false.			self printLineStart.			self cr		].	self indentLevel timesRepeat: [ self tab ].	self nextPutAll: ' *'.</body>
+
+<body package="JavascriptEngine-JSDoc">printNamespaceGlobal: objectNamespacePath 	objectNamespacePath notEmpty 		ifTrue: 		[	" define the namespace "			self nextPutAll: '/*global '.			self printNamespacePath: objectNamespacePath.			self nextPutAll: '*/'; cr;				cr		].</body>
+
+<body package="JavascriptEngine-JSDoc">printNamespacePath: objectNamespacePath 	objectNamespacePath do: [: pathPart | self nextPutAll: pathPart ] separatedBy: [ self nextPut: $. ].</body>
+
+<body package="JavascriptEngine-JSDoc">printStart	self printIndent.	self nextPutAll: '/**'; cr.</body>
+
+<body package="JavascriptEngine-JSDoc">printTag: aTag 	self printLineStart.	self nextPutAll: ' @'; nextPutAll: aTag.</body>
+
+<body package="JavascriptEngine-JSDoc">printTag: tag tagDescription: description	(description isNil or: [ description isEmpty ]) ifTrue: [		self printTag: tag;			cr.		^ self		].	(tag = 'namespace' or: [ tag = 'class' ]) ifTrue: [		self printLineStart;			printTagDescription: description;			printTag: tag;			cr.		^ self		].	self printTag: tag;		printTagDescription: description.</body>
+
+<body package="JavascriptEngine-JSDoc">printTagDescription: aDescription 	| lines string |	aDescription notNil 		ifTrue: 		[	string := aDescription isSymbol 					ifTrue: [( UserMessage defaultString: aDescription asString key: aDescription ) asString ]					ifFalse: [ aDescription ].			lines := string tokensBasedOn: Character cr.			lines 				do: 				[: line |					line notEmpty 						ifTrue: 						[	" avoid JSLint complaining about mixed spaces and tabs "							( line first = Character tab or: [ line first = Character space ]) 								ifFalse: [ self space ].							self nextPutAll: line						]				]				separatedBy: 				[	self cr.					self printLineStart				]		].	self cr.</body>
+
+<body package="JavascriptEngine-JSDoc">printType: aTypeSymbol isCollection: isCollection forTag: aTag 	aTypeSymbol notNil 		ifTrue: [ self printTypes: ( Array with: aTypeSymbol ) isCollection: isCollection forTag: aTag ].</body>
+
+<body package="JavascriptEngine-JSDoc">printTypes: someTypeSymbols isCollection: isCollection forTag: aTag 	| implementationSuperClass typeName |	someTypeSymbols notEmpty 		ifTrue: 		[	self nextPutAll: ' {'.			implementationSuperClass := aTag = #throws 					ifTrue: [ JSEError ]					ifFalse: [ JSEAbstractObject ].			someTypeSymbols 				do: 				[: typeSymbol |					typeName := self fullNameOfType: typeSymbol implementationSuperClass: implementationSuperClass.					self nextPutAll: typeName.					isCollection 						ifTrue: [ self nextPutAll: '[]' ]				]				separatedBy: [ self nextPutAll: '|' ].			self nextPutAll: '}'		].</body>
+
+<body package="JavascriptEngine-JSDoc">see: aTypeSymbol property: aPropertyName separator: propertySeparator	| typeName |	typeName := self fullNameOfType: aTypeSymbol implementationSuperClass: JSEFirstClassObject.	self tag: #see description: typeName, propertySeparator, aPropertyName</body>
+
+<body package="JavascriptEngine-JSDoc">tag: aTag type: aTypeSymbolOrCollection isCollection: isCollection identifier: anIdentifierSymbol isOptional: isOptional description: aDescription 	aTag = #example 		ifTrue: [ self checkExample: aDescription ].	self printTag: aTag.	aTypeSymbolOrCollection notNil ifTrue: [		aTypeSymbolOrCollection isSymbol			ifTrue: [ self printType: aTypeSymbolOrCollection isCollection: isCollection forTag: aTag.]			ifFalse: [ self printTypes: aTypeSymbolOrCollection isCollection: isCollection forTag: aTag.]	].	anIdentifierSymbol notNil 		ifTrue: 		[	self space.			isOptional 				ifTrue: [ self nextPut: $[ ].			self nextPutAll: anIdentifierSymbol.			isOptional 				ifTrue: [ self nextPut: $] ]		].	aTag = #example "example description needs to start on next line, bug 3456"		ifTrue: [ self cr; printLineStart. ].	self printTagDescription: aDescription.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter</class-id> <category>printing - stream</category>
+
+<body package="JavascriptEngine-JSDoc">cr	self stream cr</body>
+
+<body package="JavascriptEngine-JSDoc">nextPut: aCharacter	self stream nextPut: aCharacter</body>
+
+<body package="JavascriptEngine-JSDoc">nextPutAll: aString	self stream nextPutAll: aString</body>
+
+<body package="JavascriptEngine-JSDoc">space	self stream space</body>
+
+<body package="JavascriptEngine-JSDoc">tab	self stream tab</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">object: aObject indentLevel: aIndentLevel on: aStream 	^ self new object: aObject ; indentLevel: aIndentLevel ; stream: aStream ; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocPrinter class</class-id> <category>api</category>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocFor: aClass filename: aFilename 	" Generate annotated JavaScript source stubs in the directory for aClass "	| executionEnvironment codeStream generatedSource |	executionEnvironment := JSEGlobalCode new createExecutionEnvironment.	aClass shouldWriteJSDoc 		ifTrue: 		[	codeStream := String new writeStream.			aClass writeJSDocOn: codeStream in: executionEnvironment.			generatedSource := codeStream contents.			generatedSource notEmpty 				ifTrue: [( aFilename asFilename withEncoding: #utf8 ) writeStream nextPutAll: generatedSource; close ]		].</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocFor: aClass in: aDirectory 	" Generate annotated JavaScript source stubs in the directory for aClass "	self generateJSDocFor: aClass in: aDirectory as: aClass objectName , '.js'</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocFor: aClass in: aDirectory as: aName	" Generate annotated JavaScript source stubs in the directory for aClass "	self generateJSDocFor: aClass filename:  (aDirectory asFilename construct: aName )</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocFor: aClass on: aStream 	" Generate annotated JavaScript source stubs in the directory for aClass "	aClass shouldWriteJSDoc 		ifTrue: [ aClass writeJSDocOn: aStream in: JSEGlobalCode new createExecutionEnvironment ].</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocForErrors: aJSEErrorClass filename: aFilename 	" Generate an annotated JavaScript namespace stub "	| codeStream generatedSource |	codeStream := String new writeStream.	self generateJSDocForErrors: aJSEErrorClass on: codeStream.	generatedSource := codeStream contents.	generatedSource notEmpty 		ifTrue: [( aFilename asFilename withEncoding: #utf8 ) writeStream nextPutAll: generatedSource; close ].</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocForErrors: aJSEErrorClass in: aDirectory	self generateJSDocForErrors: aJSEErrorClass filename: (aDirectory construct: aJSEErrorClass objectNamespacePath last,  '.js').</body>
+
+<body package="JavascriptEngine-JSDoc">generateJSDocForErrors: aJSEErrorClass on: aStream	" Generate an annotated JavaScript namespace stub "	| printer |	printer := JSDocPrinter object: self indentLevel: 0 on: aStream.	printer printErrorClassHierarchy: aJSEErrorClass.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">assembleElements: elements 	" assign functions to their container objects  "	| elementsToAssemble |	elementsToAssemble := elements select: [: element | element shouldAssembleParts ].	[ elementsToAssemble notEmpty ] whileTrue: 		[ | element |			element := elementsToAssemble removeFirst.			elements copy do: 				[: otherElement | ( otherElement ~~ element and: [ element shouldAddPart: otherElement ]) 						ifTrue: 						[	element addElement: otherElement.							elements remove: otherElement						]				]		].	^ elements</body>
+
+<body package="JavascriptEngine-JSDoc">globalRegularExpressions	^ Array		with: '/\*\s*global.*\*/' 		with: '@fileOverview'</body>
+
+<body package="JavascriptEngine-JSDoc">isGlobalComment: commentToken 	^ self globalRegularExpressions anySatisfy: [: regexString | ( JSEPlatform asRegex: regexString ignoreCase: true ) search: commentToken value ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-JSDoc">parseFile: aFilename 	" Parse a JS file and extract JSDoc elements. 	Returns a JSDocFile "	| source tree commentTokens tokens globalAnnotations visitor elements |	source := aFilename asFilename contentsOfEntireFile.	source replaceAll: Character lf with: Character cr.	" comments are not part of the AST, so DIY "	tokens := JSELexicalParser new emitCommentTokens: true;			parse: source.	tree := JSESyntacticParser new factory: JSESyntaxTreeFactory new;			parse: ( tokens reject: [: token | token type = #comment ]).	commentTokens := OrderedCollection new.	globalAnnotations := OrderedCollection new.	tokens do: 		[: token |			token type = #comment 				ifTrue: 				[( self isGlobalComment: token ) 						ifTrue: [ globalAnnotations addAll: ( JSDocTag parseAnnotationsFromToken: token )]						ifFalse: [ commentTokens add: token ]				]		].	visitor := JSDocVisitor commentsStream: commentTokens readStream.	visitor visit: tree.	elements := self assembleElements: visitor elements.	^ JSDocFile node: tree annotations: globalAnnotations elements: elements</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocParser class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">generateCodeForFilesInDirectory: aDirectory class: aSuperclass globalClass: aGlobalSuperclass	" Generate JSE object classes from the annotated JavaScript files in the directory.	aSuperclass is the superclass of objects tagged as @class 	aGlobalSuperclass is the superclass of objects tagged as @namespace "	| directory docFiles |	directory := aDirectory asFilename.	docFiles := OrderedCollection new.	directory directoryContents do: [: each | docFiles add: ( JSDocFile fromFile: ( directory construct: each ))].	docFiles do: [: docFile | docFile generateCodeForClass: aSuperclass objectClass: aGlobalSuperclass ].	docFiles do: [: docFile | docFile connectToSuperclasses ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">identifier	^ identifier</body>
+
+<body package="JavascriptEngine-JSDoc">identifier: aIdentifier 	identifier := aIdentifier.</body>
+
+<body package="JavascriptEngine-JSDoc">name	^ name</body>
+
+<body package="JavascriptEngine-JSDoc">name: aName 	name := aName.</body>
+
+<body package="JavascriptEngine-JSDoc">type	^ type</body>
+
+<body package="JavascriptEngine-JSDoc">type: aType 	type := aType.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printOn: aStream 	aStream nextPut: $@.	aStream nextPutAll: ( self name ifNil: [ '???' ]).	self type notNil 		ifTrue: 		[	aStream nextPutAll: ' {'.			aStream nextPutAll: self type.			aStream nextPutAll: '}'		].	self identifier notNil 		ifTrue: 		[	aStream space.			aStream nextPutAll: self identifier.		].	self description notNil 		ifTrue: 		[	aStream space.			aStream nextPutAll: self description		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-JSDoc">isTag	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">writeTagPragmasOn: aStream 	" write one of the pragmas defined by JSEAbstractObject class&gt;&gt;tagPragmas "	| localType |	( self type isNil and: [ self identifier isNil and: [ self description isNil ]]) 		ifTrue: 		[	" empty tag, e.g. @function "			^ self		].	aStream tab; nextPutAll: '&lt;tag: #'.	aStream nextPutAll: self name.	self type notNil 		ifTrue: 		[	localType := ( self type tokensBasedOn: $. ) last.			( localType endsWith: '[]' ) 				ifTrue: 				[	" Array type "					aStream nextPutAll: ' collectionType: #'.					localType := localType copyFrom: 1 to: localType size - 2				]				ifFalse: [ aStream nextPutAll: ' type: #' ].			" write the local name "			aStream nextPutAll: localType		].	self identifier notNil 		ifTrue: 		[	self type isNil 				ifTrue: [ aStream nextPutAll: ' type: nil' ].			aStream nextPutAll: ' identifier: #'.			aStream nextPutAll: self identifier		].	aStream nextPutAll: ' description: '.	self description notNil 		ifTrue: 		[	aStream nextPut: $'.			aStream nextPutAll: self description; nextPut: $'		]		ifFalse: [ aStream nextPutAll: 'nil' ].	aStream nextPut: $&gt;; cr.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-JSDoc">parseFrom: stream 	" Extract the next tag from the stream "	| descriptionStream newline char descriptionString |	self name: ( self parseIdentifierFrom: stream ).	self skipSpacesIn: stream.	stream peek = ${ 		ifTrue: 		[	type := stream upTo: $}.			self type: ( type copyFrom: 2 to: type size ).			self skipSpacesIn: stream		].	( self class tagsWithIdentifiers includes: self name ) 		ifTrue: 		[	self identifier: ( self parseIdentifierFrom: stream ).			self skipSpacesIn: stream		].	" parse the descripion "	descriptionStream := String new writeStream.	newline := false.	[	char := stream peek.		char = $@ or: [ char isNil ]	] whileFalse: 		[	stream next.			newline 				ifTrue: [ descriptionStream nextPut: Character cr ].			( newline := char = Character cr ) 				ifFalse: [ descriptionStream nextPut: char ]		].	descriptionString := descriptionStream contents jseTrim.	descriptionString notEmpty 		ifTrue: [ self description: descriptionString ].</body>
+
+<body package="JavascriptEngine-JSDoc">parseIdentifierFrom: stream 	| identifierStream char |	identifierStream := String new writeStream.	[	char := stream peek.		char notNil and: [ char isAlphabetic ]	] whileTrue: 		[	stream next.			identifierStream nextPut: char		].	^ identifierStream contents</body>
+
+<body package="JavascriptEngine-JSDoc">skipSpacesIn: aStream	[ | char |		( char := aStream peek ) notNil and: [ #( 9 32 ) includes: char codePoint ]	] whileTrue: [ aStream next ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocTag class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagsWithIdentifiers	^ #(		'param'	)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFile</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">node	^ node</body>
+
+<body package="JavascriptEngine-JSDoc">node: aNode 	node := aNode.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFile class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagName	^ 'fileOverview'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFile class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">fromFile: aFilename	^ JSDocParser new parseFile: aFilename</body>
+
+<body package="JavascriptEngine-JSDoc">node: aNode annotations: someAnnotations elements: aElements 	^ self new node: aNode;		annotations: someAnnotations;		elements: aElements 		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocComment</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">name	^ #comment</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocComment</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printOn: aStream 	aStream nextPutAll: self description.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocComment class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-JSDoc">description: aDescriptionString 	^ self new description: aDescriptionString;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFunction</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">description	| comments |	comments := self comments.	^ comments notEmpty 		ifTrue: [ comments first description ]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-JSDoc">isPrototypeFunction	^ isPrototypeFunction</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFunction</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">printDetailsOn: aStream 	self containerName notNil 		ifTrue: 		[	aStream nextPutAll: self containerName; nextPut: $..			self isPrototypeFunction 				ifTrue: [ aStream nextPutAll: 'protoype.' ]		].	aStream nextPutAll: self localName.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFunction</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">initializeFromNodes	| containerIdentifier |	super initializeFromNodes.	containerIdentifier := self identifierNode jsDocBase.	containerIdentifier notNil 		ifTrue: 		[	isPrototypeFunction := containerIdentifier jsDocName = 'prototype'.			containerName := isPrototypeFunction 					ifTrue: [ containerIdentifier base printString ]					ifFalse: [ containerIdentifier printString ]		]		ifFalse: [ isPrototypeFunction := false ].</body>
+
+<body package="JavascriptEngine-JSDoc">isPartOfObjectNamed: aName	^ self containerName = aName</body>
+
+<body package="JavascriptEngine-JSDoc">shouldAddPart: aJSDocElement	^ false</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFunction</class-id> <category>code generation</category>
+
+<body package="JavascriptEngine-JSDoc">generateMembersOf: aContainerClass 	" Ensure that a tagged method exists "	" compute the selector and arguments "	| selector argumentSymbols selectorWithExecutionContext |	selector := self localName asString.	" prefix with 'function' to separate the function from internal methods "	selector := ( 'function' copyWith: selector first asUppercase ) , ( selector copyFrom: 2 to: selector size ).	argumentSymbols := self contentNode formalParameters collect: [: identifier | identifier identifierSymbol ].	argumentSymbols notEmpty 		ifTrue: 		[	selector := selector , ':'.			2 to: argumentSymbols size do: [: i | selector := selector , ( argumentSymbols at: i ) , ':' ]		].	selector := selector asSymbol.	selectorWithExecutionContext := ( argumentSymbols isEmpty 			ifTrue: [ selector , ':' ]			ifFalse: [ selector , 'executionContext:' ]) asSymbol.	(( aContainerClass canUnderstand: selector ) or: [ aContainerClass canUnderstand: selectorWithExecutionContext ]) 		ifFalse: 		[	" no method exists  "			self generateMethodNamed: selectorWithExecutionContext arguments: ( argumentSymbols copyWith: #executionContext ) of: aContainerClass		].</body>
+
+<body package="JavascriptEngine-JSDoc">generateMethodNamed: selector arguments: argumentsSymbols of: aClass 	" Generate a tagged method "	| methodStream selectorStream i |	methodStream := String new writeStream.	" selector "	selectorStream := selector readStream.	i := 1.	[ selectorStream atEnd ] whileFalse: 		[	i &gt; 1 				ifTrue: [ methodStream space ].			methodStream nextPutAll: ( selectorStream upTo: $: ).			methodStream nextPutAll: ': '; nextPutAll: ( argumentsSymbols at: i ).			i := i + 1		].	methodStream cr.	" comment "	self description ifNotNil: 		[: description |			methodStream				tab; nextPut: $"; nextPutAll: description; nextPut: $"; cr;				cr		].	" function pragma "	methodStream tab; nextPutAll: '&lt;'.	self isPrototypeFunction 		ifTrue: [ methodStream nextPutAll: 'prototypeFunction' ]		ifFalse: [ methodStream nextPutAll: 'function' ].	methodStream		nextPutAll: ': #'; nextPutAll: self localName; nextPutAll: ' parameters: '; nextPutAll: ( argumentsSymbols copyFrom: 1 to: argumentsSymbols size - 1 ) printString; nextPutAll: '&gt;'; cr.	self isPrototypeFunction 		ifTrue: [ methodStream tab; nextPutAll: '&lt;sendToThis&gt;'; cr ].	" tag pragmas "	self writeTagPragmasOn: methodStream.	" notYetImplemented "	methodStream cr;		tab; nextPutAll: 'self notYetImplemented'.	JSEPlatform compile: methodStream contents into: aClass classified: #'built in'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSDocFunction class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">tagName	^ 'function'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNameNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocBase	^ nil</body>
+
+<body package="JavascriptEngine-JSDoc">jsDocName	^ self identifierString</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrimitiveValue</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocContentForPropertyNamed: propertyName method: anAnnotatedMethod printer: printer 	printer nextPutAll: self toStringValue.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocElementClass	^ JSDocFunction</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDotMemberNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocBase	^ self base</body>
+
+<body package="JavascriptEngine-JSDoc">jsDocName	^ self member identifierString</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractObject class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">customer	" symbol for customer-specific objects "	^ nil</body>
+
+<body package="JavascriptEngine-JSDoc">shouldWriteJSDoc	^ self objectName notNil and: [ self customer isNil ]</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocOn: codeStream in: executionEnvvironment	( self getPrototypeIn: executionEnvvironment ) writeJSDocOn: codeStream.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">shouldWriteJSDocForMethod: anAnnotatedMethod of: anObject 	"Do not include customer specific functions "	| attributeMessages |	attributeMessages := anAnnotatedMethod attributeMessages.	attributeMessages do: 		[: message |			message selector = #customer: 				ifTrue: [ ^ false ].			message selector = #condition: 				ifTrue: 				[( anObject perform: message arguments first ) 						ifFalse: [ ^ false ]				]		].	^ true</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocContentForPropertyNamed: propertyName method: anAnnotatedMethod printer: printer 	" write the content of the property "	printer nextPutAll: 'undefined'.</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocOn: aStream 	" Write stubs annotated with JSDoc tags on the output stream "</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocPropertyNamed: propertyName of: anObject method: anAnnotatedMethod printer: printer assignmentPrintBlock: assignmentPrintBlock 	" Write as a property of aJavascriptObject on the stream "	printer printAnnotationsOfMethod: anAnnotatedMethod.	assignmentPrintBlock value.	self writeJSDocContentForPropertyNamed: propertyName method: anAnnotatedMethod printer: printer.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocConstructorMethod	" Returns the constructor method, if it is can be used to construct new objects of this kind "	| pragmas method |	pragmas := OrderedCollection new.	self class constructorPragmas do: [: pragmaName | pragmas addAll: ( Pragma allNamed: pragmaName in: self class )].	^ pragmas size = 1 		ifTrue: 		[	method := pragmas first method.			" does it contain any other pragmas? "			method  attributeMessages size &gt; 1 				ifTrue: [ method ]				ifFalse: [ nil ]		]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-JSDoc">jsDocExtendedClass	" class of the extended prototype "	^ self internalPrototype 		ifNotNil: 		[: superProto | ( superProto isUndefined or: [ superProto isJSENull or: [ superProto == JSEObject getPrototype ]]) 				ifTrue: [ nil ]				ifFalse: [ superProto class ]		]		ifNil: [ nil ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocMemberPragmaNames	^ self isPrototype		ifTrue: [ self class prototypePragmas  ]		ifFalse: [ self class staticPragmas ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>private</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocMembersOf: anObject pragmas: pragmaNames do: aBlock separatedBy: aSeparatorBlock 	" evaluate the block with		- property name		- property value		- defining pragma	for each property / function of the object "	| pragmas first |	pragmas := OrderedCollection new.	" collect all non-inherited pragmas "	pragmaNames do: [: pragmaName | pragmas addAll: ( Pragma allNamed: pragmaName from: self class to: self class pragmaRootClass )].	first := true.	( pragmas sortedBy: [: pragma | pragma argumentAt: 1 ]) do: 		[: pragma | | propertyName propertyValue |			propertyName := pragma argumentAt: 1.			propertyValue := anObject getOrNil: propertyName.			( propertyValue notNil and: [ self shouldWriteJSDocForMethod: pragma method of: anObject ]) 				ifTrue: 				[	first 						ifTrue: [ first := false ]						ifFalse: 						[	aSeparatorBlock notNil 								ifTrue: [ aSeparatorBlock value ]						].					aBlock value: propertyName value: propertyValue value: pragma				]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFirstClassObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocMembersOf: anObject on: printer 	" write as property assignments "	| objectName |	objectName := self class qualifiedObjectName.	self 		jsDocMembersOf: anObject		pragmas: anObject jsDocMemberPragmaNames		do: 		[: propertyName : propertyValue : pragma |			propertyValue 				writeJSDocPropertyNamed: propertyName				of: anObject				method: pragma method				printer: printer				assignmentPrintBlock: [ printer printPropertyAssignmentExpression: propertyName objectName: objectName isPrototype: anObject isPrototype ].			printer nextPutAll: ';'; cr;				cr		]		separatedBy: [ ].</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocOn: aStream 	" write a constructor and prototype functions "	| printer constructor |	printer := JSDocPrinter object: self indentLevel: 0 on: aStream.	printer 		printHeaderTag: 'class'		comment: self class jsDocComment		namespace: self objectNamespacePath		extends: self jsDocExtendedClass		constructor: self jsDocConstructorMethod.	self objectNamespacePath do: [: namePart | printer nextPutAll: namePart; nextPut: $. ].	printer nextPutAll: self objectName.	printer nextPutAll: ' = '.	constructor :=  self get: #constructor.	constructor writeJSDocDefinitionTo: printer anAnnotatedMethod: nil.	printer nextPut: $;; cr;		cr.	self writeJSDocMembersOf: self on: printer.	self writeJSDocMembersOf: constructor on: printer.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">taggedParametersFromMethod: anAnnotatedMethod 	" extract parameter names from @param tags "	| taggedParameters genericTagPragmas parameterPragmas |	anAnnotatedMethod isNil 		ifTrue: [ ^ nil ].	taggedParameters := OrderedCollection new.	parameterPragmas := Dictionary new.	genericTagPragmas := #( #tag:type:identifier:description: #tag:collectionType:identifier:description: ).	genericTagPragmas do: [: pragmaSelector | parameterPragmas at: pragmaSelector put: 3 ].	self class parameterTagPragmas do: [: pragmaSelector | parameterPragmas at: pragmaSelector put: 1 ].	( Pragma allInMethod: anAnnotatedMethod ) do: 		[: pragma | | identifier |			parameterPragmas 				at: pragma keyword				ifPresent: 				[: identifierPosition | | isParameter |					isParameter := ( genericTagPragmas includes: pragma keyword) 							ifTrue: [( pragma argumentAt: 1 ) = #param ]							ifFalse: [ true ].					isParameter 						ifTrue: 						[	identifier := pragma argumentAt: identifierPosition.							identifier isNil 								ifTrue: [ ^ nil ].							taggedParameters add: identifier						]				]		].	^ taggedParameters notEmpty 		ifTrue: [ taggedParameters ]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocContentForPropertyNamed: propertyName method: anAnnotatedMethod printer: printer 	self writeJSDocDefinitionTo: printer anAnnotatedMethod: anAnnotatedMethod.</body>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocDefinitionTo: printer anAnnotatedMethod: anAnnotatedMethod 	| parameters |	printer nextPutAll: 'function'.	printer nextPutAll: '('.	parameters := ( self taggedParametersFromMethod: anAnnotatedMethod ) ifNil: [ self code function formalParameters ].	parameters notNil 		ifTrue: [ parameters do: [: formalParameter | printer nextPutAll: formalParameter ] separatedBy: [ printer nextPutAll: ', ' ]].	printer nextPutAll: ')'.	self code function.	printer nextPutAll: ' { }'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">jsDocElementClass	" Return the class of JSDoc elements representing this node "	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBuiltInObject class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocOn: codeStream in: executionEnvvironment	| container object |	container := executionEnvvironment globalObject.	self objectNamespacePath do: [ : pathPart |		container := container get: pathPart	].	object := container get: self objectName.	object writeJSDocOn: codeStream.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBuiltInObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-JSDoc">writeJSDocOn: aStream 	" write a literal object "	| printer |	printer := JSDocPrinter object: self indentLevel: 0 on: aStream.	printer printHeaderTag: 'namespace' comment: self class jsDocComment namespace: self objectNamespacePath extends: nil constructor: self jsDocConstructorMethod.	printer indentLevel: 1.	self objectNamespacePath isEmpty 		ifTrue: [ printer nextPutAll: 'var ' ]		ifFalse: [ self objectNamespacePath do: [: namePart | printer nextPutAll: namePart; nextPut: $. ]].	printer nextPutAll: self objectName.	printer nextPutAll: ' = {'; cr.	self 		jsDocMembersOf: self		pragmas: self jsDocMemberPragmaNames		do: 		[: propertyName : propertyValue : pragma |			propertyValue 				writeJSDocPropertyNamed: propertyName				of: self				method: pragma method				printer: printer				assignmentPrintBlock: [ printer printPropertyAssignment: propertyName ]		]		separatedBy: 		[	aStream nextPutAll: ','; cr;				cr		].	printer cr;		nextPutAll: '};'.</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTreeVisitor</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>strictModeStack </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractObject</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars>cachedPragmas cachedConditions cachedSendToPrototype </class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFirstClassObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>internalProperties properties internalPrototype </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBuiltInObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEFirstClassObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTreeNode</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceInterval sourceInformation </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDotMemberNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEMemberNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifier formalParameters functionBody </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPrimitiveValue</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEIdentifierNameNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifierString </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionObject</name>
+<environment>JSE</environment>
+<super>JSE.JSEFirstClassObject</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>code scope isStrict </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Runtime-Core</package>
+</attributes>
+</class>
+
+</st-source>

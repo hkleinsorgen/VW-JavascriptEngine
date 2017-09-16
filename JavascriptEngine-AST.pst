@@ -1,0 +1,2855 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-AST
+Notice: Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Allows to create an abstract syntax tree 
+
+Contains:
+- the factory to create AST nodes (JSESyntaxTreeFactory)
+- the AST nodes
+- visitors (subclasses of JSESyntaxTreeVisitor )
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96212
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-Parser-Core' '') #(#any 'JavascriptEngine-VisualWorks' ''))
+Id: 4ea0f7e3-c6eb-4cc5-907f-6987238f4907
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-AST
+Parcel: #('JavascriptEngine-AST')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-AST
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Namespace' '') #('JavascriptEngine-Parser-Core' '') #('JavascriptEngine-VisualWorks' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Url: file:///c:/develop/smalltalk/squeak/Pharo3.0/package-cache/JavascriptEngine-AST-hkleinsorgen.1.mcz
+Version: 0.5.1
+Date: 2:14:29 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:14:29</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSESyntaxTreeNode</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceInterval sourceInformation </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESwitchNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>switch clauses </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractCallNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>member arguments </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionCallNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractCallNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEExpressionStatementNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>expression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEArrayLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>array padBefore padAfter </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEControlStatementNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifier </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEContinueNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEControlStatementNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEOperatorNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>operator </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBinaryOperatorNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEOperatorNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>leftExpression rightExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifier formalParameters functionBody </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionDeclarationNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEFunctionNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionExpressionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEFunctionNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBreakNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEControlStatementNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEIdentifierNameNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifierString </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEIdentifierNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEIdentifierNameNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPrimitiveLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>literalValue </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEStringLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPrimitiveLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTreeVisitor</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>strictModeStack </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxValidationVisitor</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeVisitor</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>labelStack counters </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractPropertyAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>propertyName </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPropertyFunctionAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractPropertyAssignmentNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>functionBody </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEGetPropertyAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPropertyFunctionAssignmentNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSETryNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>tryBlock catch finally </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEIterationNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>statement </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEConditionalIterationNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>condition </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDoWhileNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEConditionalIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSELabelledStatementNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>label statement </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEForIterationNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEEnumeratingForNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEForIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>enumeratedObject </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEForEnumerateVariableNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEEnumeratingForNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>variableDeclaration </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEConditionalForNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEForIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>condition updateExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEForWithInitializerNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEConditionalForNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>initializer </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEForWithVariableListNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEConditionalForNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>variableDeclarations </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEReturnNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>return </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEForEnumerateElementsNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEEnumeratingForNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>enumerable </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThrowNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>throwExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERegularExpressionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>regularExpressionString flags </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSECommaSeparatedExpressionsNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>leftExpression rightExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEWithNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>withExpression statement </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDebuggerNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBlockNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>statements </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEThisNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPrintSourceVisitor</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeVisitor</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>indent stream </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEPrintSourceVisitor</class-id>
+<body>(Pretty-)prints a JavaScript AST</body>
+</comment>
+
+<class>
+<name>JSEGroupedExpressionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>expression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>leftHandSide operator assignedExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEVariableStatementNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>variableDeclarations </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEEmptyStatementNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxHighlightingVisitor</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeVisitor</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>text scopeStack reservedWords allowReservedWordIdentifier </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEMemberNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>base member </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEDotMemberNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEMemberNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEExceptionHandlerNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>block </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFinallyNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEExceptionHandlerNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractSwitchClauseNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>statements </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESwitchDefaultClause</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractSwitchClauseNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEAbstractConditionalNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>condition trueExpression falseExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEIfNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractConditionalNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEUnaryOperatorNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEOperatorNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>expression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESwitchClause</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractSwitchClauseNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>clause </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEObjectLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>propertyAssignments </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESourceElementListNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceElements </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEProgramNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESourceElementListNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBooleanLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPrimitiveLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESyntaxTreeFactory</name>
+<environment>JSE</environment>
+<super>JSE.JSEParsedNodesFactory</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceString </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESyntaxTreeFactory</class-id>
+<body>A factory that creates an abstract syntax tree (AST)</body>
+</comment>
+
+<class>
+<name>JSESyntaxHighlighter</name>
+<environment>JSE</environment>
+<super>JSE.JSEHighlighter</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>parser globalVariables </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESyntaxHighlighter</class-id>
+<body>Syntax highlighter</body>
+</comment>
+
+<class>
+<name>JSEPrefixOperatorNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEUnaryOperatorNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENullLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPrimitiveLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSESetPropertyAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPropertyFunctionAssignmentNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>parameter </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENumericLiteralNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEPrimitiveLiteralNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEWhileNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEConditionalIterationNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPostfixOperatorNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEUnaryOperatorNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEFunctionBodyNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESourceElementListNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEPropertyAssignmentNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractPropertyAssignmentNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>assignedExpression </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSENewNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractCallNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEBracketMemberNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEMemberNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSECatchNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEExceptionHandlerNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifier </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEVariableDeclarationNode</name>
+<environment>JSE</environment>
+<super>JSE.JSESyntaxTreeNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>identifier initializer </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEConditionalExpressionNode</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractConditionalNode</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-AST</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">children	| children |	children := OrderedCollection new.	self childrenDo: [ : childNode | children add: childNode ].	^ children</body>
+
+<body package="JavascriptEngine-AST">lineNumber	" Returns the first line number of the node "	^ self sourceString ifNotNil: [ : s | self sourceInterval ifNotNil: [ : interval | s jseLineNumberAt: interval first ]]</body>
+
+<body package="JavascriptEngine-AST">lineNumberInterval	" Returns the first and line number of the node "	^ self sourceString 		ifNotNil: [: s | self sourceInterval ifNotNil: [: interval | ( s jseLineNumberAt: interval first ) to: ( s jseLineNumberAt: interval last )]]</body>
+
+<body package="JavascriptEngine-AST">propertyNameSymbol	JSESyntaxError raiseSignal: 'Not a property name' sourceInterval: self sourceInterval</body>
+
+<body package="JavascriptEngine-AST">sourceInformation	^ sourceInformation</body>
+
+<body package="JavascriptEngine-AST">sourceInformation: aSourceInformation 	sourceInformation := aSourceInformation.</body>
+
+<body package="JavascriptEngine-AST">sourceInterval	sourceInterval isNil 		ifTrue: [ self computeSourceInterval ].	^ sourceInterval</body>
+
+<body package="JavascriptEngine-AST">sourceInterval: aSourceInterval 	sourceInterval := aSourceInterval.</body>
+
+<body package="JavascriptEngine-AST">sourceString	^ self sourceInformation ifNotNil: [ : info | info sourceString ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>validation</category>
+
+<body package="JavascriptEngine-AST">validate	" The parser does not detect all syntax errors, especially structural errors.	the syntax validation visitor performs the remaining checks "	JSESyntaxValidationVisitor new visit: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">hasStrictDirective	^ false</body>
+
+<body package="JavascriptEngine-AST">isDirective	^ false</body>
+
+<body package="JavascriptEngine-AST">isIdentifierName	^ false</body>
+
+<body package="JavascriptEngine-AST">isStrictDirective	^ false</body>
+
+<body package="JavascriptEngine-AST">returnsReferences	" true if the evaluation of this node can be a reference "	^ false</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">addFunctionDeclarationsTo: aSyntaxHighlightingVisitor</body>
+
+<body package="JavascriptEngine-AST">computeSourceInterval	| start stop |	start := nil.	stop := nil.	self childrenDo: 		[: childNode |			childNode sourceInterval ifNotNil: 				[: childInterval |					start := start notNil 							ifTrue: [ start min: childInterval first ]							ifFalse: [ childInterval first ].					stop := stop notNil 							ifTrue: [ stop max: childInterval last ]							ifFalse: [ childInterval last ]				]		].	start notNil 		ifTrue: [ sourceInterval := start to: stop ].</body>
+
+<body package="JavascriptEngine-AST">setSourceIntervalFromToken: aToken	sourceInterval := aToken start to: aToken stop.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-AST">childrenDo: aBlock 	" evaluates the block with each direct child node.	generic low level code "	JSESyntaxTreeNode instSize + 1 to: self class instSize		do: 		[: i | | thing |			thing := self instVarAt: i.			thing notNil 				ifTrue: 				[( thing isKindOf: JSESyntaxTreeNode ) 						ifTrue: [ aBlock value: thing ]						ifFalse: 						[( (thing isKindOf: Collection) and: [ thing isString not ]) 								ifTrue: [ thing do: aBlock ]						]				]		].</body>
+
+<body package="JavascriptEngine-AST">nodesDo: aBlock 	" evaluates the block with all nodes."	aBlock value: self.	self childrenDo: [ : childNode |		childNode nodesDo: aBlock 	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeNode</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-AST">printOn: aStream 	| visitor |"	^ ( self sourceString notNil and: [ self sourceInterval notNil ]) 		ifTrue: [ self sourceString copyFrom: self sourceInterval first to: self sourceInterval last ]		ifFalse: 		["				visitor := JSEPrintSourceVisitor on: aStream.			visitor visit: self		"]"</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptSwitch: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">clauses	^ clauses</body>
+
+<body package="JavascriptEngine-AST">clauses: aListOfClauses 	clauses := aListOfClauses.</body>
+
+<body package="JavascriptEngine-AST">switch	^ switch</body>
+
+<body package="JavascriptEngine-AST">switch: aSwitch 	switch := aSwitch.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractCallNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">arguments	^ arguments</body>
+
+<body package="JavascriptEngine-AST">arguments: aListOfArguments 	arguments := aListOfArguments.</body>
+
+<body package="JavascriptEngine-AST">member	^ member</body>
+
+<body package="JavascriptEngine-AST">member: aMemberExpression	member := aMemberExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionCallNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptFunctionCall: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEExpressionStatementNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptExpressionStatement: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEExpressionStatementNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">expression	^ expression</body>
+
+<body package="JavascriptEngine-AST">expression: aExpression 	expression := aExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEExpressionStatementNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">isDirective	^ self expression isDirective</body>
+
+<body package="JavascriptEngine-AST">isStrictDirective	^ self expression isStrictDirective</body>
+
+<body package="JavascriptEngine-AST">returnsReferences	^ self expression returnsReferences</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEArrayLiteralNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">array	^ array</body>
+
+<body package="JavascriptEngine-AST">array: aArray 	array := aArray.</body>
+
+<body package="JavascriptEngine-AST">padAfter	^ padAfter</body>
+
+<body package="JavascriptEngine-AST">padAfter: aPadAfter 	padAfter := aPadAfter.</body>
+
+<body package="JavascriptEngine-AST">padBefore	^ padBefore</body>
+
+<body package="JavascriptEngine-AST">padBefore: aPadBefore 	padBefore := aPadBefore.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEArrayLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptArrayLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEArrayLiteralNode</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-AST">childrenDo: aBlock 	array do: 		[: each |			each notNil 				ifTrue: [ aBlock value: each ]		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEControlStatementNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">identifier	^ identifier</body>
+
+<body package="JavascriptEngine-AST">identifier: aIdentifier 	identifier := aIdentifier.</body>
+
+<body package="JavascriptEngine-AST">identifierString	^ self identifier notNil 		ifTrue: [ self identifier identifierString ]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-AST">identifierSymbol	^ self identifierString ifNotNil: [ : s | s asSymbol ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEContinueNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptContinue: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEOperatorNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">operator	^ operator</body>
+
+<body package="JavascriptEngine-AST">operator: anOperatorSymbol 	operator := anOperatorSymbol.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBinaryOperatorNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">leftExpression	^ leftExpression</body>
+
+<body package="JavascriptEngine-AST">leftExpression: aLeftExpression 	leftExpression := aLeftExpression.</body>
+
+<body package="JavascriptEngine-AST">rightExpression	^ rightExpression</body>
+
+<body package="JavascriptEngine-AST">rightExpression: aRightExpression 	rightExpression := aRightExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBinaryOperatorNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptBinaryOperator: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">formalParameters	^ formalParameters</body>
+
+<body package="JavascriptEngine-AST">formalParameters: aListOfParameters	formalParameters := aListOfParameters</body>
+
+<body package="JavascriptEngine-AST">functionBody	^ functionBody</body>
+
+<body package="JavascriptEngine-AST">functionBody: aFunctionBody 	functionBody := aFunctionBody.</body>
+
+<body package="JavascriptEngine-AST">identifier	^ identifier</body>
+
+<body package="JavascriptEngine-AST">identifier: aIdentifier 	identifier := aIdentifier.</body>
+
+<body package="JavascriptEngine-AST">identifierSymbol	^ self identifier ifNotNil: [ : id | id identifierSymbol ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">hasStrictDirective	^ self functionBody hasStrictDirective</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionDeclarationNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor setStrictMode: self hasStrictDirective while: [ aVisitor acceptFunctionDeclaration: self ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionDeclarationNode</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">addFunctionDeclarationsTo: aSyntaxHighlightingVisitor	aSyntaxHighlightingVisitor addFunctionDeclaration: self identifier identifierString</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionExpressionNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor setStrictMode: self hasStrictDirective while: [ aVisitor acceptFunctionExpression: self ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBreakNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptBreak: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNameNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptIdentifierName: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNameNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">identifierString	^ identifierString</body>
+
+<body package="JavascriptEngine-AST">identifierString: aString 	identifierString := aString.</body>
+
+<body package="JavascriptEngine-AST">identifierSymbol	^ self identifierString ifNotNil: [ : s | s asSymbol ]</body>
+
+<body package="JavascriptEngine-AST">propertyNameSymbol	^ self identifierSymbol</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNameNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">isIdentifierName	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNameNode class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">fromToken: aToken 	^ self new 		identifierString: aToken literalValue;		setSourceIntervalFromToken: aToken;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptIdentifier: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIdentifierNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">returnsReferences	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrimitiveLiteralNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">literalValue	^ literalValue</body>
+
+<body package="JavascriptEngine-AST">literalValue: aLiteralValue 	literalValue := aLiteralValue.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrimitiveLiteralNode</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-AST">childrenDo: aBlock 	" primitives are leaves of the AST "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrimitiveLiteralNode class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">fromToken: aToken 	^ self new		literalValue: aToken literalValue;		setSourceIntervalFromToken: aToken;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStringLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptStringLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEStringLiteralNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">isDirective	^ true</body>
+
+<body package="JavascriptEngine-AST">isStrictDirective	^ self literalValue = 'use strict'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeVisitor</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptArrayLiteral: anArrayLiteralNode	^ self acceptNode: anArrayLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptAssignment: anAssignmentNode	^ self acceptNode: anAssignmentNode</body>
+
+<body package="JavascriptEngine-AST">acceptBinaryOperator: aBinaryOperatorNode	^ self acceptNode: aBinaryOperatorNode</body>
+
+<body package="JavascriptEngine-AST">acceptBlock: anBlockNode	^ self acceptNode: anBlockNode</body>
+
+<body package="JavascriptEngine-AST">acceptBooleanLiteral: anBooleanLiteralNode	^ self acceptNode: anBooleanLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptBracketMember: aBracketMemberNode	^ self acceptNode: aBracketMemberNode</body>
+
+<body package="JavascriptEngine-AST">acceptBreak: aBreakNode	^ self acceptNode: aBreakNode</body>
+
+<body package="JavascriptEngine-AST">acceptCatch: anCatchNode	^ self acceptNode: anCatchNode</body>
+
+<body package="JavascriptEngine-AST">acceptCommaSeparatedExpressions: aCommaSeparatedExpressionsNode	^ self acceptNode: aCommaSeparatedExpressionsNode</body>
+
+<body package="JavascriptEngine-AST">acceptConditionalExpression: aConditionalExpressionNode	^ self acceptNode: aConditionalExpressionNode</body>
+
+<body package="JavascriptEngine-AST">acceptContinue: aContinueNode	^ self acceptNode: aContinueNode</body>
+
+<body package="JavascriptEngine-AST">acceptDebugger: aDebuggerNode	^ self acceptNode: aDebuggerNode</body>
+
+<body package="JavascriptEngine-AST">acceptDoWhile: aDoWhileNode	^ self acceptNode: aDoWhileNode</body>
+
+<body package="JavascriptEngine-AST">acceptDotMember: aDotMemberNode	^ self acceptNode: aDotMemberNode</body>
+
+<body package="JavascriptEngine-AST">acceptEmptyStatement: anEmptyStatementNode	^ self acceptNode: anEmptyStatementNode</body>
+
+<body package="JavascriptEngine-AST">acceptExpressionStatement: anExpressionStatementNode	^ self acceptNode: anExpressionStatementNode</body>
+
+<body package="JavascriptEngine-AST">acceptFinally: aFinallyNode	^ self acceptNode: aFinallyNode</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateElements: aForEnumerateElementsNode	^ self acceptNode: aForEnumerateElementsNode</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateVariable: aForEnumerateVariableNode	^ self acceptNode: aForEnumerateVariableNode</body>
+
+<body package="JavascriptEngine-AST">acceptForWithInitializer: anInitializedForNode	^ self acceptNode: anInitializedForNode</body>
+
+<body package="JavascriptEngine-AST">acceptForWithVariableList: aForWithVariableListNode	^ self acceptNode: aForWithVariableListNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionBody: aFunctionBodyNode	^ self acceptNode: aFunctionBodyNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionCall: aFunctionCallNode	^ self acceptNode: aFunctionCallNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionDeclaration: aFunctionDeclarationNode	^ self acceptNode: aFunctionDeclarationNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionExpression: aFunctionExpressionNode	^ self acceptNode: aFunctionExpressionNode</body>
+
+<body package="JavascriptEngine-AST">acceptGetPropertyAssignment: aGetPropertyAssignmentNode	^ self acceptNode: aGetPropertyAssignmentNode</body>
+
+<body package="JavascriptEngine-AST">acceptGroupedExpression: aGroupedExpressionNode	^ self acceptNode: aGroupedExpressionNode</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifier: anIdentifierNode	^ self acceptNode: anIdentifierNode</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifierName: anIdentifierNameNode	^ self acceptNode: anIdentifierNameNode</body>
+
+<body package="JavascriptEngine-AST">acceptIf: anIfNode	^ self acceptNode: anIfNode</body>
+
+<body package="JavascriptEngine-AST">acceptLabelledStatement: aLabelledStatementNode	^ self acceptNode: aLabelledStatementNode</body>
+
+<body package="JavascriptEngine-AST">acceptNew: aNewNode	^ self acceptNode: aNewNode</body>
+
+<body package="JavascriptEngine-AST">acceptNode: aNode	" default implementation "	self visitChildrenOf: aNode.	^ nil</body>
+
+<body package="JavascriptEngine-AST">acceptNullLiteral: anNullLiteralNode	^ self acceptNode: anNullLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptNumericLiteral: anNumericLiteralNode	^ self acceptNode: anNumericLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptObjectLiteral: anObjectLiteralNode	^ self acceptNode: anObjectLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptPostfixOperator: anPostfixOperatorNode	^ self acceptNode: anPostfixOperatorNode</body>
+
+<body package="JavascriptEngine-AST">acceptPrefixOperator: aPrefixOperatorNode	^ self acceptNode: aPrefixOperatorNode</body>
+
+<body package="JavascriptEngine-AST">acceptProgram: aProgramNode	^ self acceptNode: aProgramNode</body>
+
+<body package="JavascriptEngine-AST">acceptPropertyAssignment: anPropertyAssignmentNode	^ self acceptNode: anPropertyAssignmentNode</body>
+
+<body package="JavascriptEngine-AST">acceptRegularExpression: anRegularExpressionNode	^ self acceptNode: anRegularExpressionNode</body>
+
+<body package="JavascriptEngine-AST">acceptReturn: aReturnNode	^ self acceptNode: aReturnNode</body>
+
+<body package="JavascriptEngine-AST">acceptSetPropertyAssignment: aSetPropertyAssignmentNode	^ self acceptNode: aSetPropertyAssignmentNode</body>
+
+<body package="JavascriptEngine-AST">acceptStringLiteral: anStringLiteralNode	^ self acceptNode: anStringLiteralNode</body>
+
+<body package="JavascriptEngine-AST">acceptSwitch: aSwitchNode	^ self acceptNode: aSwitchNode</body>
+
+<body package="JavascriptEngine-AST">acceptSwitchClause: aSwitchClauseNode	^ self acceptNode: aSwitchClauseNode</body>
+
+<body package="JavascriptEngine-AST">acceptSwitchDefaultClause: aSwitchDefaultClauseNode	^ self acceptNode: aSwitchDefaultClauseNode</body>
+
+<body package="JavascriptEngine-AST">acceptThis: aThisNode	^ self acceptNode: aThisNode</body>
+
+<body package="JavascriptEngine-AST">acceptThrow: aThrowNode	^ self acceptNode: aThrowNode</body>
+
+<body package="JavascriptEngine-AST">acceptTry: aTryNode	^ self acceptNode: aTryNode</body>
+
+<body package="JavascriptEngine-AST">acceptUnaryOperator: anUnaryOperatorNode	^ self acceptNode: anUnaryOperatorNode</body>
+
+<body package="JavascriptEngine-AST">acceptVariableDeclaration: aVariableDeclarationNode	^ self acceptNode: aVariableDeclarationNode</body>
+
+<body package="JavascriptEngine-AST">acceptVariableStatement: aVariableStatementNode	^ self acceptNode: aVariableStatementNode</body>
+
+<body package="JavascriptEngine-AST">acceptWhile: aWhileNode	^ self acceptNode: aWhileNode</body>
+
+<body package="JavascriptEngine-AST">acceptWith: aWithNode	^ self acceptNode: aWithNode</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeVisitor</class-id> <category>visitor</category>
+
+<body package="JavascriptEngine-AST">visit: aNode	^ aNode acceptVisitor: self</body>
+
+<body package="JavascriptEngine-AST">visitChildrenOf: aNode	aNode childrenDo: [ : childNode |		self visit: childNode	].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeVisitor</class-id> <category>strict mode</category>
+
+<body package="JavascriptEngine-AST">isInStrictMode	^ strictModeStack jseReverseDetect: [ : bool | bool notNil ] ifNone: [ false ]</body>
+
+<body package="JavascriptEngine-AST">isInStrictMode: aBoolean	 strictModeStack size = 1		ifTrue: [ strictModeStack at: 1 put: aBoolean ]		ifFalse: [ JSEError raiseSignal: 'Internal error: Cannot set strict mode of visitor' ]</body>
+
+<body package="JavascriptEngine-AST">setStrictMode: aBoolean while: aBlock 	" strict mode can only be enabled and propagates to nested functions without a directive "	^ aBoolean 		ifTrue: 		[	strictModeStack addLast: aBoolean.			aBlock ensure: [ strictModeStack removeLast ]		]		ifFalse: [ aBlock value ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeVisitor</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-AST">initialize	strictModeStack := OrderedCollection with: false.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeVisitor class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">new	^ self basicNew initialize</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxValidationVisitor</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptBreak: aBreakNode 	" 12.8 The break Statement "	self validateControlStatement: aBreakNode.	super acceptBreak: aBreakNode.</body>
+
+<body package="JavascriptEngine-AST">acceptContinue: aContinueNode	" 12.7 The continue Statement "	self validateControlStatement: aContinueNode.	super acceptContinue: aContinueNode</body>
+
+<body package="JavascriptEngine-AST">acceptDoWhile: aDoWhileNode	self validateBreakableNode: aDoWhileNode</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateElements: aForEnumerateElementsNode	self validateBreakableNode: aForEnumerateElementsNode</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateVariable: aForEnumerateVariableNode	self validateBreakableNode: aForEnumerateVariableNode</body>
+
+<body package="JavascriptEngine-AST">acceptForWithInitializer: anInitializedForNode	self validateBreakableNode: anInitializedForNode</body>
+
+<body package="JavascriptEngine-AST">acceptForWithVariableList: aForWithVariableListNode	self validateBreakableNode: aForWithVariableListNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionBody: aFunctionBodyNode	self increase: #functionBodyCounter whileVisiting: aFunctionBodyNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionDeclaration: aFunctionDeclarationNode 	" 13.1 Strict Mode Restrictions "	self validateFunction: aFunctionDeclarationNode.	self newContextWhile: [ super acceptFunctionDeclaration: aFunctionDeclarationNode ].</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionExpression: aFunctionExpressionNode	self validateFunction: aFunctionExpressionNode.	self newContextWhile: [ super acceptFunctionExpression: aFunctionExpressionNode ]</body>
+
+<body package="JavascriptEngine-AST">acceptLabelledStatement: aLabelledStatementNode 	" 12.12 Labelled Statements "	| label |	label  := aLabelledStatementNode label identifierString.	(labelStack includes: label)		ifTrue: [ JSESyntaxError raiseSignal: ('Label "&lt;1s&gt;" may not appear within a statement with the same label' expandMacrosWith: label) node: aLabelledStatementNode  ].	labelStack add: label.	[ super acceptLabelledStatement: aLabelledStatementNode  ] ensure: [ labelStack removeLast ].</body>
+
+<body package="JavascriptEngine-AST">acceptPostfixOperator: anPostfixOperatorNode 	self checkPrePostfixOperator: anPostfixOperatorNode.	super acceptPostfixOperator: anPostfixOperatorNode .</body>
+
+<body package="JavascriptEngine-AST">acceptPrefixOperator: aPrefixOperatorNode	self checkPrePostfixOperator: aPrefixOperatorNode.	super acceptPrefixOperator: aPrefixOperatorNode .</body>
+
+<body package="JavascriptEngine-AST">acceptReturn: aReturnNode 	( self counterAt: #functionBodyCounter ) = 0 		ifTrue: [ JSESyntaxError raiseSignal: 'return may not appear outside function bodies' node: aReturnNode ].	super acceptReturn: aReturnNode.</body>
+
+<body package="JavascriptEngine-AST">acceptSwitch: aSwitchNode	self validateBreakableNode: aSwitchNode</body>
+
+<body package="JavascriptEngine-AST">acceptVariableDeclaration: aVariableDeclarationNode 	| identifierSymbol |	self isInStrictMode 		ifTrue: 		[	identifierSymbol := aVariableDeclarationNode identifierSymbol.			self validateStrictModeIdentifier: identifierSymbol of: aVariableDeclarationNode		].	super acceptVariableDeclaration: aVariableDeclarationNode.</body>
+
+<body package="JavascriptEngine-AST">acceptWhile: aWhileNode	self validateBreakableNode: aWhileNode</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxValidationVisitor</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-AST">initialize	super initialize.	self initializeContext.</body>
+
+<body package="JavascriptEngine-AST">initializeContext	labelStack := OrderedCollection new.	counters := Dictionary new.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxValidationVisitor</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">checkPrePostfixOperator: anOperatorNode 	anOperatorNode expression returnsReferences 		ifFalse: [ JSESyntaxError raiseSignal: ('Operand expression of operator "&lt;1s&gt;" is not a reference' expandMacrosWith:  anOperatorNode operator ) ].</body>
+
+<body package="JavascriptEngine-AST">counterAt: aCounterName 	^ counters at: aCounterName ifAbsent: [ 0 ]</body>
+
+<body package="JavascriptEngine-AST">counterAt: aCounterName put: anInteger	counters at: aCounterName put: anInteger</body>
+
+<body package="JavascriptEngine-AST">forbiddenStrictModeIdentifiers	^ #( #eval #arguments )</body>
+
+<body package="JavascriptEngine-AST">increase: aCounterName whileVisiting: aNode 	self counterAt: aCounterName put: ( self counterAt: aCounterName ) + 1.	[ self acceptNode: aNode ] ensure: [ self counterAt: aCounterName put: ( self counterAt: aCounterName ) - 1 ].</body>
+
+<body package="JavascriptEngine-AST">newContextWhile: aBlock 	| oldLabelStack oldCounters |	oldLabelStack := labelStack.	oldCounters := counters.	self initializeContext.	^ aBlock ensure: 		[	labelStack := oldLabelStack.			counters := oldCounters.		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxValidationVisitor</class-id> <category>visiting - private</category>
+
+<body package="JavascriptEngine-AST">validateBreakableNode: aNode 	self increase: #unlabelledBreakAllowedCounter whileVisiting: aNode</body>
+
+<body package="JavascriptEngine-AST">validateControlStatement: aControlStatementNode	" 12.7 The continue Statement 	12.8 The break Statement "	aControlStatementNode identifier 		ifNotNil: 		[: identifier | 			| string |			( labelStack includes: ( string := identifier identifierString )) 				ifFalse: [ JSESyntaxError raiseSignal: ('No statement labelled "&lt;1s&gt;" found in outer context' expandMacrosWith: string) node: aControlStatementNode ]		]		ifNil: 		[	(self counterAt: #unlabelledBreakAllowedCounter) = 0				ifTrue: [ JSESyntaxError raiseSignal: 'Unlabelled break/continue can only appear in "for" , "while" or "switch" statements' node: aControlStatementNode ]		].</body>
+
+<body package="JavascriptEngine-AST">validateFunction: aFunctionNode 	" 13.1 Strict Mode Restrictions "	| formalParameters symbols |	self isInStrictMode 		ifTrue: 		[	self validateStrictModeIdentifier: aFunctionNode identifierSymbol of: aFunctionNode.			formalParameters := aFunctionNode formalParameters.			symbols := Set new.			formalParameters do: 				[: identifier | | identifierSymbol |					identifierSymbol := identifier identifierSymbol.					self validateStrictModeIdentifier: identifierSymbol of: aFunctionNode.					( symbols includes: identifierSymbol ) 						ifTrue: 						[	JSESyntaxError raiseSignal: ( 'The identifier "&lt;1s&gt;" appears more than once' expandMacrosWith: identifierSymbol ) node: aFunctionNode						].					symbols add: identifierSymbol				]		].</body>
+
+<body package="JavascriptEngine-AST">validateStrictModeIdentifier: identifierSymbol of: aVariableDeclarationNode 	( self forbiddenStrictModeIdentifiers includes: identifierSymbol ) 		ifTrue: 		[	JSESyntaxError 				raiseSignal: ( 'The identifier "&lt;1s&gt;" may not be used in strict mode' expandMacrosWith: identifierSymbol )				node: aVariableDeclarationNode		].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractPropertyAssignmentNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">propertyName	^ propertyName</body>
+
+<body package="JavascriptEngine-AST">propertyName: aPropertyName 	propertyName := aPropertyName.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPropertyFunctionAssignmentNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">functionBody	^ functionBody</body>
+
+<body package="JavascriptEngine-AST">functionBody: aFunctionBody 	functionBody := aFunctionBody.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEGetPropertyAssignmentNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptGetPropertyAssignment: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETryNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">catch	^ catch</body>
+
+<body package="JavascriptEngine-AST">catch: aCatch 	catch := aCatch.</body>
+
+<body package="JavascriptEngine-AST">finally	^ finally</body>
+
+<body package="JavascriptEngine-AST">finally: aFinally 	finally := aFinally.</body>
+
+<body package="JavascriptEngine-AST">tryBlock	^ tryBlock</body>
+
+<body package="JavascriptEngine-AST">tryBlock: aBlock	tryBlock := aBlock</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETryNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptTry: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIterationNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">statement	^ statement</body>
+
+<body package="JavascriptEngine-AST">statement: aStatement 	statement := aStatement.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEConditionalIterationNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">condition	^ condition</body>
+
+<body package="JavascriptEngine-AST">condition: aConditionExpression	condition := aConditionExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDoWhileNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptDoWhile: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELabelledStatementNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptLabelledStatement: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELabelledStatementNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">label	^ label</body>
+
+<body package="JavascriptEngine-AST">label: aLabel 	label := aLabel.</body>
+
+<body package="JavascriptEngine-AST">statement	^ statement</body>
+
+<body package="JavascriptEngine-AST">statement: aStatement 	statement := aStatement.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEEnumeratingForNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">enumeratedObject	^ enumeratedObject</body>
+
+<body package="JavascriptEngine-AST">enumeratedObject: anEnumeratedObject 	enumeratedObject := anEnumeratedObject.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForEnumerateVariableNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptForEnumerateVariable: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForEnumerateVariableNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">variableDeclaration	^ variableDeclaration</body>
+
+<body package="JavascriptEngine-AST">variableDeclaration: aVariableDeclaration 	variableDeclaration := aVariableDeclaration.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEConditionalForNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">condition	^ condition</body>
+
+<body package="JavascriptEngine-AST">condition: aConditionExpression 	condition := aConditionExpression.</body>
+
+<body package="JavascriptEngine-AST">updateExpression	^ updateExpression</body>
+
+<body package="JavascriptEngine-AST">updateExpression: aUpdateExpression 	updateExpression := aUpdateExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForWithInitializerNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptForWithInitializer: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForWithInitializerNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">initializer	^ initializer</body>
+
+<body package="JavascriptEngine-AST">initializer: anExpression 	initializer := anExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForWithVariableListNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">variableDeclarations	^ variableDeclarations</body>
+
+<body package="JavascriptEngine-AST">variableDeclarations: aListOfVariableDeclarations 	variableDeclarations := aListOfVariableDeclarations.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForWithVariableListNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptForWithVariableList: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEReturnNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">return	^ return</body>
+
+<body package="JavascriptEngine-AST">return: aReturnExpression	return := aReturnExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEReturnNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptReturn: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForEnumerateElementsNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptForEnumerateElements: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEForEnumerateElementsNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">enumerable	^ enumerable</body>
+
+<body package="JavascriptEngine-AST">enumerable: aEnumerable 	enumerable := aEnumerable.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThrowNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">throwExpression	^ throwExpression</body>
+
+<body package="JavascriptEngine-AST">throwExpression: aThrowExpression 	throwExpression := aThrowExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThrowNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptThrow: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegularExpressionNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">flags	^ flags</body>
+
+<body package="JavascriptEngine-AST">flags: aFlagsString	flags := aFlagsString.</body>
+
+<body package="JavascriptEngine-AST">regularExpressionString	^ regularExpressionString</body>
+
+<body package="JavascriptEngine-AST">regularExpressionString: aString 	regularExpressionString := aString.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegularExpressionNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptRegularExpression: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegularExpressionNode class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">fromToken: aToken 	^ self new 		regularExpressionString: aToken literalValue;		setSourceIntervalFromToken: aToken;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSECommaSeparatedExpressionsNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptCommaSeparatedExpressions: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSECommaSeparatedExpressionsNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">leftExpression	^ leftExpression</body>
+
+<body package="JavascriptEngine-AST">leftExpression: aLeftExpression 	leftExpression := aLeftExpression.</body>
+
+<body package="JavascriptEngine-AST">rightExpression	^ rightExpression</body>
+
+<body package="JavascriptEngine-AST">rightExpression: aRightExpression 	rightExpression := aRightExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEWithNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">statement	^ statement</body>
+
+<body package="JavascriptEngine-AST">statement: aStatement 	statement := aStatement.</body>
+
+<body package="JavascriptEngine-AST">withExpression	^ withExpression</body>
+
+<body package="JavascriptEngine-AST">withExpression: aWithExpression 	withExpression := aWithExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEWithNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptWith: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptDebugger: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBlockNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">statements	^ statements</body>
+
+<body package="JavascriptEngine-AST">statements: aListOfStatements 	statements := aListOfStatements.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBlockNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptBlock: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEThisNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptThis: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceVisitor</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptArrayLiteral: anArrayLiteralNode	self print: '['.	anArrayLiteralNode padBefore timesRepeat: [ self print: ',' ].	anArrayLiteralNode array do: [ : each | each notNil ifTrue: [ self visit: each ]] separatedBy: [ self print: ',' ].	anArrayLiteralNode padAfter timesRepeat: [ self print: ',' ].	self print: ']'.</body>
+
+<body package="JavascriptEngine-AST">acceptAssignment: anAssignmentNode	self visit: anAssignmentNode leftHandSide.	self printWhitespace.	self print: anAssignmentNode operator.	self printWhitespace.	self visit: anAssignmentNode assignedExpression.</body>
+
+<body package="JavascriptEngine-AST">acceptBinaryOperator: aBinaryOperatorNode	self visit: aBinaryOperatorNode leftExpression.	self printWhitespace.	self print: aBinaryOperatorNode operator.	self printWhitespace.	self visit: aBinaryOperatorNode rightExpression.</body>
+
+<body package="JavascriptEngine-AST">acceptBlock: anBlockNode 	self printBlockStatements: anBlockNode statements separationBlock: [ ].</body>
+
+<body package="JavascriptEngine-AST">acceptBooleanLiteral: anBooleanLiteralNode	self print: anBooleanLiteralNode literalValue printString.</body>
+
+<body package="JavascriptEngine-AST">acceptBracketMember: aBracketMemberNode	self visit: aBracketMemberNode base.	self print: '['.	self visit: aBracketMemberNode member.	self print: ']'.</body>
+
+<body package="JavascriptEngine-AST">acceptBreak: aBreakNode	self print: 'break'.	self printControlStatement: aBreakNode.</body>
+
+<body package="JavascriptEngine-AST">acceptCatch: anCatchNode	self print: 'catch ('.	self visit: anCatchNode identifier.	self print: ')'.	self printWhitespace.	self visit: anCatchNode block.</body>
+
+<body package="JavascriptEngine-AST">acceptCommaSeparatedExpressions: aCommaSeparatedExpressionsNode 	self visit: aCommaSeparatedExpressionsNode leftExpression.	self print: ','.	self printWhitespace.	self visit: aCommaSeparatedExpressionsNode rightExpression.</body>
+
+<body package="JavascriptEngine-AST">acceptConditionalExpression: aConditionalExpressionNode 	self visit: aConditionalExpressionNode condition.	self print: ' ? '.	self visit: aConditionalExpressionNode trueExpression.	aConditionalExpressionNode falseExpression notNil 		ifTrue: 		[	self print: ' : '.			self visit: aConditionalExpressionNode falseExpression		].</body>
+
+<body package="JavascriptEngine-AST">acceptContinue: aContinueNode	self print: 'continue'.	self printControlStatement: aContinueNode.</body>
+
+<body package="JavascriptEngine-AST">acceptDebugger: aDebuggerNode	self print: 'debugger;'.</body>
+
+<body package="JavascriptEngine-AST">acceptDoWhile: aDoWhileNode	self print: 'do '.	self visit: aDoWhileNode statement.	self print: ' while ('.	self visit: aDoWhileNode condition.	self print: ');'.</body>
+
+<body package="JavascriptEngine-AST">acceptDotMember: aDotMemberNode	self visit: aDotMemberNode base.	self print: '.'.	self visit: aDotMemberNode member.</body>
+
+<body package="JavascriptEngine-AST">acceptEmptyStatement: anEmptyStatementNode	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">acceptExpressionStatement: anExpressionStatementNode	self visit: anExpressionStatementNode expression.	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">acceptFinally: aFinallyNode	self print: 'finally '.	self visit: aFinallyNode block.</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateElements: aForEnumerateElementsNode	self print: 'for ('.	self visit: aForEnumerateElementsNode enumerable.	self print: ' in '.	self visit: aForEnumerateElementsNode enumeratedObject.	self print: ')'.	self indentedDo: [ self visit: aForEnumerateElementsNode statement ].</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateVariable: aForEnumerateVariableNode	self print: 'for (var '.	self visit: aForEnumerateVariableNode variableDeclaration.	self print: ' in '.	self visit: aForEnumerateVariableNode enumeratedObject.	self print: ')'.	self indentedDo: [ self visit: aForEnumerateVariableNode statement ].</body>
+
+<body package="JavascriptEngine-AST">acceptForWithInitializer: anInitializedForNode 	self print: 'for ('.	anInitializedForNode initializer ifNotNil: [: initializer | self visit: initializer ].	self print: ';'.	anInitializedForNode condition ifNotNil: 		[: condition |			self printWhitespace.			self visit: condition		].	self print: ';'.	anInitializedForNode updateExpression ifNotNil: 		[: update |			self printWhitespace.			self visit: update		].	self print: ')'.	self indentedDo: [ self visit: anInitializedForNode statement ].</body>
+
+<body package="JavascriptEngine-AST">acceptForWithVariableList: aForWithVariableListNode 	self print: 'for (var '.	aForWithVariableListNode variableDeclarations 		do: [: varDeclaration | self visit: varDeclaration ]		separatedBy: 		[	self print: ','.			self printWhitespace		].	self print: ';'.	aForWithVariableListNode condition ifNotNil: 		[: condition |			self printWhitespace.			self visit: condition		].	self print: ';'.	aForWithVariableListNode updateExpression ifNotNil: 		[: update |			self printWhitespace.			self visit: update		].	self print: ')'.	self indentedDo: [ self visit: aForWithVariableListNode statement ].</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionBody: aFunctionBodyNode 	self printBlockStatements: aFunctionBodyNode sourceElements separationBlock: [ ].</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionCall: aFunctionCallNode 	self visit: aFunctionCallNode member.	aFunctionCallNode arguments notNil 		ifTrue: 		[	self print: '('.			aFunctionCallNode arguments 				do: [: arg | self visit: arg ]				separatedBy: 				[	self print: ','.					self printWhitespace				].			self print: ')'		].</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionDeclaration: aFunctionDeclarationNode	self printFunction: aFunctionDeclarationNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionExpression: aFunctionExpressionNode	self printFunction:  aFunctionExpressionNode</body>
+
+<body package="JavascriptEngine-AST">acceptGetPropertyAssignment: aGetPropertyAssignmentNode 	self print: 'get '.	self print: aGetPropertyAssignmentNode propertyName.	self print: '()'.	self printWhitespace.	self print: '{'.	self indentedDo: [ self visit: aGetPropertyAssignmentNode assignedExpression ].</body>
+
+<body package="JavascriptEngine-AST">acceptGroupedExpression: aGroupedExpressionNode	self print: '('.	self visit: aGroupedExpressionNode expression.	self print: ')'.</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifier: anIdentifierNode	self print: anIdentifierNode identifierString.</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifierName: anIdentifierNameNode	self print: anIdentifierNameNode identifierString.</body>
+
+<body package="JavascriptEngine-AST">acceptIf: anIfNode 	self print: 'if ('.	self visit: anIfNode condition.	self print: ')'.	self indentedDo: [ self visit: anIfNode trueExpression ].	anIfNode falseExpression notNil 		ifTrue: 		[	self printNewLine;				print: 'else'.			self indentedDo: [ self visit: anIfNode falseExpression ]		].</body>
+
+<body package="JavascriptEngine-AST">acceptLabelledStatement: aLabelledStatementNode	self visit: aLabelledStatementNode label.	self print: ':'. 	self printWhitespace.	self visit: aLabelledStatementNode statement.</body>
+
+<body package="JavascriptEngine-AST">acceptNew: aNewNode	self print: 'new '.	self acceptFunctionCall: aNewNode.</body>
+
+<body package="JavascriptEngine-AST">acceptNullLiteral: anNullLiteralNode	self print: 'null'.</body>
+
+<body package="JavascriptEngine-AST">acceptNumericLiteral: anNumericLiteralNode	| n |	n := anNumericLiteralNode literalValue printString.	" don't print double marker character "	n last = $d ifTrue: [ n := n copyFrom: 1 to: n size - 1].	self print: n</body>
+
+<body package="JavascriptEngine-AST">acceptObjectLiteral: anObjectLiteralNode 	self printBlockStatements: anObjectLiteralNode propertyAssignments separationBlock: [ self print: ',' ].</body>
+
+<body package="JavascriptEngine-AST">acceptPostfixOperator: anPostfixOperatorNode	self visit: anPostfixOperatorNode expression.	self print: anPostfixOperatorNode operator.</body>
+
+<body package="JavascriptEngine-AST">acceptPrefixOperator: aPrefixOperatorNode	self acceptUnaryOperator: aPrefixOperatorNode</body>
+
+<body package="JavascriptEngine-AST">acceptProgram: aProgramNode 	self printNodeLines: aProgramNode sourceElements separatedBy: [ ].</body>
+
+<body package="JavascriptEngine-AST">acceptPropertyAssignment: anPropertyAssignmentNode	self visit: anPropertyAssignmentNode propertyName.	self print: ':'.	self printWhitespace.	self visit: anPropertyAssignmentNode assignedExpression.</body>
+
+<body package="JavascriptEngine-AST">acceptRegularExpression: anRegularExpressionNode	self print: '/'.	self print: anRegularExpressionNode regularExpressionString.	self print: '/'.	anRegularExpressionNode flags ifNotNil: [ : flags | self print: flags ].</body>
+
+<body package="JavascriptEngine-AST">acceptReturn: aReturnNode	self print: 'return'.	aReturnNode return ifNotNil: [ : return |		self printWhitespace.		self visit: return.	].	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">acceptSetPropertyAssignment: aSetPropertyAssignmentNode	self print: 'set '.	self print: aSetPropertyAssignmentNode propertyName.	self print: '('.	self visit: aSetPropertyAssignmentNode parameter.	self print: ')'.	self printWhitespace.	self print: '{'.	self indentedDo: [ self visit: aSetPropertyAssignmentNode assignedExpression ].</body>
+
+<body package="JavascriptEngine-AST">acceptStringLiteral: anStringLiteralNode 	self print: '"'.	self printEscaped: anStringLiteralNode literalValue escape: #($").	self print: '"'.</body>
+
+<body package="JavascriptEngine-AST">acceptSwitch: aSwitchNode 	self print: 'switch ('.	self visit: aSwitchNode switch.	self print: ')'.	self printNewLine.	self printBlockStatements: aSwitchNode clauses separationBlock: [ ].</body>
+
+<body package="JavascriptEngine-AST">acceptSwitchClause: aSwitchClauseNode 	self visit: aSwitchClauseNode clause.	self printSwitchClause: aSwitchClauseNode.</body>
+
+<body package="JavascriptEngine-AST">acceptSwitchDefaultClause: aSwitchDefaultClauseNode	self print: 'default'.	self printSwitchClause: aSwitchDefaultClauseNode.</body>
+
+<body package="JavascriptEngine-AST">acceptThis: aThisNode	self print: 'this'</body>
+
+<body package="JavascriptEngine-AST">acceptThrow: aThrowNode	self print: 'throw '.	self visit: aThrowNode throwExpression.	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">acceptTry: aTryNode 	self print: 'try '.	self visit: aTryNode tryBlock.	aTryNode catch ifNotNil: 		[: catch |			self printNewLine.			self visit: catch		].	aTryNode finally ifNotNil: 		[: finally |			self printNewLine.			self visit: finally		].</body>
+
+<body package="JavascriptEngine-AST">acceptUnaryOperator: anUnaryOperatorNode	| operator |	operator := anUnaryOperatorNode operator.	self print: operator.	(operator anySatisfy: [ : char | char isLetter ])		ifTrue: [ self printWhitespace ].	self visit: anUnaryOperatorNode expression.</body>
+
+<body package="JavascriptEngine-AST">acceptVariableDeclaration: aVariableDeclarationNode 	self visit: aVariableDeclarationNode identifier.	aVariableDeclarationNode initializer ifNotNil: 		[: initializer |			self printWhitespace;				print: '=';				printWhitespace.			self visit: initializer		].</body>
+
+<body package="JavascriptEngine-AST">acceptVariableStatement: aVariableStatementNode 	self print: 'var '.	aVariableStatementNode variableDeclarations 		do: [: varDeclaration | self visit: varDeclaration ]		separatedBy: 		[	self print: ',';				printWhitespace		].	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">acceptWhile: aWhileNode	self print: 'while ('.	self visit: aWhileNode condition.	self print: ')'.	self printWhitespace.	self visit: aWhileNode statement.</body>
+
+<body package="JavascriptEngine-AST">acceptWith: aWithNode 	self print: 'with ('.	self visit: aWithNode withExpression.	self print: ')'.	self printWhitespace.	self visit: aWithNode statement.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceVisitor</class-id> <category>common fragments</category>
+
+<body package="JavascriptEngine-AST">printControlStatement: aNode	aNode identifier ifNotNil: [ : identifier |		self printWhitespace.		self visit: identifier 	].	self print: ';'.</body>
+
+<body package="JavascriptEngine-AST">printFunction: aFunction 	self print: 'function'.	aFunction identifier ifNotNil: 		[: identifier |			self print: ' '.			self visit: identifier		].	self print: '('.	aFunction formalParameters 		do: [: param | self visit: param ]		separatedBy: 		[	self print: ','.			self printWhitespace		].	self print: ')'.	self printWhitespace.	self visit: aFunction functionBody.</body>
+
+<body package="JavascriptEngine-AST">printNodeLines: aListOfNodes separatedBy: separationBlock 	aListOfNodes notNil 		ifTrue: [ aListOfNodes do: [: statement | self visit: statement ] separatedBy: [ separationBlock value. self printNewLine ]].</body>
+
+<body package="JavascriptEngine-AST">printSwitchClause: aClauseNode 	self print: ':'.	self printWhitespace.	self printNodeLines: aClauseNode statements separatedBy: [ ].	self printNewLine;		printIndent.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceVisitor</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">indentedDo: aBlock 	stream nextPut: Character cr.	indent := indent + 1.	self printIndent.	^ aBlock ensure: [ indent := indent - 1 ]</body>
+
+<body package="JavascriptEngine-AST">initializeForStream: aStream	stream := aStream.	indent := 0.</body>
+
+<body package="JavascriptEngine-AST">print: aString	stream nextPutAll: aString</body>
+
+<body package="JavascriptEngine-AST">printBlockStatements: statements separationBlock: separationBlock  	self print: '{'.	( statements notNil and: [ statements notEmpty ]) 		ifTrue: 		[	self indentedDo: [ self printNodeLines: statements separatedBy: separationBlock ].			self printNewLine		].	self print: '}'.</body>
+
+<body package="JavascriptEngine-AST">printEscaped: aString	self printEscaped: aString escape: #()</body>
+
+<body package="JavascriptEngine-AST">printEscaped: aString escape: aListOfCharacters 	| lt |	lt := JSELexicalParser lineTerminatorCodeUnitValues.	aString do: 		[: char | | codePoint |			codePoint := char codePoint.			(( aListOfCharacters includes: char ) or: [ lt includes: codePoint ]) 				ifTrue: 				[	stream nextPutAll: '\u'.					codePoint printOn: stream paddedWith: $0 to: 4 base: 16				]				ifFalse: [ stream nextPut: char ]		].</body>
+
+<body package="JavascriptEngine-AST">printIndent	indent timesRepeat: [ stream nextPut: Character tab ].</body>
+
+<body package="JavascriptEngine-AST">printNewLine	stream nextPut: Character cr.	self printIndent.</body>
+
+<body package="JavascriptEngine-AST">printWhitespace	stream nextPut: Character space</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrintSourceVisitor class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">on: aStream 	^ self new initializeForStream: aStream;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEGroupedExpressionNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptGroupedExpression: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEGroupedExpressionNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">expression	^ expression</body>
+
+<body package="JavascriptEngine-AST">expression: aExpression 	expression := aExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAssignmentNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">assignedExpression	^ assignedExpression</body>
+
+<body package="JavascriptEngine-AST">assignedExpression: anAssignedExpression 	assignedExpression := anAssignedExpression.</body>
+
+<body package="JavascriptEngine-AST">leftHandSide	^ leftHandSide</body>
+
+<body package="JavascriptEngine-AST">leftHandSide: aLeftHandSide 	leftHandSide := aLeftHandSide.</body>
+
+<body package="JavascriptEngine-AST">operator	^ operator</body>
+
+<body package="JavascriptEngine-AST">operator: anOperatorSymbol 	operator := anOperatorSymbol.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAssignmentNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptAssignment: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEVariableStatementNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptVariableStatement: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEVariableStatementNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">variableDeclarations	^ variableDeclarations</body>
+
+<body package="JavascriptEngine-AST">variableDeclarations: aListOfVariableDeclarations 	variableDeclarations := aListOfVariableDeclarations.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEEmptyStatementNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptEmptyStatement: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">addFunctionDeclaration: aFunctionName 	( self currentScope at: #functionDeclarations ) add: aFunctionName asString.</body>
+
+<body package="JavascriptEngine-AST">addFunctionDeclarationsFromList: aListOfNodes	aListOfNodes do: [ : node |		node addFunctionDeclarationsTo: self	].</body>
+
+<body package="JavascriptEngine-AST">addFunctionParameters: aFunctionNode	aFunctionNode formalParameters do: [ : formalParameter |		( self currentScope at: #formalParameters ) add: formalParameter identifierString.	].</body>
+
+<body package="JavascriptEngine-AST">addGlobalVariable: aVariableName	( scopeStack first at: #variableDeclarations ) add: aVariableName asString.</body>
+
+<body package="JavascriptEngine-AST">addLocalVariable: aVariableName 	( self currentScope at: #variableDeclarations ) add: aVariableName asString.</body>
+
+<body package="JavascriptEngine-AST">allowReservedWordIdentifier	^ allowReservedWordIdentifier</body>
+
+<body package="JavascriptEngine-AST">allowReservedWordIdentifierWhile: aBlock 	| old |	old := allowReservedWordIdentifier.	allowReservedWordIdentifier := true.	^ aBlock ensure: [ allowReservedWordIdentifier := old ]</body>
+
+<body package="JavascriptEngine-AST">createScope	| scope |	scope := Dictionary new.	scope at: #variableDeclarations put: Set new.	scope at: #formalParameters put: Set new.	scope at: #functionDeclarations put: Set new.	^ scope</body>
+
+<body package="JavascriptEngine-AST">currentScope	^ scopeStack last</body>
+
+<body package="JavascriptEngine-AST">highlight: aNode with: anEmphasis	aNode sourceInterval ifNotNil: [ : sourceInterval |		text emphasizeFrom: sourceInterval first to: sourceInterval last with: anEmphasis	].</body>
+
+<body package="JavascriptEngine-AST">isFormalParameterReference: identifierString 	scopeStack reverseDo: [: scope | 		(( scope at: #variableDeclarations ) includes: identifierString )			ifTrue: [ ^ false ].		(( scope at: #formalParameters ) includes: identifierString )			ifTrue: [ ^ true ].	].	^ false</body>
+
+<body package="JavascriptEngine-AST">isVisibleReference: identifierString 	(#('true' 'false' 'null' 'undefined') includes: identifierString)		ifTrue: [ ^ true ].	^ scopeStack anySatisfy: [: scope | 		(( scope at: #functionDeclarations ) includes: identifierString ) 		or: [(( scope at: #formalParameters ) includes: identifierString ) 		or: [( scope at: #variableDeclarations ) includes: identifierString 	]]]</body>
+
+<body package="JavascriptEngine-AST">newScopeWhile: aBlock 	| scope |	scope := self createScope.	scopeStack add: scope.	^ aBlock ensure: [ scopeStack removeLast ]</body>
+
+<body package="JavascriptEngine-AST">reservedWords	reservedWords isNil 		ifTrue: [ reservedWords := JSELexicalParser reservedWords ].	^ reservedWords</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">text	^ text</body>
+
+<body package="JavascriptEngine-AST">text: aText 	text := aText.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptAssignment: anAssignmentNode 	" highlight assignments to formal parameters "	anAssignmentNode leftHandSide isIdentifierName 		ifTrue: 		[( self isFormalParameterReference: anAssignmentNode leftHandSide identifierString ) 				ifTrue: [ self highlight: anAssignmentNode leftHandSide with: self emphasisWarning ]		].	super acceptAssignment: anAssignmentNode.</body>
+
+<body package="JavascriptEngine-AST">acceptCatch: anCatchNode	self addLocalVariable: anCatchNode identifier identifierString.	super acceptCatch: anCatchNode.</body>
+
+<body package="JavascriptEngine-AST">acceptDotMember: aDotMemberNode	aDotMemberNode base acceptVisitor: self .	self allowReservedWordIdentifierWhile: [  aDotMemberNode member acceptVisitor: self  ].</body>
+
+<body package="JavascriptEngine-AST">acceptForEnumerateVariable: aForEnumerateVariableNode	self addLocalVariable: aForEnumerateVariableNode variableDeclaration identifier identifierString.	super acceptForEnumerateVariable: aForEnumerateVariableNode</body>
+
+<body package="JavascriptEngine-AST">acceptForWithVariableList: aForWithVariableListNode	aForWithVariableListNode variableDeclarations do: [ : variableDeclaration |		self addLocalVariable: variableDeclaration identifier identifierString.	].	super acceptForWithVariableList: aForWithVariableListNode</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionBody: aFunctionBodyNode 	aFunctionBodyNode sourceElements ifNotNil: [ : nodes | self addFunctionDeclarationsFromList: nodes ].	super acceptFunctionBody: aFunctionBodyNode.</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionDeclaration: aFunctionDeclarationNode 	self addFunctionDeclaration: aFunctionDeclarationNode identifier identifierString.	self newScopeWhile: [ 		self addFunctionParameters: aFunctionDeclarationNode.		super acceptFunctionDeclaration: aFunctionDeclarationNode	].</body>
+
+<body package="JavascriptEngine-AST">acceptFunctionExpression: aFunctionExpressionNode 	self newScopeWhile: [ 		self addFunctionParameters: aFunctionExpressionNode.		super acceptFunctionExpression: aFunctionExpressionNode	].</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifier: anIdentifierNode 	" highlight unknown references "	| identifierString visible |	identifierString := anIdentifierNode identifierString.	visible := self isVisibleReference: identifierString.	visible 		ifFalse: [ self highlight: anIdentifierNode with: self emphasisWarning ].</body>
+
+<body package="JavascriptEngine-AST">acceptIdentifierName: anIdentifierNameNode 	self allowReservedWordIdentifier 		ifTrue: 		[ | identifierString |			identifierString := anIdentifierNameNode identifierString.			( self reservedWords includes: identifierString ) 				ifTrue: 				[	" fix lexical highlighting "					self highlight: anIdentifierNameNode with: nil				]		].</body>
+
+<body package="JavascriptEngine-AST">acceptProgram: aProgramNode 	aProgramNode sourceElements ifNotNil: [ : nodes | self addFunctionDeclarationsFromList: nodes ].	super acceptProgram: aProgramNode .</body>
+
+<body package="JavascriptEngine-AST">acceptVariableDeclaration: aVariableDeclarationNode	self addLocalVariable: aVariableDeclarationNode identifier identifierString.	super acceptVariableDeclaration: aVariableDeclarationNode.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor</class-id> <category>emphasis</category>
+
+<body package="JavascriptEngine-AST">emphasisWarning	^ #jaggedEdge</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-AST">initialize	super initialize.	scopeStack := OrderedCollection new.	scopeStack add: self createScope.	allowReservedWordIdentifier := false.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlightingVisitor class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">text: aText 	^ self new text: aText ; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEMemberNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">base	^ base</body>
+
+<body package="JavascriptEngine-AST">base: aBaseExpression	base := aBaseExpression.</body>
+
+<body package="JavascriptEngine-AST">member	^ member</body>
+
+<body package="JavascriptEngine-AST">member: aMemberExpression 	member := aMemberExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEMemberNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">returnsReferences	^ true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDotMemberNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptDotMember: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEExceptionHandlerNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">block	^ block</body>
+
+<body package="JavascriptEngine-AST">block: aBlock 	block := aBlock.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFinallyNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptFinally: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractSwitchClauseNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">clause	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-AST">statements	^ statements</body>
+
+<body package="JavascriptEngine-AST">statements: aStatements 	statements := aStatements.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchDefaultClause</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">clause	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchDefaultClause</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptSwitchDefaultClause: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractConditionalNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">condition	^ condition</body>
+
+<body package="JavascriptEngine-AST">condition: aCondition 	condition := aCondition.</body>
+
+<body package="JavascriptEngine-AST">falseExpression	^ falseExpression</body>
+
+<body package="JavascriptEngine-AST">falseExpression: aFalseExpression 	falseExpression := aFalseExpression.</body>
+
+<body package="JavascriptEngine-AST">trueExpression	^ trueExpression</body>
+
+<body package="JavascriptEngine-AST">trueExpression: aTrueExpression 	trueExpression := aTrueExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEIfNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptIf: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnaryOperatorNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">expression	^ expression</body>
+
+<body package="JavascriptEngine-AST">expression: aExpression 	expression := aExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnaryOperatorNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptUnaryOperator: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchClause</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">clause	^ clause</body>
+
+<body package="JavascriptEngine-AST">clause: aClause 	clause := aClause.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESwitchClause</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptSwitchClause: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectLiteralNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">propertyAssignments	^ propertyAssignments</body>
+
+<body package="JavascriptEngine-AST">propertyAssignments: aListOfPropertyAssignments 	propertyAssignments := aListOfPropertyAssignments.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEObjectLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptObjectLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESourceElementListNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">sourceElements	^ sourceElements</body>
+
+<body package="JavascriptEngine-AST">sourceElements: aListOfSourceElements 	sourceElements := aListOfSourceElements.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESourceElementListNode</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-AST">hasStrictDirective	self sourceElements notNil 		ifTrue: 		[	self sourceElements do: 				[: node |					node isStrictDirective 						ifTrue: [ ^ true ].					node isDirective 						ifFalse: [ ^ false ]				]		].	^ false</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEProgramNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor setStrictMode: self hasStrictDirective while: [ aVisitor acceptProgram: self ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBooleanLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptBooleanLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeFactory</class-id> <category>lexical elements</category>
+
+<body package="JavascriptEngine-AST">createBooleanLiteral: token	" 7.8 Literals "	^ JSEBooleanLiteralNode fromToken: token</body>
+
+<body package="JavascriptEngine-AST">createIdentifier: token	" 7.5 Tokens "	^ JSEIdentifierNode fromToken: token</body>
+
+<body package="JavascriptEngine-AST">createIdentifierName: token	" 7.5 Tokens "	^ JSEIdentifierNameNode fromToken: token</body>
+
+<body package="JavascriptEngine-AST">createNullLiteral: token	" 7.8 Literals "	^ JSENullLiteralNode fromToken: token</body>
+
+<body package="JavascriptEngine-AST">createNumericLiteral: token	" 7.8 Literals "	^ JSENumericLiteralNode fromToken: token</body>
+
+<body package="JavascriptEngine-AST">createRegularExpression: regexToken 	" 15.10 RegExp (Regular Expression) Objects "	^ JSERegularExpressionNode new 		regularExpressionString: regexToken literalValue;		flags: regexToken flags;		setSourceIntervalFromToken: regexToken;		yourself</body>
+
+<body package="JavascriptEngine-AST">createStringLiteral: token	" 7.8 Literals "	^ JSEStringLiteralNode fromToken: token</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeFactory</class-id> <category>functions and programs</category>
+
+<body package="JavascriptEngine-AST">createFunctionBody: sourceElements sourceInterval: sourceInterval 	" 13 Function Definition "	^ JSEFunctionBodyNode new 		sourceInterval: sourceInterval;		sourceElements: sourceElements;		yourself</body>
+
+<body package="JavascriptEngine-AST">createFunctionDeclaration: identifier parameters: formalParameters body: functionBody sourceInterval: sourceInterval 	" 13 Function Definition "	^ JSEFunctionDeclarationNode new		sourceInterval: sourceInterval;		identifier: identifier;		formalParameters: formalParameters;		functionBody: functionBody;		yourself</body>
+
+<body package="JavascriptEngine-AST">createFunctionExpression: identifierOrNil parameters: formalParameters body: functionBody sourceInterval: sourceInterval 	" 13 Function Definition "	^ JSEFunctionExpressionNode new		sourceInterval: sourceInterval;		identifier: identifierOrNil;		formalParameters: formalParameters;		functionBody: functionBody;		yourself</body>
+
+<body package="JavascriptEngine-AST">createProgram: sourceElements	" 14 Program "	^ JSEProgramNode new 		sourceElements: sourceElements;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeFactory</class-id> <category>source</category>
+
+<body package="JavascriptEngine-AST">attachSourceInformation: aSourceInformation to: aNode	aNode nodesDo:  [ : node | node sourceInformation: aSourceInformation ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeFactory</class-id> <category>statements</category>
+
+<body package="JavascriptEngine-AST">createBlock: statementList sourceInterval: sourceInterval 	" 12.1 Block "	^ JSEBlockNode new		sourceInterval: sourceInterval;		statements: statementList;		yourself</body>
+
+<body package="JavascriptEngine-AST">createBreak: identifierOrNil sourceInterval: sourceInterval 	" 12.8 The break Statement "	^ JSEBreakNode new 		sourceInterval: sourceInterval;		identifier: identifierOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createCatch: identifier block: catchBlock sourceInterval: sourceInterval 	" 12.14 The try Statement "	^ JSECatchNode new		sourceInterval: sourceInterval;		identifier: identifier;		block: catchBlock;		yourself</body>
+
+<body package="JavascriptEngine-AST">createContinue: identifierOrNil sourceInterval: sourceInterval 	" 12.7 The continue Statement "	^ JSEContinueNode new		sourceInterval: sourceInterval;		identifier: identifierOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createDebugger: sourceInterval 	" 12.15 The debugger statement "	^ JSEDebuggerNode new		sourceInterval: sourceInterval;		yourself</body>
+
+<body package="JavascriptEngine-AST">createDo: statement whileExpression: whileExpression sourceInterval: sourceInterval 	" 12.6.1 The do-while Statement "	^ JSEDoWhileNode new 		sourceInterval: sourceInterval;		condition: whileExpression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createEmptyStatement: sourceInterval 	" 12.3 Empty Statement "	^ JSEEmptyStatementNode new		sourceInterval: sourceInterval;		yourself</body>
+
+<body package="JavascriptEngine-AST">createExpressionStatement: expression sourceInterval: sourceInterval 	" 12.4 Expression Statement "	^ JSEExpressionStatementNode new 		sourceInterval: sourceInterval;		expression: expression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createFinally: finallyBlock sourceInterval: sourceInterval 	" 12.14 The try Statement "	^ JSEFinallyNode new 		sourceInterval: sourceInterval;		block: finallyBlock;		yourself</body>
+
+<body package="JavascriptEngine-AST">createFor: initializationExpression condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval 	" 12.6.3 The for Statement "	^ JSEForWithInitializerNode new		sourceInterval: sourceInterval;		initializer: initializationExpression;		condition: conditionExpression;		updateExpression: updateExpression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createFor: enumerableExpression in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval 	" 12.6.3 The for Statement "	^ JSEForEnumerateElementsNode new		sourceInterval: sourceInterval;		enumerable: enumerableExpression;		enumeratedObject: enumeratedObjectExpression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createForVariable: variableDeclaration in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval 	" 12.6.3 The for Statement "	^ JSEForEnumerateVariableNode new		sourceInterval: sourceInterval;		variableDeclaration: variableDeclaration;		enumeratedObject: enumeratedObjectExpression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createForVariables: variableDeclarations condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval 	" 12.6.3 The for Statement "	^ JSEForWithVariableListNode new		sourceInterval: sourceInterval;		variableDeclarations: variableDeclarations;		condition: conditionExpression;		updateExpression: updateExpression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createIf: textExpression trueExpression: trueExpression falseExpression: falseExpressionOrNil sourceInterval: sourceInterval 	" 12.5 The if Statement "	^ JSEIfNode new		sourceInterval: sourceInterval;		condition: textExpression;		trueExpression: trueExpression;		falseExpression: falseExpressionOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createLabel: labelIdentifier statement: statement sourceInterval: sourceInterval 	" 12.12 Labelled Statements "	^ JSELabelledStatementNode new		sourceInterval: sourceInterval;		label: labelIdentifier;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createReturn: returnExpressionOrNil sourceInterval: sourceInterval 	" 12.9 The return Statement "	^ JSEReturnNode new 		sourceInterval: sourceInterval;		return: returnExpressionOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createSwitch: switchExpression clauses: clauses sourceInterval: sourceInterval 	" 12.11 The switch Statement "	^ JSESwitchNode new 		sourceInterval: sourceInterval;		switch: switchExpression;		clauses: clauses;		yourself</body>
+
+<body package="JavascriptEngine-AST">createSwitchClause: clauseExpression statements: statements sourceInterval: sourceInterval 	" 12.11 The switch Statement "	^ JSESwitchClause new 		sourceInterval: sourceInterval;		clause: clauseExpression;		statements: statements;		yourself</body>
+
+<body package="JavascriptEngine-AST">createSwitchDefaultClause: statements sourceInterval: sourceInterval 	" 12.11 The switch Statement "	^ JSESwitchDefaultClause new 		sourceInterval: sourceInterval;		statements: statements;		yourself</body>
+
+<body package="JavascriptEngine-AST">createThrow: throwExpression sourceInterval: sourceInterval 	" 12.13 The throw Statement "	^ JSEThrowNode new 		sourceInterval: sourceInterval;		throwExpression: throwExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createTry: tryBlock catch: catchStatementOrNil finally: finallyStatementOrNil sourceInterval: sourceInterval 	" 12.14 The try Statement "	^ JSETryNode new		sourceInterval: sourceInterval;		tryBlock: tryBlock;		catch: catchStatementOrNil;		finally: finallyStatementOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createVariableDeclaration: identifier initializer: initializerOrNil sourceInterval: sourceInterval 	" 12.2 Variable Statement "	^ JSEVariableDeclarationNode new 		sourceInterval: sourceInterval;		identifier: identifier;		initializer: initializerOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createVariableStatement: variableDeclarations sourceInterval: sourceInterval 	" 12.2 Variable Statement "	^ JSEVariableStatementNode new 		sourceInterval: sourceInterval;		variableDeclarations: variableDeclarations;		yourself</body>
+
+<body package="JavascriptEngine-AST">createWhile: expression statement: statement sourceInterval: sourceInterval 	" 12.6.2 The while Statement "	^ JSEWhileNode new		sourceInterval: sourceInterval;		condition: expression;		statement: statement;		yourself</body>
+
+<body package="JavascriptEngine-AST">createWith: withExpression statement: statement sourceInterval: sourceInterval 	" 12.10 The with Statement "	^ JSEWithNode new 		sourceInterval: sourceInterval;		withExpression: withExpression;		statement: statement;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxTreeFactory</class-id> <category>expressions</category>
+
+<body package="JavascriptEngine-AST">createAdditiveExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.6 Additive Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createArguments: arguments sourceInterval: sourceInterval 	" 11.2 Left-Hand-Side Expressions "	^ arguments</body>
+
+<body package="JavascriptEngine-AST">createArray: arrayElements padBefore: padBeforeSize after: padAfterSize sourceInterval: sourceInterval 	" 11.1.4 Array Initialiser "	^ JSEArrayLiteralNode new		sourceInterval: sourceInterval;		array: arrayElements;		padBefore: padBeforeSize;		padAfter: padAfterSize;		yourself</body>
+
+<body package="JavascriptEngine-AST">createAssignmentExpression: leftHandSideExpression to: assignedExpression operator: operatorString sourceInterval: sourceInterval 	" 11.13 Assignment Operators "	^ JSEAssignmentNode new		sourceInterval: sourceInterval;		leftHandSide: leftHandSideExpression;		operator: operatorString asSymbol;		assignedExpression: assignedExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createBitwiseExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.10 Binary Bitwise Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createCall: memberExpression arguments: arguments sourceInterval: sourceInterval 	" 11.2 Left-Hand-Side Expressions "	^ JSEFunctionCallNode new		sourceInterval: sourceInterval;		member: memberExpression;		arguments: arguments;		yourself</body>
+
+<body package="JavascriptEngine-AST">createCommaSeparatedExpression: expression1 with: expression2 sourceInterval: sourceInterval 	" 11.14 Comma Operator "	^ JSECommaSeparatedExpressionsNode new		sourceInterval: sourceInterval;		 leftExpression: expression1;		rightExpression: expression2;		yourself</body>
+
+<body package="JavascriptEngine-AST">createConditionalExpression: textExpression trueExpression: trueExpression falseExpression: falseExpression sourceInterval: sourceInterval 	" 11.12 Conditional Operator "	^ JSEConditionalExpressionNode new		sourceInterval: sourceInterval;		condition: textExpression;		trueExpression: trueExpression;		falseExpression: falseExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createEqualityExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.9 Equality Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createGroupedExpression: expression sourceInterval: sourceInterval 	" 11.1.6 The Grouping Operator "	^ JSEGroupedExpressionNode new		sourceInterval: sourceInterval;		expression: expression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createLogicalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.11 Binary Logical Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createMemberOf: baseExpression bracket: bracketExpression sourceInterval: sourceInterval 	" 11.2 Left-Hand-Side Expressions "	^ JSEBracketMemberNode new		sourceInterval: sourceInterval;		base: baseExpression;		member: bracketExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createMemberOf: baseExpression dot: dotExpression sourceInterval: sourceInterval 	" 11.2 Left-Hand-Side Expressions "	^ JSEDotMemberNode new 		sourceInterval: sourceInterval;		base: baseExpression;		member: dotExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createMultiplicativeExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.5 Multiplicative Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createNew: newExpression arguments: argumentsOrNil sourceInterval: sourceInterval 	" 11.2 Left-Hand-Side Expressions "	^ JSENewNode new		sourceInterval: sourceInterval;		member: newExpression;		arguments: argumentsOrNil;		yourself</body>
+
+<body package="JavascriptEngine-AST">createObject: propertyAssignmentList sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	^ JSEObjectLiteralNode new		sourceInterval: sourceInterval;		propertyAssignments: propertyAssignmentList;		yourself</body>
+
+<body package="JavascriptEngine-AST">createPostfixExpression: expression operator: postfixOperatorString sourceInterval: sourceInterval 	" 11.3 Postfix Expressions "	^ JSEPostfixOperatorNode new		sourceInterval: sourceInterval;		expression: expression;		operator: postfixOperatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createPropertyAssignment: propertyName expression: assignedExpression sourceInterval: sourceInterval 	" 11.1.5 Object Initialiser "	^ JSEPropertyAssignmentNode new 		sourceInterval: sourceInterval ;		propertyName: propertyName;		assignedExpression: assignedExpression;		yourself</body>
+
+<body package="JavascriptEngine-AST">createPropertyGetAssignment: propertyName functionBody: functionBody sourceInterval: sourceInterval 	" 11.1.5 Object Initialiser "	^ JSEGetPropertyAssignmentNode new 		sourceInterval: sourceInterval ;		propertyName: propertyName;		functionBody: functionBody;		yourself</body>
+
+<body package="JavascriptEngine-AST">createPropertySetAssignment: propertyName parameter: parameter functionBody: functionBody sourceInterval: sourceInterval 	" 11.1.5 Object Initialiser "	^ JSESetPropertyAssignmentNode new		sourceInterval: sourceInterval;		propertyName: propertyName;		parameter: parameter;		functionBody: functionBody;		yourself</body>
+
+<body package="JavascriptEngine-AST">createRelationalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.8 Relational Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createShiftExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval 	" 11.7 Bitwise Shift Operators "	^ JSEBinaryOperatorNode new		sourceInterval: sourceInterval;		leftExpression: expression1;		rightExpression: expression2;		operator: operatorString asSymbol;		yourself</body>
+
+<body package="JavascriptEngine-AST">createThisExpression: sourceInterval 	" 11.1.1 The this Keyword "	^ JSEThisNode new 		sourceInterval: sourceInterval;		yourself</body>
+
+<body package="JavascriptEngine-AST">createUnaryExpression: expression operator: unaryOperatorString sourceInterval: sourceInterval 	" 11.4 Unary Operators "	| operator nodeClass |	operator := unaryOperatorString asSymbol.	nodeClass := ( operator = #'--' or: [ operator = #'++' ]) 			ifTrue: [ JSEPrefixOperatorNode ]			ifFalse: [ JSEUnaryOperatorNode ].	^ nodeClass new 		sourceInterval: sourceInterval;		expression: expression;		operator: operator;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlighter</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">globalVariables	^ globalVariables</body>
+
+<body package="JavascriptEngine-AST">globalVariables: aGlobalVariables 	" collection of predefined global variables "	globalVariables := aGlobalVariables.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxHighlighter</class-id> <category>private</category>
+
+<body package="JavascriptEngine-AST">emphasisError	^ Array with: #jaggedEdge with: #color -&gt; ColorValue red</body>
+
+<body package="JavascriptEngine-AST">highlightSyntaxOfTokens: tokens of: aText	" Syntax highlighting "	[ 		| tree visitor |		tree := self parser parseTokens: (tokens reject: [ : t | t isComment ]).		" analysis "		visitor := JSESyntaxHighlightingVisitor text: aText.		self globalVariables notNil 			ifTrue: [ self globalVariables do: [: variableName | visitor addGlobalVariable: variableName ]].		visitor visit: tree	] 		on: JSE.JSEError		do: 		[: ex |			ex sourceInterval ifNotNil: [: sourceInterval | aText emphasizeFrom: sourceInterval first to: sourceInterval last with: self emphasisError ]		].</body>
+
+<body package="JavascriptEngine-AST">highlightTokens: tokens of: aText offset: offset 	" Additionally highlight syntax errors "	super highlightTokens: tokens of: aText offset: offset.	self highlightSyntaxOfTokens: tokens of: aText.</body>
+
+<body package="JavascriptEngine-AST">parser	 | highlightParser |	parser ifNil: [ parser := JSE.JSEParser new ].	highlightParser := parser copy.	highlightParser  factory: JSESyntaxTreeFactory new.	^ highlightParser</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPrefixOperatorNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptPrefixOperator: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENullLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptNullLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESetPropertyAssignmentNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">parameter	^ parameter</body>
+
+<body package="JavascriptEngine-AST">parameter: aParameter 	parameter := aParameter</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESetPropertyAssignmentNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptSetPropertyAssignment: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericLiteralNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptNumericLiteral: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEWhileNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptWhile: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPostfixOperatorNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptPostfixOperator: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionBodyNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptFunctionBody: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPropertyAssignmentNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptPropertyAssignment: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPropertyAssignmentNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">assignedExpression	^ assignedExpression</body>
+
+<body package="JavascriptEngine-AST">assignedExpression: anAssignedExpression 	assignedExpression := anAssignedExpression.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENewNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptNew: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEBracketMemberNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptBracketMember: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSECatchNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">identifier	^ identifier</body>
+
+<body package="JavascriptEngine-AST">identifier: aIdentifier 	identifier := aIdentifier.</body>
+
+<body package="JavascriptEngine-AST">identifierSymbol	^ self identifier identifierSymbol</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSECatchNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptCatch: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEVariableDeclarationNode</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-AST">identifier	^ identifier</body>
+
+<body package="JavascriptEngine-AST">identifier: aIdentifier 	identifier := aIdentifier.</body>
+
+<body package="JavascriptEngine-AST">identifierSymbol	^ self identifier ifNotNil: [ : id | id identifierSymbol ]</body>
+
+<body package="JavascriptEngine-AST">initializer	^ initializer</body>
+
+<body package="JavascriptEngine-AST">initializer: aInitializer 	initializer := aInitializer.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEVariableDeclarationNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptVariableDeclaration: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEConditionalExpressionNode</class-id> <category>visiting</category>
+
+<body package="JavascriptEngine-AST">acceptVisitor: aVisitor	^ aVisitor acceptConditionalExpression: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxError class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-AST">raiseSignal: aMessage node: aNode	^ self raiseSignal: aMessage sourceInterval: aNode sourceInterval sourceInformation: aNode sourceInformation</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEHighlighter</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>styles reservedWords lexicalParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEParsedNodesFactory</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+</st-source>

@@ -1,0 +1,557 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Debugger-Remote
+Notice: Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Remote debugger, compatible with Rhino
+
+See  http://wiki.eclipse.org/JSDT/Debug/Rhino_Debug_Wire_Protocol
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2013 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96214
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Debugger-Core' '') #(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-Parser-Core' '') #(#any 'JavascriptEngine-Runtime-Core' '') #(#any 'JSON-Squeak' ''))
+PackageName: JavascriptEngine-Debugger-Remote
+Parcel: #('JavascriptEngine-Debugger-Remote')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Debugger-Remote
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Debugger-Core' #componentType #package) #(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-Parser-Core' #componentType #package) #(#name 'JavascriptEngine-Runtime-Core' #componentType #package) #(#name 'JSON-Squeak' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Debugger-Core' '') #('JavascriptEngine-Namespace' '') #('JavascriptEngine-Parser-Core' '') #('JavascriptEngine-Runtime-Core' '') #('JSON-Squeak' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Version: 0.5.1
+Date: 2:14:39 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:14:39</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSERemoteDebuggerPacket</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>body sequenceNumber </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERemoteDebuggerPacket</class-id>
+<body>Abstract superclass of packets sent</body>
+</comment>
+
+<class>
+<name>JSEDebuggerResponse</name>
+<environment>JSE</environment>
+<super>JSE.JSERemoteDebuggerPacket</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>command success running requestSequenceNumber </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEDebuggerResponse</class-id>
+<body>Response of a requestInstance Variables:	body	&lt;Dictionary&gt;	Response body 	command	&lt;String&gt;	The response command	running	&lt;Boolean&gt;	true if the debugger is running	success	&lt;Boolean&gt;	true if this response indicates success</body>
+</comment>
+
+<class>
+<name>JSEDebuggerEventMessage</name>
+<environment>JSE</environment>
+<super>JSE.JSERemoteDebuggerPacket</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>type </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEDebuggerEventMessage</class-id>
+<body>Event (break etc, see JSEDebugEvent) that is sent to the debugger client</body>
+</comment>
+
+<class>
+<name>JSERemoteDebuggerSession</name>
+<environment>JSE</environment>
+<super>Core.Announcer</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>stream requestsRegistry sequenceNumber debugEnvironment </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERemoteDebuggerSession</class-id>
+<body>Abstract superclass of remote debugger sessions</body>
+</comment>
+
+<class>
+<name>JSERemoteSessionStarted</name>
+<environment>JSE</environment>
+<super>Core.Announcement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<class>
+<name>JSERemoteDebugger</name>
+<environment>JSE</environment>
+<super>Core.Announcer</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>socket listenerProcess debugEnvironment sessions debuggerProtocol </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERemoteDebugger</class-id>
+<body>Remote debugger, compatible with RhinoSee  http://wiki.eclipse.org/JSDT/Debug/Rhino_Debug_Wire_ProtocolInstance Variables:	listenerProcess	&lt;Process&gt;	Socket listener process	requestsRegistry	&lt;Dictionary&gt;	Known requests	sequenceNumber	&lt;Integer&gt;	Next packet sequence number	socket	&lt;SocketAccessor&gt;	Listener socket	debugEnvironment &lt;DebugEnvironment&gt; Debug environment</body>
+</comment>
+
+<class>
+<name>JSERhinoDebuggerSession</name>
+<environment>JSE</environment>
+<super>JSE.JSERemoteDebuggerSession</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERhinoDebuggerSession</class-id>
+<body>Rhino debugger sessions</body>
+</comment>
+
+<class>
+<name>JSERemoteSessionFinished</name>
+<environment>JSE</environment>
+<super>Core.Announcement</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</class>
+
+<shared-variable>
+<name>DebuggerProtocol</name>
+<environment>JSE.JSERemoteDebugger</environment>
+<private>false</private>
+<constant>false</constant>
+<category>accessing</category>
+<initializer>nil</initializer>
+<attributes>
+<package>JavascriptEngine-Debugger-Remote</package>
+</attributes>
+</shared-variable>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">requestPragma	&lt;pragmas: #instance&gt;	^ #(request:)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERhinoDebuggerSession</class-id> <category>requests</category>
+
+<body package="JavascriptEngine-Debugger-Remote">requestBreakpoint: arguments 	"The breakpoint request is sent from the client to the remote interpreter to retrieve a specific breakpoint. 	If communication is successful a corresponding breakpoint response is sent back from the remote interpreter.  "	&lt;request: 'breakpoint'&gt;		| breakpoint |	breakpoint := self debugEnvironment breakpointWithID: ( arguments at: 'breakpointId' ).	^ breakpoint notNil 		ifTrue: 		[	JSEDebuggerResponse new at: 'thread' put: breakpoint asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Breakpoint not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestBreakpoints: arguments 	" The breakpoints request is sent from the client to the remote interpreter to retrieve all breakpoints set in the remote interpreter. 	If communication is successful a corresponding breakpoints response is sent back from the remote interpreter.  "	&lt;request: 'breakpoints'&gt;		^ JSEDebuggerResponse new		at: 'breakpoints' put: self debugEnvironment breakpoints;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestClearBreakpoint: arguments 	" The clearbreakpoint request is sent from the client to the remote interpreter to remove a specific breakpoint. 	If communication is successful a corresponding clearbreakpoint response is sent back from the remote interpreter. "	&lt;request: 'clearbreakpoint'&gt;		| breakpoint breakpointId |	breakpointId := arguments at: 'breakpointId' ifAbsent: [ nil ].	breakpoint := self debugEnvironment breakpointWithID: breakpointId.	^ breakpoint notNil 		ifTrue: 		[	self debugEnvironment removeBreakpoint: breakpoint.			JSEDebuggerResponse new at: 'breakpoint' put: breakpoint asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Breakpoint not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestConnect: arguments	&lt;request: 'connect'&gt;	^ JSEDebuggerResponse new</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestContinue: arguments 	&lt;request: 'continue'&gt;		| threadID stepKind |	threadID := arguments at: self debuggerProtocol THREAD_ID ifAbsent: [ nil ].	stepKind := arguments at: self debuggerProtocol STEP ifPresent: [ : s | s asSymbol  ].	self debugEnvironment continue: threadID step: stepKind.	^ JSEDebuggerResponse new</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestDispose: arguments 	&lt;request: 'dispose'&gt;		^ JSEDebuggerResponse new</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestEvaluate: arguments 	&lt;request: 'evaluate'&gt;		| thread frame expression result evaluateJson |	thread := ( self debugEnvironment threadWithID: ( arguments at: self debuggerProtocol THREAD_ID )) 			ifNil: [ ^ self errorResponse: 'Thread not found' ].	frame := ( thread frameWithID: ( arguments at: self debuggerProtocol FRAME_ID )) ifNil: [ ^ self errorResponse: 'Frame not found' ].	expression := arguments at: self debuggerProtocol EXPRESSION.	result := thread evaluate: expression inFrame: frame.	evaluateJson := result isUndefined 			ifTrue: [ nil ]			ifFalse: [ result asRhinoLookupJsonWithRegistry: thread objectRegistry ].	^ JSEDebuggerResponse new at: self debuggerProtocol EVALUATE put: evaluateJson;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestFrame: arguments 	&lt;request: 'frame'&gt;		| frame |	frame := ( self debugEnvironment threadWithID: ( arguments at: self debuggerProtocol THREAD_ID )) 			ifNotNil: [: thread | thread frameWithID: ( arguments at: self debuggerProtocol FRAME_ID )].	^ frame notNil 		ifTrue: 		[	JSEDebuggerResponse new at: self debuggerProtocol FRAME put: frame asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Frame not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestFrames: arguments 	&lt;request: 'frames'&gt;		| frameIDs |	frameIDs := self debugEnvironment frameIDsOfThreadID: ( arguments at: self debuggerProtocol THREAD_ID ).	^ JSEDebuggerResponse new at: self debuggerProtocol FRAMES put: frameIDs;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestLookup: arguments 	&lt;request: 'lookup'&gt;		| referenceId threadId frameId thread lookup object registry |	referenceId := arguments at: self debuggerProtocol REFERENCE_ID.	threadId := arguments at: self debuggerProtocol THREAD_ID.	frameId := arguments at: self debuggerProtocol FRAME_ID.	thread := self debugEnvironment threadWithID: threadId.	thread threadProcessDo: 		[	registry := thread objectRegistry.			object := referenceId = JSEFrame referenceId 					ifTrue: [ thread frameWithID: frameId ]					ifFalse: [ registry referenceWithID: referenceId ].			lookup := object asRhinoLookupJsonWithRegistry: registry		].	^ JSEDebuggerResponse new at: self debuggerProtocol LOOKUP put: lookup;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestScript: arguments 	&lt;request: 'script'&gt;		| script |	script := self debugEnvironment scriptWithID: ( arguments at: 'scriptId' ).	^ script notNil 		ifTrue: 		[	JSEDebuggerResponse new at: 'script' put: script asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Script not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestScripts: arguments 	&lt;request: 'scripts'&gt;		^ JSEDebuggerResponse new		at: 'scripts' put: self debugEnvironment scriptIDs;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestSetBreakpoint: arguments 	&lt;request: 'setbreakpoint'&gt;		| breakpoint lineNumber scriptId condition script |	lineNumber := arguments at: 'line' ifAbsent: [ nil ].	scriptId := arguments at: 'scriptId' ifAbsent: [ nil ].	condition := arguments at: 'condition' ifAbsent: [ nil ].	script := self debugEnvironment scriptWithID: scriptId.	^ script notNil 		ifTrue: 		[	breakpoint := JSEBreakpoint script: script lineNumber: lineNumber condition: condition.			self debugEnvironment addBreakpoint: breakpoint.			JSEDebuggerResponse new at: 'breakpoint' put: breakpoint asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Script not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestSuspend: arguments 	&lt;request: 'suspend'&gt;		self debugEnvironment suspendThreadWithID: ( arguments at: self debuggerProtocol THREAD_ID ).	^ JSEDebuggerResponse new</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestThread: arguments 	&lt;request: 'thread'&gt;		| thread |	thread := self debugEnvironment threadWithID: ( arguments at: self debuggerProtocol THREAD_ID ).	^ thread notNil 		ifTrue: 		[	JSEDebuggerResponse new at: self debuggerProtocol THREAD put: thread asRhinoJson;				yourself		]		ifFalse: [ self errorResponse: 'Thread not found' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestThreads: arguments 	&lt;request: 'threads'&gt;		^ JSEDebuggerResponse new		at: 'threads' put: self debugEnvironment threadIDs;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestVersion: arguments 	&lt;request: 'version'&gt;		^ JSEDebuggerResponse new		body: self debugEnvironment version;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">at: aKey put: aValue	self body at: aKey put: aValue</body>
+
+<body package="JavascriptEngine-Debugger-Remote">body	^ body</body>
+
+<body package="JavascriptEngine-Debugger-Remote">body: aBody 	body := aBody.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sequenceNumber	^ sequenceNumber</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sequenceNumber: aSequenceNumber 	sequenceNumber := aSequenceNumber.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Remote">asAnnouncement	^self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Debugger-Remote">initialize	body := Dictionary new.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Remote">asRhinoJson	| json |	json := Dictionary new.	json at: JSERhinoProtocol BODY put: self body.	self sequenceNumber notNil 		ifTrue: [ json at: JSERhinoProtocol SEQUENCE put: self sequenceNumber ].	^ json</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Remote">new	^ super new initialize</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerPacket class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Remote">asAnnouncement	^self</body>
+
+<body package="JavascriptEngine-Debugger-Remote">asAnnouncementClasses	^Array with: self</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerResponse</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">command	^ command</body>
+
+<body package="JavascriptEngine-Debugger-Remote">command: aCommand 	command := aCommand.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestSequenceNumber	^ requestSequenceNumber</body>
+
+<body package="JavascriptEngine-Debugger-Remote">requestSequenceNumber: aRequestSequenceNumber 	requestSequenceNumber := aRequestSequenceNumber.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">running	^ running</body>
+
+<body package="JavascriptEngine-Debugger-Remote">running: aRunning 	running := aRunning.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">success	^ success</body>
+
+<body package="JavascriptEngine-Debugger-Remote">success: aSuccess 	success := aSuccess.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerResponse</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Debugger-Remote">initialize	super initialize.	running := true.	success := true.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerResponse</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Remote">asRhinoJson	| json |	json := super asRhinoJson.	json at: JSERhinoProtocol  COMMAND put: self command.	json at: JSERhinoProtocol TYPE put: JSERhinoProtocol  RESPONSE_TYPE.	json at: JSERhinoProtocol  SUCCESS put: self success.	json at: JSERhinoProtocol  RUNNING put: self running.	self requestSequenceNumber notNil 		ifTrue: [ json at: JSERhinoProtocol REQUEST_SEQUENCE put: self requestSequenceNumber ].	^ json</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerEventMessage</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">type	^ type</body>
+
+<body package="JavascriptEngine-Debugger-Remote">type: aType 	type := aType.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerEventMessage</class-id> <category>json</category>
+
+<body package="JavascriptEngine-Debugger-Remote">asRhinoJson	| json |	json := super asRhinoJson.	json at: JSERhinoProtocol TYPE put: JSERhinoProtocol  EVENT_TYPE.	json at: JSERhinoProtocol  EVENT put: self type.	^ json</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEDebuggerEventMessage class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Remote">type: aType	^  self new type: aType; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">debugEnvironment	^ debugEnvironment</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debugEnvironment: aDebugEnvironment 	debugEnvironment := aDebugEnvironment.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">stream	^ stream</body>
+
+<body package="JavascriptEngine-Debugger-Remote">stream: aStream 	stream := aStream.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol	^ self class debuggerProtocol</body>
+
+<body package="JavascriptEngine-Debugger-Remote">log: aString	self announce: (JSEDebugLog message: aString)</body>
+
+<body package="JavascriptEngine-Debugger-Remote">logException: anException message: aString	self announce: (JSEDebugException exception: anException message: aString)</body>
+
+<body package="JavascriptEngine-Debugger-Remote">nextSequenceNumber	sequenceNumber := sequenceNumber + 1.	^ sequenceNumber</body>
+
+<body package="JavascriptEngine-Debugger-Remote">subscribeToEvents	self debugEnvironment 		when: JSEDebugEvent		do: 		[: event |			event suspend.			[ self sendEvent: event ] on: Error do: [: ex | self logException: ex message: 'Could not send event' ]		]		for: self.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Debugger-Remote">initialize	sequenceNumber := 0.	self initializeRequests.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">initializeRequests	requestsRegistry := Dictionary new.	( Pragma allNamed: #request: from: self class to: JSERemoteDebuggerSession) do: 		[: pragma | | requestName |			requestName := pragma argumentAt: 1.			( requestsRegistry includesKey: requestName ) 				ifTrue: [ self error: 'Request ' , requestName , ' already registered' ].			requestsRegistry at: requestName put: pragma selector		].</body>
+
+<body package="JavascriptEngine-Debugger-Remote">shutDown	self debugEnvironment removeAllBreakpoints; unsubscribe: self.	self log: 'Remote debugger session shut down'.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession</class-id> <category>private - packets</category>
+
+<body package="JavascriptEngine-Debugger-Remote">errorResponse: aMessage 	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Debugger-Remote">handleNextRequest	" get &amp; handle the request "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sendEvent: aDebugEvent 	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession</class-id> <category>session</category>
+
+<body package="JavascriptEngine-Debugger-Remote">handleRequests	self subscribeToEvents.	[			[ self handleNextRequest ] whileTrue	] ensure: [ self shutDown ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Remote">new	^ super new initialize</body>
+
+<body package="JavascriptEngine-Debugger-Remote">stream: aStream debugEnvironment: aDebugEnvironment 	^ self new		stream: aStream;		debugEnvironment: aDebugEnvironment;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebuggerSession class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">classForDebuggerProtocol: aDebuggerProtocol 	^ self allSubclasses detect: [: subclass | subclass debuggerProtocol = aDebuggerProtocol  ] ifNone: [ JSEDebugError raiseSignal: 'Unknown debugger protocol' ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Debugger-Remote">log: aString	self announce: (JSEDebugLog message: aString)</body>
+
+<body package="JavascriptEngine-Debugger-Remote">logException: anException message: aString	self announce: (JSEDebugException exception: anException message: aString)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger</class-id> <category>running</category>
+
+<body package="JavascriptEngine-Debugger-Remote">shutDown	sessions do: [: session | session shutDown ].	listenerProcess notNil 		ifTrue: 		[	listenerProcess terminate.			listenerProcess := nil		].	socket notNil 		ifTrue: 		[	socket close.			socket := nil		].	self debugEnvironment shutDown.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">startAt: aPort	socket := SocketAccessor defaultClass newTCPserverAtPort: aPort.	socket listenFor: 20.	listenerProcess := [ self listenerLoop ] forkAt: Processor lowIOPriority.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">actualPort	^ socket notNil 		ifTrue: [ socket getName port ]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debugEnvironment	^ debugEnvironment</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debugEnvironment: aDebugEnvironment 	debugEnvironment := aDebugEnvironment.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol	^ debuggerProtocol</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol: aSymbol 	debuggerProtocol := aSymbol.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">numberOfSessions	^  sessions size</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger</class-id> <category>private - request handling</category>
+
+<body package="JavascriptEngine-Debugger-Remote">handleSessionAt: aSocket 	" start a new debug session " 	[ | stream |		stream := ( aSocket asExternalConnection withEncoding: #'iso8859-1' ) readAppendStream lineEndTransparent.		[ self handleSessionStream: stream ] ensure: 			[	stream close.				aSocket close			]	] on: Error do: [: ex | self logException: ex message: 'Unhandled exception, terminating session' ].</body>
+
+<body package="JavascriptEngine-Debugger-Remote">handleSessionStream: stream 	" start a new debug session "	| session sessionClass |	sessionClass := JSERemoteDebuggerSession classForDebuggerProtocol: self debuggerProtocol.	session := sessionClass stream: stream debugEnvironment: self debugEnvironment.	sessions add: session.	session when: JSEDebugMessage do: [: announcement | self announce: announcement ].	self announce: JSERemoteSessionStarted new.	[ session handleRequests ] ensure: 		[	sessions remove: session ifAbsent: [ ].			self log: 'Session ended'.			self announce: JSERemoteSessionFinished new.		].</body>
+
+<body package="JavascriptEngine-Debugger-Remote">listenerLoop	 [ 		[			| clientSocket |			clientSocket := socket accept.			[ self handleSessionAt: clientSocket ] forkAt: Processor userSchedulingPriority		] on: Error do: [ : ex |		].	] repeat</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Debugger-Remote">initialize	sessions := Set new.	debuggerProtocol := self class debuggerProtocol ifNil: [ JSERhinoProtocol ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Debugger-Remote">debugEnvironment: aDebugEnvironment 	^ self new debugEnvironment: aDebugEnvironment ; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERemoteDebugger class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol	^ DebuggerProtocol</body>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol: aDebuggerProtocol	DebuggerProtocol := aDebuggerProtocol</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERhinoDebuggerSession</class-id> <category>private - packets</category>
+
+<body package="JavascriptEngine-Debugger-Remote">errorResponse: aMessage 	self log: 'Could not handle request: ' , aMessage.	^ JSEDebuggerResponse new 		success: false;		at: 'message' put: aMessage;		yourself</body>
+
+<body package="JavascriptEngine-Debugger-Remote">handleJsonRequest: json	| command selector arguments response |	command := json at: 'command' ifAbsent: [ ^ self errorResponse: 'Command is missing' ].	selector := requestsRegistry at: command ifAbsent: [ ^ self errorResponse: 'Unknown command: ', command ].	arguments := json at: 'arguments' ifAbsent: [ Dictionary new ].	response := self perform: selector with: arguments.	response command isNil ifTrue: [ response command: command ].	^ response</body>
+
+<body package="JavascriptEngine-Debugger-Remote">handleNextRequest	" get &amp; handle the request "	| requestJsonString response requestJson |	requestJsonString := self receiveJson.	requestJsonString  isNil ifTrue: [ ^ false ].	self log: 'Request ' , requestJsonString.	requestJson := JSON.Json readFrom: requestJsonString readStream.	response :=		[ self handleJsonRequest: requestJson ] on: JSEDebugError do: [: ex | self errorResponse: ex description ].	" bookkeeping "	requestJson at: 'seq' ifPresent: [: seq | response requestSequenceNumber: seq ].	" send the response "	self sendPacket: response.	^ true</body>
+
+<body package="JavascriptEngine-Debugger-Remote">receiveJson	| contentLength |	contentLength := Integer readFrom: stream.	contentLength = 0 		ifTrue: [ ^ nil ].	stream next: 2.	^ stream next: contentLength</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sendEvent: aDebugEvent 	| message |	message := JSEDebuggerEventMessage type: aDebugEvent eventType.	message body: aDebugEvent asRhinoJson.	self sendPacket: message.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sendJson: responseJsonString 	stream print: responseJsonString size.	stream nextPut: Character cr; nextPut: Character lf.	stream nextPutAll: responseJsonString; flush.</body>
+
+<body package="JavascriptEngine-Debugger-Remote">sendPacket: aPacket 	| responseJsonString responseJson |	aPacket sequenceNumber: self nextSequenceNumber.	responseJson := aPacket asRhinoJson.	responseJsonString := JSON.Json render: responseJson.	self log: 'Sending ' , responseJsonString.	self sendJson: responseJsonString.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERhinoDebuggerSession class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Debugger-Remote">debuggerProtocol	^ JSERhinoProtocol</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>Announcer</name>
+<environment>Core</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>subscriptionRegistry </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Model-Observables</category>
+<attributes>
+<package>System-Announcements</package>
+</attributes>
+</class>
+
+<class>
+<name>Announcement</name>
+<environment>Core</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>System-Announcements</category>
+<attributes>
+<package>System-Announcements</package>
+</attributes>
+</class>
+
+</st-source>

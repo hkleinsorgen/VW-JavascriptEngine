@@ -1,0 +1,910 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-VisualWorks
+Comment: VisualWorks specific code
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96221
+DbUsername: klnsrgn
+DbVersion: 0.5.1
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Namespace' '') #(#any 'Regex11' '') #(#any 'AT MetaNumerics' '') #(#any 'BoostRegEx' '') #(#any 'ExtraCollections' ''))
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-VisualWorks
+Parcel: #('JavascriptEngine-VisualWorks')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-VisualWorks
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'Regex11' #componentType #package) #(#name 'AT MetaNumerics' #componentType #package) #(#name 'BoostRegEx' #componentType #package) #(#name 'ExtraCollections' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Namespace' '') #('Regex11' '') #('AT MetaNumerics' '') #('BoostRegEx' '') #('ExtraCollections' ''))
+PrintStringCache: (0.5.1,klnsrgn)
+Version: 0.5.1
+Post-Load Block: 
+	[:package |
+	JSE.JSEPlatform initializePlatform.
+]
+Date: 2:15:24 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:15:24</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSERxmBranch</name>
+<environment>JSE</environment>
+<super>RxmBranch</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERxmBranch</class-id>
+<body>Regular expression branch, tweaked for Javascript</body>
+</comment>
+
+<class>
+<name>JSERxCharSetParser</name>
+<environment>JSE</environment>
+<super>RxCharSetParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports>
+			Smalltalk.*
+			</imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERxCharSetParser</class-id>
+<body>Regular expression char set parser, tweaked for Javascript</body>
+</comment>
+
+<class>
+<name>JSERxMatcher</name>
+<environment>JSE</environment>
+<super>RxMatcher</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERxMatcher</class-id>
+<body>Regular expression matcher, tweaked for Javascript</body>
+</comment>
+
+<class>
+<name>JSEPlatform</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars>positiveMaxIntegerValue negativeMaxIntegerValue positiveInfinityValue negativeInfinityValue nanValue negativeZeroValue </class-inst-vars>
+<imports>
+			Smalltalk.*
+			</imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEPlatform</class-id>
+<body>Smalltalk platform specific code</body>
+</comment>
+
+<class>
+<name>JSERxParser</name>
+<environment>JSE</environment>
+<super>RxParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports>
+			Smalltalk.*
+			</imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERxParser</class-id>
+<body>Regular expression parser, tweaked for Javascript</body>
+</comment>
+
+<class>
+<name>JSESparseArray</name>
+<environment>JSE</environment>
+<super>Core.SequenceableCollection</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>elements length </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESparseArray</class-id>
+<body>JSESparseArray is a specialized collection for large sparse arraysInstance Variables:	elements	&lt;Dictionary&gt;	Contains the actual elements. The key is the array index	length	&lt;Integer&gt;	The length of the array</body>
+</comment>
+
+<class>
+<name>JSEOrderedDictionary</name>
+<environment>JSE</environment>
+<super>Collections.OrderedDictionary</super>
+<private>false</private>
+<indexed-type>objects</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-VisualWorks</package>
+</attributes>
+</class>
+
+<methods>
+<class-id>Core.Integer</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsNumberValue	" see 8.5 The Number Type "	^ self abs &lt;= 9007199254740992 		ifTrue: [ self ]		ifFalse: 		[	self &gt; JSEPlatform positiveMaxIntegerValue 				ifTrue: [ JSEPlatform positiveInfinityValue ]				ifFalse: 				[	self &lt; JSEPlatform negativeMaxIntegerValue 						ifTrue: [ JSEPlatform negativeInfinityValue ]						ifFalse: [ self asDouble jseAsNumberValue ]				]		]</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsTimestamp	" assume that this is the number of milliseconds since 1970 of a timestamp in the UTC timezone "	^ Timestamp fromMilliseconds: self + JSEPlatform timestampUTC1970Offset</body>
+</methods>
+
+<methods>
+<class-id>Core.Integer</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseHexString	" asLowercase was added to pass some ECMA testcases of the JSON.stringify() function"	^ '\u', (self jsePrintStringRadix: 16 paddedTo: 4) asLowercase</body>
+
+<body package="JavascriptEngine-VisualWorks">jsePrintStringRadix: radix paddedTo: length	| aStream |	aStream := WriteStream on: (String new: 16).	self printOn: aStream paddedWith: $0 to: length base: radix.	^aStream contents</body>
+</methods>
+
+<methods>
+<class-id>Core.UnicodeCollationAlgorithm</class-id> <category>collating</category>
+
+<body package="JavascriptEngine-VisualWorks">jseLocaleCompareString: aString1 with: aString2 	" trueCompare returns wrong results for decomposed strings "	| s1 s2 |	s1 := self normalizeD: aString1.	s2 := self normalizeD: aString2.		^ self fastCollate: s1 with: s2 mode: #shifted</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsInteger	^ JSEPlatform parseIntegerFrom: self readStream</body>
+</methods>
+
+<methods>
+<class-id>Core.LimitedPrecisionReal</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAbsPrintOn: aStream digits: digits 	"x is myself normalized to [1.0, 10.0), exp is my exponent"	| fuzz x exp q i radix needsDot |	radix := self class zero + 10.	exp := self floorLog: radix.	"guard against very very small numbers"	exp &lt; ( -16 - digits ) 		ifTrue: [ x := self * ( radix raisedTo: 16 ) / ( radix raisedTo: exp + 16 )]		ifFalse: [ x := self / ( radix raisedTo: exp )].	fuzz := radix raisedTo: 1 - digits.	"round the last digit to be printed"	x := 0.5 * fuzz + x.	x &gt;= radix 		ifTrue: 		[	"check if rounding has unnormalized x"			x := x / radix.			exp := exp + 1		].	(exp &lt; 21 and: [exp &gt; -7])		ifTrue: 		[	"decimal notation"			q := 0.			exp &lt; 0 				ifTrue: 				[	aStream nextPutAll: '0.'.					-1 - exp timesRepeat: [ aStream nextPut: $0 ]				]		]		ifFalse: 		[	"scientific notation"			q := exp.			exp := 0		].	" do not print .0 "	needsDot := false.	[ x &gt;= fuzz ] whileTrue: 		[	needsDot 				ifTrue: 				[	needsDot := false.					aStream nextPut: $.				].			"use fuzz to track significance"			i := x truncated.			aStream nextPut: ( Character digitValue: i ).			x := ( x - i ) * radix.			fuzz := fuzz * radix.			exp := exp - 1.			exp = -1 				ifTrue: [ needsDot := true ]		].	[ exp &gt; -1 ] whileTrue: 		[				aStream nextPut: $0.			exp := exp - 1.		].	q ~= 0 		ifTrue: 		[	aStream nextPut: $e.			q &gt; 0 				ifTrue: [ aStream nextPut: $+ ].			q printOn: aStream		].</body>
+</methods>
+
+<methods>
+<class-id>Core.LimitedPrecisionReal</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIsPositive	^ self jseIsNegativeZero 		ifTrue: [ false ]		ifFalse: [ self &gt;= 0 ]</body>
+</methods>
+
+<methods>
+<class-id>Core.LimitedPrecisionReal</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">jsePrintIntegerDigits: integerDigits fractionDigits: fractionDigits forceExponent: forceExponent radix: radix 	| stream |	stream := String new writeStream.	self 		jsePrintIntegerDigits: integerDigits		fractionDigits: fractionDigits		forceExponent: forceExponent		radix: radix		printPolicy: ( Locale named: #C ) numberPolicy		on: stream.	^ stream contents</body>
+
+<body package="JavascriptEngine-VisualWorks">jsePrintIntegerDigits: integerDigits fractionDigits: fractionDigits forceExponent: forceExponent radix: radix printPolicy: aNumberPrintPolicy on: aStream 	| fuzz x exp q i r zero zeroCh digits fractionDigitsPrinted fractionDigitsToPrint fractionStarted integerDigitsPrinted  |	digits := fractionDigits notNil 			ifTrue: [ integerDigits + fractionDigits ]			ifFalse: [ self defaultNumberOfDigits ].	zero := aNumberPrintPolicy zeroCode.	zeroCh := Character codePoint: zero.	fractionDigitsPrinted := nil.	fractionStarted := false.	integerDigitsPrinted := 0.	"x is myself normalized to [1.0, 10.0), exp is my exponent"	r := self class zero + 10.	self &gt; 0 		ifTrue: 		[	exp := self floorLog: r.			"guard against very very small numbers"			x := exp &lt; ( -16 - digits ) 					ifTrue: [ self * ( r raisedTo: 16 ) / ( r raisedTo: exp + 16 )]					ifFalse: [ self / ( r raisedTo: exp )].			fuzz := r raisedTo: 1 - digits.			"round the last digit to be printed"			x := 0.5 * fuzz + x.			x &gt;= r 				ifTrue: 				[	"check if rounding has unnormalized x"					x := x / r.					exp := exp + 1				].			( exp &lt; 6 and: [ exp &gt; -4 ]) 				ifTrue: 				[	"decimal notation"					q := 0.					exp &lt; 0 						ifTrue: 						[	aStream nextPut: zeroCh; nextPut: aNumberPrintPolicy decimalPoint.							fractionStarted := true.							fractionDigitsPrinted := -1 - exp.							fractionDigitsPrinted timesRepeat: [ aStream nextPut: zeroCh ]						]				]				ifFalse: 				[	"scientific notation"					q := exp.					exp := 0				].			[ x &gt;= fuzz ] whileTrue: 				[	(fractionStarted not and: [fractionDigitsPrinted = 0])						ifTrue: [ aStream nextPut: aNumberPrintPolicy decimalPoint. fractionStarted := true ].					"use fuzz to track significance"					i := x truncated.					aStream nextPut: ( Character codePoint: i + zero ).					fractionDigitsPrinted notNil 						ifTrue: [ fractionDigitsPrinted := fractionDigitsPrinted + 1 ]						ifFalse: 						[	integerDigitsPrinted := integerDigitsPrinted + 1.							integerDigitsPrinted = integerDigits 								ifTrue: 								[	fractionDigitsPrinted := 0.									q := q + (exp max: 0).								]						].					x := ( x - i ) * r.					fuzz := fuzz * r.					exp := exp - 1.					( exp = -1 and: [ fractionDigitsPrinted isNil ]) 						ifTrue: 						[	fractionDigitsPrinted := 0.						]				].		]		ifFalse: 		[	exp := 0.			q := 0.			aStream nextPut: zeroCh		].	( fractionDigits notNil and: [( fractionDigitsToPrint := fractionDigits - ( fractionDigitsPrinted ifNil: [ 0 ])) &gt; 0 ]) 		ifTrue: 		[	(fractionStarted not and: [( fractionDigitsPrinted isNil or: [ fractionDigitsPrinted = 0 ]) ])				ifTrue: 				[	fractionDigitsPrinted := 0.					aStream nextPut: aNumberPrintPolicy decimalPoint.					fractionStarted := true				].			fractionDigitsToPrint timesRepeat: [ aStream nextPut: zeroCh ]		].	( q ~= 0 or: [ forceExponent ]) 		ifTrue: 		[	aStream nextPut: $e.			q &gt;= 0 				ifTrue: [ aStream nextPut: $+ ].			q printOn: aStream printPolicy: aNumberPrintPolicy		].</body>
+</methods>
+
+<methods>
+<class-id>Core.LimitedPrecisionReal</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-VisualWorks">jsePrintOn: aStream 	" print as described in 9.8.1 ToString Applied to the Number Type "	| digits |	self isSpecialValue 		ifTrue: [ ^ self printAsSpecialValueOn: aStream ].	digits := self defaultNumberOfDigits.	self &gt; 0.0 		ifTrue: [ self jseAbsPrintOn: aStream digits: digits ]		ifFalse: 		[	self = 0.0 				ifTrue: [ aStream nextPutAll: '0.0' ]				ifFalse: 				[	aStream nextPutAll: '-'.					self negated jseAbsPrintOn: aStream digits: digits				]		].</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToExponential: fractionDigits 	^ self jsePrintIntegerDigits: 1 fractionDigits: fractionDigits forceExponent: true radix: 10</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToPrecision: precision 	| m e |	self isZero 		ifTrue: 		[	m := String new.			precision timesRepeat: [ m := m , '0' ].			e := 0		]		ifFalse: 		[ | min max n |			n := self.			min := 10 raisedTo: precision - 1.			max := 10 * min.			e := precision - 1.			[ n &gt;= max ] whileTrue: 				[	e := e + 1.					n := n / 10				].			[ n &lt; min ] whileTrue: 				[	e := e - 1.					n := n * 10				].			n := n rounded.			m := n printString.			( e &lt; -6 or: [ e &gt;= precision ]) 				ifTrue: 				[ | a b c d |					a := String with: ( m at: 1 ).					b := m allButFirst: 1.					m := a , '.' , b.					"e cannot be 0"					e &gt; 0 						ifTrue: [ c := '+' ]						ifFalse: 						[	c := '-'.							e := e negated						].					d := e printString.					^ m , 'e' , c , d				]		].	e = ( precision - 1 ) 		ifTrue: [ ^ m ].	e &gt;= 0 		ifTrue: [ m := ( m copyFrom: 1 to: e + 1 ) , '.' , ( m allButFirst: e + 1 )]		ifFalse: 		[ | newM |			newM := '0.'.			( e + 1 ) negated timesRepeat: [ newM := newM , '0' ].			m := newM , m		].	^ m</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAddOrConcat: aSequenceableCollection 	" Returns a collection with the additional elements.	Unlike jseConcat it is allowed to modify this collection. "	self addAll: aSequenceableCollection.</body>
+
+<body package="JavascriptEngine-VisualWorks">jseConcat: aSequenceableCollection 	^ self, aSequenceableCollection</body>
+
+<body package="JavascriptEngine-VisualWorks">jseDeletableLengthFor: newLength 	" Returns the shortest length &gt;= newLength that only contains deletable elements "	| deletableLength deleteSucceeded |	deleteSucceeded := true.	deletableLength := self size.	[	deletableLength &gt; 0 			ifTrue: 			[	( self at: deletableLength ) ifNotNil: 					[: element | ( element isProperty and: [ element isConfigurable not ]) 							ifTrue: [ deleteSucceeded := false ]					].				deleteSucceeded and: [ deletableLength &gt; newLength ]			]			ifFalse: [ false ]	] whileTrue: [ deletableLength := deletableLength - 1 ].	^ deletableLength</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseDisplayString	" Concatenate the display strings of each element "	| stream |	self isEmpty 		ifTrue: [ ^ '' ].	stream := ( String new: self size * 3 ) writeStream.	self do: [: each | stream nextPutAll: each jseDisplayString ] separatedBy: [ stream nextPutAll: ', ' ].	^ stream contents</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIndicesAndValuesDo: aBlock	" perform the block with each element index (0-based) and the element, in ascending order "	1 to: self  size		do: 		[: i | | each | ( each := self at: i ) ~~ nil 				ifTrue: [ aBlock value: i - 1 value: each ]		].</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseLastIndexOfSubCollection: aSubCollection endingAt: endIndex	"Answer the last index &lt;= endIndex of the receiver's first element, such that that 	element equals the first element of aSubCollection, and the next 	elements equal the rest of the elements of aSubCollection.  	If no such match is found, answer 0."	| subSize lastElement index matchIndex |	subSize := aSubCollection size.	subSize = 0 		ifTrue: [ ^ 0 ].	lastElement := aSubCollection at: subSize.	matchIndex := (endIndex + subSize - 1) min: self size.	[ matchIndex &gt;= 1 ] whileTrue: 		[	( self at: matchIndex ) = lastElement 				ifTrue: 				[	subSize = 1 						ifTrue: [ ^ matchIndex ].					index := 2.					[( self at: matchIndex - index + 1 ) = ( aSubCollection at: subSize - index + 1 )] whileTrue: 						[	index = subSize 								ifTrue: [ ^ matchIndex - subSize + 1 ].							index := index + 1						]				].			matchIndex := matchIndex - 1		].	^ 0</body>
+
+<body package="JavascriptEngine-VisualWorks">jseResizedTo: aNumber 	" Returns a collection with the given size.	May resize the receiver "	| resized |	^ aNumber &lt; JSEPlatform sparseArrayLimit		ifTrue: [			self changeSizeTo: aNumber.			self		]		ifFalse: [			resized := JSEPlatform sparseArrayClass withSize: aNumber.			resized replaceFrom: 1 to: self size with: self startingAt: 1.			resized				].</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-VisualWorks">jseReverseDetect: aBlock ifNone: exceptionBlock 	"Evaluate aBlock with each of the receiver's elements as the argument. (reverse order)	Answer the first element for which aBlock evaluates to true."	self reverseDo: [:each | (aBlock value: each) ifTrue: [^each]].	^exceptionBlock value</body>
+</methods>
+
+<methods>
+<class-id>Core.Double</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIsNegativeZero	^ self isZero and: 		[	UninterpretedBytes isBigEndian 				ifTrue: [( self basicAt: 1 ) = 128 ]				ifFalse: [( self basicAt: 8 ) = 128 ]		]</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIsPositiveZero	^ self isZero and: [ self jseIsNegativeZero not ]</body>
+</methods>
+
+<methods>
+<class-id>Core.Number</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsInteger	^ self asInteger</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsInternalMillisecondValue	^ (self isNaN or: [ self isInfinity ])		ifTrue: [ self ]		ifFalse: [ self truncated ]</body>
+</methods>
+
+<methods>
+<class-id>Core.Number</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIsFinite	^ (self isInfinity or: [self isNaN ]) not</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIsNegativeZero	^ false</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIsPositive	^ self &gt;= 0</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIsPositiveZero	^ self isZero</body>
+</methods>
+
+<methods>
+<class-id>Core.Number</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseNegated	| negatedValue |	^ self isNaN 		ifTrue: [ self ]		ifFalse: 		[	negatedValue := self jseIsPositiveZero 					ifTrue: [ JSEPlatform negativeZeroValue ]					ifFalse: 					[	self jseIsNegativeZero 							ifTrue: [ 0 ]							ifFalse: [ self value negated ]					].			negatedValue		]</body>
+</methods>
+
+<methods>
+<class-id>Core.Number</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-VisualWorks">jsePrintOn: aStream 	self printOn: aStream</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToExponential: fractionDigits 	^ self asDouble jseToExponential: fractionDigits</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToPrecision: precision	^ self asDouble jseToPrecision: precision</body>
+</methods>
+
+<methods>
+<class-id>Core.Number</class-id> <category>mathematical functions</category>
+
+<body package="JavascriptEngine-VisualWorks">jseToSignedInteger32Value	^ self jseToSignedIntegerValueModulo: 16r100000000</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToSignedIntegerValueModulo: modulo 	| integer |	^ ( self isNaN or: [ self  isZero or: [ self  isInfinity ]]) 		ifTrue: [ 0 ]		ifFalse: 		[	integer := self truncated \\ modulo.			integer &lt; ( modulo // 2 ) 				ifTrue: [ integer ]				ifFalse: [ integer - modulo ]		]</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToUnsignedInteger32Value	^ self jseToUnsignedIntegerValueModulo: 16r100000000</body>
+
+<body package="JavascriptEngine-VisualWorks">jseToUnsignedIntegerValueModulo: modulo 	^ ( self isNaN or: [ self isZero or: [ self isInfinity ]]) 		ifTrue: [ 0 ]		ifFalse: [ self truncated \\ modulo ]</body>
+</methods>
+
+<methods>
+<class-id>Core.Dictionary</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">prepareForModificationOf: aJSEObject	" Hook "</body>
+</methods>
+
+<methods>
+<class-id>Core.Timestamp</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsInternalMillisecondValue	^ self jseAsMilliseconds</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsLocalTimestamp	" Assume that this is a UTC timestamp "	^ TimeZone default universalToLocal: self</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsMilliseconds	" Assume that this is a UTC timestamp "	^ self asMilliseconds floor - JSEPlatform timestampUTC1970Offset</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsTimestamp	^ self</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsUTCMilliseconds	" Assume that this is a timestamp of the local timezone"	^ self jseAsUTCTimestamp jseAsMilliseconds</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAsUTCTimestamp	" Assume that this is a timestamp of the local timezone"	^ TimeZone default localToUniversal: self</body>
+</methods>
+
+<methods>
+<class-id>Core.Timestamp</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">jseDaysInMonth	^ ( Date newDay: 1 monthNumber: self month year: self year ) daysInMonth</body>
+
+<body package="JavascriptEngine-VisualWorks">jseNormalize	" Normalize out-of-range values for timestamp parts. "	| extra daysInMonth |	self millisecond: self millisecond floor.	self second: self second floor.	self minute: self minute floor.	self hour: self hour floor.	self day: self day floor.	self month: self month floor.	self year: self year floor.	( extra := self millisecond // 1000 ) ~~ 0 		ifTrue: 		[	self millisecond: self milliseconds \\ 1000.			self second: self seconds + extra		].	( extra := self second // 60 ) ~~ 0 		ifTrue: 		[	self second: self seconds \\ 60.			self minute: self minute + extra		].	( extra := self minute // 60 ) ~~ 0 		ifTrue: 		[	self minute: self minute \\ 60.			self hour: self hour + extra		].	( extra := self hour // 24 ) ~~ 0 		ifTrue: 		[	self hour: self hour \\ 24.			self day: self day + extra		].	self jseNormalizeMonth.	[	daysInMonth := self jseDaysInMonth.		( extra := self day - daysInMonth ) &gt; 0 or: [( extra := self day - 1 ) &lt; 0 ]	] whileTrue: 		[	extra &gt; 0 				ifTrue: 				[	self day: self day - daysInMonth.					self month: self month + 1.					self jseNormalizeMonth				]				ifFalse: 				[	self month: self month - 1.					self jseNormalizeMonth.					self day: self day + self jseDaysInMonth				]		].</body>
+
+<body package="JavascriptEngine-VisualWorks">jseNormalizeMonth	| extra |	( extra := ( self month - 1 ) // 12 ) ~~ 0 		ifTrue: 		[	self month: ( self month - 1 ) \\ 12 + 1.			self year: self year + extra		].</body>
+</methods>
+
+<methods>
+<class-id>Core.Timestamp</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseTimeZone	" Assume that this is a local timestamp. Returns the timezone as Duration "	^ self - self jseAsUTCTimestamp</body>
+
+<body package="JavascriptEngine-VisualWorks">jseWeekday	" see 15.9.1.6 Week Day "	| weekday |	weekday := self asDate weekdayIndex.	^ weekday = 7 		ifTrue: [ 0 ]		ifFalse: [ weekday  ]</body>
+</methods>
+
+<methods>
+<class-id>Core.Timestamp</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jsIsValid	^ self year jseIsFinite		and: [ self month jseIsFinite 		and: [ self day jseIsFinite 		and: [ self hour jseIsFinite 		and: [ self minute jseIsFinite 		and: [ self second jseIsFinite 		and: [ self millisecond jseIsFinite 		]]]]]]</body>
+</methods>
+
+<methods>
+<class-id>RxsPredicate class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-VisualWorks">jseForEscapedLetter: aCharacter 	| selector |	selector := EscapedLetterSelectors at: aCharacter ifAbsent: [ ].	^ selector notNil 		ifTrue: [ self new perform: selector ]		ifFalse: [ Root.Smalltalk.RxsCharacter with: aCharacter ]</body>
+</methods>
+
+<methods>
+<class-id>Core.SmallDouble</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIsPositiveZero	" Negative zero is an instance of Double "	^ self isZero</body>
+</methods>
+
+<methods>
+<class-id>Kernel.BlockClosure</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-VisualWorks">jseIsBlockClosure	^ true</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIsClean	^ outerContext isNil and: [ method numCopiedValues = 0 ]</body>
+</methods>
+
+<methods>
+<class-id>Core.FourByteString</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsStringValue	| bytes surrogateStream |	bytes := self asByteArrayEncoding: #utf16.	surrogateStream := (String new: self size) writeStream.	1 to: bytes size by: 2 do: [ : i |		surrogateStream nextPut: (Character codePoint: ((bytes at: i + 1) bitShift: 8) + (bytes at: i)).	].	^ surrogateStream contents.</body>
+</methods>
+
+<methods>
+<class-id>Core.Fraction</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-VisualWorks">jseAsNumberValue	^ self asDouble</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxmBranch</class-id> <category>matching</category>
+
+<body package="JavascriptEngine-VisualWorks">matchAgainst: aMatcher	" ECMAScript's disjunctions return the first match, not the longest match.	See 15.10.2.3 Disjunction "	^(next matchAgainst: aMatcher)		or: [alternative notNil			and: [alternative matchAgainst: aMatcher]]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxCharSetParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-VisualWorks">parseEscapeChar	" Allow to escape all characters "	self match: $\.	$- = lookahead		ifTrue: [elements add: (RxsCharacter with: $-)]		ifFalse: [elements add: (RxsPredicate jseForEscapedLetter: lookahead)].	self match: lookahead</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxMatcher</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">hookBranchOf: regexNode onto: endMarker	"  ECMAScript's disjunctions return the first match, not the longest match.	See 15.10.2.3 Disjunction 	Use JSERxmBranch instead of RxmBranch "	| rest |	rest := regexNode regex isNil		ifTrue: [nil]		ifFalse: [self hookBranchOf: regexNode regex onto: endMarker].	^JSERxmBranch new		next: ((regexNode branch dispatchTo: self)					pointTailTo: endMarker; 					yourself);		alternative: rest;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxMatcher</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">jsePositionOf: aString	self matchesIn: aString value do: [: match | ^ self position - match size ].	^ -1</body>
+
+<body package="JavascriptEngine-VisualWorks">matches: aString offset: offset do: matchBlock elseDo: nonMatchBlock 	| startIndex matchSucceeded groups |	stream := aString readStream.	startIndex := offset.	matchSucceeded := false.	"native smalltalk regex implementation always starts the match at the pos 1 of the string, so we have to continously try to match"	[ matchSucceeded ] whileFalse: 		[	( startIndex &lt; 0 or: [ startIndex &gt; aString size ]) ifTrue: [ ^ nonMatchBlock value ].			startIndex &gt; 0 ifTrue: [ stream position: startIndex ].			lastChar := nil.			self tryMatch 				ifTrue: [ matchSucceeded := true ]				ifFalse: [ startIndex := startIndex + 1 ]		].	^ matchSucceeded 		ifTrue: 		[	groups := Array new: self subexpressionCount.			1 to: groups size do: [: i | groups at: i put: ( self subexpression: i )].			matchBlock value: groups value: startIndex value: stream position		]		ifFalse: [ nonMatchBlock value ]</body>
+
+<body package="JavascriptEngine-VisualWorks">matchesIn: aString do: aBlock global: global 	self matchesIn: aString		do: 		[: match | | numberOfCaptures captures |			numberOfCaptures := self subexpressionCount - 1.			captures := Array new: numberOfCaptures.			1 to: numberOfCaptures do: [: i | captures at: i put: ( self subexpression: i + 1 )].			aBlock value: match value: captures value: self position - match size + 1.			global ifFalse: [ ^ self ]		].</body>
+
+<body package="JavascriptEngine-VisualWorks">split: aString limit: limitValue	" Implementation of split() for regular expression separators "	| elements valueStream start |	elements := OrderedCollection new.	valueStream := aString readStream.	start := 1.	self 		matchesOnStream: valueStream		do: 		[: match | | pos |			pos := self position.			elements add: ( aString copyFrom: start to: pos - match size ).			( limitValue notNil and: [ elements size = limitValue ]) 				ifTrue: [ ^ elements ].			2 to: self subexpressionCount do: [ : sub |				elements add: ( self subexpression: sub).				( limitValue notNil and: [ elements size = limitValue ]) 					ifTrue: [ ^ elements ].			].			start := pos + 1		].	start &lt;= aString size 		ifTrue: [ elements add: ( aString copyFrom: start to: aString size ) ]		ifFalse: [ elements add: '' ].	^ elements</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxMatcher class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-VisualWorks">forString: aString ignoreCase: ignoreCase multiline: multiline 	^ self nativeMatcherClass 		ifNil: 		[	"no multiline support"			self for: ( JSERxParser new parse: aString ) ignoreCase: ignoreCase		]		ifNotNil: 		[: nativeMatcherClass | 			| matcher decodedString |			" replace \u1234 with \x{1234} "			matcher := '\\\u([0-9a-fA-F]{4,4})' asRegex.			decodedString := matcher copy: aString translatingMatchesUsing: [: match | '\x{' , ( matcher subexpression: 2 ) , '}' ].			nativeMatcherClass forString: decodedString ignoreCase: ignoreCase multiline: multiline		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxMatcher class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">nativeMatcherClass	^ Boost.BoostRxMatcher libAvailable 		ifTrue: [ Boost.BoostRxMatcher ]		ifFalse: [ nil ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPlatform class</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-VisualWorks">initializePlatform	" require for NaN / INF "	Double ieeePrimitivesEnabled: true</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPlatform class</class-id> <category>compiling</category>
+
+<body package="JavascriptEngine-VisualWorks">compile: aString into: aClass classified: aSymbol 	^ aClass compile: aString classified: aSymbol</body>
+
+<body package="JavascriptEngine-VisualWorks">defineClassNamed: aLocalClassname superclass: aSuperclass 	^ aSuperclass environment 		defineClass: aLocalClassname asSymbol		superclass: aSuperclass fullyQualifiedReference		indexedType: #none		private: false		instanceVariableNames: ''		classInstanceVariableNames: ''		imports: ''		category: ''</body>
+
+<body package="JavascriptEngine-VisualWorks">defineSuperclass: aSuperclass of: aClass	^ aClass environment 		defineClass: aClass name		superclass: aSuperclass fullyQualifiedReference		indexedType: aClass behaviorType		private: false		instanceVariableNames: aClass instanceVariablesString		classInstanceVariableNames: aClass class instanceVariablesString		imports: ''		category: ''</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPlatform class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">arrayElementsWithSize: length 	^ length &lt; self sparseArrayLimit 		ifTrue: [ OrderedCollection withSize: length ]		ifFalse: [ self sparseArrayClass withSize: length ]</body>
+
+<body package="JavascriptEngine-VisualWorks">asRegex: aString ignoreCase: ignoreCase	^ JSERxMatcher for: ( JSERxParser new parse: aString ) ignoreCase: ignoreCase</body>
+
+<body package="JavascriptEngine-VisualWorks">asRegex: aString ignoreCase: ignoreCase multiline: multiline	^JSERxMatcher forString: aString ignoreCase: ignoreCase multiline: multiline</body>
+
+<body package="JavascriptEngine-VisualWorks">floatClass	^ Double</body>
+
+<body package="JavascriptEngine-VisualWorks">localeCompareString: aString1 with: aString2	^ UnicodeCollationAlgorithm new jseLocaleCompareString: aString1 with: aString2</body>
+
+<body package="JavascriptEngine-VisualWorks">orderedDictionaryClass	^ JSEOrderedDictionary</body>
+
+<body package="JavascriptEngine-VisualWorks">parseFloatFrom: aStream 	" Parse a float from the stream.	Does not use Double&gt;&gt;readFrom: to satisfy the requirements by the ECMA standard	e.g. '.1e-1' should be equal to '0.01'.	This is a tweaked version of Number&gt;&gt;readSmalltalkSyntaxFrom: "	| neg value |	( aStream atEnd or: [ aStream peek isLetter ]) 		ifTrue: [ ^ 0 ].	neg := aStream peekFor: $-.	value := Number readIntegerFrom: aStream radix: 10.	value := self parseFloatFrom: aStream integerPart: value.	^ neg 		ifTrue: [ value negated ]		ifFalse: [ value ]</body>
+
+<body package="JavascriptEngine-VisualWorks">parseIntegerFrom: aStream 	^ Integer readFrom: aStream</body>
+
+<body package="JavascriptEngine-VisualWorks">parseIntegerFrom: aStream radix: aRadix	^ Integer readFrom:  aStream radix: aRadix</body>
+
+<body package="JavascriptEngine-VisualWorks">sparseArrayClass	^ JSESparseArray</body>
+
+<body package="JavascriptEngine-VisualWorks">sparseArrayLimit	" 2^24 "	^ 16777216</body>
+
+<body package="JavascriptEngine-VisualWorks">timestampFromYear: year month: month day: day hours: hours minutes: minutes seconds: seconds milliseconds: milliseconds		| timestamp   |	timestamp := Timestamp new.	timestamp year: year.	timestamp month: month.	timestamp day: day.	timestamp hour: hours.	timestamp minute: minutes.	timestamp second: seconds.	timestamp millisecond: milliseconds.	^ timestamp</body>
+
+<body package="JavascriptEngine-VisualWorks">timestampNowUTC	^ Timestamp nowUTC</body>
+
+<body package="JavascriptEngine-VisualWorks">timestampUTC1970Offset	^ 2177452800000</body>
+
+<body package="JavascriptEngine-VisualWorks">toStringValue: aTimestamp valueBlock: valueBlock isUTC: isUTC locale: locale policy: policy printTimezone: printTimezone 	" Utility method to print timestamp/time/date values "	| stream timezone isISO |	stream := String new writeStream.	stream nextPutAll: ( locale printAsTime: ( valueBlock value: aTimestamp ) policyNamed: policy ).	printTimezone 		ifTrue: 		[	isISO := (policy = #iso8601 or: [ policy = #iso8601Enhanced ]).			isISO 				ifFalse: [ stream nextPutAll: ' GMT' ].			isUTC 				ifTrue: 				[	isISO 						ifTrue: [ stream nextPut: $Z ]				]				ifFalse: 				[	timezone := isUTC 							ifTrue: [ 0 seconds ]							ifFalse: [ aTimestamp asTimestamp jseTimeZone ].					timezone positive 						ifTrue: [ stream nextPut: $+ ].					timezone hours printOn: stream paddedWith: $0 to: 2 base: 10.					timezone minutes printOn: stream paddedWith: $0 to: 2 base: 10				]		].	^ stream contents</body>
+
+<body package="JavascriptEngine-VisualWorks">utf8DecodeNextFrom: aStream 	" UTF8StreamEncoder does not check for invalid sequences "	| c1 c2 c3 extraBytes |	c1 := aStream next.	c1 == nil 		ifTrue: [ ^ Character illegalCode asCharacter ].	16r7F &gt;= c1 		ifTrue: [ ^ Character codePoint: c1 ].	"1-byte character"	( c1 &lt; 16rC0 or: [ c1 = 16rFF ]) 		ifTrue: [ ^ Character illegalCode asCharacter ].	16rC0 == ( c1 bitAnd: 16rE0 ) 		ifTrue: 		[	"optimize 2-byte character"			c2 := aStream next.			c2 == nil 				ifTrue: [ ^ Character illegalCode asCharacter ].			" must match 10xxxxxx "			(c2 bitAnd: 2r11000000) = 2r10000000				ifFalse: [ ^ Character illegalCode asCharacter ].			^ Character codePoint: (( c1 bitAnd: 16r1F ) bitShift: 6 ) + ( c2 bitAnd: 16r3F )		].	16rE0 == ( c1 bitAnd: 16rF0 ) 		ifTrue: 		[	"optimize 3-byte character"			c2 := aStream next.			c2 == nil 				ifTrue: [ ^ Character illegalCode asCharacter ].			(c2 bitAnd: 2r11000000) = 2r10000000				ifFalse: [ ^ Character illegalCode asCharacter ].			c3 := aStream next.			c3 == nil 				ifTrue: [ ^ Character illegalCode asCharacter ].			(c3 bitAnd: 2r11000000) = 2r10000000				ifFalse: [ ^ Character illegalCode asCharacter ].			^ Character codePoint: (( c1 bitAnd: 16r0F ) bitShift: 12 ) + (( c2 bitAnd: 16r3F ) bitShift: 6 ) + ( c3 bitAnd: 16r3F )		].	extraBytes := c1 &lt; 16rF8 			ifTrue: [ 3 ]			ifFalse: 			[	c1 &lt; 16rFC 					ifTrue: [ 4 ]					ifFalse: 					[	c1 &lt; 16rFE 							ifTrue: [ 5 ]							ifFalse: [ 6 ]					]			].	"Refuse to decode characters with more than 21 bits--Unicode's defined limit."	extraBytes &gt; 3 		ifTrue: [ ^ Character illegalCode asCharacter ].	c1 := c1 bitAnd: ( 16rFF bitShift: -2 - extraBytes ).	"Mask off the tag bits."	extraBytes timesRepeat: 		[	c2 := aStream next.			c2 == nil 				ifTrue: [ ^ Character illegalCode asCharacter  ].			(c2 bitAnd: 2r11000000) = 2r10000000				ifFalse: [ ^ Character illegalCode asCharacter ].			c1 := ( c1 bitShift: 6 ) + ( c2 bitAnd: 16r3F )		].	^ Character codePoint: c1</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPlatform class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">parseFloatFrom: aStream integerPart: integerPart 	" a tweak copy of Number&gt;&gt;readSmalltalkFloat:from: "	| value possibleCoercionClass precision digit num den exp neg endOfNumber eChar |	precision := 0.	num := 0.	den := 1.	( aStream peekFor: $. ) 		ifTrue: 		[	"&lt;integer&gt;.&lt;fraction&gt;"			( aStream atEnd not and: [ aStream peek isDigit ]) 				ifTrue: 				[ | atEnd |					[( atEnd := aStream atEnd ) or: [( digit := aStream next ) isDigit not ]] whileFalse: 						[	num := num * 10 + digit digitValue.							precision := precision + 1						].					den := 10 ** precision.					atEnd 						ifFalse: [ aStream skip: -1 ]				]				ifFalse: 				[	"oops - just &lt;integer&gt;."					"un-gobble the period"					aStream skip: -1				]		].	eChar := aStream peek.	eChar == nil 		ifTrue: [ possibleCoercionClass := nil ]		ifFalse: 		[	possibleCoercionClass := (eChar =  $e or: [ eChar = $E ]) 					ifTrue: [ Double ].			possibleCoercionClass == nil 				ifFalse: [ aStream next ]		].	exp := nil.	possibleCoercionClass == nil 		ifFalse: 		[	endOfNumber := aStream position.			neg := aStream peekFor: $-.			(( digit := aStream peek ) notNil and: [ digit isDigit ]) 				ifTrue: 				[	exp := Number readIntegerFrom: aStream radix: 10.					neg 						ifTrue: [ exp := exp negated ]				]				ifFalse: [ aStream position: endOfNumber ]		].	value := integerPart + ( num / den ).	"The exponent will be added in the next step."	^ exp == nil 		ifTrue: [ value asDouble ]		ifFalse: [( value * ( 10 raisedTo: exp )) asDouble ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEPlatform class</class-id> <category>constants</category>
+
+<body package="JavascriptEngine-VisualWorks">nanValue	nanValue isNil 		ifTrue: [ nanValue := self floatClass zero / self floatClass zero ].	^ nanValue</body>
+
+<body package="JavascriptEngine-VisualWorks">negativeInfinityValue	negativeInfinityValue isNil 		ifTrue: [ negativeInfinityValue := self floatClass unity negated / self floatClass zero ].	^ negativeInfinityValue</body>
+
+<body package="JavascriptEngine-VisualWorks">negativeMaxIntegerValue	negativeMaxIntegerValue isNil 		ifTrue: [ negativeMaxIntegerValue := self floatClass fmax negated asInteger ].	^ negativeMaxIntegerValue</body>
+
+<body package="JavascriptEngine-VisualWorks">negativeZeroValue	negativeZeroValue isNil		ifTrue: [ negativeZeroValue := 16r8000000000000000 copy changeClassTo: Double ].	^ negativeZeroValue</body>
+
+<body package="JavascriptEngine-VisualWorks">positiveInfinityValue	positiveInfinityValue isNil 		ifTrue: [ positiveInfinityValue := self floatClass unity / self floatClass zero ].	^ positiveInfinityValue</body>
+
+<body package="JavascriptEngine-VisualWorks">positiveMaxIntegerValue	positiveMaxIntegerValue isNil 		ifTrue: [ positiveMaxIntegerValue := self floatClass fmax asInteger ].	^ positiveMaxIntegerValue</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxParser</class-id> <category>recursive descent</category>
+
+<body package="JavascriptEngine-VisualWorks">atom	" Tweaked for JavaScript	- no message predicates "	| atom |	( lookahead == #epsilon or: [ lookahead == $| or: [ lookahead == $) or: [ lookahead == $* or: [ lookahead == $+ or: [ lookahead == $? ]]]]]) 		ifTrue: [ ^ RxsEpsilon new ].	lookahead == $( 		ifTrue: 		[	"&lt;atom&gt; ::= '(' &lt;regex&gt; ')' "			self match: $(.			atom := self regex.			self match: $).			^ atom		].	lookahead == $[ 		ifTrue: 		[	"&lt;atom&gt; ::= '[' &lt;characterSet&gt; ']' "			self match: $[.			atom := self characterSet.			self match: $].			^ atom		].	lookahead == $. 		ifTrue: 		[	"any non-whitespace character"			self next.			^ RxsContextCondition new beAny		].	lookahead == $^ 		ifTrue: 		[	"beginning of line condition"			self next.			^ RxsContextCondition new beBeginningOfLine		].	lookahead = $$ 		ifTrue: 		[	"end of line condition"			self next.			^ RxsContextCondition new beEndOfLine		].	lookahead == $\ 		ifTrue: 		[	"&lt;atom&gt; ::= '\' &lt;character&gt;"			self next.			lookahead == #epsilon 				ifTrue: [ self signalParseError: 'bad quotation' ].			( BackslashConstants includesKey: lookahead ) 				ifTrue: 				[	atom := RxsCharacter with: ( BackslashConstants at: lookahead ).					self next.					^ atom				].			self 				ifSpecial: lookahead				then: 				[: node |					self next.					^ node				]		].	"If passed through the above, the following is a regular character."	atom := RxsCharacter with: lookahead.	self next.	^ atom</body>
+
+<body package="JavascriptEngine-VisualWorks">piece	"Tweaked for JavaScript:	- dont complain about nullable closures for optional atoms"	| atom repetitions errorMessage |	errorMessage := 'Repitition of nullable elements not allowed'.	atom := self atom.	lookahead == $* ifTrue: 		[self next.		atom isNullable ifTrue: [self signalParseError: errorMessage].		^RxsPiece new initializeStarAtom: atom].	lookahead == $+ ifTrue: 		[self next.		atom isNullable ifTrue: [self signalParseError: errorMessage].		^RxsPiece new initializePlusAtom: atom].	lookahead == $? ifTrue: 		[self next.		"atom isNullable ifTrue: [self signalParseError: errorMessage]."		^RxsPiece new initializeOptionalAtom: atom].	lookahead == ${		ifTrue: 			[self match: ${.			repetitions := self repetitions.			self match: $}.			^RxsPiece new				initializeAtom: atom				min: repetitions min				max: repetitions max].	^RxsPiece new initializeAtom: atom</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">characterSetFrom: setSpec	" same implementation as RxParser, excepct that it uses JSERxCharSetParser instead of RxCharsetParser "	| negated spec |	spec := ReadStream on: setSpec.	spec peek == $^		ifTrue: 	[negated := true.				spec next]		ifFalse:	[negated := false].	^RxsCharSet new		initializeElements: (JSERxCharSetParser on: spec) parse		negated: negated</body>
+
+<body package="JavascriptEngine-VisualWorks">ifSpecial: aCharacter then: aBlock 	aCharacter = $c 		ifTrue: [ self parseEscapeWith: [ self parseControlEscape ] do: [: escape | ^ aBlock value: escape ]].	( aCharacter = $&lt; or: [ aCharacter = $&gt; ]) 		ifTrue: 		[	" normal character "			^ self		].	^ super ifSpecial: aCharacter then: aBlock</body>
+
+<body package="JavascriptEngine-VisualWorks">parseEscapeWith: aBlock do: anEscapeBlock	| position oldLookahead escape |	position := input position.	oldLookahead := lookahead.	escape := aBlock value.	^ escape notNil 		ifTrue: [ anEscapeBlock value: escape ]		ifFalse: 		[	lookahead := oldLookahead.			input position: position.			nil		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERxParser</class-id> <category>escapes</category>
+
+<body package="JavascriptEngine-VisualWorks">parseControlEscape	" 15.10.2.10 CharacterEscape "	self next.	^ ( lookahead = #epsilon or: [ lookahead isAlphabetic not ]) 		ifTrue: [ nil ]		ifFalse: [ RxsCharacter with: ( Character value: lookahead codePoint \\ 32 )]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>adding</category>
+
+<body package="JavascriptEngine-VisualWorks">add: newObject	"ArrayedCollections cannot implement add:."	self shouldNotImplement</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-VisualWorks">at: index 	^ index &lt;= length 		ifTrue: [ elements at: index ifAbsent: [ nil ]]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-VisualWorks">at: index put: value 	value notNil 		ifTrue: [ elements at: index put: value ]		ifFalse: [ elements removeKey: index ifAbsent: [ ]].</body>
+
+<body package="JavascriptEngine-VisualWorks">jseAddOrConcat: aSequenceableCollection 	^ self jseConcat: aSequenceableCollection</body>
+
+<body package="JavascriptEngine-VisualWorks">jseConcat: aSequenceableCollection 	| start concatenated |	start := self size + 1.	concatenated := self copy.	concatenated  length: self size + aSequenceableCollection size.	aSequenceableCollection jseIndicesAndValuesDo: [ : i : element |		concatenated at: i + start put: element	].	^ concatenated</body>
+
+<body package="JavascriptEngine-VisualWorks">jseDeletableLengthFor: newLength 	" Returns the shortest length &gt;= newLength that only contains deletable elements "	| deletableLength deleteSucceeded elementIndex elementIndices i |	deleteSucceeded := true.	elementIndices := self indices.	i := elementIndices size.	deletableLength := self size.	[ | element |		elementIndex := elementIndices at: i.		elementIndex &gt; newLength 			ifTrue: 			[	element := self at: elementIndex.				( element notNil and: [ element isProperty and: [ element isConfigurable not ]]) 					ifTrue: [ deleteSucceeded := false ]					ifFalse: [ deletableLength := elementIndex - 1 ].				deleteSucceeded and: [ i &gt; 1 ]			]			ifFalse: [ false ]	] whileTrue: [ i := i - 1 ].	^ deletableLength</body>
+
+<body package="JavascriptEngine-VisualWorks">jseResizedTo: aNumber 	self length: aNumber</body>
+
+<body package="JavascriptEngine-VisualWorks">replaceFrom: start to: stop with: replacement startingAt: repStart 	0  to: stop - start		do: 		[: i | | element |			element := replacement at: i + repStart .			element notNil 				ifTrue: [ self at: i + start put: element ]		].</body>
+
+<body package="JavascriptEngine-VisualWorks">size	^ length</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>copying</category>
+
+<body package="JavascriptEngine-VisualWorks">postCopy	super postCopy.	elements notNil 		ifTrue: [ elements := elements copy ].</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>enumerating</category>
+
+<body package="JavascriptEngine-VisualWorks">do: aBlock 	1 to: self size do: [ : i |		aBlock value: (self at: i)	].</body>
+
+<body package="JavascriptEngine-VisualWorks">jseIndicesAndValuesDo: aBlock	" pefrorm the block with each element index (0-based) and the element "	self indices do: [ : index |		aBlock value: index - 1 value: (self at: index)	]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-VisualWorks">initializeForLength: aNumber	elements := Dictionary new.	length := aNumber</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray</class-id> <category>private</category>
+
+<body package="JavascriptEngine-VisualWorks">indices	^  elements keys asSortedCollection.</body>
+
+<body package="JavascriptEngine-VisualWorks">length: aNumber 	length := aNumber</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESparseArray class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-VisualWorks">new	^ self basicNew initializeForLength: 0</body>
+
+<body package="JavascriptEngine-VisualWorks">new: aNumber	^ self basicNew initializeForLength: aNumber</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEOrderedDictionary</class-id> <category>copying</category>
+
+<body package="JavascriptEngine-VisualWorks">postCopy	super postCopy.	order notNil ifTrue: [ order := order copy ].</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>RxmBranch</name>
+<environment>Smalltalk</environment>
+<super>RxmLink</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>loopback alternative </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>VB-Regex</category>
+<attributes>
+<package>Regex11</package>
+</attributes>
+</class>
+
+<class>
+<name>Dictionary</name>
+<environment>Core</environment>
+<super>Core.Set</super>
+<private>false</private>
+<indexed-type>objects</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-Unordered</category>
+<attributes>
+<package>Collections-Unordered</package>
+</attributes>
+</class>
+
+<class>
+<name>Number</name>
+<environment>Core</environment>
+<super>Core.ArithmeticValue</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>LimitedPrecisionReal</name>
+<environment>Core</environment>
+<super>Core.Number</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars>powersOfTwo </class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>SmallDouble</name>
+<environment>Core</environment>
+<super>Core.LimitedPrecisionReal</super>
+<private>false</private>
+<indexed-type>immediate</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>BlockClosure</name>
+<environment>Kernel</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>method outerContext copiedValues </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Methods</category>
+<attributes>
+<package>Kernel-Methods</package>
+</attributes>
+</class>
+
+<class>
+<name>SequenceableCollection</name>
+<environment>Core</environment>
+<super>Core.Collection</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-Abstract</category>
+<attributes>
+<package>Collections-Abstract</package>
+</attributes>
+</class>
+
+<class>
+<name>String</name>
+<environment>Core</environment>
+<super>Core.CharacterArray</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-Text</category>
+<attributes>
+<package>Collections-Text</package>
+</attributes>
+</class>
+
+<class>
+<name>OrderedDictionary</name>
+<environment>Collections</environment>
+<super>Core.Dictionary</super>
+<private>false</private>
+<indexed-type>objects</indexed-type>
+<inst-vars>order </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>ExtraCollections</package>
+</attributes>
+</class>
+
+<class>
+<name>Double</name>
+<environment>Core</environment>
+<super>Core.LimitedPrecisionReal</super>
+<private>false</private>
+<indexed-type>bytes</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>Timestamp</name>
+<environment>Core</environment>
+<super>Core.Magnitude</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>year month day hours minutes seconds milliseconds partialNanosecond </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-General</category>
+<attributes>
+<package>Magnitude-General</package>
+</attributes>
+</class>
+
+<class>
+<name>UnicodeCollationAlgorithm</name>
+<environment>Core</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>decompositions recompositions combiners collationFlags collationContractions collationAllLevels collationExpansions tailoredCollationFlags tailoredCollationContractions tailoredCollationAllLevels tailoredCollationExpansions reverseSecondary </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>Collections-Collation</package>
+</attributes>
+</class>
+
+<class>
+<name>RxParser</name>
+<environment>Smalltalk</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>input lookahead </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>VB-Regex</category>
+<attributes>
+<package>Regex11</package>
+</attributes>
+</class>
+
+<class>
+<name>RxMatcher</name>
+<environment>Smalltalk</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>matcher ignoreCase startOptimizer stream markerPositions markerCount lastResult lastChar </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>VB-Regex</category>
+<attributes>
+<package>Regex11</package>
+</attributes>
+</class>
+
+<class>
+<name>RxCharSetParser</name>
+<environment>Smalltalk</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>source lookahead elements </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>VB-Regex</category>
+<attributes>
+<package>Regex11</package>
+</attributes>
+</class>
+
+<class>
+<name>Integer</name>
+<environment>Core</environment>
+<super>Core.Number</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>Fraction</name>
+<environment>Core</environment>
+<super>Core.Number</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>numerator denominator </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-Numbers</category>
+<attributes>
+<package>Magnitude-Numbers</package>
+</attributes>
+</class>
+
+<class>
+<name>FourByteString</name>
+<environment>Core</environment>
+<super>Core.String</super>
+<private>false</private>
+<indexed-type>bytes</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-String Support</category>
+<attributes>
+<package>Collections-String Support</package>
+</attributes>
+</class>
+
+</st-source>

@@ -1,0 +1,2452 @@
+<?xml version="1.0"?>
+
+<st-source>
+<!-- 
+Name: JavascriptEngine-Parser-Core
+Notice: Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: Parser for ECMAScript aka Javascript.
+Uses a factory (subclass of JSEParsedNodesFactory) to create meaningful objects from the parsed source.
+
+The parser uses PetitParser. Requires a tweaked version which can be downloaded here:
+https://github.com/hkleinsorgen/VW-PetitParser
+
+Example:
+
+	JSE.JSEParser new 
+		factory: JSE.JSESyntaxTreeFactory new;
+		parse: 'var a=42;'
+
+
+
+Contact: h . kleinsorgen - at - gmail . com
+Github repo: https://github.com/hkleinsorgen/VW-JavascriptEngine
+
+Licensed under the MIT license
+
+Copyright (c) 2010 Holger Kleinsorgen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+DbIdentifier: psql_public_cst_2007
+DbTrace: 96223
+DbUsername: klnsrgn
+DbVersion: 0.5.2
+DevelopmentPrerequisites: #(#(#any 'JavascriptEngine-Namespace' '') #(#any 'JavascriptEngine-VisualWorks' '') #(#any 'PetitParser' ''))
+Namespace: Smalltalk.JSE
+PackageName: JavascriptEngine-Parser-Core
+Parcel: #('JavascriptEngine-Parser-Core')
+ParcelDirectory: e:\develop\git\jse\JavascriptEngine-Parser-Core
+PrerequisiteDescriptions: #(#(#name 'JavascriptEngine-Namespace' #componentType #package) #(#name 'JavascriptEngine-VisualWorks' #componentType #package) #(#name 'PetitParser' #componentType #package))
+PrerequisiteParcels: #(#('JavascriptEngine-Namespace' '') #('JavascriptEngine-VisualWorks' '') #('PetitParser' ''))
+PrintStringCache: (0.5.2,klnsrgn)
+Version: 0.5.2
+Date: 2:21:02 PM September 16, 2017
+ -->
+<time-stamp>From VisualWorks®, 8.1.1 of 10. März 2016 on 16. September 2017 at 14:21:02</time-stamp>
+
+
+<do-it>(Dialog confirm: 'You are filing-in a Parcel source file!\\While this is possible it will not have\the same effect as loading the parcel.\None of the Parcel''s prerequisites will\be loaded and none of its load actions\will be performed.\\Are you sure you want to file-in?' withCRs) ifFalse: [self error: 'Parcel file-in abandoned.  Choose terminate or close.']</do-it>
+
+<class>
+<name>JSEParsedNodesFactory</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEParsedNodesFactory</class-id>
+<body>Used by the Javascript parser to create objects from the parsed elements</body>
+</comment>
+
+<class>
+<name>JSEAbstractParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPCompositeParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEAbstractParser</class-id>
+<body>Abstract JavaScript parser superclass</body>
+</comment>
+
+<class>
+<name>JSEParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>lexicalParser syntacticParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEParser</class-id>
+<body>Parses that consists of a lexical and a syntactic parser.Uses a factory to create the output. Consists of a lexical and a syntactic parser.</body>
+</comment>
+
+<class>
+<name>JSELiteralSequenceChoiceParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>message literalsBySize maxSize </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<class>
+<name>JSEEndOfInputParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPEndOfInputParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEEndOfInputParser</class-id>
+<body>Rreturns a failure that points to the unreadable token, instead to the last readable </body>
+</comment>
+
+<class>
+<name>JSEActionParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPActionParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEActionParser</class-id>
+<body>Additionally passes the source interval to the action block</body>
+</comment>
+
+<class>
+<name>JSESourceInformation</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceString location clientData </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESourceInformation</class-id>
+<body>JSESourceInformation has not been commented.  The comment should state the purpose of the class and also explain any unobvious aspects of the implementation.Instance Variables:	location	&lt;String&gt;	Location of the script	sourceString	&lt;String&gt;	Source code</body>
+</comment>
+
+<class>
+<name>JSEError</name>
+<environment>JSE</environment>
+<super>Core.Error</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>sourceInterval lineNumber sourceInformation </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEError</class-id>
+<body>Superclass of Javascript errors</body>
+</comment>
+
+<class>
+<name>JSEToken</name>
+<environment>JSE</environment>
+<super>PetitParser.PPToken</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>type literalValue hasPreceedingLineTerminator </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEToken</class-id>
+<body>Token created by a lexical parser</body>
+</comment>
+
+<class>
+<name>JSELookaheadParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPDelegateParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSELookaheadParser</class-id>
+<body>A parser that succeeds whenever its delegate does, but consumes no input</body>
+</comment>
+
+<class>
+<name>JSEJsonFactory</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonFactory</class-id>
+<body>Used by the JSON parser to create objects from the parsed elements</body>
+</comment>
+
+<class>
+<name>JSEHighlighter</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>styles reservedWords lexicalParser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEHighlighter</class-id>
+<body>Lexical highlighter</body>
+</comment>
+
+<class>
+<name>JSEUnicodeTables</name>
+<environment>JSE</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars>codePointCategories categoryCodePoints </class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEUnicodeTables</class-id>
+<body>Maps code points to Unicode categories</body>
+</comment>
+
+<class>
+<name>JSETokenParser</name>
+<environment>JSE</environment>
+<super>PetitParser.PPTokenParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>type </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSETokenParser</class-id>
+<body>Creates typed tokens</body>
+</comment>
+
+<class>
+<name>JSENilFactory</name>
+<environment>JSE</environment>
+<super>JSE.JSEParsedNodesFactory</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSENilFactory</class-id>
+<body>A factory that does nothing. Used when no factory is specified.</body>
+</comment>
+
+<class>
+<name>JSEAbstractLexicalParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>whiteSpace lineTerminator decimalDigit decimalDigits hexIntegerLiteral hexDigit exponentPart exponentIndicator signedInteger unicodeEscapeSequence decimalIntegerLiteral nonZeroDigit </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEAbstractLexicalParser</class-id>
+<body>Abstract superclass of lexical parsers</body>
+</comment>
+
+<class>
+<name>JSEAbstractSyntacticParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>factory </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEAbstractSyntacticParser</class-id>
+<body>Abstract superclass of syntactic parsers that consume tokens generated by a lexical parser.The factory object handles the parsed elements .</body>
+</comment>
+
+<class>
+<name>JSEJsonParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonParser</class-id>
+<body>Parses JSON</body>
+</comment>
+
+<class>
+<name>JSESyntaxError</name>
+<environment>JSE</environment>
+<super>JSE.JSEError</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESyntaxError</class-id>
+<body>Represents a SyntaxError of the ECMA specification. Also raised when the parser could not parse a script.</body>
+</comment>
+
+<class>
+<name>JSERegexToken</name>
+<environment>JSE</environment>
+<super>JSE.JSEToken</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>flags startToken stopToken </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSERegexToken</class-id>
+<body>Token for literal regular expressions</body>
+</comment>
+
+<class>
+<name>JSEFunctionBodyParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEFunctionBodyParser</class-id>
+<body>Parses the body of a function</body>
+</comment>
+
+<class>
+<name>JSEFormalParameterListParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEFormalParameterListParser</class-id>
+<body>Parses formal parameters of a function</body>
+</comment>
+
+<class>
+<name>JSEJsonNilFactory</name>
+<environment>JSE</environment>
+<super>JSE.JSEJsonFactory</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonNilFactory</class-id>
+<body>A factory that does nothing. Used when no factory is specified.</body>
+</comment>
+
+<class>
+<name>JSEJsonLexicalParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLexicalParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>jsonElement jsonWhitespace jsonString jsonStringCharacter jsonEscapeCharacter jsonEscapeSequence jsonNumber jsonFraction nullLiteral booleanLiteral punctuator </inst-vars>
+<class-inst-vars>stringifyReplacements parseReplacements </class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonLexicalParser</class-id>
+<body>Parses JSON </body>
+</comment>
+
+<class>
+<name>JSENumericStringParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLexicalParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>strDecimalLiteral stringNumericLiteral strNumericLiteral strUnsignedDecimalLiteral strWhiteSpace strWhiteSpaceChar </inst-vars>
+<class-inst-vars>default </class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSENumericStringParser</class-id>
+<body>Parser used for converting numeric strings</body>
+</comment>
+
+<class>
+<name>JSELexicalParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractLexicalParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>emitCommentTokens regexEnabled sourceCharacter comment tokenParser divPunctuator multiLineComment singleLineComment multiLineCommentChars multiLineCommentChar singleLineCommentChars singleLineCommentChar identifierName punctuator numericLiteral octalIntegerLiteral stringLiteral reservedWord identifierStart identifierPart unicodeLetter unicodeCombiningMark unicodeDigit unicodeConnectorPunctuation keyword futureReservedWord nullLiteral booleanLiteral decimalLiteral doubleStringCharacters singleStringCharacters doubleStringCharacter singleStringCharacter escapeSequence lineContinuation lineTerminatorSequence characterEscapeSequence hexEscapeSequence singleEscapeCharacter nonEscapeCharacter escapeCharacter identifier literal regularExpressionFlags regularExpressionClassChars regularExpressionClassChar regularExpressionNonTerminator regularExpressionBackslashSequence regularExpressionLiteral inputElement pattern alternative assertion atom quantifier disjunction quantifierPrefix patternCharacter atomEscape characterClass decimalEscape characterEscape characterClassEscape controlEscape controlLetter identityEscape term </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSELexicalParser</class-id>
+<body>Parses JavaScriptA bit of cheating is involved to parse regular expressions, see	processTokens:on:preceedingLineTerminator:</body>
+</comment>
+
+<class>
+<name>JSESyntacticParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractSyntacticParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>strictModeStack expression elision elementList assignmentExpression propertyNameAndValueList propertyAssignment propertyName functionBody primaryExpression functionExpression arguments argumentList leftHandSideExpression postfixExpression unaryExpression multiplicativeExpression additiveExpression shiftExpression relationalExpression relationalExpressionNoIn equalityExpression equalityExpressionNoIn bitwiseANDExpression bitwiseANDExpressionNoIn bitwiseXORExpression bitwiseXORExpressionNoIn bitwiseORExpressionNoIn bitwiseORExpression logicalANDExpression logicalANDExpressionNoIn logicalORExpression logicalORExpressionNoIn assignmentExpressionNoIn assignmentOperator conditionalExpression conditionalExpressionNoIn expressionNoIn block variableStatement emptyStatement expressionStatement ifStatement iterationStatement continueStatement breakStatement returnStatement withStatement labelledStatement switchStatement throwStatement tryStatement debuggerStatement statementList statement variableDeclarationList variableDeclaration variableDeclarationListNoIn variableDeclarationNoIn initialiser initialiserNoIn caseBlock defaultClause caseClause catch finally formalParameterList sourceElements sourceElement functionDeclaration program arrayLiteral objectLiteral lineTerminator identifier identifierName stringLiteral numericLiteral literal automaticSemicolon newExpression forStatementLoop defaultClauseAndClauses memberExpression memberBaseExpression memberPartExpression newMemberExpression newMemberPartExpression propertySetIdentifier </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSESyntacticParser</class-id>
+<body>Parses JavaScript tokens. Uses a factory to create a useful output.</body>
+</comment>
+
+<class>
+<name>JSEJsonSyntacticParser</name>
+<environment>JSE</environment>
+<super>JSE.JSEAbstractSyntacticParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>element object member array literal </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category></category>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</class>
+
+<comment>
+<class-id>JSE.JSEJsonSyntacticParser</class-id>
+<body>Parses JSON tokens</body>
+</comment>
+
+<shared-variable>
+<name>StrictReservedWords</name>
+<environment>JSE.JSELexicalParser</environment>
+<private>false</private>
+<constant>false</constant>
+<category>accessing</category>
+<initializer>nil</initializer>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</shared-variable>
+
+<shared-variable>
+<name>ReservedWords</name>
+<environment>JSE.JSELexicalParser</environment>
+<private>false</private>
+<constant>false</constant>
+<category>accessing</category>
+<initializer>nil</initializer>
+<attributes>
+<package>JavascriptEngine-Parser-Core</package>
+</attributes>
+</shared-variable>
+
+<methods>
+<class-id>JSE.JSEHighlighter</class-id> <category>styles</category>
+
+<body package="JavascriptEngine-Parser-Core">styleComment	&lt;style: #comment&gt;	^ #color -&gt; (ColorValue red: 0.0 green: 0.4 blue: 0.0)</body>
+
+<body package="JavascriptEngine-Parser-Core">styleIdentifierName: token 	&lt;style: #identifierName&gt;		^ ( self reservedWords includes: token value ) 		ifTrue: [ Array with: #bold with: #color -&gt; (ColorValue red: 0.5 green: 0 blue: 0.33) ]		ifFalse: [ nil ]</body>
+
+<body package="JavascriptEngine-Parser-Core">styleLiteral	&lt;style: #numeric&gt;	&lt;style: #string&gt;	&lt;style: #boolean&gt;	&lt;style: #null&gt;	^ #color -&gt; (ColorValue red: 0 green: 0 blue: 0.75)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEHighlighter class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">stylePragma	&lt;pragmas: #instance&gt;	^ #(		style:	)</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream	aStream nextPutAll: self</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-Parser-Core">jseJsonLiteral	" JSON literal representation of this string "	| stream replacements |	stream := String new writeStream.	stream nextPut: $".	replacements := JSEJsonLexicalParser stringifyReplacements.	self do: 		[: char | | replacement |			replacement := replacements at: char codePoint ifAbsent: [ nil ].			replacement notNil 				ifTrue: [ stream nextPutAll: replacement ]				ifFalse: [ stream nextPut: char ]		].	stream nextPut: $".	^ stream contents</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseLineNumberAt: index 	| lineNumber last |	lineNumber := 1.	last := nil.	1 to: index		do: 		[: i | | char |			char := self at: i.			(char = Character cr or: [ char = Character lf and: [ last ~= Character cr ]])				ifTrue: [ lineNumber := lineNumber + 1 ].			last := char.		].	^ lineNumber</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-Parser-Core">jseParser	" returns a parser that matches the string "	^ self asParser</body>
+
+<body package="JavascriptEngine-Parser-Core">jseTokenParser	" returns a parser that matches a token representing this string, except literals "	^ PPPredicateObjectParser 		on: [: token | token literalValue = self and: [ (JSESyntacticParser literalTokenTypes includes: token type) not ]]		message: self printString , ' expected'</body>
+</methods>
+
+<methods>
+<class-id>Core.String</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseTrim	| size index trimCharacters |	trimCharacters := (JSEAbstractLexicalParser lineTerminatorCodeUnitValues, JSEAbstractLexicalParser whiteSpaceCodeValues) asSet.	( size := self size ) == 0 		ifTrue: [ ^ self ].	index := 1.	[ | codePoint |		codePoint := (self at: index) codePoint.		( trimCharacters includes: codePoint  ) or: [( JSEUnicodeTables unicodeCategoryOf: codePoint ) = 'Zs' ]	] whileTrue: 		[	index = size 				ifTrue: [ ^ '' ].			index := index + 1		].	[ | codePoint |		codePoint := (self at: size) codePoint.		(trimCharacters includes: codePoint) or: [ ( JSEUnicodeTables unicodeCategoryOf: codePoint ) = 'Zs' ]	] whileTrue: 		[	index = size 				ifTrue: [ ^ '' ].			size := size - 1		].	^ self copyFrom: index to: size</body>
+</methods>
+
+<methods>
+<class-id>Core.SequenceableCollection</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream	self do: [ : each | each jseConstructStringOn: aStream ]</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPFailure</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">raiseJSEError	JSESyntaxError raiseSignal: self message sourceInterval: (self position to: self position).</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPPredicateObjectParser class</class-id> <category>factory-chars</category>
+
+<body package="JavascriptEngine-Parser-Core">anyUnicodeCategory: categories 	" returns a parser that matches characters of any of the given Unicode categories (eg. Lu, Ll ) "	^ self 		on: 		[: each | | unicodeCategory |			unicodeCategory := JSEUnicodeTables unicodeCategoryOf: each.			categories includes: unicodeCategory.		]		message: 'any unicode category of ' , categories printString , ' expected'		negated: 		[: each | | unicodeCategory |			unicodeCategory := JSEUnicodeTables unicodeCategoryOf: each.			( categories includes: unicodeCategory ) not		]		message: 'none of any unicode category of ' , categories printString , 'expected'</body>
+</methods>
+
+<methods>
+<class-id>Core.UndefinedObject</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>operations-convenience</category>
+
+<body package="JavascriptEngine-Parser-Core">butNot: notParser	" a parser that does not match if the given parser matches.	returns the result of this parser "	^ (notParser asParser not, self) ==&gt; [ : elements | elements at: 2 ]</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>operations-mapping</category>
+
+<body package="JavascriptEngine-Parser-Core">jseAction: aBlock	" like ==&gt;, but additionally passes the source interval "	^ JSE.JSEActionParser on: self block: aBlock</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>operations</category>
+
+<body package="JavascriptEngine-Parser-Core">jseEnd	^ JSEEndOfInputParser on: self</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>operations-mapping</category>
+
+<body package="JavascriptEngine-Parser-Core">jseMap: aBlock	" like #map:, but additionally passes the source interval "		^ self jseAction: aBlock</body>
+
+<body package="JavascriptEngine-Parser-Core">jseToken: tokenType 	" returns a parser that creates JSE tokens of the given type "	^ (JSETokenParser on: self) type: tokenType; yourself</body>
+
+<body package="JavascriptEngine-Parser-Core">jseToken: tokenType valueBlock: valueBlock 	" returns a parser that creates JSE tokens of the given type. the literal value is computed by the valueBlock "	^ ( self jseToken: tokenType ) ==&gt; 		[: token |			token literalValue: ( valueBlock cull: token ).			token		]</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPParser</class-id> <category>operations-convenience</category>
+
+<body package="JavascriptEngine-Parser-Core">listSeparatedBy: aParser 	"Answer a new parser that parses the receiver one or more times, separated by aParser.	Returns the elements parsed by the receiver. The separating elements are discarded "	^ ( PPSequenceParser with: self with: (( PPSequenceParser with: aParser with: self ) ==&gt; [ : nodes | nodes at: 2 ]) star ) 		==&gt; [: nodes | | array firstElement otherElements |			firstElement := nodes at: 1.			otherElements := nodes at: 2.			array := Array new: otherElements size + 1.			array at: 1 put: firstElement.			otherElements notEmpty 				ifTrue: [ array replaceFrom: 2 to: array size with: otherElements ].			array		]</body>
+</methods>
+
+<methods>
+<class-id>Core.TwoByteString</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream	aStream nextPutAll: self</body>
+</methods>
+
+<methods>
+<class-id>Core.Object</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream	" construct a string from literal elements "	JSEError  raiseSignal: 'Cannot construct string from ', self printString</body>
+</methods>
+
+<methods>
+<class-id>PetitParser.PPSequenceParser</class-id> <category>operations-mapping</category>
+
+<body package="JavascriptEngine-Parser-Core">jseMap: aBlock 	^ self jseAction: [: nodes : sourceInterval | aBlock valueWithArguments: ( nodes copyWith: sourceInterval )]</body>
+</methods>
+
+<methods>
+<class-id>Core.Character</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">jseConstructStringOn: aStream	aStream nextPut: self</body>
+</methods>
+
+<methods>
+<class-id>Core.Character</class-id> <category>converting</category>
+
+<body package="JavascriptEngine-Parser-Core">jseIsFirstSurrogateChar	^ (self codePoint &gt;= 16rD800 and: [ self codePoint &lt;= 16rDBFF ])</body>
+
+<body package="JavascriptEngine-Parser-Core">jseParser	" returns a parser that matches the character "	^ PPLiteralObjectParser on: self message: ('Character "&lt;1s&gt;" (&lt;2s&gt;) expected' expandMacrosWith: (String with: self) with: self codePoint jseHexString)</body>
+
+<body package="JavascriptEngine-Parser-Core">jseTokenParser	^ (String with: self) jseTokenParser</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>lexical elements</category>
+
+<body package="JavascriptEngine-Parser-Core">createBooleanLiteral: token	" 7.8 Literals "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createIdentifier: token	" 7.5 Tokens "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createIdentifierName: token	" 7.5 Tokens "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createNullLiteral: token	" 7.8 Literals "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createNumericLiteral: token	" 7.8 Literals "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createRegularExpression: regexToken	" 15.10 RegExp (Regular Expression) Objects "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createStringLiteral: token	" 7.8 Literals "	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Parser-Core">initialize</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>strict mode</category>
+
+<body package="JavascriptEngine-Parser-Core">enterStrictMode	" sent when the strict mode directive is parsed "</body>
+
+<body package="JavascriptEngine-Parser-Core">leaveStrictMode	" sent after the last source element within strict mode was parsed "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>source</category>
+
+<body package="JavascriptEngine-Parser-Core">attachSourceInformation: aSourceInformation to: factoryResult	" Sent after parsing "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>statements</category>
+
+<body package="JavascriptEngine-Parser-Core">createBlock: statementList sourceInterval: sourceInterval	" 12.1 Block "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createBreak: identifierOrNil sourceInterval: sourceInterval	" 12.8 The break Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createCatch: identifier block: catchBlock sourceInterval: sourceInterval	" 12.14 The try Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createContinue: identifierOrNil sourceInterval: sourceInterval	" 12.7 The continue Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createDebugger: anObject 	" 12.15 The debugger statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createDo: statement whileExpression: whileExpression sourceInterval: sourceInterval	" 12.6.1 The do-while Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createEmptyStatement: anObject 	" 12.3 Empty Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createExpressionStatement: expression sourceInterval: sourceInterval	" 12.4 Expression Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createFinally: finallyBlock sourceInterval: sourceInterval	" 12.14 The try Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createFor: initializationExpression condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval	" 12.6.3 The for Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createFor: enumerableExpression in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval	" 12.6.3 The for Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createForVariable: variableDeclaration in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval	" 12.6.3 The for Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createForVariables: variableDeclarationList condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval	" 12.6.3 The for Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createIf: textExpression trueExpression: trueExpression falseExpression: falseExpressionOrNil sourceInterval: sourceInterval	" 12.5 The if Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createLabel: labelIdentifier statement: statement sourceInterval: sourceInterval	" 12.12 Labelled Statements "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createReturn: returnExpressionOrNil sourceInterval: sourceInterval	" 12.9 The return Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitch: switchExpression clauses: clauses sourceInterval: sourceInterval	" 12.11 The switch Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitchClause: clauseExpression statements: statements sourceInterval: sourceInterval	" 12.11 The switch Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitchDefaultClause: statements sourceInterval: sourceInterval	" 12.11 The switch Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createThrow: throwExpression sourceInterval: sourceInterval	" 12.13 The throw Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createTry: tryBlock catch: catchStatementOrNil finally: finallyStatementOrNil sourceInterval: sourceInterval	" 12.14 The try Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createVariableDeclaration: identifier initializer: initializerOrNil sourceInterval: sourceInterval	" 12.2 Variable Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createVariableStatement: variableDeclarations sourceInterval: sourceInterval	" 12.2 Variable Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createWhile: expression statement: statement sourceInterval: sourceInterval	" 12.6.2 The while Statement "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createWith: withExpression statement: statement sourceInterval: sourceInterval	" 12.10 The with Statement "	self subclassResponsibility.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">createAdditiveExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.6 Additive Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createArguments: arguments sourceInterval: sourceInterval	" 11.2 Left-Hand-Side Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createArray: arrayElements padBefore: padBeforeSize after: padAfterSize sourceInterval: sourceInterval	" 11.1.4 Array Initialiser "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createAssignmentExpression: leftHandSideExpression to: assignedExpression operator: operatorString sourceInterval: sourceInterval	" 11.13 Assignment Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createBitwiseExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.10 Binary Bitwise Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createCall: memberExpression arguments: arguments sourceInterval: sourceInterval	" 11.2 Left-Hand-Side Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createCommaSeparatedExpression: expression1 with: expression2 sourceInterval: sourceInterval	" 11.14 Comma Operator "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createConditionalExpression: textExpression trueExpression: trueExpression falseExpression: falseExpression sourceInterval: sourceInterval	" 11.12 Conditional Operator "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createEqualityExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.9 Equality Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createGroupedExpression: expression sourceInterval: sourceInterval	" 11.1.6 The Grouping Operator "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createLogicalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.11 Binary Logical Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createMemberOf: baseExpression bracket: bracketExpression sourceInterval: sourceInterval	" 11.2 Left-Hand-Side Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createMemberOf: baseExpression dot: dotExpression sourceInterval: sourceInterval	" 11.2 Left-Hand-Side Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createMultiplicativeExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.5 Multiplicative Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createNew: newExpression arguments: argumentsOrNil sourceInterval: sourceInterval	" 11.2 Left-Hand-Side Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createObject: propertyAssignmentList sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createPostfixExpression: expression operator: postfixOperatorString sourceInterval: sourceInterval	" 11.3 Postfix Expressions "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertyAssignment: propertyName expression: assignedExpression sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertyGetAssignment: propertyName functionBody: functionBody sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertySetAssignment: propertyName parameter: parameter functionBody: functionBody sourceInterval: sourceInterval	" 11.1.5 Object Initialiser "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createRelationalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.8 Relational Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createShiftExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	" 11.7 Bitwise Shift Operators "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createThisExpression: anObject 	" 11.1.1 The this Keyword "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createUnaryExpression: expression operator: unaryOperatorString sourceInterval: sourceInterval	" 11.4 Unary Operators "	self subclassResponsibility.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory</class-id> <category>functions and programs</category>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionBody: sourceElements sourceInterval: sourceInterval	" 13 Function Definition "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionDeclaration: identifier parameters: formalParameters body: functionBody sourceInterval: sourceInterval	" 13 Function Definition "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionExpression: identifierOrNil parameters: formalParameters body: functionBody sourceInterval: sourceInterval	" 13 Function Definition "	self subclassResponsibility.</body>
+
+<body package="JavascriptEngine-Parser-Core">createProgram: sourceElements 	" 14 Program "	self subclassResponsibility.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParsedNodesFactory class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">new	^ super new initialize</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractParser</class-id> <category>initialization</category>
+
+<body package="JavascriptEngine-Parser-Core">fastInitializeStartingAt: aSymbol 	" this is an optimized version that tries to avoid sending the expensive #oneWayBecome: "	| allVariableNames ignoredVariableNames productionIndexesAndNames actualParsers |	self initialize.	"find all the productions that need to be initialized"	allVariableNames := self class allInstVarNames collect: [: each | each asSymbol ].	ignoredVariableNames := self class ignoredNames collect: [: each | each asSymbol ].	productionIndexesAndNames := (( 1 to: self class instSize ) collect: [: index | index -&gt; ( allVariableNames at: index )]) 			reject: [: assoc | ignoredVariableNames includes: assoc value ].	"initialize productions with an undefined parser to be replaced later"	productionIndexesAndNames do: [: assoc | self instVarAt: assoc key put: ( PPUnresolvedParser named: assoc value )].	" define parsers. all parsers referenced by instVar accessors are still unresolved  "	actualParsers := Array new: self class instSize.	productionIndexesAndNames do: 		[: assoc | | actualParser |			( self respondsTo: assoc value ) 				ifTrue: 				[	actualParser := self perform: assoc value.					actualParser == self ifTrue: [ self error: assoc value, ' did not return a new parser' ].					actualParser name isNil 						ifTrue: [ actualParser name: assoc value ].					actualParsers at: assoc key put: actualParser				]				ifFalse: [ self error: 'Unable to initialize ' , assoc value printString ]		].	" replace unresolved parsers "	productionIndexesAndNames do: 		[: assoc | | unresolvedParser actualParser instVarIndex productionIndex |			instVarIndex := assoc key.			unresolvedParser := self instVarAt: instVarIndex.			actualParser := actualParsers at: instVarIndex.			actualParser name = assoc value 				ifTrue: [ unresolvedParser become: actualParser ]				ifFalse: [					" Special case: a production returns another production. This requires #becomeForward:.					The referenced production should be inlined in the grammer "					productionIndex := (productionIndexesAndNames detect: [: a | a value = actualParser name ]) key.					unresolvedParser becomeForward: (self instVarAt: productionIndex).				].		].	parser := self perform: aSymbol.</body>
+
+<body package="JavascriptEngine-Parser-Core">initializeStartingAt: aSymbol 	self fastInitializeStartingAt: aSymbol</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">arrayFromStartAndStarElements: elementAndStarElements	| array firstElement otherElements |	firstElement := elementAndStarElements at: 1.	otherElements := elementAndStarElements at: 2.	array := Array new: otherElements size + 1.	array at: 1 put: firstElement.	otherElements notEmpty		ifTrue: [ array replaceFrom: 2 to: array size with: otherElements ].	^ array</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	" Parse the stream 	Raises a JSESyntaxError when errors are encountered "	| result |	result := super parseOn: aStream.	result isPetitFailure 		ifTrue: [ result raiseJSEError ].	^ result</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractParser</class-id> <category>utilities</category>
+
+<body package="JavascriptEngine-Parser-Core">tokenParserOfType: tokenType 	^ PPPredicateObjectParser on: [: token | token type = tokenType ] message: tokenType , ' expected'</body>
+
+<body package="JavascriptEngine-Parser-Core">tokenParserOfTypes: tokenTypes	^ PPPredicateObjectParser on: [ : token | tokenTypes includes: token type ] message: 'any of ', tokenTypes printString, ' expected'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">createLexicalParser	^ JSELexicalParser new</body>
+
+<body package="JavascriptEngine-Parser-Core">createSyntacticParser	^ JSESyntacticParser new</body>
+
+<body package="JavascriptEngine-Parser-Core">lexicalParser	^ lexicalParser</body>
+
+<body package="JavascriptEngine-Parser-Core">lexicalParser: aLexicalParser 	lexicalParser := aLexicalParser.</body>
+
+<body package="JavascriptEngine-Parser-Core">syntacticParser	^ syntacticParser</body>
+
+<body package="JavascriptEngine-Parser-Core">syntacticParser: aSyntacticParser 	syntacticParser := aSyntacticParser.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">children	^ Array with: lexicalParser with: syntacticParser</body>
+
+<body package="JavascriptEngine-Parser-Core">factory	^ syntacticParser factory</body>
+
+<body package="JavascriptEngine-Parser-Core">factory: aFactory 	syntacticParser factory: aFactory</body>
+
+<body package="JavascriptEngine-Parser-Core">isInStrictMode: aBoolean	self syntacticParser isInStrictMode: aBoolean</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>initialization</category>
+
+<body package="JavascriptEngine-Parser-Core">initialize	lexicalParser := self createLexicalParser.	syntacticParser := self createSyntacticParser.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parse: aString 	^ self parse: aString sourceInformation: (JSESourceInformation sourceString: aString)</body>
+
+<body package="JavascriptEngine-Parser-Core">parse: aString sourceInformation: aSourceInformation	^ [ 	| result |		result := self parseOn: (PPStream on: aString) .		self factory attachSourceInformation: aSourceInformation to: result.		result.	] 		on: JSESyntaxError		do: 		[: ex |			ex sourceInformation: aSourceInformation.			ex pass		]</body>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	" Parse the stream and return the result of the factory's program handler.	Raises a JSESyntaxError when errors are encountered "	| lexicalResult |	lexicalResult := lexicalParser parseOn: aStream.	^ self parseTokens: lexicalResult</body>
+
+<body package="JavascriptEngine-Parser-Core">parseTokens: tokens 	" Parse the tokens and return the result of the factory's program handler.	Raises a JSESyntaxError when errors are encountered "	^ [ syntacticParser parse: ( PPStream on: tokens )] 		on: JSESyntaxError		do: 		[: ex |			ex sourceInterval ifNotNil: 				[: sourceInterval | " translate token to source position "					| start stop |					( sourceInterval first &gt; 0 and: [ sourceInterval last &gt; 0 ]) 						ifTrue: 						[	start := ( tokens at: sourceInterval first ) start.							stop := ( tokens at: sourceInterval last ) stop.							ex sourceInterval: ( start to: stop )						].					ex pass				]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEParser class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">factory: aParsedNodesFactory	^ self new 		factory: aParsedNodesFactory;		yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELiteralSequenceChoiceParser</class-id> <category>initialization</category>
+
+<body package="JavascriptEngine-Parser-Core">initializeOn: literals message: aString	message := aString.	literalsBySize := Dictionary new.	maxSize := 0.	literals do: [ : literal |		(literalsBySize at: literal size ifAbsentPut: [ Set new ]) add: literal.		maxSize := maxSize max: literal size.	].</body>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	| position readSize bestMatch literalStream |	position := aStream position.	readSize := 0.	bestMatch := nil.	literalStream := ( String new: maxSize ) writeStream.	[ readSize &lt; maxSize and: [ aStream atEnd not ]] whileTrue: 		[	literalStream nextPut: aStream next.			readSize := readSize + 1.			literalsBySize 				at: readSize				ifPresent: 				[: literals | | literal |					literal := literalStream contents.					( literals includes: literal ) 						ifTrue: 						[	bestMatch := literal.							position := aStream position						]				]		].	aStream position: position.	^ bestMatch ifNil: [ PPFailure message: message stream: aStream ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELiteralSequenceChoiceParser class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">on: literals	^ self on: literals message: 'any of ', literals printString , ' expected'</body>
+
+<body package="JavascriptEngine-Parser-Core">on: literals message: aString	" matches the longest literal sequence "	^ self new initializeOn: literals message: aString</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEEndOfInputParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	" returns a failure that points to the unreadable token, instead to the last readable "	| position result furthestFailure unreadablePosition bestResult |	position := aStream position.	furthestFailure := nil.	result := parser parseOn: aStream.	aStream atEnd		ifTrue: [ ^ result ].	unreadablePosition := aStream position + 1.	furthestFailure := aStream furthestFailure.	bestResult := ( furthestFailure notNil and: [ furthestFailure position &gt;= unreadablePosition ]) 			ifTrue: [ furthestFailure ]			ifFalse: 			[	result isPetitFailure 					ifTrue: [ result ]					ifFalse: 					[	" generic error "						PPFailure message: 'Syntax error' at: unreadablePosition					]			].	aStream position: position.	^ bestResult</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEActionParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	" Additionally passes the source interval to the action block "	| element startPosition interval |	startPosition := aStream atEnd 			ifTrue: [ nil ]			ifFalse: [ aStream peek start ].	^ ( element := parser parseOn: aStream ) isPetitFailure 		ifTrue: [ element ]		ifFalse: 		[	interval  := startPosition notNil 					ifTrue: [ startPosition  to: aStream current stop ]					ifFalse: [ nil ].			block value: element value: interval  		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESourceInformation</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">clientData	" Arbitrary object that is not used by JSE.	Can be used by clients to add more information about the source  "	^ clientData</body>
+
+<body package="JavascriptEngine-Parser-Core">clientData: aClientData 	" Arbitrary object that is not used by JSE.	Can be used by clients to add more information about the source  "	clientData := aClientData.</body>
+
+<body package="JavascriptEngine-Parser-Core">location	^ location</body>
+
+<body package="JavascriptEngine-Parser-Core">location: aLocation 	location := aLocation.</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceString	^ sourceString</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceString: aSourceString 	sourceString := aSourceString.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESourceInformation class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">sourceString: aSourceString 	^ self new sourceString: aSourceString ; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEError</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">copyForReraise	| copy |	copy := super copyForReraise.	copy sourceInterval: self sourceInterval.	copy sourceInformation: self sourceInformation.	copy lineNumber: self lineNumber.	^ copy</body>
+
+<body package="JavascriptEngine-Parser-Core">errorName	^ self objectName ifNil: [ 'Error' ]</body>
+
+<body package="JavascriptEngine-Parser-Core">lineNumber	lineNumber isNil 		ifTrue: 		[( self sourceInterval notNil and: [ self sourceString notNil and: [ self sourceInterval first &gt; 0 and: [ self sourceInterval first  &lt;= self sourceString size]]]) 				ifTrue: [ lineNumber := self sourceString jseLineNumberAt: self sourceInterval first ]		].	^ lineNumber</body>
+
+<body package="JavascriptEngine-Parser-Core">lineNumber: aLineNumber 	lineNumber := aLineNumber.</body>
+
+<body package="JavascriptEngine-Parser-Core">objectName	^ self class objectName</body>
+
+<body package="JavascriptEngine-Parser-Core">objectNamespacePath	^ self class objectNamespacePath</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceInformation	^ sourceInformation</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceInformation: aSourceInformation 	sourceInformation := aSourceInformation.</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceInterval	^sourceInterval</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceInterval: anInterval	sourceInterval := anInterval</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceString	^ self sourceInformation ifNotNil: [ : info | info sourceString ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEError</class-id> <category>printing</category>
+
+<body package="JavascriptEngine-Parser-Core">description	| description nearStart nearStop cutOffLength |	description := super description.	( self sourceInterval notNil and: [ self sourceInformation notNil and: [ self sourceInterval first &gt; 0 ]]) 		ifTrue: 		[	" Show erroneous source  "			description := description , ' ('.			self sourceInformation location ifNotNil: [: location | description := description , 'script "' , location , '", ' ].			description := description , 'line ' , self lineNumber printString , ', '.			nearStart := self sourceInterval first.			nearStop := self sourceInterval last.			" .... but not too much "			cutOffLength := 25.			nearStart + cutOffLength &lt; nearStop 				ifTrue: 				[( self sourceString nextIndexOf: Character space from: nearStart + cutOffLength to: self sourceString size ) 						ifNotNil: [: cutOff | nearStop := nearStop min: cutOff ]				].			description := description , 'near "' , ( self sourceString copyFrom: nearStart to: nearStop ) , '")'		].	^ description</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEError class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">raiseSignal: aMessage sourceInterval: anInterval	^ self new		messageText: aMessage;		sourceInterval: anInterval;		raiseSignal</body>
+
+<body package="JavascriptEngine-Parser-Core">raiseSignal: aMessage sourceInterval: anInterval sourceInformation: aSourceInformation	^ self new		messageText: aMessage;		sourceInterval: anInterval;		sourceInformation: aSourceInformation;		raiseSignal</body>
+
+<body package="JavascriptEngine-Parser-Core">signal: aString	" Grease compatibility "	^ self raiseSignal: aString</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEError class</class-id> <category>signalling</category>
+
+<body package="JavascriptEngine-Parser-Core">raiseSignal: aMessage with: aParameter 	self new messageText: aMessage;		parameter: aParameter;		raise.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEError class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">isAbstract	^ self objectName notNil</body>
+
+<body package="JavascriptEngine-Parser-Core">objectName	" Name of the native error constructor, or nil "	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">objectNamespacePath	" Path of the namespace of the error constructor "	^ #()</body>
+
+<body package="JavascriptEngine-Parser-Core">qualifiedObjectName	" Returns the qualified name starting at the global object "	| stream |	stream := String new writeStream.	self objectNamespacePath do: [: pathPart | stream nextPutAll: pathPart; nextPut: $. ].	stream nextPutAll: self objectName.	^ stream contents</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEToken</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">hasPreceedingLineTerminator	" true if there was at least one line terminator before this token "	^ hasPreceedingLineTerminator ifNil: [ false ]</body>
+
+<body package="JavascriptEngine-Parser-Core">hasPreceedingLineTerminator: aHasPreceedingLineTerminator 	hasPreceedingLineTerminator := aHasPreceedingLineTerminator.</body>
+
+<body package="JavascriptEngine-Parser-Core">literalValue	^ literalValue</body>
+
+<body package="JavascriptEngine-Parser-Core">literalValue: aLiteralValue 	literalValue := aLiteralValue.</body>
+
+<body package="JavascriptEngine-Parser-Core">type	^ type</body>
+
+<body package="JavascriptEngine-Parser-Core">type: aType 	type := aType.</body>
+
+<body package="JavascriptEngine-Parser-Core">value	^ (start = 1 and: [ stop = collection size ])		ifTrue: [ collection ]		ifFalse: [ super value ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEToken</class-id> <category>testing</category>
+
+<body package="JavascriptEngine-Parser-Core">isComment	^ self type = #comment</body>
+
+<body package="JavascriptEngine-Parser-Core">isLineTerminator	^ self type = #lineTerminator 		or: [ self isComment and: [ self value anySatisfy: [: ch | JSEAbstractLexicalParser lineTerminatorCodeUnitValues includes: ch codePoint ]]]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELookaheadParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	| element position |	position := aStream position.	element := parser parseOn: aStream.	aStream position: position.	^ element</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonFactory</class-id> <category>factory</category>
+
+<body package="JavascriptEngine-Parser-Core">createArrayWithElements: aList	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createLiteral: aLiteralValue 	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createMember: aName value: aValue	self subclassResponsibility</body>
+
+<body package="JavascriptEngine-Parser-Core">createObjectWithMembers: aListOfMembers	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonFactory</class-id> <category>source</category>
+
+<body package="JavascriptEngine-Parser-Core">attachSourceInformation: aSourceInformation to: factoryResult	" Sent after parsing "</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEHighlighter</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aToken of: aText offset: offset with: anEmphasis 	aText emphasizeFrom: aToken start + offset to: aToken stop + offset with: anEmphasis.</body>
+
+<body package="JavascriptEngine-Parser-Core">highlightTokens: tokens of: aText offset: offset 	tokens do: 		[: token | | emphasisSelector emphasis |			emphasisSelector := self styles at: token type ifAbsent: [ nil ].			emphasisSelector notNil 				ifTrue: 				[	emphasis := emphasisSelector numArgs = 0 							ifTrue: [ self perform: emphasisSelector ]							ifFalse: [ self perform: emphasisSelector with: token ].					self highlight: token of: aText offset: offset with: emphasis				]		].</body>
+
+<body package="JavascriptEngine-Parser-Core">initializeStyles	styles := Dictionary new.	( Pragma allNamed: #style: from: self class to: JSEHighlighter) do: 		[: pragma | 			styles at: ( pragma argumentAt: 1 ) put: pragma selector.		].</body>
+
+<body package="JavascriptEngine-Parser-Core">lexicalParser	^ lexicalParser ifNil: [ lexicalParser := JSELexicalParser new emitCommentTokens: true; yourself ]</body>
+
+<body package="JavascriptEngine-Parser-Core">reservedWords	reservedWords isNil 		ifTrue: [ reservedWords := JSELexicalParser reservedWords ].	^ reservedWords</body>
+
+<body package="JavascriptEngine-Parser-Core">styles	styles isNil 		ifTrue: [ self initializeStyles ].	^ styles</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEHighlighter</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText 	^ self highlight: aStringOrText from: 1 to: aStringOrText  size</body>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText errorsDo: errorBlock	^ self highlight: aStringOrText from: 1 to: aStringOrText  size errorsDo: errorBlock</body>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText from: start to: stop 	"  Highlight tokens using the style definitions (see 'styles' protocol) "	^  self highlight: aStringOrText from: start to: stop errorsDo: [ : error | ]</body>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText from: start to: stop errorsDo: errorBlock	"  Highlight tokens using the style definitions (see 'styles' protocol) "	| tokens text string |	string := aStringOrText asString .	text := aStringOrText asText.	text emphasizeFrom: start to: stop with: nil.	[	tokens := self lexicalParser parse: ( string copyFrom: start to: stop ).		self highlightTokens: tokens of: text offset: start - 1.	] on: JSEError do: [: ex | errorBlock value: ex ].	^ text</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEHighlighter class</class-id> <category>api</category>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText 	^ self new highlight: aStringOrText.</body>
+
+<body package="JavascriptEngine-Parser-Core">highlight: aStringOrText from: start to: stop	^ self new highlight: aStringOrText from: start to: stop</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnicodeTables class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">initializeUnicodeCategories	"self initializeUnicodeCategories"	codePointCategories := JSEPlatform sparseArrayClass new: 16r110000.	categoryCodePoints := Dictionary new.	self unicodeCategoriesArray do: 		[: categoryArray | | unicodeCategory |			unicodeCategory := categoryArray at: 1.			( categoryArray at: 2 ) do: 				[: codeElement |					codeElement isInteger 						ifTrue: [ self registerCodePoint: codeElement category: unicodeCategory ]						ifFalse: [ codeElement first to: codeElement last do: [: code | self registerCodePoint: code category: unicodeCategory ]]				]		].</body>
+
+<body package="JavascriptEngine-Parser-Core">registerCodePoint: codePoint category: unicodeCategory 	" codePointCategories  is an array, and codePoint can be zero, so add 1 "	codePointCategories at: codePoint + 1 put: unicodeCategory.	( categoryCodePoints at: unicodeCategory ifAbsentPut: [ Set new ]) add: codePoint.</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeCategoriesArray^ #(	#('Zp'			#( 8233))	#('Sc'			#( 36 #(162 165) 1547 #(2546 2547) 2555 2801 3065 3647 6107 #(8352 8376) 43064 65020 65129 65284 #(65504 65505) #(65509 65510)))	#('Pi'			#( 171 8216 #(8219 8220) 8223 8249 11778 11780 11785 11788 11804 11808))	#('So'			#( #(166 167) 169 174 176 182 1154 #(1550 1551) 1769 #(1789 1790) 2038 2554 2928 #(3059 3064) 3066 3199 #(3313 3314) 3449 #(3841 3843) #(3859 3863) #(3866 3871) 3892 3894 3896 #(4030 4037) #(4039 4044) #(4046 4047) #(4053 4056) #(4254 4255) 4960 #(5008 5017) 6464 #(6624 6655) #(7009 7018) #(7028 7036) #(8448 8449) #(8451 8454) #(8456 8457) 8468 #(8470 8472) #(8478 8483) 8485 8487 8489 8494 #(8506 8507) 8522 #(8524 8525) 8527 #(8597 8601) #(8604 8607) #(8609 8610) #(8612 8613) #(8615 8621) #(8623 8653) #(8656 8657) 8659 #(8661 8691) #(8960 8967) #(8972 8991) #(8994 9000) #(9003 9083) #(9085 9114) #(9140 9179) #(9186 9192) #(9216 9254) #(9280 9290) #(9372 9449) #(9472 9654) #(9656 9664) #(9666 9719) #(9728 9838) #(9840 9933) #(9935 9953) 9955 #(9960 9983) #(9985 9988) #(9990 9993) #(9996 10023) #(10025 10059) 10061 #(10063 10066) #(10070 10078) #(10081 10087) 10132 #(10136 10159) #(10161 10174) #(10240 10495) #(11008 11055) #(11077 11078) #(11088 11097) #(11493 11498) #(11904 11929) #(11931 12019) #(12032 12245) #(12272 12283) 12292 #(12306 12307) 12320 #(12342 12343) #(12350 12351) #(12688 12689) #(12694 12703) #(12736 12771) #(12800 12830) #(12842 12880) #(12896 12927) #(12938 12976) #(12992 13054) #(13056 13311) #(19904 19967) #(42128 42182) #(43048 43051) #(43062 43063) 43065 #(43639 43641) 65021 65508 65512 #(65517 65518) #(65532 65533) 65794 #(65847 65855) #(65913 65929) #(65936 65947) #(66000 66044) #(118784 119029) #(119040 119078) #(119081 119140) #(119146 119148) #(119171 119172) #(119180 119209) #(119214 119261) #(119296 119361) 119365 #(119552 119638) #(126976 127019) #(127024 127123) #(127248 127278) 127281 127293 127295 127298 127302 #(127306 127310) 127319 127327 127353 #(127355 127356) 127359 #(127370 127373) 127376 127488 #(127504 127537) #(127552 127560)))	#('Mn'			#( #(768 879) #(1155 1159) #(1425 1469) 1471 #(1473 1474) #(1476 1477) 1479 #(1552 1562) #(1611 1630) 1648 #(1750 1756) #(1759 1764) #(1767 1768) #(1770 1773) 1809 #(1840 1866) #(1958 1968) #(2027 2035) #(2070 2073) #(2075 2083) #(2085 2087) #(2089 2093) #(2304 2306) 2364 #(2369 2376) 2381 #(2385 2389) #(2402 2403) 2433 2492 #(2497 2500) 2509 #(2530 2531) #(2561 2562) 2620 #(2625 2626) #(2631 2632) #(2635 2637) 2641 #(2672 2673) 2677 #(2689 2690) 2748 #(2753 2757) #(2759 2760) 2765 #(2786 2787) 2817 2876 2879 #(2881 2884) 2893 2902 #(2914 2915) 2946 3008 3021 #(3134 3136) #(3142 3144) #(3146 3149) #(3157 3158) #(3170 3171) 3260 3263 3270 #(3276 3277) #(3298 3299) #(3393 3396) 3405 #(3426 3427) 3530 #(3538 3540) 3542 3633 #(3636 3642) #(3655 3662) 3761 #(3764 3769) #(3771 3772) #(3784 3789) #(3864 3865) 3893 3895 3897 #(3953 3966) #(3968 3972) #(3974 3975) #(3984 3991) #(3993 4028) 4038 #(4141 4144) #(4146 4151) #(4153 4154) #(4157 4158) #(4184 4185) #(4190 4192) #(4209 4212) 4226 #(4229 4230) 4237 4253 4959 #(5906 5908) #(5938 5940) #(5970 5971) #(6002 6003) #(6071 6077) 6086 #(6089 6099) 6109 #(6155 6157) 6313 #(6432 6434) #(6439 6440) 6450 #(6457 6459) #(6679 6680) 6742 #(6744 6750) 6752 6754 #(6757 6764) #(6771 6780) 6783 #(6912 6915) 6964 #(6966 6970) 6972 6978 #(7019 7027) #(7040 7041) #(7074 7077) #(7080 7081) #(7212 7219) #(7222 7223) #(7376 7378) #(7380 7392) #(7394 7400) 7405 #(7616 7654) #(7677 7679) #(8400 8412) 8417 #(8421 8432) #(11503 11505) #(11744 11775) #(12330 12335) #(12441 12442) 42607 #(42620 42621) #(42736 42737) 43010 43014 43019 #(43045 43046) 43204 #(43232 43249) #(43302 43309) #(43335 43345) #(43392 43394) 43443 #(43446 43449) 43452 #(43561 43566) #(43569 43570) #(43573 43574) 43587 43596 43696 #(43698 43700) #(43703 43704) #(43710 43711) 43713 44005 44008 44013 64286 #(65024 65039) #(65056 65062) 66045 #(68097 68099) #(68101 68102) #(68108 68111) #(68152 68154) 68159 #(69760 69761) #(69811 69814) #(69817 69818) #(119143 119145) #(119163 119170) #(119173 119179) #(119210 119213) #(119362 119364) #(917760 917999)))	#('Nl'			#( #(5870 5872) #(8544 8578) #(8581 8584) 12295 #(12321 12329) #(12344 12346) #(42726 42735) #(65856 65908) 66369 66378 #(66513 66517) #(74752 74850)))	#('Cf'			#( 173 #(1536 1539) 1757 1807 #(6068 6069) #(8203 8207) #(8234 8238) #(8288 8292) #(8298 8303) 65279 #(65529 65531) 69821 #(119155 119162) 917505 #(917536 917631)))	#('Pf'			#( 187 8217 8221 8250 11779 11781 11786 11789 11805 11809))	#('Sm'			#( 43 #(60 62) 124 126 172 177 215 247 1014 #(1542 1544) 8260 8274 #(8314 8316) #(8330 8332) #(8512 8516) 8523 #(8592 8596) #(8602 8603) 8608 8611 8614 8622 #(8654 8655) 8658 8660 #(8692 8959) #(8968 8971) #(8992 8993) 9084 #(9115 9139) #(9180 9185) 9655 9665 #(9720 9727) 9839 #(10176 10180) #(10183 10186) 10188 #(10192 10213) #(10224 10239) #(10496 10626) #(10649 10711) #(10716 10747) #(10750 11007) #(11056 11076) #(11079 11084) 64297 65122 #(65124 65126) 65291 #(65308 65310) 65372 65374 65506 #(65513 65516) 120513 120539 120571 120597 120629 120655 120687 120713 120745 120771))	#('Zl'			#( 8232))	#('Lo'			#( 443 #(448 451) 660 #(1488 1514) #(1520 1522) #(1569 1599) #(1601 1610) #(1646 1647) #(1649 1747) 1749 #(1774 1775) #(1786 1788) 1791 1808 #(1810 1839) #(1869 1957) 1969 #(1994 2026) #(2048 2069) #(2308 2361) 2365 2384 #(2392 2401) 2418 #(2425 2431) #(2437 2444) #(2447 2448) #(2451 2472) #(2474 2480) 2482 #(2486 2489) 2493 2510 #(2524 2525) #(2527 2529) #(2544 2545) #(2565 2570) #(2575 2576) #(2579 2600) #(2602 2608) #(2610 2611) #(2613 2614) #(2616 2617) #(2649 2652) 2654 #(2674 2676) #(2693 2701) #(2703 2705) #(2707 2728) #(2730 2736) #(2738 2739) #(2741 2745) 2749 2768 #(2784 2785) #(2821 2828) #(2831 2832) #(2835 2856) #(2858 2864) #(2866 2867) #(2869 2873) 2877 #(2908 2909) #(2911 2913) 2929 2947 #(2949 2954) #(2958 2960) #(2962 2965) #(2969 2970) 2972 #(2974 2975) #(2979 2980) #(2984 2986) #(2990 3001) 3024 #(3077 3084) #(3086 3088) #(3090 3112) #(3114 3123) #(3125 3129) 3133 #(3160 3161) #(3168 3169) #(3205 3212) #(3214 3216) #(3218 3240) #(3242 3251) #(3253 3257) 3261 3294 #(3296 3297) #(3333 3340) #(3342 3344) #(3346 3368) #(3370 3385) 3389 #(3424 3425) #(3450 3455) #(3461 3478) #(3482 3505) #(3507 3515) 3517 #(3520 3526) #(3585 3632) #(3634 3635) #(3648 3653) #(3713 3714) 3716 #(3719 3720) 3722 3725 #(3732 3735) #(3737 3743) #(3745 3747) 3749 3751 #(3754 3755) #(3757 3760) #(3762 3763) 3773 #(3776 3780) #(3804 3805) 3840 #(3904 3911) #(3913 3948) #(3976 3979) #(4096 4138) 4159 #(4176 4181) #(4186 4189) 4193 #(4197 4198) #(4206 4208) #(4213 4225) 4238 #(4304 4346) #(4352 4680) #(4682 4685) #(4688 4694) 4696 #(4698 4701) #(4704 4744) #(4746 4749) #(4752 4784) #(4786 4789) #(4792 4798) 4800 #(4802 4805) #(4808 4822) #(4824 4880) #(4882 4885) #(4888 4954) #(4992 5007) #(5024 5108) #(5121 5740) #(5743 5759) #(5761 5786) #(5792 5866) #(5888 5900) #(5902 5905) #(5920 5937) #(5952 5969) #(5984 5996) #(5998 6000) #(6016 6067) 6108 #(6176 6210) #(6212 6263) #(6272 6312) 6314 #(6320 6389) #(6400 6428) #(6480 6509) #(6512 6516) #(6528 6571) #(6593 6599) #(6656 6678) #(6688 6740) #(6917 6963) #(6981 6987) #(7043 7072) #(7086 7087) #(7168 7203) #(7245 7247) #(7258 7287) #(7401 7404) #(7406 7409) #(8501 8504) #(11568 11621) #(11648 11670) #(11680 11686) #(11688 11694) #(11696 11702) #(11704 11710) #(11712 11718) #(11720 11726) #(11728 11734) #(11736 11742) 12294 12348 #(12353 12438) 12447 #(12449 12538) 12543 #(12549 12589) #(12593 12686) #(12704 12727) #(12784 12799) 13312 19893 19968 40907 #(40960 40980) #(40982 42124) #(42192 42231) #(42240 42507) #(42512 42527) #(42538 42539) 42606 #(42656 42725) #(43003 43009) #(43011 43013) #(43015 43018) #(43020 43042) #(43072 43123) #(43138 43187) #(43250 43255) 43259 #(43274 43301) #(43312 43334) #(43360 43388) #(43396 43442) #(43520 43560) #(43584 43586) #(43588 43595) #(43616 43631) #(43633 43638) 43642 #(43648 43695) 43697 #(43701 43702) #(43705 43709) 43712 43714 #(43739 43740) #(43968 44002) 44032 55203 #(55216 55238) #(55243 55291) #(63744 64045) #(64048 64109) #(64112 64217) 64285 #(64287 64296) #(64298 64310) #(64312 64316) 64318 #(64320 64321) #(64323 64324) #(64326 64433) #(64467 64829) #(64848 64911) #(64914 64967) #(65008 65019) #(65136 65140) #(65142 65276) #(65382 65391) #(65393 65437) #(65440 65470) #(65474 65479) #(65482 65487) #(65490 65495) #(65498 65500) #(65536 65547) #(65549 65574) #(65576 65594) #(65596 65597) #(65599 65613) #(65616 65629) #(65664 65786) #(66176 66204) #(66208 66256) #(66304 66334) #(66352 66368) #(66370 66377) #(66432 66461) #(66464 66499) #(66504 66511) #(66640 66717) #(67584 67589) 67592 #(67594 67637) #(67639 67640) 67644 #(67647 67669) #(67840 67861) #(67872 67897) 68096 #(68112 68115) #(68117 68119) #(68121 68147) #(68192 68220) #(68352 68405) #(68416 68437) #(68448 68466) #(68608 68680) #(69763 69807) #(73728 74606) #(77824 78894) 131072 173782 173824 177972 #(194560 195101)))	#('Pe'			#( 41 93 125 3899 3901 5788 8262 8318 8334 9002 10089 10091 10093 10095 10097 10099 10101 10182 10215 10217 10219 10221 10223 10628 10630 10632 10634 10636 10638 10640 10642 10644 10646 10648 10713 10715 10749 11811 11813 11815 11817 12297 12299 12301 12303 12305 12309 12311 12313 12315 #(12318 12319) 64831 65048 65078 65080 65082 65084 65086 65088 65090 65092 65096 65114 65116 65118 65289 65341 65373 65376 65379))	#('Pd'			#( 45 1418 1470 5120 6150 #(8208 8213) 11799 11802 12316 12336 12448 #(65073 65074) 65112 65123 65293))	#('Sk'			#( 94 96 168 175 180 184 #(706 709) #(722 735) #(741 747) 749 #(751 767) 885 #(900 901) 8125 #(8127 8129) #(8141 8143) #(8157 8159) #(8173 8175) #(8189 8190) #(12443 12444) #(42752 42774) #(42784 42785) #(42889 42890) 65342 65344 65507))	#('Cs'			#( 55296 #(56191 56192) #(56319 56320) 57343))	#('Cc'			#( #(0 31) #(127 159)))	#('Ps'			#( 40 91 123 3898 3900 5787 8218 8222 8261 8317 8333 9001 10088 10090 10092 10094 10096 10098 10100 10181 10214 10216 10218 10220 10222 10627 10629 10631 10633 10635 10637 10639 10641 10643 10645 10647 10712 10714 10748 11810 11812 11814 11816 12296 12298 12300 12302 12304 12308 12310 12312 12314 12317 64830 65047 65077 65079 65081 65083 65085 65087 65089 65091 65095 65113 65115 65117 65288 65339 65371 65375 65378))	#('Pc'			#( 95 #(8255 8256) 8276 #(65075 65076) #(65101 65103) 65343))	#('Lm'			#( #(688 705) #(710 721) #(736 740) 748 750 884 890 1369 1600 #(1765 1766) #(2036 2037) 2042 2074 2084 2088 2417 3654 3782 4348 6103 6211 6823 #(7288 7293) #(7468 7521) 7544 #(7579 7615) 8305 8319 #(8336 8340) 11389 11631 11823 12293 #(12337 12341) 12347 #(12445 12446) #(12540 12542) 40981 #(42232 42237) 42508 42623 #(42775 42783) 42864 42888 43471 43632 43741 65392 #(65438 65439)))	#('Ll'			#( #(97 122) 170 181 186 #(223 246) #(248 255) 257 259 261 263 265 267 269 271 273 275 277 279 281 283 285 287 289 291 293 295 297 299 301 303 305 307 309 #(311 312) 314 316 318 320 322 324 326 #(328 329) 331 333 335 337 339 341 343 345 347 349 351 353 355 357 359 361 363 365 367 369 371 373 375 378 380 #(382 384) 387 389 392 #(396 397) 402 405 #(409 411) 414 417 419 421 424 #(426 427) 429 432 436 438 #(441 442) #(445 447) 454 457 460 462 464 466 468 470 472 474 #(476 477) 479 481 483 485 487 489 491 493 #(495 496) 499 501 505 507 509 511 513 515 517 519 521 523 525 527 529 531 533 535 537 539 541 543 545 547 549 551 553 555 557 559 561 #(563 569) 572 #(575 576) 578 583 585 587 589 #(591 659) #(661 687) 881 883 887 #(891 893) 912 #(940 974) #(976 977) #(981 983) 985 987 989 991 993 995 997 999 1001 1003 1005 #(1007 1011) 1013 1016 #(1019 1020) #(1072 1119) 1121 1123 1125 1127 1129 1131 1133 1135 1137 1139 1141 1143 1145 1147 1149 1151 1153 1163 1165 1167 1169 1171 1173 1175 1177 1179 1181 1183 1185 1187 1189 1191 1193 1195 1197 1199 1201 1203 1205 1207 1209 1211 1213 1215 1218 1220 1222 1224 1226 1228 #(1230 1231) 1233 1235 1237 1239 1241 1243 1245 1247 1249 1251 1253 1255 1257 1259 1261 1263 1265 1267 1269 1271 1273 1275 1277 1279 1281 1283 1285 1287 1289 1291 1293 1295 1297 1299 1301 1303 1305 1307 1309 1311 1313 1315 1317 #(1377 1415) #(7424 7467) #(7522 7543) #(7545 7578) 7681 7683 7685 7687 7689 7691 7693 7695 7697 7699 7701 7703 7705 7707 7709 7711 7713 7715 7717 7719 7721 7723 7725 7727 7729 7731 7733 7735 7737 7739 7741 7743 7745 7747 7749 7751 7753 7755 7757 7759 7761 7763 7765 7767 7769 7771 7773 7775 7777 7779 7781 7783 7785 7787 7789 7791 7793 7795 7797 7799 7801 7803 7805 7807 7809 7811 7813 7815 7817 7819 7821 7823 7825 7827 #(7829 7837) 7839 7841 7843 7845 7847 7849 7851 7853 7855 7857 7859 7861 7863 7865 7867 7869 7871 7873 7875 7877 7879 7881 7883 7885 7887 7889 7891 7893 7895 7897 7899 7901 7903 7905 7907 7909 7911 7913 7915 7917 7919 7921 7923 7925 7927 7929 7931 7933 #(7935 7943) #(7952 7957) #(7968 7975) #(7984 7991) #(8000 8005) #(8016 8023) #(8032 8039) #(8048 8061) #(8064 8071) #(8080 8087) #(8096 8103) #(8112 8116) #(8118 8119) 8126 #(8130 8132) #(8134 8135) #(8144 8147) #(8150 8151) #(8160 8167) #(8178 8180) #(8182 8183) 8458 #(8462 8463) 8467 8495 8500 8505 #(8508 8509) #(8518 8521) 8526 8580 #(11312 11358) 11361 #(11365 11366) 11368 11370 11372 11377 #(11379 11380) #(11382 11388) 11393 11395 11397 11399 11401 11403 11405 11407 11409 11411 11413 11415 11417 11419 11421 11423 11425 11427 11429 11431 11433 11435 11437 11439 11441 11443 11445 11447 11449 11451 11453 11455 11457 11459 11461 11463 11465 11467 11469 11471 11473 11475 11477 11479 11481 11483 11485 11487 11489 #(11491 11492) 11500 11502 #(11520 11557) 42561 42563 42565 42567 42569 42571 42573 42575 42577 42579 42581 42583 42585 42587 42589 42591 42595 42597 42599 42601 42603 42605 42625 42627 42629 42631 42633 42635 42637 42639 42641 42643 42645 42647 42787 42789 42791 42793 42795 42797 #(42799 42801) 42803 42805 42807 42809 42811 42813 42815 42817 42819 42821 42823 42825 42827 42829 42831 42833 42835 42837 42839 42841 42843 42845 42847 42849 42851 42853 42855 42857 42859 42861 42863 #(42865 42872) 42874 42876 42879 42881 42883 42885 42887 42892 #(64256 64262) #(64275 64279) #(65345 65370) #(66600 66639) #(119834 119859) #(119886 119892) #(119894 119911) #(119938 119963) #(119990 119993) 119995 #(119997 120003) #(120005 120015) #(120042 120067) #(120094 120119) #(120146 120171) #(120198 120223) #(120250 120275) #(120302 120327) #(120354 120379) #(120406 120431) #(120458 120485) #(120514 120538) #(120540 120545) #(120572 120596) #(120598 120603) #(120630 120654) #(120656 120661) #(120688 120712) #(120714 120719) #(120746 120770) #(120772 120777) 120779))	#('Co'			#( 57344 63743 983040 1048573 1048576 1114109))	#('Po'			#( #(33 35) #(37 39) 42 44 #(46 47) #(58 59) #(63 64) 92 161 183 191 894 903 #(1370 1375) 1417 1472 1475 1478 #(1523 1524) #(1545 1546) #(1548 1549) 1563 #(1566 1567) #(1642 1645) 1748 #(1792 1805) #(2039 2041) #(2096 2110) #(2404 2405) 2416 3572 3663 #(3674 3675) #(3844 3858) 3973 #(4048 4052) #(4170 4175) 4347 #(4961 4968) #(5741 5742) #(5867 5869) #(5941 5942) #(6100 6102) #(6104 6106) #(6144 6149) #(6151 6154) #(6468 6469) #(6622 6623) #(6686 6687) #(6816 6822) #(6824 6829) #(7002 7008) #(7227 7231) #(7294 7295) 7379 #(8214 8215) #(8224 8231) #(8240 8248) #(8251 8254) #(8257 8259) #(8263 8273) 8275 #(8277 8286) #(11513 11516) #(11518 11519) #(11776 11777) #(11782 11784) 11787 #(11790 11798) #(11800 11801) 11803 #(11806 11807) #(11818 11822) #(11824 11825) #(12289 12291) 12349 12539 #(42238 42239) #(42509 42511) 42611 42622 #(42738 42743) #(43124 43127) #(43214 43215) #(43256 43258) #(43310 43311) 43359 #(43457 43469) #(43486 43487) #(43612 43615) #(43742 43743) 44011 #(65040 65046) 65049 65072 #(65093 65094) #(65097 65100) #(65104 65106) #(65108 65111) #(65119 65121) 65128 #(65130 65131) #(65281 65283) #(65285 65287) 65290 65292 #(65294 65295) #(65306 65307) #(65311 65312) 65340 65377 #(65380 65381) #(65792 65793) 66463 66512 67671 67871 67903 #(68176 68184) 68223 #(68409 68415) #(69819 69820) #(69822 69825) #(74864 74867)))	#('Nd'			#( #(48 57) #(1632 1641) #(1776 1785) #(1984 1993) #(2406 2415) #(2534 2543) #(2662 2671) #(2790 2799) #(2918 2927) #(3046 3055) #(3174 3183) #(3302 3311) #(3430 3439) #(3664 3673) #(3792 3801) #(3872 3881) #(4160 4169) #(4240 4249) #(6112 6121) #(6160 6169) #(6470 6479) #(6608 6618) #(6784 6793) #(6800 6809) #(6992 7001) #(7088 7097) #(7232 7241) #(7248 7257) #(42528 42537) #(43216 43225) #(43264 43273) #(43472 43481) #(43600 43609) #(44016 44025) #(65296 65305) #(66720 66729) #(120782 120831)))	#('Me'			#( #(1160 1161) 1758 #(8413 8416) #(8418 8420) #(42608 42610)))	#('Mc'			#( 2307 #(2366 2368) #(2377 2380) 2382 #(2434 2435) #(2494 2496) #(2503 2504) #(2507 2508) 2519 2563 #(2622 2624) 2691 #(2750 2752) 2761 #(2763 2764) #(2818 2819) 2878 2880 #(2887 2888) #(2891 2892) 2903 #(3006 3007) #(3009 3010) #(3014 3016) #(3018 3020) 3031 #(3073 3075) #(3137 3140) #(3202 3203) 3262 #(3264 3268) #(3271 3272) #(3274 3275) #(3285 3286) #(3330 3331) #(3390 3392) #(3398 3400) #(3402 3404) 3415 #(3458 3459) #(3535 3537) #(3544 3551) #(3570 3571) #(3902 3903) 3967 #(4139 4140) 4145 4152 #(4155 4156) #(4182 4183) #(4194 4196) #(4199 4205) #(4227 4228) #(4231 4236) 4239 #(4250 4252) 6070 #(6078 6085) #(6087 6088) #(6435 6438) #(6441 6443) #(6448 6449) #(6451 6456) #(6576 6592) #(6600 6601) #(6681 6683) 6741 6743 6753 #(6755 6756) #(6765 6770) 6916 6965 6971 #(6973 6977) #(6979 6980) 7042 7073 #(7078 7079) 7082 #(7204 7211) #(7220 7221) 7393 7410 #(43043 43044) 43047 #(43136 43137) #(43188 43203) #(43346 43347) 43395 #(43444 43445) #(43450 43451) #(43453 43456) #(43567 43568) #(43571 43572) 43597 43643 #(44003 44004) #(44006 44007) #(44009 44010) 44012 69762 #(69808 69810) #(69815 69816) #(119141 119142) #(119149 119154)))	#('Zs'			#( 32 160 5760 6158 #(8192 8202) 8239 8287 12288))	#('Lu'			#( #(65 90) #(192 214) #(216 222) 256 258 260 262 264 266 268 270 272 274 276 278 280 282 284 286 288 290 292 294 296 298 300 302 304 306 308 310 313 315 317 319 321 323 325 327 330 332 334 336 338 340 342 344 346 348 350 352 354 356 358 360 362 364 366 368 370 372 374 #(376 377) 379 381 #(385 386) 388 #(390 391) #(393 395) #(398 401) #(403 404) #(406 408) #(412 413) #(415 416) 418 420 #(422 423) 425 428 #(430 431) #(433 435) 437 #(439 440) 444 452 455 458 461 463 465 467 469 471 473 475 478 480 482 484 486 488 490 492 494 497 500 #(502 504) 506 508 510 512 514 516 518 520 522 524 526 528 530 532 534 536 538 540 542 544 546 548 550 552 554 556 558 560 562 #(570 571) #(573 574) 577 #(579 582) 584 586 588 590 880 882 886 902 #(904 906) 908 #(910 911) #(913 929) #(931 939) 975 #(978 980) 984 986 988 990 992 994 996 998 1000 1002 1004 1006 1012 1015 #(1017 1018) #(1021 1071) 1120 1122 1124 1126 1128 1130 1132 1134 1136 1138 1140 1142 1144 1146 1148 1150 1152 1162 1164 1166 1168 1170 1172 1174 1176 1178 1180 1182 1184 1186 1188 1190 1192 1194 1196 1198 1200 1202 1204 1206 1208 1210 1212 1214 #(1216 1217) 1219 1221 1223 1225 1227 1229 1232 1234 1236 1238 1240 1242 1244 1246 1248 1250 1252 1254 1256 1258 1260 1262 1264 1266 1268 1270 1272 1274 1276 1278 1280 1282 1284 1286 1288 1290 1292 1294 1296 1298 1300 1302 1304 1306 1308 1310 1312 1314 1316 #(1329 1366) #(4256 4293) 7680 7682 7684 7686 7688 7690 7692 7694 7696 7698 7700 7702 7704 7706 7708 7710 7712 7714 7716 7718 7720 7722 7724 7726 7728 7730 7732 7734 7736 7738 7740 7742 7744 7746 7748 7750 7752 7754 7756 7758 7760 7762 7764 7766 7768 7770 7772 7774 7776 7778 7780 7782 7784 7786 7788 7790 7792 7794 7796 7798 7800 7802 7804 7806 7808 7810 7812 7814 7816 7818 7820 7822 7824 7826 7828 7838 7840 7842 7844 7846 7848 7850 7852 7854 7856 7858 7860 7862 7864 7866 7868 7870 7872 7874 7876 7878 7880 7882 7884 7886 7888 7890 7892 7894 7896 7898 7900 7902 7904 7906 7908 7910 7912 7914 7916 7918 7920 7922 7924 7926 7928 7930 7932 7934 #(7944 7951) #(7960 7965) #(7976 7983) #(7992 7999) #(8008 8013) 8025 8027 8029 8031 #(8040 8047) #(8120 8123) #(8136 8139) #(8152 8155) #(8168 8172) #(8184 8187) 8450 8455 #(8459 8461) #(8464 8466) 8469 #(8473 8477) 8484 8486 8488 #(8490 8493) #(8496 8499) #(8510 8511) 8517 8579 #(11264 11310) 11360 #(11362 11364) 11367 11369 11371 #(11373 11376) 11378 11381 #(11390 11392) 11394 11396 11398 11400 11402 11404 11406 11408 11410 11412 11414 11416 11418 11420 11422 11424 11426 11428 11430 11432 11434 11436 11438 11440 11442 11444 11446 11448 11450 11452 11454 11456 11458 11460 11462 11464 11466 11468 11470 11472 11474 11476 11478 11480 11482 11484 11486 11488 11490 11499 11501 42560 42562 42564 42566 42568 42570 42572 42574 42576 42578 42580 42582 42584 42586 42588 42590 42594 42596 42598 42600 42602 42604 42624 42626 42628 42630 42632 42634 42636 42638 42640 42642 42644 42646 42786 42788 42790 42792 42794 42796 42798 42802 42804 42806 42808 42810 42812 42814 42816 42818 42820 42822 42824 42826 42828 42830 42832 42834 42836 42838 42840 42842 42844 42846 42848 42850 42852 42854 42856 42858 42860 42862 42873 42875 #(42877 42878) 42880 42882 42884 42886 42891 #(65313 65338) #(66560 66599) #(119808 119833) #(119860 119885) #(119912 119937) 119964 #(119966 119967) 119970 #(119973 119974) #(119977 119980) #(119982 119989) #(120016 120041) #(120068 120069) #(120071 120074) #(120077 120084) #(120086 120092) #(120120 120121) #(120123 120126) #(120128 120132) 120134 #(120138 120144) #(120172 120197) #(120224 120249) #(120276 120301) #(120328 120353) #(120380 120405) #(120432 120457) #(120488 120512) #(120546 120570) #(120604 120628) #(120662 120686) #(120720 120744) 120778))	#('No'			#( #(178 179) 185 #(188 190) #(2548 2553) #(3056 3058) #(3192 3198) #(3440 3445) #(3882 3891) #(4969 4988) #(6128 6137) 8304 #(8308 8313) #(8320 8329) #(8528 8543) 8585 #(9312 9371) #(9450 9471) #(10102 10131) 11517 #(12690 12693) #(12832 12841) #(12881 12895) #(12928 12937) #(12977 12991) #(43056 43061) #(65799 65843) #(65909 65912) 65930 #(66336 66339) #(67672 67679) #(67862 67867) #(68160 68167) #(68221 68222) #(68440 68447) #(68472 68479) #(69216 69246) #(119648 119665) #(127232 127242)))	#('Lt'			#( 453 456 459 498 #(8072 8079) #(8088 8095) #(8104 8111) 8124 8140 8188)))</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEUnicodeTables class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">unicodeCategoryOf: aCharacterOrInteger 	| codePoint |	codePointCategories isNil 		ifTrue: [ self initializeUnicodeCategories ].	codePoint := aCharacterOrInteger isInteger 			ifTrue: [ aCharacterOrInteger ]			ifFalse: [ aCharacterOrInteger codePoint ].	" codePointCategories  is an array, and codePoint can be zero, so add 1 "	^ codePointCategories at: codePoint + 1</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeCodePointsOf: aCategory	categoryCodePoints isNil 		ifTrue: [ self initializeUnicodeCategories ].	^ categoryCodePoints at: aCategory ifAbsent: [ nil ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETokenParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">defaultTokenClass	^ JSEToken</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETokenParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">type	^ type</body>
+
+<body package="JavascriptEngine-Parser-Core">type: aType 	type := aType.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSETokenParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	| start element stop token |	start := aStream position.	element := parser parseOn: aStream.	element isPetitFailure 		ifTrue: 		[	aStream position: start.			^ element		].	stop := aStream position.	token := self create: aStream collection start: start + 1 stop: stop.	token type: self type.	token literalValue: element.	^ token</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENilFactory</class-id> <category>lexical elements</category>
+
+<body package="JavascriptEngine-Parser-Core">createBooleanLiteral: token		^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createIdentifier: token	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createIdentifierName: token	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createNullLiteral: token	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createNumericLiteral: token	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createRegularExpression: regexToken	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createStringLiteral: token	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENilFactory</class-id> <category>functions and programs</category>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionBody: sourceElements sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionDeclaration: identifier parameters: formalParameters body: functionBody sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createFunctionExpression: identifierOrNil parameters: formalParameters body: functionBody sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createProgram: sourceElements 	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENilFactory</class-id> <category>expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">createAdditiveExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createArguments: arguments sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createArray: arrayElements padBefore: padBeforeSize after: padAfterSize sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createAssignmentExpression: leftHandSideExpression to: assignedExpression operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createBitwiseExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createCall: memberExpression arguments: arguments sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createCommaSeparatedExpression: expression1 with: expression2 sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createConditionalExpression: textExpression trueExpression: trueExpression falseExpression: falseExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createEqualityExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createGroupedExpression: expression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createLogicalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createMemberOf: baseExpression bracket: bracketExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createMemberOf: baseExpression dot: dotExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createMultiplicativeExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createNew: newExpression arguments: argumentsOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createObject: propertyAssignmentList sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createPostfixExpression: expression operator: postfixOperatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertyAssignment: propertyName expression: assignedExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertyGetAssignment: propertyName functionBody: functionBody sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createPropertySetAssignment: propertyName parameter: parameter functionBody: functionBody sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createRelationalExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createShiftExpression: expression1 with: expression2 operator: operatorString sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createThisExpression: anObject 	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createUnaryExpression: expression operator: unaryOperatorString sourceInterval: sourceInterval	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENilFactory</class-id> <category>statements</category>
+
+<body package="JavascriptEngine-Parser-Core">createBlock: statementList sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createBreak: identifierOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createCatch: identifier block: catchBlock sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createContinue: identifierOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createDebugger: anObject 	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createDo: statement whileExpression: whileExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createEmptyStatement: anObject 	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createExpressionStatement: expression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createFinally: finallyBlock sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createFor: initializationExpression condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createFor: enumerableExpression in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createForVariable: variableDeclaration in: enumeratedObjectExpression do: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createForVariables: variableDeclarationList condition: conditionExpression update: updateExpression do: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createIf: textExpression trueExpression: trueExpression falseExpression: falseExpressionOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createLabel: labelIdentifier statement: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createReturn: returnExpressionOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitch: switchExpression clauses: clauses sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitchClause: clauseExpression statements: statements sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createSwitchDefaultClause: statements sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createThrow: throwExpression sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createTry: tryBlock catch: catchStatementOrNil finally: finallyStatementOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createVariableDeclaration: identifier initializer: initializerOrNil sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createVariableStatement: variableDeclarations sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createWhile: expression statement: statement sourceInterval: sourceInterval	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createWith: withExpression statement: statement sourceInterval: sourceInterval	^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>utilities</category>
+
+<body package="JavascriptEngine-Parser-Core">alphabeticCharacter	^ PPPredicateObjectParser 		on: 		[: char | | codePoint |			codePoint := char codePoint.			(codePoint &gt;= $a codePoint and: [ codePoint &lt;= $z codePoint ])			or: [ codePoint &gt;= $A codePoint and: [ codePoint &lt;= $Z codePoint ]]		]		message: 'any of a-z,A-Z expected'</body>
+
+<body package="JavascriptEngine-Parser-Core">anyCodeUnitValue: codeUnitValues	^ self anyOf: (codeUnitValues collect: [ : codeUnitValue | Character codePoint: codeUnitValue ])</body>
+
+<body package="JavascriptEngine-Parser-Core">anyExceptAnyCodeUnitValueOf: codeUnitValues	^ PPPredicateObjectParser anyExceptAnyOf: (codeUnitValues collect: [ : codeUnitValue | Character codePoint: codeUnitValue ])</body>
+
+<body package="JavascriptEngine-Parser-Core">anyOf: anArray 	" parser that matches any of the characters.	Tweaked to give a nicer error message than PPPredicateObjectParser anyOf: anArray "	^ PPPredicateObjectParser 		on: [: each | anArray includes: each ]		message: 'any of »' , anArray jseDisplayString , '« expected'		negated: [: each | ( anArray includes: each ) not ]		message: 'none of »' , anArray jseDisplayString , '« expected'</body>
+
+<body package="JavascriptEngine-Parser-Core">anyOfStrings: strings	^ JSELiteralSequenceChoiceParser on: strings</body>
+
+<body package="JavascriptEngine-Parser-Core">epsilon	^ PPEpsilonParser new</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>7.8 Literals</category>
+
+<body package="JavascriptEngine-Parser-Core">booleanLiteral	^ 	('true' jseParser jseToken: #boolean valueBlock: [ true ])	/ ('false' jseParser jseToken: #boolean valueBlock: [ false ])</body>
+
+<body package="JavascriptEngine-Parser-Core">decimalDigit	^ PPPredicateObjectParser digit</body>
+
+<body package="JavascriptEngine-Parser-Core">decimalDigits	^ decimalDigit plus</body>
+
+<body package="JavascriptEngine-Parser-Core">decimalIntegerLiteral	^ 	$0 jseParser 		==&gt; [: s | '0' ]	/ (nonZeroDigit , decimalDigits optional 		==&gt; [ : s | (s at: 2) notNil ifTrue: [ (Array with: (s at: 1)), (s at: 2) ] ifFalse: [ Array with: (s at: 1) ]])</body>
+
+<body package="JavascriptEngine-Parser-Core">exponentIndicator	^ self anyOf: 'eE'</body>
+
+<body package="JavascriptEngine-Parser-Core">exponentPart	^ exponentIndicator, signedInteger ==&gt; [ : s |  (s at: 2) ]</body>
+
+<body package="JavascriptEngine-Parser-Core">hexDigit	^ self anyOf: '0123456789abcdefABCDEF'</body>
+
+<body package="JavascriptEngine-Parser-Core">hexIntegerLiteral	^ 	(self anyOfStrings: #('0x' '0X')) , hexDigit plus 		==&gt; [ : s | self integerFromHexCharacters: (s at: 2) ]</body>
+
+<body package="JavascriptEngine-Parser-Core">nonZeroDigit	^ self anyOf: '123456789'</body>
+
+<body package="JavascriptEngine-Parser-Core">nullLiteral	^ ('null' jseParser ==&gt; [ : n | nil ]) jseToken: #null</body>
+
+<body package="JavascriptEngine-Parser-Core">signedInteger	^ decimalDigits 		/ ($+ jseParser, decimalDigits ==&gt; [ : s | (s at: 2) ])		/ ($- jseParser, decimalDigits ==&gt; [ : s | '-', (s at: 2) ])</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeEscapeSequence	^ $u jseParser, (hexDigit min: 4 max: 4)		==&gt;  [ : s | Character codePoint: (self integerFromHexCharacters: (s at: 2) ) ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>7.2 White Space</category>
+
+<body package="JavascriptEngine-Parser-Core">whiteSpace	^ (self anyCodeUnitValue: self class whiteSpaceCodeValues) ==&gt; [ : w | nil ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">integerFromDecimalCharacters: characterArray	^ JSEPlatform parseIntegerFrom: characterArray readStream</body>
+
+<body package="JavascriptEngine-Parser-Core">integerFromHexCharacters: characterArray	^ JSEPlatform parseIntegerFrom: characterArray readStream radix: 16</body>
+
+<body package="JavascriptEngine-Parser-Core">numberFromIntegerCharacters: integerCharacters decimalPlaces: decimalPlaces exponent: exponentCharacters 	| integer numberStream |	^ ( decimalPlaces isNil or: [ decimalPlaces isEmpty ]) 		ifTrue: 		[ | exponent |			integer := self integerFromDecimalCharacters: integerCharacters.			exponentCharacters notNil 				ifTrue: 				[	exponent := self integerFromDecimalCharacters: exponentCharacters.					exponent &gt;309 ifTrue: 					[ "JSEPlatform positiveMaxIntegerValue &amp; negativeMaxIntegerValue have 309 digits -&gt; anything longer will trigger the infinityValue, but need much more memory and might crash"						^ integer &gt; 0  							ifTrue:  [ JSEPlatform positiveInfinityValue ]							ifFalse: [ JSEPlatform negativeInfinityValue  ]					].					(integer * ( 10 raisedTo: exponent )) jseAsNumberValue				]				ifFalse: [ integer ]		]		ifFalse: 		[ 			numberStream := String new writeStream.			numberStream nextPutAll: ( integerCharacters ifNil: [ '0' ]); nextPut: $.; nextPutAll: decimalPlaces.			exponentCharacters notNil 				ifTrue: 				[	numberStream nextPut: $e.					exponentCharacters first = $+ 						ifTrue: [ numberStream nextPutAll: ( exponentCharacters copyFrom: 2 to: exponentCharacters size )]						ifFalse: [ numberStream nextPutAll: exponentCharacters ]				].			JSEPlatform parseFloatFrom: numberStream contents readStream		]</body>
+
+<body package="JavascriptEngine-Parser-Core">stringFromCharacters: characterArray 	" todo: move lineContinuation to avoid nil characters "	^ ( characterArray includes: nil ) 		ifTrue: [ String withAll: ( characterArray copyWithout: nil )]		ifFalse: [ String withAll: characterArray ]</body>
+
+<body package="JavascriptEngine-Parser-Core">stringFromElements: elements 	" construct a string from literal elements "	| writeStream |	writeStream := ( String new: elements size ) writeStream.	self stringFromElements: elements on: writeStream.	^ writeStream contents</body>
+
+<body package="JavascriptEngine-Parser-Core">stringFromElements: elements on: stream 	" construct a string from literal elements "	elements jseConstructStringOn: stream</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>7 Lexcial Conventions</category>
+
+<body package="JavascriptEngine-Parser-Core">sourceCharacter	^ PPPredicateObjectParser any</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser</class-id> <category>7.3 Line Terminators</category>
+
+<body package="JavascriptEngine-Parser-Core">lineTerminator	^ (self anyCodeUnitValue: self class lineTerminatorCodeUnitValues) jseToken: #lineTerminator</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractLexicalParser class</class-id> <category>constants</category>
+
+<body package="JavascriptEngine-Parser-Core">lineTerminatorCodeUnitValues	^ #( 16r000A 16r000D 16r2028 16r2029 )</body>
+
+<body package="JavascriptEngine-Parser-Core">whiteSpaceCodeValues	^ #(16r0009 16r000B 16r000C 16r0020 16r00A0 16r1680 16r180E 16r2000 16r2001 16r2002 16r2003 16r2004 16r2005 16r2006 16r2007 16r2008 16r2009 16r200A 16r202F 16r205F 16r3000 16rFEFF )</body>
+
+<body package="JavascriptEngine-Parser-Core">zeroWidthCodeValues	^ #(16r200C 16r200D)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractSyntacticParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">createDefaultFactory	self subclassResponsibility</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractSyntacticParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">factory	factory isNil 		ifTrue: [ factory := self createDefaultFactory ].	^ factory</body>
+
+<body package="JavascriptEngine-Parser-Core">factory: aFactory 	factory := aFactory.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEAbstractSyntacticParser class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">ignoredNames	^ super ignoredNames, #(factory)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">createLexicalParser	^ JSEJsonLexicalParser new</body>
+
+<body package="JavascriptEngine-Parser-Core">createSyntacticParser		^ JSEJsonSyntacticParser new</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntaxError class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">jsDocComment	^ 'Represents a SyntaxError of the ECMA specification. Also raised when the parser could not parse a script.'</body>
+
+<body package="JavascriptEngine-Parser-Core">objectName	^ #SyntaxError</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSERegexToken</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">flags	" an optional string "	^ flags ifNil: [ nil ]</body>
+
+<body package="JavascriptEngine-Parser-Core">flags: aString 	flags := aString.</body>
+
+<body package="JavascriptEngine-Parser-Core">start: aStartInteger stop: aStopInteger	start := aStartInteger.	stop := aStopInteger</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFunctionBodyParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">createSyntacticParser		^ JSESyntacticParser newStartingAt: #startFunctionBody</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEFormalParameterListParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">createSyntacticParser		^ JSESyntacticParser newStartingAt: #startFormalParameterList</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonNilFactory</class-id> <category>factory</category>
+
+<body package="JavascriptEngine-Parser-Core">createArrayWithElements: aList	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createLiteral: aLiteralValue 	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createMember: aName value: aValue	^ nil</body>
+
+<body package="JavascriptEngine-Parser-Core">createObjectWithMembers: aListOfMembers		^ nil</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonLexicalParser</class-id> <category>grammar</category>
+
+<body package="JavascriptEngine-Parser-Core">jsonElement	^ jsonWhitespace 		/ nullLiteral		/ booleanLiteral		/ jsonString		/ jsonNumber		/ punctuator</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonEscapeCharacter	^ (self anyOf: '"/\bfnrt') ==&gt; [ : char | JSEJsonLexicalParser parseReplacements at: char ifAbsent: [ char ] ]</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonEscapeSequence	^ jsonEscapeCharacter		/ unicodeEscapeSequence</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonFraction	^ ($. jseParser, decimalDigits) map: [ : dot : digits | digits ]</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonNumber	^ ($- jseParser optional , decimalIntegerLiteral , jsonFraction optional , exponentPart optional map: 		[: minus : integer : decimalPlaces : exponent | | number |			number := self numberFromIntegerCharacters: integer decimalPlaces: decimalPlaces exponent: exponent.			minus notNil 				ifTrue: [ number := number jseNegated ].			number		])  jseToken: #numeric</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonString	^ ($" jseParser, ((jsonStringCharacter star ==&gt; [ : chars | self stringFromCharacters: chars])  jseToken: #string) , $" jseParser) map: [ : q1 : string : q2 | string ]</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonStringCharacter	| noCharacters |	noCharacters := Set new: 32.	0 to: 16r1f do: [ : i | noCharacters add: (Character codePoint: i) ].	noCharacters add: $"; add: $\.	^ (self sourceCharacter butNot: (self anyOf: noCharacters ))		/ (($\ jseParser, jsonEscapeSequence) map: [ : e : c | c ])</body>
+
+<body package="JavascriptEngine-Parser-Core">jsonWhitespace	^ (self anyCodeUnitValue: #(9 10 13 32)) ==&gt; [ : w | nil ]</body>
+
+<body package="JavascriptEngine-Parser-Core">punctuator	^ (self anyOfStrings: #('[' ']' '{' '}' ',' ':')) jseToken: #punctuator</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonLexicalParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">start	^ ( jsonElement star ==&gt; [: tokens | tokens reject: [: token | token isNil ]]) jseEnd</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonLexicalParser class</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">initializeJsonEscapeCharacters	" replacement strings for certain characters that may not appear in JSON strings "	stringifyReplacements := Dictionary new.	parseReplacements := Dictionary new.	#( #( 8 $b ) #( 9 $t ) #( 10 $n ) #( 12 $f ) #( 13 $r ) #( 34 $" ) #(92 $\)  ) do: 		[: escapePair |			stringifyReplacements at: escapePair first put: ( String with: $\ with: escapePair last ).			parseReplacements at: escapePair last put: ( Character codePoint: escapePair first )		].	0 to: 31		do: 		[: codePoint | ( stringifyReplacements includesKey: codePoint ) 				ifFalse: [ stringifyReplacements at: codePoint put: codePoint jseHexString ]		].</body>
+
+<body package="JavascriptEngine-Parser-Core">parseReplacements	" replacement characters for escape sequences "	parseReplacements isNil 		ifTrue: [ self initializeJsonEscapeCharacters ].	^ parseReplacements</body>
+
+<body package="JavascriptEngine-Parser-Core">stringifyReplacements	" replacement strings for certain characters that may not appear in JSON strings "	stringifyReplacements isNil 		ifTrue: [ self initializeJsonEscapeCharacters ].	^ stringifyReplacements</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericStringParser</class-id> <category>9 Type Conversion and Testing</category>
+
+<body package="JavascriptEngine-Parser-Core">strDecimalLiteral	^ strUnsignedDecimalLiteral 		/ ($+ jseParser, strUnsignedDecimalLiteral map: [ : sign : unsignedDecimal | unsignedDecimal ])		/ ($- jseParser, strUnsignedDecimalLiteral map: [ : sign : unsignedDecimal | unsignedDecimal jseNegated ])</body>
+
+<body package="JavascriptEngine-Parser-Core">strNumericLiteral	^ 	hexIntegerLiteral	/ strDecimalLiteral</body>
+
+<body package="JavascriptEngine-Parser-Core">strUnsignedDecimalLiteral	^ ( 'Infinity' jseParser map: [: inf | JSEPlatform positiveInfinityValue ]) 		/ ( decimalDigits , $. jseParser , decimalDigits optional , exponentPart optional 				map: [: int : dot : dec : exp | self numberFromIntegerCharacters: int decimalPlaces: dec exponent: exp ]) 		/ ( $. jseParser , decimalDigits , exponentPart optional 				map: [: dot : dec : exp | self numberFromIntegerCharacters: nil decimalPlaces: dec exponent: exp ]) 		/ ( decimalDigits , exponentPart optional map: [: int : exp | self numberFromIntegerCharacters: int decimalPlaces: nil exponent: exp ])</body>
+
+<body package="JavascriptEngine-Parser-Core">strWhiteSpace	^ strWhiteSpaceChar star</body>
+
+<body package="JavascriptEngine-Parser-Core">strWhiteSpaceChar	^ whiteSpace 		/ lineTerminator</body>
+
+<body package="JavascriptEngine-Parser-Core">stringNumericLiteral	^  strWhiteSpace, strNumericLiteral optional, strWhiteSpace		map: [ : w1 : numeric : w2 | numeric ifNil: [ 0 ] ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericStringParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">start	^  stringNumericLiteral jseEnd</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSENumericStringParser class</class-id> <category>instance creation</category>
+
+<body package="JavascriptEngine-Parser-Core">default	default isNil 		ifTrue: [ default := self new ].	^ default</body>
+
+<body package="JavascriptEngine-Parser-Core">reset	default := nil.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.6 Identifier Names and Identifiers</category>
+
+<body package="JavascriptEngine-Parser-Core">futureReservedWord	^ self anyOfStrings: self class futureReservedWords</body>
+
+<body package="JavascriptEngine-Parser-Core">identifier	^ identifierName butNot: reservedWord</body>
+
+<body package="JavascriptEngine-Parser-Core">identifierName	^ (identifierStart, identifierPart star ==&gt; [ : s | (String with: (s at: 1)), (s at: 2) ]) jseToken: #identifierName</body>
+
+<body package="JavascriptEngine-Parser-Core">identifierPart	^ unicodeLetter 		/ $$ jseParser 		/ $_ jseParser 		/ (( $\ jseParser , unicodeEscapeSequence ) &gt;=&gt; [: aStream : parseBlock | self parseEscapedIdentifierPartWith: parseBlock isStart: false on: aStream ])		 / unicodeCombiningMark 		/ unicodeDigit 		/ unicodeConnectorPunctuation 		/ (self anyCodeUnitValue: self class zeroWidthCodeValues)</body>
+
+<body package="JavascriptEngine-Parser-Core">identifierStart	^ unicodeLetter 		/ $$ jseParser 		/ $_ jseParser 		/ (( $\ jseParser , unicodeEscapeSequence ) &gt;=&gt; [: aStream : parseBlock | self parseEscapedIdentifierPartWith: parseBlock isStart: true on: aStream ])</body>
+
+<body package="JavascriptEngine-Parser-Core">keyword	^ self anyOfStrings:  self class keywords</body>
+
+<body package="JavascriptEngine-Parser-Core">reservedWord	^ keyword / futureReservedWord / nullLiteral / booleanLiteral</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeCombiningMark	^ PPPredicateObjectParser anyUnicodeCategory: #('Mn' 'Mc')</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeConnectorPunctuation	^ PPPredicateObjectParser anyUnicodeCategory: #('Pc')</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeDigit	^ PPPredicateObjectParser anyUnicodeCategory: #('Nd')</body>
+
+<body package="JavascriptEngine-Parser-Core">unicodeLetter	^ PPPredicateObjectParser anyUnicodeCategory: #('Lu' 'Ll' 'Lt' 'Lm' 'Lo' 'Nl')</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.8 Literals</category>
+
+<body package="JavascriptEngine-Parser-Core">booleanLiteral	^ 	(('true' jseParser, identifierPart not)  jseToken: #boolean valueBlock: [ true ])	/ (('false' jseParser, identifierPart not) jseToken: #boolean valueBlock: [ false ])</body>
+
+<body package="JavascriptEngine-Parser-Core">characterEscapeSequence	^ singleEscapeCharacter 		/ nonEscapeCharacter</body>
+
+<body package="JavascriptEngine-Parser-Core">decimalLiteral 	^ 	(decimalIntegerLiteral , $. jseParser, decimalDigits optional, exponentPart optional 		map: [ : int : dot : dec : exp | self numberFromIntegerCharacters: int decimalPlaces: dec exponent: exp ])	/ ($. jseParser , decimalDigits , exponentPart optional 		map: [ : dot : dec : exp | self numberFromIntegerCharacters: nil decimalPlaces: dec exponent: exp ])	/ (decimalIntegerLiteral, exponentPart optional 		map: [ : int : exp | self numberFromIntegerCharacters: int decimalPlaces: nil exponent: exp ])</body>
+
+<body package="JavascriptEngine-Parser-Core">doubleStringCharacter	^ self stringCharacterWithQuoteChar: $"</body>
+
+<body package="JavascriptEngine-Parser-Core">doubleStringCharacters	^ doubleStringCharacter plus ==&gt; [: characterArray | self stringFromCharacters: characterArray ]</body>
+
+<body package="JavascriptEngine-Parser-Core">escapeCharacter	^ singleEscapeCharacter 	/ decimalDigit 	/ $x jseParser	/ $u jseParser</body>
+
+<body package="JavascriptEngine-Parser-Core">escapeSequence	^ characterEscapeSequence 	/ (($0 jseParser, decimalDigit not) ==&gt; [ : s | Character codePoint: 0 ])	/ hexEscapeSequence 	/ unicodeEscapeSequence</body>
+
+<body package="JavascriptEngine-Parser-Core">hexEscapeSequence	^ ($x jseParser, (hexDigit min: 2 max: 2))		==&gt;  [ : s | Character codePoint: (self integerFromHexCharacters: (s at: 2) ) ]</body>
+
+<body package="JavascriptEngine-Parser-Core">lineContinuation	^ $\ jseParser, lineTerminatorSequence		==&gt; [ : s | nil ]</body>
+
+<body package="JavascriptEngine-Parser-Core">literal	^ nullLiteral / booleanLiteral / numericLiteral / stringLiteral</body>
+
+<body package="JavascriptEngine-Parser-Core">nonEscapeCharacter	^ sourceCharacter butNot: (escapeCharacter | lineTerminator )</body>
+
+<body package="JavascriptEngine-Parser-Core">nullLiteral	^ (('null' jseParser, identifierPart not) ==&gt; [ : n | nil ]) jseToken: #null</body>
+
+<body package="JavascriptEngine-Parser-Core">numericLiteral	" octal numbers are not allowed in strict mode, so create a different token type "	^ (hexIntegerLiteral jseToken: #numeric) / (octalIntegerLiteral jseToken: #numericOctal) / (decimalLiteral jseToken: #numeric)</body>
+
+<body package="JavascriptEngine-Parser-Core">octalIntegerLiteral	^ ( $0 jseParser , ( self anyOf: '01234567' ) plus ) 		==&gt; [: elements | JSEPlatform parseIntegerFrom: ( self stringFromElements: elements ) readStream radix: 8 ]</body>
+
+<body package="JavascriptEngine-Parser-Core">singleEscapeCharacter	^ 		($b jseParser ==&gt; [ : c | Character codePoint: 16r08 ])		/ ($t jseParser ==&gt; [ : c | Character codePoint: 16r09 ])			/ ($n jseParser ==&gt; [ : c | Character codePoint: 16r0a ])		/ ($v jseParser ==&gt; [ : c | Character codePoint: 16r0B ])		/ ($f jseParser ==&gt; [ : c | Character codePoint: 16r0C ])		/ ($r jseParser ==&gt; [ : c | Character codePoint: 16r0D ])		/ $" jseParser 		/ $' jseParser		/ $\ jseParser</body>
+
+<body package="JavascriptEngine-Parser-Core">singleStringCharacter	^ self stringCharacterWithQuoteChar: $'</body>
+
+<body package="JavascriptEngine-Parser-Core">singleStringCharacters	^ singleStringCharacter plus ==&gt; [: characterArray | self stringFromCharacters: characterArray ]</body>
+
+<body package="JavascriptEngine-Parser-Core">stringLiteral	^ 	(		($" jseParser, (doubleStringCharacters optional  jseToken: #string valueBlock: [ : token | token literalValue ifNil: [ '' ]]), $" jseParser)		/ ($' jseParser, (singleStringCharacters optional  jseToken: #string valueBlock: [ : token | token literalValue ifNil: [ '' ]]), $' jseParser)	) ==&gt; [ : s | s at: 2  ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.3 Line Terminators</category>
+
+<body package="JavascriptEngine-Parser-Core">lineTerminatorSequence	^ 	(String with: Character cr with: Character lf) jseParser	/ (self anyCodeUnitValue: self class lineTerminatorCodeUnitValues)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.8.5 Regular Expression Literals</category>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionBackslashSequence	^ ($\ jseParser, regularExpressionNonTerminator)		==&gt; [ : elements | self stringFromElements: elements ]</body>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionClassChar	^ (regularExpressionNonTerminator butNot: (self anyOf: #($] $\)))		/ regularExpressionBackslashSequence</body>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionClassChars	^ regularExpressionClassChar star		==&gt; [ : elements | self stringFromElements: elements ]</body>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionFlags	^   identifierPart star		==&gt; [ : elements | self stringFromElements: elements ]</body>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionLiteral	" The lexical syntax is disambigous with regard to regular expressions.	Use some guessing (isPossibleRegexPredecessorToken) to work around this issue "	^ ( $/ jseParser , ( self regexTokenOn: pattern ) , $/ jseParser , ( regularExpressionFlags butNot: ( self anyOf: '/*' ))) &gt;=&gt; 		[: aStream : parseBlock |			self regexEnabled 				ifTrue: [ self regexTokenFrom: aStream with: parseBlock ]				ifFalse: [ PPFailure message: 'Regex not enabled' stream: aStream ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">regularExpressionNonTerminator	^ (sourceCharacter butNot: lineTerminator)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.4 Comments</category>
+
+<body package="JavascriptEngine-Parser-Core">comment	^ multiLineComment / singleLineComment ==&gt; 		[: commentToken | 			(self emitCommentTokens or: [ commentToken isLineTerminator ])				ifTrue: [ commentToken ]				ifFalse: [ nil ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">multiLineComment	^ ('/*' jseParser , multiLineCommentChars optional , '*/' jseParser map: 		[: start : commentString : end | 			start , commentString , end 		]) jseToken: #comment</body>
+
+<body package="JavascriptEngine-Parser-Core">multiLineCommentChar	^ (PPPredicateObjectParser anyExceptAnyOf: '*')		/ (($*  jseParser , $/ jseParser not) ==&gt; [ : n | n first ])</body>
+
+<body package="JavascriptEngine-Parser-Core">multiLineCommentChars	^ multiLineCommentChar star 		==&gt; [ : s | self stringFromElements: s ]</body>
+
+<body package="JavascriptEngine-Parser-Core">singleLineComment	^ ( '//' jseParser , singleLineCommentChars optional map: 		[: s : c |			c notNil 				ifTrue: [ s , c ]				ifFalse: [ s ]		]) jseToken: #comment</body>
+
+<body package="JavascriptEngine-Parser-Core">singleLineCommentChar	^ self anyExceptAnyCodeUnitValueOf: self class lineTerminatorCodeUnitValues</body>
+
+<body package="JavascriptEngine-Parser-Core">singleLineCommentChars	^ singleLineCommentChar plus ==&gt; [ : chars | self stringFromCharacters: chars  ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">parseEscapedIdentifierPartWith: parseBlock isStart: isStart on: aStream 	| position char nodes |	position := aStream position.	nodes := parseBlock value.	"see 7.6 - A UnicodeEscapeSequence cannot be used to put a character into an IdentifierName that would otherwise be illegal"	^ nodes isPetitFailure 		ifTrue: [ nodes ]		ifFalse: 		[	char := nodes at: 2.			( char notNil and: [ isStart not or: [ char = $$ or: [ char = $_ or: [ #( 'Lu' 'Ll' 'Lt' 'Lm' 'Lo' 'Nl' ) includes: ( JSEUnicodeTables unicodeCategoryOf: char )]]]]) 				ifTrue: [ char ]				ifFalse: 				[	aStream position: position.					PPFailure message: 'Illegal identifier character: \u' , ( char codePoint printStringRadix: 16 ) stream: aStream				]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">processTokens: aRawTokenCollection 	| tokens writeStream |	tokens := OrderedCollection new: aRawTokenCollection size.	writeStream := tokens writeStream.	self processTokens: aRawTokenCollection on: writeStream preceedingLineTerminator: false. 	^ writeStream contents</body>
+
+<body package="JavascriptEngine-Parser-Core">processTokens: aRawTokenCollection on: writeStream preceedingLineTerminator: preceedingLineTerminator 	" removes gaps and line terminators. 	do a sanity check for regular expressions (blame the ambiguous syntax for this)	tokens are flagged if they are preceeded by a line terminator "	| readStream hasPreceedingLineTerminator lastToken replacementTokens |	readStream := aRawTokenCollection readStream.	hasPreceedingLineTerminator := preceedingLineTerminator.	lastToken := nil.	[ readStream atEnd ] whileFalse: 		[ | token |			token := readStream next.			token notNil 				ifTrue: 				[	token isLineTerminator 						ifTrue: 						[	hasPreceedingLineTerminator := true.							( self emitCommentTokens and: [ token isComment ]) 								ifTrue: [ writeStream nextPut: token ]						]						ifFalse: 						[	hasPreceedingLineTerminator 								ifTrue: 								[	token hasPreceedingLineTerminator: true.									hasPreceedingLineTerminator := false								].							" check if a regular expression is expected here "							( token type = #regex and: [ lastToken notNil and: [( self isPossibleRegexPredecessorToken: lastToken ) not ]]) 								ifTrue: 								[	" check if this could be parsed as something else "									[	replacementTokens := self parseReplacementsForRegexToken: token.										self processTokens: replacementTokens on: writeStream preceedingLineTerminator: hasPreceedingLineTerminator.										hasPreceedingLineTerminator := false.										token := replacementTokens last									] 										on: JSESyntaxError										do: 										[: ex |											" no, emit the regular expression "											writeStream nextPut: token										]								]								ifFalse: [ writeStream nextPut: token ]						].					lastToken := token				]		].</body>
+
+<body package="JavascriptEngine-Parser-Core">stringCharacterWithQuoteChar: quoteChar	^ (sourceCharacter butNot: (self anyOf: (Array with: quoteChar with: $\)) | lineTerminator )		/ (($\ jseParser, escapeSequence ) ==&gt; [ : s | s at: 2 ])		/ lineContinuation</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>A.7 Regular Expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">alternative	^  term star		==&gt; [ : s | self stringFromElements: s ]</body>
+
+<body package="JavascriptEngine-Parser-Core">assertion^ 	$^ jseParser	/ $$ jseParser	/ (($\ jseParser, ($b  jseParser / $B jseParser)) ==&gt; [ : s | self stringFromElements: s ])	/ (($( jseParser, $? jseParser, ( $= jseParser / $! jseParser) , disjunction, $) jseParser) ==&gt; [ : s | self stringFromElements: s ])</body>
+
+<body package="JavascriptEngine-Parser-Core">atom	" Tweak: \$ shoulded be parsed as character sequence '\$'.	To achieve this, atomEscape has precedence over pattern character, and  '\' is a valid pattern character  "	^	$. jseParser	/ (($\ jseParser, atomEscape ) map: [ : bs : escape | escape ])	/ patternCharacter 	/ characterClass 	/ (($( jseParser, ($? jseParser, $: jseParser) optional, disjunction, $) jseParser) ==&gt; [ : s | self stringFromElements: s ])</body>
+
+<body package="JavascriptEngine-Parser-Core">atomEscape	^ 	decimalEscape 	/ characterEscape 	/ characterClassEscape</body>
+
+<body package="JavascriptEngine-Parser-Core">characterClass	^ ($[ jseParser, regularExpressionClassChars, $] jseParser) ==&gt; [ : s | self stringFromElements: s ]</body>
+
+<body package="JavascriptEngine-Parser-Core">characterClassEscape	" Some escape sequences have to be transformed here, rather than letting the RxMatcher handle the escapes.	The untransformed escapes have to preprend a backslash "	^ (self anyOf: #($d $D $s $S $w $W $c $A $Z $B $&lt; $&gt;)) ==&gt; [ : s | '\', (self stringFromElements: s) ]</body>
+
+<body package="JavascriptEngine-Parser-Core">characterEscape	" Some escape sequences have to be transformed here, rather than letting the RxMatcher handle the escapes.	The untransformed escapes have to preprend a backslash "	^ 	(controlEscape  ==&gt; [ : s | '\', (self stringFromElements: s) ])	/ (($c jseParser, controlLetter ) ==&gt; [ : s |  '\',  (self stringFromElements: s) ])	/ hexEscapeSequence  	/ unicodeEscapeSequence 	/ (identityEscape ==&gt; [ : s | '\', (self stringFromElements: s) ])</body>
+
+<body package="JavascriptEngine-Parser-Core">controlEscape	^ self anyOf: #($f $n $r $t $v $a $e)</body>
+
+<body package="JavascriptEngine-Parser-Core">controlLetter	^ self alphabeticCharacter</body>
+
+<body package="JavascriptEngine-Parser-Core">decimalEscape	" see 15.10.2.9 AtomEscape and 15.10.2.11 DecimalEscape  "	^ decimalIntegerLiteral , decimalDigit not map: 		[: decIntLiteral : n | | number |			number := self numberFromIntegerCharacters: decIntLiteral decimalPlaces: nil exponent: nil.			number = 0 				ifTrue: [ Character value: 0 ]				ifFalse: 				[	" not implemented yet "					'\' , decIntLiteral				]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">disjunction	^ (alternative, ($| jseParser, alternative) star  ) 		==&gt; [ : s | self stringFromElements: s ]</body>
+
+<body package="JavascriptEngine-Parser-Core">identityEscape	^ 	(sourceCharacter butNot: identifierPart / lineTerminator )	/ (self anyCodeUnitValue: self class zeroWidthCodeValues)</body>
+
+<body package="JavascriptEngine-Parser-Core">pattern	^  disjunction</body>
+
+<body package="JavascriptEngine-Parser-Core">patternCharacter	^ sourceCharacter butNot: (lineTerminator / (self anyOf: '^$.*+?()[]{}|/')).</body>
+
+<body package="JavascriptEngine-Parser-Core">quantifier	^ (quantifierPrefix, $? jseParser optional) ==&gt; [ : s | self stringFromElements: s ]</body>
+
+<body package="JavascriptEngine-Parser-Core">quantifierPrefix	^ 	$* jseParser	/ $+ jseParser	/ $? jseParser	/ ((${ jseParser, decimalDigits, ($, jseParser, decimalDigits optional) optional, $} jseParser) ==&gt; [ : s | self stringFromElements: s ])</body>
+
+<body package="JavascriptEngine-Parser-Core">term	^ assertion	/ ((atom, quantifier optional) ==&gt; [ : s | self stringFromElements: s ])</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>private - regular expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">isPossibleRegexPredecessorToken: aToken 	" would aToken and a regular expression token be a valid sequence?	assume that a regular expression only appears 		- in variable assignments		- function calls		- as a base expression (e.g. /\w+/.match(foo)"	( #( #numeric #numericOctal #boolean #null ) includes: aToken type ) 		ifTrue: [ ^ false ].	( #identifierName = aToken type and: [( self class strictReservedWords includes: aToken literalValue ) not ]) 		ifTrue: 		[	" variable reference "			^ false		].	aToken type = #punctuator 		ifTrue: 		[( #( '&gt;&gt;&gt;=' '===' '!==' '&gt;&gt;&gt;' '&lt;&lt;=' '&gt;&gt;=' '&lt;=' '&gt;=' '==' '!=' '++' '--' '&lt;&lt;' '&gt;&gt;' '+=' '-=' '*=' '%=' '&amp;=' '|=' '^=' '}' ')' ']' '.' ',' '&lt;' '&gt;' '+' '-' '*' '%' '&amp;' '|' '^' '~' ) 				includes: aToken literalValue ) 				ifTrue: [ ^ false ]		].	^ true</body>
+
+<body package="JavascriptEngine-Parser-Core">parseReplacementsForRegexToken: regexToken 	" yucky hack - this is not a regular expression, convert it into non-regex tokens"	| replacementTokens offset |	regexEnabled := false.	replacementTokens := self parse: regexToken value.	regexEnabled := true.	offset := regexToken start - 1.	replacementTokens do: [ : token |		token initializeOn: regexToken collection start: token start + offset stop: token stop + offset 	].	^  replacementTokens</body>
+
+<body package="JavascriptEngine-Parser-Core">regexEnabled	^  regexEnabled</body>
+
+<body package="JavascriptEngine-Parser-Core">regexTokenFrom: aStream with: parseBlock 	" parse and complete the regex token "	| token elements start stop |	start := aStream position + 1.	elements := parseBlock value.	^ elements isPetitFailure 		ifTrue: [ elements ]		ifFalse: 		[	token := elements at: 2.			token flags: ( elements at: 4 ).			stop := aStream position.			token start: start stop: stop.			token		]</body>
+
+<body package="JavascriptEngine-Parser-Core">regexTokenOn: aParser	" returns a parser that creates a JSE token for a regular expression "	^ (JSETokenParser on: aParser) type: #regex; tokenClass: JSERegexToken; yourself</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.5 Tokens</category>
+
+<body package="JavascriptEngine-Parser-Core">divPunctuator	^ (self anyOfStrings: self class divPunctuators) jseToken: #punctuator</body>
+
+<body package="JavascriptEngine-Parser-Core">tokenParser	" odd: original spec does not include nullLiteral and booleanLiteral here "	^ 	nullLiteral	/ booleanLiteral	/ identifierName 	/ numericLiteral 	/ stringLiteral	/ punctuator</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7.7 Punctuators</category>
+
+<body package="JavascriptEngine-Parser-Core">punctuator	^ ( self anyOfStrings: self class punctuators ) jseToken: #punctuator</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">emitCommentTokens	" true if comments should be emitted as tokens "	^ emitCommentTokens ifNil: [ false ]</body>
+
+<body package="JavascriptEngine-Parser-Core">emitCommentTokens: aBoolean	" true if comments should be emitted as tokens "	emitCommentTokens := aBoolean</body>
+
+<body package="JavascriptEngine-Parser-Core">start	^  (inputElement star ==&gt; [ : tokens | self processTokens: tokens ]) jseEnd</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>7 Lexcial Conventions</category>
+
+<body package="JavascriptEngine-Parser-Core">inputElement	^ 	whiteSpace	/ lineTerminator 	/ comment 	/ tokenParser 	/ regularExpressionLiteral	/ divPunctuator</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser</class-id> <category>initialization</category>
+
+<body package="JavascriptEngine-Parser-Core">initialize	super initialize.	regexEnabled := true.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser class</class-id> <category>constants</category>
+
+<body package="JavascriptEngine-Parser-Core">divPunctuators	" sorted by size "	^ #( '/=' '/' )</body>
+
+<body package="JavascriptEngine-Parser-Core">futureReservedWords	^ #(		'class'		'enum'		'extends'		'super'		'const'		'export'		'import'		)</body>
+
+<body package="JavascriptEngine-Parser-Core">keywords	^ #(		'break'		'do'		'instanceof'		'typeof'		'case'		'else'		'new'		'var'		'catch'		'finally'		'return'		'void'		'continue'		'for'		'switch'		'while'		'debugger'		'function'		'this'		'with'		'default'		'if'		'throw'		'delete'		'in'		'try'	)</body>
+
+<body package="JavascriptEngine-Parser-Core">literalReservedWords	^ #( 'false' 'true' 'null' )</body>
+
+<body package="JavascriptEngine-Parser-Core">punctuators	" sorted by size "	^ # ('&gt;&gt;&gt;=' '===' '!==' '&gt;&gt;&gt;' '&lt;&lt;=' '&gt;&gt;=' '&lt;=' '&gt;=' '==' '!=' '++' '--' '&lt;&lt;' '&gt;&gt;' '&amp;&amp;' '||' '+=' '-=' '*=' '%=' '&amp;=' '|=' '^=' '{' '}' '(' ')' '[' ']' '.' ';' ',' '&lt;' '&gt;' '+' '-' '*' '%' '&amp;' '|' '^' '!' '~' '?' ':' '=')</body>
+
+<body package="JavascriptEngine-Parser-Core">reservedWords	ReservedWords isNil 		ifTrue: [ ReservedWords := (self keywords, self futureReservedWords, self literalReservedWords) asSet ].	^ ReservedWords</body>
+
+<body package="JavascriptEngine-Parser-Core">strictFutureReservedWords	^  #(		'implements'		'let'		'private'		'public'		'interface'		'package'		'protected'		'static'		'yield'	)</body>
+
+<body package="JavascriptEngine-Parser-Core">strictReservedWords	StrictReservedWords isNil 		ifTrue: [ StrictReservedWords := (self keywords, self futureReservedWords, self literalReservedWords, self strictFutureReservedWords ) asSet ].	^ StrictReservedWords</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSELexicalParser class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">ignoredNames	^ super ignoredNames, #(emitCommentTokens regexEnabled)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>lexical tokens</category>
+
+<body package="JavascriptEngine-Parser-Core">identifier	^ (PPPredicateObjectParser 			on: [: token | token type = #identifierName and: [( self reservedWords includes: token value ) not ]]			message: 'Identifier expected') 		==&gt; [ : token | self factory createIdentifier: token ]</body>
+
+<body package="JavascriptEngine-Parser-Core">identifierName	" null, true, false are valid identifier names, but the lexical parser creates special tokens "	^ (self tokenParserOfType: #identifierName)		==&gt; [ : token | self factory createIdentifierName: token ]	/ (( self tokenParserOfType: #null) ==&gt; [: token | 		| identifierNameToken |		identifierNameToken := token copy.		identifierNameToken literalValue: 'null'.		identifierNameToken type: #identifierName.		self factory createIdentifierName:  identifierNameToken ])	/ (( self tokenParserOfType: #boolean) ==&gt; [: token | 		| identifierNameToken |		identifierNameToken := token copy.		identifierNameToken literalValue: token literalValue printString.		identifierNameToken type: #identifierName.		self factory createIdentifierName:  identifierNameToken ])</body>
+
+<body package="JavascriptEngine-Parser-Core">lineTerminator	^ JSELookaheadParser on: (PPPredicateObjectParser 		on: [: token | token hasPreceedingLineTerminator ]		message: 'line terminator expected')</body>
+
+<body package="JavascriptEngine-Parser-Core">literal	^ ( self tokenParserOfTypes: self class literalTokenTypes ) 		==&gt; [: token | self createLiteralForToken: token ]</body>
+
+<body package="JavascriptEngine-Parser-Core">numericLiteral	^ (self tokenParserOfTypes: #(#numeric #numericOctal)) 		==&gt; [ : token | self factory createNumericLiteral: token ]</body>
+
+<body package="JavascriptEngine-Parser-Core">stringLiteral	^ (self tokenParserOfType: #string) 		==&gt; [ : token | self factory createStringLiteral: token ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">createDefaultFactory	^ JSENilFactory new</body>
+
+<body package="JavascriptEngine-Parser-Core">start	^  program jseEnd</body>
+
+<body package="JavascriptEngine-Parser-Core">startFormalParameterList	^ formalParameterList optional jseEnd 		jseAction: [: elements : sourceInterval | self factory createFunctionExpression: nil parameters: ( elements ifNil: [ #( )]) body: nil sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">startFunctionBody	^  functionBody jseEnd</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.13 Assignment Operators</category>
+
+<body package="JavascriptEngine-Parser-Core">assignmentExpression	^ conditionalExpression / ( leftHandSideExpression , assignmentOperator , assignmentExpression jseAction: 				[: elements : sourceInterval |					self factory 						createAssignmentExpression: ( elements at: 1 )						to: ( elements at: 3 )						operator: ( elements at: 2 ) literalValue						sourceInterval: sourceInterval				])</body>
+
+<body package="JavascriptEngine-Parser-Core">assignmentExpressionNoIn	^ ( leftHandSideExpression , assignmentOperator , assignmentExpressionNoIn jseAction: 		[: elements : sourceInterval |			self factory 				createAssignmentExpression: ( elements at: 1 )				to: ( elements at: 3 )				operator: ( elements at: 2 ) literalValue				sourceInterval: sourceInterval		]) 		/ conditionalExpressionNoIn</body>
+
+<body package="JavascriptEngine-Parser-Core">assignmentOperator 	^ self anyOf: self class assignmentOperators</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>factory - private</category>
+
+<body package="JavascriptEngine-Parser-Core">combine: aParsedElement withElements: otherParsedElements with: combinatorBlock 	| e |	e := aParsedElement.	otherParsedElements do: [: anotherParsedElement | e := combinatorBlock value: e value: anotherParsedElement ].	^ e</body>
+
+<body package="JavascriptEngine-Parser-Core">combineBinaryExpressions: elements with: combinatorBlock 	| e |	e := elements at: 1.	( elements at: 2 ) ifNotNil: 		[: operatorAndRightSideExpressions |			operatorAndRightSideExpressions do: 				[: operatorAndRightSideExpression |					e := combinatorBlock value: e value: ( operatorAndRightSideExpression at: 2 ) value: ( operatorAndRightSideExpression at: 1 ) literalValue				]		].	^ e</body>
+
+<body package="JavascriptEngine-Parser-Core">combineExpression: anExpression conditionalExpression: trueAndFalseExpressions sourceInterval: sourceInterval 	^ ( trueAndFalseExpressions notNil and: [ trueAndFalseExpressions notEmpty ]) 		ifTrue: 		[	self factory 				createConditionalExpression: anExpression				trueExpression: ( trueAndFalseExpressions at: 2 )				falseExpression: ( trueAndFalseExpressions at: 4 )				sourceInterval: sourceInterval		]		ifFalse: [ anExpression ]</body>
+
+<body package="JavascriptEngine-Parser-Core">combineExpression: baseExpression expressionBlocks: expressionBlocks	| e |	e := baseExpression.	expressionBlocks notNil		ifTrue: [			expressionBlocks do: [ : aBlock |				e := aBlock value: e.			]	].	^ e</body>
+
+<body package="JavascriptEngine-Parser-Core">createLiteralForToken: token 	token type = #regex 		ifTrue: [ ^ self factory createRegularExpression: token ].	token type = #string 		ifTrue: [ ^ self factory createStringLiteral: token ].	token type = #numeric 		ifTrue: [ ^ self factory createNumericLiteral: token ].	token type = #numericOctal 		ifTrue: 		[	^ self isInStrictMode 				ifTrue: [ PPFailure message: 'Octal numbers are not allowed in strict mode' at: token start ]				ifFalse: [ self factory createNumericLiteral: token ]		].	token type = #boolean 		ifTrue: [ ^ self factory createBooleanLiteral: token ].	token type = #null 		ifTrue: [ ^ self factory createNullLiteral: token ].	self error: 'Unknown literal type: ' , token type.</body>
+
+<body package="JavascriptEngine-Parser-Core">createPaddedElementList: elementsAndPaddings 	| i size elements |	elementsAndPaddings isEmpty 		ifTrue: [ ^ #( )].	size := 1.	2 to: elementsAndPaddings size by: 2 do: [: elisionIndex | size := size + ( elementsAndPaddings at: elisionIndex )].	elements := Array new: size.	i := 1.	1 to: elementsAndPaddings size		by: 2		do: 		[: elementIndex |			elements at: i put: ( elementsAndPaddings at: elementIndex ).			elementIndex &lt; elementsAndPaddings size 				ifTrue: [ i := i + ( elementsAndPaddings at: elementIndex + 1 )]		].	^ elements</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>12.2 Variable Statement</category>
+
+<body package="JavascriptEngine-Parser-Core">initialiser	^ $= jseTokenParser, assignmentExpression		==&gt; [ : elements | elements at: 2 ]</body>
+
+<body package="JavascriptEngine-Parser-Core">initialiserNoIn	^ $= jseTokenParser, assignmentExpressionNoIn 		==&gt; [ : elements | elements at: 2 ]</body>
+
+<body package="JavascriptEngine-Parser-Core">variableDeclaration	^ identifier , initialiser optional 		jseAction: [: elements : sourceInterval | self factory createVariableDeclaration: ( elements at: 1 ) initializer: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">variableDeclarationList	^ self variableDeclaration listSeparatedBy: $, jseTokenParser</body>
+
+<body package="JavascriptEngine-Parser-Core">variableDeclarationListNoIn	^ variableDeclarationNoIn listSeparatedBy: $, jseTokenParser</body>
+
+<body package="JavascriptEngine-Parser-Core">variableDeclarationNoIn	^ identifier , initialiserNoIn optional 		jseAction: [: elements : sourceInterval | self factory createVariableDeclaration: ( elements at: 1 ) initializer: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">variableStatement	^ 'var' jseTokenParser , variableDeclarationList , automaticSemicolon 		jseAction: [: elements : sourceInterval | self factory createVariableStatement: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>12 Statements</category>
+
+<body package="JavascriptEngine-Parser-Core">block	^ ${ jseTokenParser , statementList , $} jseTokenParser 		jseAction: [: elements : sourceInterval | self factory createBlock: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">breakStatement	^ 'break' jseTokenParser 		, ((( lineTerminator not , identifier , automaticSemicolon ) ==&gt; [: elements | elements at: 2 ]) / ( automaticSemicolon ==&gt; [: elements | nil ])) 		jseAction: [: elements : sourceInterval | self factory createBreak: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">continueStatement	^ 'continue' jseTokenParser 		, ((( lineTerminator not , identifier , automaticSemicolon ) ==&gt; [: elements | elements at: 2 ]) / ( automaticSemicolon ==&gt; [: elements | nil ])) 		jseAction: [: elements : sourceInterval | self factory createContinue: ( elements at: 2 ) sourceInterval: nil ]</body>
+
+<body package="JavascriptEngine-Parser-Core">debuggerStatement	^ 'debugger' jseTokenParser , automaticSemicolon jseAction: [: elements : sourceInterval | self factory createDebugger: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">emptyStatement	^ $; jseTokenParser jseAction: [: elements : sourceInterval | self factory createEmptyStatement: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">expressionStatement	^ ( expression , automaticSemicolon butNot: ${ jseTokenParser / 'function' jseTokenParser ) 		jseAction: [: elements : sourceInterval | self factory createExpressionStatement: ( elements at: 1 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">ifStatement	^ 'if' jseTokenParser , $( jseTokenParser , expression , $) jseTokenParser , statement 		, (( 'else' jseTokenParser , statement ) ==&gt; [: elements | elements at: 2 ]) optional jseAction: 		[: elements : sourceInterval |			self factory 				createIf: ( elements at: 3 )				trueExpression: ( elements at: 5 )				falseExpression: ( elements at: 6 )				sourceInterval: sourceInterval		]</body>
+
+<body package="JavascriptEngine-Parser-Core">labelledStatement	^ identifier , $: jseTokenParser , statement 		jseAction: [: elements : sourceInterval | self factory createLabel: ( elements at: 1 ) statement: ( elements at: 3 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">returnStatement	^ 'return' jseTokenParser 		, ((( lineTerminator not , expression , automaticSemicolon ) ==&gt; [: elements | elements at: 2 ]) / ( automaticSemicolon ==&gt; [: elements | nil ])) 		jseAction: [: elements : sourceInterval | self factory createReturn: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">statement	^ 	block 	/ variableStatement 	/ emptyStatement 	/ expressionStatement 	/ ifStatement 	/ iterationStatement 	/ continueStatement 	/ breakStatement 	/ returnStatement 	/ withStatement 	/ labelledStatement 	/ switchStatement 	/ throwStatement 	/ tryStatement 	/ debuggerStatement	" ECMA 262 states that this is not allowed, but even the ECMA 262 tests uses function expressions in blocks (see test10_4_2_1_2) "	/ functionExpression</body>
+
+<body package="JavascriptEngine-Parser-Core">statementList	^ statement star</body>
+
+<body package="JavascriptEngine-Parser-Core">throwStatement	^ 'throw' jseTokenParser , lineTerminator not , expression , automaticSemicolon 		jseAction: [: elements : sourceInterval | self factory createThrow: ( elements at: 3 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">withStatement	^ 'with' jseTokenParser , $( jseTokenParser , expression , $) jseTokenParser , statement 		jseAction: [: elements : sourceInterval | self factory createWith: ( elements at: 3 ) statement: ( elements at: 5 ) sourceInterval: sourceInterval ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.1 Primary Expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">arrayLiteral	^ $[ jseTokenParser , elision optional , elementList optional , elision optional , $] jseTokenParser jseMap: 		[: b1 : elision1 : arrayElements : elision2 : b2 : sourceInterval |			self factory 				createArray: ( arrayElements ifNil: [ #( )])				padBefore: ( elision1 ifNil: [ 0 ])				after: ( elision2 ifNotNil: [: n | n - 1 ] ifNil: [ 0 ])				sourceInterval: sourceInterval		]</body>
+
+<body package="JavascriptEngine-Parser-Core">elementList	^ ( assignmentExpression separatedBy: elision)		==&gt; [: paddingsAndElements | self createPaddedElementList: paddingsAndElements ]</body>
+
+<body package="JavascriptEngine-Parser-Core">elision	^ ($, jseTokenParser plus) ==&gt; [ : elison | elison size ]</body>
+
+<body package="JavascriptEngine-Parser-Core">objectLiteral	^	(${ jseTokenParser, $} jseTokenParser		jseAction: [: elements : sourceInterval | self factory createObject: #() sourceInterval: sourceInterval ])	/ (${ jseTokenParser, propertyNameAndValueList, $, jseTokenParser optional, $} jseTokenParser		jseAction: [: elements : sourceInterval | self factory createObject: (elements at: 2) sourceInterval: sourceInterval  ])</body>
+
+<body package="JavascriptEngine-Parser-Core">primaryExpression	^ ( 'this' jseTokenParser jseAction: [: elements : sourceInterval | self factory createThisExpression: sourceInterval ]) 		/ ( $( jseTokenParser , expression , $) jseTokenParser 				jseAction: [: elements : sourceInterval | self factory createGroupedExpression: ( elements at: 2 ) sourceInterval: sourceInterval ]) 		/ identifier / literal 		/ arrayLiteral / objectLiteral</body>
+
+<body package="JavascriptEngine-Parser-Core">propertyAssignment	^ ( propertyName , $: jseTokenParser , assignmentExpression 		jseAction: [: elements : sourceInterval | self factory createPropertyAssignment: ( elements at: 1 ) expression: ( elements at: 3 ) sourceInterval: sourceInterval ]) 		/ ( 'get' jseTokenParser , propertyName , $( jseTokenParser , $) jseTokenParser , ${ jseTokenParser , functionBody , $} jseTokenParser jseAction: 				[: elements : sourceInterval |					self factory createPropertyGetAssignment: ( elements at: 2 ) functionBody: ( elements at: 6 ) sourceInterval: sourceInterval				]) 		/ ( 'set' jseTokenParser , propertyName , $( jseTokenParser , propertySetIdentifier , $) jseTokenParser , ${ jseTokenParser , functionBody 				, $} jseTokenParser jseAction: 				[: elements : sourceInterval |					self factory 						createPropertySetAssignment: ( elements at: 2 )						parameter: ( elements at: 4 )						functionBody: ( elements at: 7 )						sourceInterval: sourceInterval				])</body>
+
+<body package="JavascriptEngine-Parser-Core">propertyName	^ 	identifierName 	/ stringLiteral 	/ numericLiteral</body>
+
+<body package="JavascriptEngine-Parser-Core">propertyNameAndValueList	^ propertyAssignment listSeparatedBy: $, jseTokenParser</body>
+
+<body package="JavascriptEngine-Parser-Core">propertySetIdentifier	^ identifier butNot: (PPPredicateObjectParser 			on: [: token | self isInStrictMode and: [ #('eval' 'arguments') includes: token value ] ]			message: 'Identifier expected')</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.2 Left-Hand-Side Expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">argumentList	^ assignmentExpression listSeparatedBy: $, jseTokenParser</body>
+
+<body package="JavascriptEngine-Parser-Core">arguments	^ $( jseTokenParser , argumentList optional , $) jseTokenParser 		jseAction: [: elements : sourceInterval | self factory createArguments: (( elements at: 2 ) ifNil: [ #( )]) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">leftHandSideExpression	^ "newExpression / " memberExpression</body>
+
+<body package="JavascriptEngine-Parser-Core">memberBaseExpression	^ 	newExpression	/ primaryExpression	/ functionExpression</body>
+
+<body package="JavascriptEngine-Parser-Core">memberExpression	^ memberBaseExpression, memberPartExpression star		map: [ : base : members | self combineExpression: base expressionBlocks: members ]</body>
+
+<body package="JavascriptEngine-Parser-Core">memberPartExpression	" returns a block that receives the base and which creates the member "	^ ( $[ jseTokenParser , expression , $] jseTokenParser 		jseMap: [: b1 : member : b2 : sourceInterval | [: base | self factory createMemberOf: base bracket: member sourceInterval: sourceInterval ]]) 		/ ( $. jseTokenParser , identifierName 				jseMap: [: d : member : sourceInterval | [: base | self factory createMemberOf: base dot: member sourceInterval: sourceInterval ]]) 		/ ( arguments jseMap: [: args : sourceInterval | [: base | self factory createCall: base arguments: args sourceInterval: sourceInterval ]])</body>
+
+<body package="JavascriptEngine-Parser-Core">newExpression	^ 'new' jseTokenParser , newMemberExpression , arguments optional 		jseMap: [: n : member : args : sourceInterval | self factory createNew: member arguments: args sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">newMemberExpression	^ memberBaseExpression, newMemberPartExpression star		map: [ : base : members | self combineExpression: base expressionBlocks: members ]</body>
+
+<body package="JavascriptEngine-Parser-Core">newMemberPartExpression	" returns a block that receives the base and which creates the member "	^ ( $[ jseTokenParser , expression , $] jseTokenParser 		jseMap: [: b1 : member : b2 : sourceInterval | [: base | self factory createMemberOf: base bracket: member sourceInterval: sourceInterval ]]) 		/ ( $. jseTokenParser , identifierName 				jseMap: [: d : member : sourceInterval | [: base | self factory createMemberOf: base dot: member sourceInterval: sourceInterval ]])</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>12.11 The switch Statement</category>
+
+<body package="JavascriptEngine-Parser-Core">caseBlock	^ (${ jseTokenParser, caseClause star , defaultClauseAndClauses, $} jseTokenParser		==&gt; [ : elements |				(elements at: 3) notNil 					ifTrue: [ (elements at: 2), (elements at: 3) ]					ifFalse: [ elements at: 2 ]		])</body>
+
+<body package="JavascriptEngine-Parser-Core">caseClause	^ 'case' jseTokenParser , expression , $: jseTokenParser , statementList 		jseAction: [: elements : sourceInterval | self factory createSwitchClause: ( elements at: 2 ) statements: ( elements at: 4 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">defaultClause	^ 'default' jseTokenParser , $: jseTokenParser , statementList 		jseAction: [: elements : sourceInterval | self factory createSwitchDefaultClause: ( elements at: 3 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">defaultClauseAndClauses	^ ( defaultClause , caseClause star) optional		 ==&gt; [: elements |			elements notNil 				ifTrue: [ self arrayFromStartAndStarElements: elements ]				ifFalse: [ nil ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">switchStatement	^ 'switch' jseTokenParser , $( jseTokenParser , expression , $) jseTokenParser , caseBlock 		jseAction: [: elements : sourceInterval | self factory createSwitch: ( elements at: 3 ) clauses: ( elements at: 5 ) sourceInterval: sourceInterval ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>13 Function Definition</category>
+
+<body package="JavascriptEngine-Parser-Core">formalParameterList	^ identifier listSeparatedBy: $, jseTokenParser</body>
+
+<body package="JavascriptEngine-Parser-Core">functionBody	^ ( sourceElements optional jseAction: [: elements : sourceInterval | self factory createFunctionBody: elements sourceInterval: sourceInterval ]) 		&gt;=&gt; 		[: aStream : parseBlock |			" reset strict mode tracking for the body "			strictModeStack addLast: nil.			[ parseBlock value ] ensure: [ strictModeStack removeLast ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">functionDeclaration	^ 'function' jseTokenParser , identifier , $( jseTokenParser , formalParameterList optional , $) jseTokenParser , ${ jseTokenParser , functionBody 		, $} jseTokenParser jseAction: 		[: elements : sourceInterval |			self factory 				createFunctionDeclaration: ( elements at: 2 )				parameters: (( elements at: 4 ) ifNil: [ #( )])				body: ( elements at: 7 )				sourceInterval: sourceInterval		]</body>
+
+<body package="JavascriptEngine-Parser-Core">functionExpression	^ 'function' jseTokenParser , identifier optional , $( jseTokenParser , formalParameterList optional , $) jseTokenParser , ${ jseTokenParser 		, functionBody , $} jseTokenParser 		jseAction: 		[: elements : sourceInterval |			self factory 				createFunctionExpression: ( elements at: 2 )				parameters: (( elements at: 4 ) ifNil: [ #( )])				body: ( elements at: 7 )				sourceInterval: sourceInterval		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>private</category>
+
+<body package="JavascriptEngine-Parser-Core">isInStrictMode	^ strictModeStack jseReverseDetect: [ : bool | bool notNil ] ifNone: [ false ]</body>
+
+<body package="JavascriptEngine-Parser-Core">isInStrictMode: aBoolean	 strictModeStack size = 1		ifTrue: [ strictModeStack at: 1 put: aBoolean ]		ifFalse: [ JSEError raiseSignal: 'Internal error: Cannot set strict mode of parser while parsing' ]</body>
+
+<body package="JavascriptEngine-Parser-Core">reservedWords	^ self isInStrictMode 		ifTrue: [ JSELexicalParser strictReservedWords ]		ifFalse: [ JSELexicalParser reservedWords ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>parsing</category>
+
+<body package="JavascriptEngine-Parser-Core">parseOn: aStream 	^ [ super parseOn: aStream ] ensure: 		[	" reset state, parser might be  reused  "			self initializeStrictModeScope		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>initialize-release</category>
+
+<body package="JavascriptEngine-Parser-Core">initialize	super initialize.	self initializeStrictModeScope.</body>
+
+<body package="JavascriptEngine-Parser-Core">initializeStrictModeScope	" strictModeStack helps to track if strict mode is enabled "	strictModeStack := OrderedCollection with: nil.</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>7.9 Automatic Semicolon Insertion</category>
+
+<body package="JavascriptEngine-Parser-Core">automaticSemicolon	^ $; jseTokenParser / ( lineTerminator ==&gt; [: e | #lineTerminator ]) / (( JSELookaheadParser on: $} jseTokenParser ) ==&gt; [: e | #closedCurlyBrace ]) 		/ ( PPPluggableParser on: 				[: stream |					stream atEnd 						ifTrue: [ #endOfInput ]						ifFalse: [ PPFailure message: 'end of input expected' stream: stream ]				])</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>14 Program</category>
+
+<body package="JavascriptEngine-Parser-Core">program	^ sourceElements optional ==&gt; [: elements | self factory createProgram: elements ]</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceElement	^ functionDeclaration / statement</body>
+
+<body package="JavascriptEngine-Parser-Core">sourceElements	^ sourceElement plus &gt;=&gt; 		[: stream : parseBlock | 			| token strict position |			position := stream position.			" check strict mode directive  "			strict := false.			[ strict not and: [( token := stream next ) notNil and: [ token type = #string ]]] whileTrue: [ strict := token literalValue = 'use strict' ].			strict 				ifTrue: 				[	strictModeStack at: strictModeStack size put: true.					self factory enterStrictMode				].			stream position: position.			[ parseBlock value ] ensure: 				[	strict 						ifTrue: [ self factory leaveStrictMode ]				]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>utilities</category>
+
+<body package="JavascriptEngine-Parser-Core">anyOf: anArray	^ PPPredicateObjectParser 		on: [: token | (anArray includes: token literalValue) and: [ #(identifierName punctuator) includes: token type ]]		message: 'any of »', anArray jseDisplayString , '« expected'		negated: [: token | (anArray includes: token literalValue) not ]		message: 'none of »', anArray jseDisplayString , '« not expected'</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.10 Binary Bitwise Operators</category>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseANDExpression	^ equalityExpression , ( $&amp; jseTokenParser , equalityExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseANDExpressionNoIn	^ equalityExpressionNoIn , ( $&amp; jseTokenParser , equalityExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseORExpression	^ bitwiseXORExpression , ( $| jseTokenParser , bitwiseXORExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseORExpressionNoIn	^ bitwiseXORExpressionNoIn , ( $| jseTokenParser , bitwiseXORExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseXORExpression	^ bitwiseANDExpression , ( $^ jseTokenParser , bitwiseANDExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">bitwiseXORExpressionNoIn	^ bitwiseANDExpressionNoIn , ( $^ jseTokenParser , bitwiseANDExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createBitwiseExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.14 Comma Operator</category>
+
+<body package="JavascriptEngine-Parser-Core">expression	^ assignmentExpression , (( $, jseTokenParser , assignmentExpression ) ==&gt; [: s | s at: 2 ]) star jseAction: 		[: elements : sourceInterval |			self 				combine: ( elements at: 1 )				withElements: ( elements at: 2 )				with: [: e1 : e2 | self factory createCommaSeparatedExpression: e1 with: e2 sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">expressionNoIn	^ assignmentExpression , (( $, jseTokenParser , assignmentExpressionNoIn ) ==&gt; [: s | s at: 2 ]) star jseAction: 		[: elements : sourceInterval |			self 				combine: ( elements at: 1 )				withElements: ( elements at: 2 )				with: [: e1 : e2 | self factory createCommaSeparatedExpression: e1 with: e2 sourceInterval: sourceInterval ]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.8 Relational Operators</category>
+
+<body package="JavascriptEngine-Parser-Core">relationalExpression	^ shiftExpression , (( self anyOf: self class relationalOperators ) , shiftExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createRelationalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">relationalExpressionNoIn	^ shiftExpression , (( self anyOf: ( self class relationalOperators copyWithout: 'in' )) , shiftExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createRelationalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.11 Binary Logical Operators</category>
+
+<body package="JavascriptEngine-Parser-Core">logicalANDExpression	^ bitwiseORExpression , ( '&amp;&amp;' jseTokenParser , bitwiseORExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createLogicalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">logicalANDExpressionNoIn	^ bitwiseORExpressionNoIn , ( '&amp;&amp;' jseTokenParser , bitwiseORExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createLogicalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">logicalORExpression	^ logicalANDExpression , ( '||' jseTokenParser , logicalANDExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createLogicalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">logicalORExpressionNoIn	^ logicalANDExpressionNoIn , ( '||' jseTokenParser , logicalANDExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createLogicalExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>12.6 Iteration Statements</category>
+
+<body package="JavascriptEngine-Parser-Core">forStatementLoop	" returns a factory block that receives the statement "	^ ( 'var' jseTokenParser , variableDeclarationListNoIn , $; jseTokenParser , expression optional , $; jseTokenParser , expression optional 		jseAction: 		[: elements : sourceInterval |					[: forStatement |			self factory 					createForVariables: ( elements at: 2 )					condition: ( elements at: 4 )					update: ( elements at: 6 )					do: forStatement					sourceInterval: sourceInterval		]		]) 		/ ( 'var' jseTokenParser , variableDeclarationNoIn , 'in' jseTokenParser , expression jseAction: 				[: elements : sourceInterval |									[: forStatement |					self factory createForVariable: ( elements at: 2 ) in: ( elements at: 4 ) do: forStatement sourceInterval: sourceInterval				]				]) 		/ ( expressionNoIn optional , $; jseTokenParser , expression optional , $; jseTokenParser , expression optional jseAction: 				[: elements : sourceInterval |									[: forStatement |					self factory 							createFor: ( elements at: 1 )							condition: ( elements at: 3 )							update: ( elements at: 5 )							do: forStatement							sourceInterval: sourceInterval				]				]) 		/ ( leftHandSideExpression , 'in' jseTokenParser , expression jseAction: 				[: elements : sourceInterval |					[: forStatement | self factory createFor: ( elements at: 1 ) in: ( elements at: 3 ) do: forStatement sourceInterval: sourceInterval ]				])</body>
+
+<body package="JavascriptEngine-Parser-Core">iterationStatement	^ ( 'do' jseTokenParser , statement , 'while' jseTokenParser , $( jseTokenParser , expression , $) jseTokenParser 		jseAction: [: elements : sourceInterval | self factory createDo: ( elements at: 2 ) whileExpression: ( elements at: 5 ) sourceInterval: sourceInterval ]) 		/ ( 'while' jseTokenParser , $( jseTokenParser , expression , $) jseTokenParser , statement 				jseAction: [: elements : sourceInterval | self factory createWhile: ( elements at: 3 ) statement: ( elements at: 5 ) sourceInterval: sourceInterval ]) 		/ ( 'for' jseTokenParser , $( jseTokenParser , forStatementLoop , $) jseTokenParser , statement jseAction: 				[: elements : sourceInterval |					" forStatementLoop returns a factory block "					( elements at: 3 ) value: ( elements at: 5 )				])</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.12 Conditional Operator</category>
+
+<body package="JavascriptEngine-Parser-Core">conditionalExpression	^ logicalORExpression , assignmentOperator not , ( $? jseTokenParser , assignmentExpression , $: jseTokenParser , assignmentExpression ) optional 		jseAction: [: elements : sourceInterval | self combineExpression: ( elements at: 1 ) conditionalExpression: ( elements at: 3 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">conditionalExpressionNoIn	^ logicalORExpressionNoIn , ( $? jseTokenParser , assignmentExpressionNoIn , $: jseTokenParser , assignmentExpressionNoIn ) optional 		jseAction: [: elements : sourceInterval | self combineExpression: ( elements at: 1 ) conditionalExpression: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11 Expressions</category>
+
+<body package="JavascriptEngine-Parser-Core">additiveExpression	^ multiplicativeExpression , (( self anyOf: self class additiveOperators ) , multiplicativeExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createAdditiveExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">multiplicativeExpression	^ unaryExpression , (( self anyOf: self class multiplicativeOperators ) , unaryExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createMultiplicativeExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">postfixExpression	^ leftHandSideExpression , (( self anyOf: #( '++' '--' )) butNot: lineTerminator ) optional jseAction: 		[: elements : sourceInterval | | postfix |			postfix := elements at: 2.			postfix notNil 				ifTrue: [ self factory createPostfixExpression: ( elements at: 1 ) operator: postfix literalValue sourceInterval: sourceInterval ]				ifFalse: [ elements at: 1 ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">shiftExpression	^ additiveExpression , (( self anyOf: #( '&lt;&lt;' '&gt;&gt;&gt;' '&gt;&gt;' )) , additiveExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createShiftExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">unaryExpression	^ (( self anyOf: self class unaryOperators ) , unaryExpression 		jseAction: [: elements : sourceInterval | self factory createUnaryExpression: ( elements at: 2 ) operator: ( elements at: 1 ) literalValue sourceInterval: sourceInterval ]) 		/ postfixExpression</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>12.14 The try Statement</category>
+
+<body package="JavascriptEngine-Parser-Core">catch	^ 'catch' jseTokenParser , $( jseTokenParser , identifier , $) jseTokenParser , block 		jseAction: [: elements : sourceInterval | self factory createCatch: ( elements at: 3 ) block: ( elements at: 5 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">finally	^ 'finally' jseTokenParser , block 		jseAction: [: elements : sourceInterval | self factory createFinally: ( elements at: 2 ) sourceInterval: sourceInterval ]</body>
+
+<body package="JavascriptEngine-Parser-Core">tryStatement	^ ( 'try' jseTokenParser , block , catch , finally optional 		jseAction: [: elements : sourceInterval | self factory createTry: ( elements at: 2 ) catch: ( elements at: 3 ) finally: ( elements at: 4 ) sourceInterval: sourceInterval ]) 		/ ( 'try' jseTokenParser , block , finally 				jseAction: [: elements : sourceInterval | self factory createTry: ( elements at: 2 ) catch: nil finally: ( elements at: 3 ) sourceInterval: sourceInterval ])</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser</class-id> <category>11.9 Equality Operators</category>
+
+<body package="JavascriptEngine-Parser-Core">equalityExpression	^ relationalExpression , (( self anyOf: self class equalityOperators ) , relationalExpression ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createEqualityExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+
+<body package="JavascriptEngine-Parser-Core">equalityExpressionNoIn	^ relationalExpressionNoIn , (( self anyOf: self class equalityOperators ) , relationalExpressionNoIn ) star jseAction: 		[: elements : sourceInterval |			self 				combineBinaryExpressions: elements				with: [: e1 : e2 : op | self factory createEqualityExpression: e1 with: e2 operator: op sourceInterval: sourceInterval ]		]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser class</class-id> <category>constants</category>
+
+<body package="JavascriptEngine-Parser-Core">additiveOperators	^ #( '+' '-' )</body>
+
+<body package="JavascriptEngine-Parser-Core">assignmentOperators	^ #(		'='		'*='		'/='		'%='		'+='		'-='		'&lt;&lt;='		'&gt;&gt;='		'&gt;&gt;&gt;='		'&amp;='		'^='		'|='	)</body>
+
+<body package="JavascriptEngine-Parser-Core">equalityOperators	^ #('===' '!==' '==' '!=')</body>
+
+<body package="JavascriptEngine-Parser-Core">literalTokenTypes	^ #(#string #numeric #numericOctal #boolean #null #literal #regex)</body>
+
+<body package="JavascriptEngine-Parser-Core">multiplicativeOperators	^ #( '*' '/' '%' )</body>
+
+<body package="JavascriptEngine-Parser-Core">relationalOperators	^ #('&lt;=' '&gt;=' '&lt;' '&gt;' 'instanceof' 'in')</body>
+
+<body package="JavascriptEngine-Parser-Core">shiftOperators	^ #( '&lt;&lt;' '&gt;&gt;&gt;' '&gt;&gt;' )</body>
+
+<body package="JavascriptEngine-Parser-Core">unaryOperators	^ #('delete' 'void' 'typeof' '++' '--' '+' '-' '~' '!')</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSESyntacticParser class</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">ignoredNames	^ super ignoredNames, #(strictModeStack)</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonSyntacticParser</class-id> <category>grammar</category>
+
+<body package="JavascriptEngine-Parser-Core">array	^ ($[ jseTokenParser, (element listSeparatedBy: $, jseTokenParser) optional, $] jseTokenParser) 		map: [ : c1 : elements : c2 | self factory createArrayWithElements: (elements ifNil: [ #() ]) ]</body>
+
+<body package="JavascriptEngine-Parser-Core">element	^ array	/ object	/ literal</body>
+
+<body package="JavascriptEngine-Parser-Core">literal	^ (self tokenParserOfTypes: #(#numeric #boolean #string #null )) 		==&gt; [ : token | self factory createLiteral: token literalValue ]</body>
+
+<body package="JavascriptEngine-Parser-Core">member	^ ( (self tokenParserOfType: #string ), $: jseTokenParser, element)  		map: [ : memberName : sep : memberValue | self factory createMember: memberName literalValue value: memberValue ]</body>
+
+<body package="JavascriptEngine-Parser-Core">object	^ (${ jseTokenParser, (member listSeparatedBy: $, jseTokenParser) optional, $} jseTokenParser)		map: [ : c1 : members : c2 | self factory createObjectWithMembers: (members ifNil: [ #() ]) ]</body>
+</methods>
+
+<methods>
+<class-id>JSE.JSEJsonSyntacticParser</class-id> <category>accessing</category>
+
+<body package="JavascriptEngine-Parser-Core">createDefaultFactory	^ JSEJsonNilFactory new</body>
+
+<body package="JavascriptEngine-Parser-Core">start	^ element jseEnd</body>
+</methods>
+
+<do-it>"Imported Classes:"</do-it>
+
+<do-it>self error: 'Attempting to file-in parcel imports.  Choose terminate or close'</do-it>
+
+<class>
+<name>Object</name>
+<environment>Core</environment>
+<super></super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>PPParser</name>
+<environment>PetitParser</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>properties </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>Character</name>
+<environment>Core</environment>
+<super>Core.Magnitude</super>
+<private>false</private>
+<indexed-type>immediate</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Magnitude-General</category>
+<attributes>
+<package>Magnitude-General</package>
+</attributes>
+</class>
+
+<class>
+<name>PPToken</name>
+<environment>PetitParser</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>collection start stop </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Core</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>PPFailure</name>
+<environment>PetitParser</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>message position </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Core</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>PPDelegateParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>parser </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>SequenceableCollection</name>
+<environment>Core</environment>
+<super>Core.Collection</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-Abstract</category>
+<attributes>
+<package>Collections-Abstract</package>
+</attributes>
+</class>
+
+<class>
+<name>String</name>
+<environment>Core</environment>
+<super>Core.CharacterArray</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-Text</category>
+<attributes>
+<package>Collections-Text</package>
+</attributes>
+</class>
+
+<class>
+<name>TwoByteString</name>
+<environment>Core</environment>
+<super>Core.String</super>
+<private>false</private>
+<indexed-type>bytes</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Collections-String Support</category>
+<attributes>
+<package>Collections-String Support</package>
+</attributes>
+</class>
+
+<class>
+<name>PPActionParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPDelegateParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>block </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>PPSequenceParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPListParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>PPCompositeParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPDelegateParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Tools</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>UndefinedObject</name>
+<environment>Core</environment>
+<super>Core.Object</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Objects</category>
+<attributes>
+<package>Kernel-Objects</package>
+</attributes>
+</class>
+
+<class>
+<name>PPEndOfInputParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPDelegateParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+<class>
+<name>Error</name>
+<environment>Core</environment>
+<super>Core.Exception</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars></inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>Kernel-Exception Handling</category>
+<attributes>
+<package>Kernel-Exception Handling</package>
+</attributes>
+</class>
+
+<class>
+<name>PPTokenParser</name>
+<environment>PetitParser</environment>
+<super>PetitParser.PPFlattenParser</super>
+<private>false</private>
+<indexed-type>none</indexed-type>
+<inst-vars>tokenClass </inst-vars>
+<class-inst-vars></class-inst-vars>
+<imports></imports>
+<category>PetitParser-Parsers</category>
+<attributes>
+<package>PetitParser</package>
+</attributes>
+</class>
+
+</st-source>
